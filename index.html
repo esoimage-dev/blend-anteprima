@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>Blend Food & Drink</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Caveat:wght@500;700&family=Nothing+You+Could+Do&family=Homemade+Apple&family=Big+Shoulders+Display:wght@500;700;800;900&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600&display=swap">
 <meta name="description" content="Cocktail d'autore, cucina di piccoli produttori e jazz dal vivo. Via di Mezzocammino 141, Roma. Tutte le sere fino alle 2.">
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
@@ -21,10 +25,6 @@
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="it_IT">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Caveat:wght@500;700&family=Nothing+You+Could+Do&family=Homemade+Apple&family=Big+Shoulders+Display:wght@500;700;800;900&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600&display=swap">
 </head>
 <body>
 <style>
@@ -1382,6 +1382,146 @@ body.past .deck.swap-in .tt .disc { translate: 0 0; transition: translate 1.1s c
   .drinks { bottom: 0 !important; -webkit-mask-image: none !important; mask-image: none !important; background: none !important; padding-bottom: calc(.8rem + env(safe-area-inset-bottom, 0px)) !important; padding-top: 2.2rem !important; margin-top: -1.6rem !important; isolation: isolate; }
   .drinks { background: linear-gradient(rgba(14, 12, 10, 0) 0, rgba(14, 12, 10, .55) 35%, rgba(14, 12, 10, .94) 70%) !important; }
 }
+
+/* ---------- v25: la cucina a portate. Cinque pannelli in orizzontale, selettore a icone, appunti appoggiati sulla foto ---------- */
+.kit { position: relative; --pad: max(var(--gut), calc((100vw - 1440px) / 2 + var(--gut))); --peek: clamp(64px, 10vw, 170px); --pw: min(1120px, calc(100vw - 2 * var(--pad) - var(--peek))); --ph: clamp(520px, 66svh, 620px); --gap: clamp(1.4rem, 3.4vw, 3.4rem); margin-top: clamp(2rem, 4vw, 3.2rem); }
+.kit-nav { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 2.4rem; margin-bottom: clamp(1.6rem, 2.8vw, 2.4rem); }
+.kit-tabs { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.kt { all: unset; box-sizing: border-box; position: relative; display: flex; align-items: center; gap: .85rem; padding: .3rem 0 1.05rem; cursor: pointer; color: var(--ash); transition: color .3s; -webkit-tap-highlight-color: transparent; }
+.kt::before, .kt::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--line); }
+.kt::after { height: 2px; background: var(--sign); transform-origin: 0 50%; transform: scaleX(var(--k, 0)); }
+.kt:hover, .kt[aria-selected="true"] { color: var(--bone); }
+.kt:focus-visible { outline: 2px solid var(--sign); outline-offset: 4px; }
+.ki { position: relative; flex: none; width: 40px; height: 40px; }
+.ki > svg:first-child { display: block; width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; transition: transform .5s cubic-bezier(.2, .8, .2, 1); }
+.kt:hover .ki > svg:first-child { transform: rotate(-6deg) scale(1.06); }
+.ki .ring { position: absolute; left: -11px; top: -8px; width: calc(100% + 23px); height: calc(100% + 16px); max-width: none; overflow: visible; pointer-events: none; }
+.ki .ring path { fill: none; stroke: #d0402a; stroke-width: 2.6; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset .3s; }
+.kt[aria-selected="true"] .ring path { stroke-dashoffset: 0; transition: stroke-dashoffset .6s cubic-bezier(.6, 0, .3, 1) .1s; }
+.kn { font-size: clamp(1.1rem, 1.65vw, 1.55rem); line-height: 1; letter-spacing: .02em; }
+.kit-arr { display: flex; gap: .4rem; padding-bottom: .75rem; }
+.kit-arr button { all: unset; box-sizing: border-box; cursor: pointer; width: 58px; height: 44px; display: grid; place-items: center; color: var(--bone); transition: color .25s, opacity .25s, transform .3s; }
+.kit-arr svg { width: 46px; height: 23px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
+.kit-arr button:hover { color: var(--sign); }
+#kit-next:hover:not(:disabled) { transform: translateX(4px); } #kit-prev:hover:not(:disabled) { transform: translateX(-4px); }
+.kit-arr button:disabled { opacity: .22; cursor: default; color: var(--bone); }
+.kit-arr button:focus-visible { outline: 2px solid var(--sign); outline-offset: 2px; }
+
+.kit-track { overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scroll-padding-left: var(--pad); overscroll-behavior-x: contain; scrollbar-width: none; padding-block: 28px 40px; margin-block: -28px -40px; cursor: grab; }
+.kit-track::-webkit-scrollbar { display: none; }
+.kit-track:focus-visible { outline: 2px solid var(--sign); outline-offset: -6px; }
+.kit-track.drag { scroll-snap-type: none; cursor: grabbing; user-select: none; -webkit-user-select: none; }
+.kit-in { display: flex; gap: var(--gap); width: max-content; padding-left: var(--pad); }
+.kit-end { flex: none; width: calc(100vw - var(--pad) - var(--pw) - var(--gap)); }
+
+.kp { position: relative; flex: none; width: var(--pw); height: var(--ph); scroll-snap-align: start; display: grid; grid-template-columns: minmax(0, 1.22fr) minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); column-gap: clamp(1.4rem, 3vw, 3rem); opacity: calc(1 - var(--a, 0) * .62); }
+.kp-ph { grid-column: 1; grid-row: 1 / -1; margin: 0; height: 100%; }
+.kp-ph img { transform: translateX(calc(var(--d, 0) * -7%)) scale(1.16); will-change: transform; -webkit-user-drag: none; user-select: none; }
+.kp-t { grid-column: 2; grid-row: 1; position: relative; z-index: 2; margin: -.04em 0 0 -24%; font-size: clamp(3.6rem, 8.4vw, 8.6rem); white-space: nowrap; text-shadow: 0 4px 34px rgba(0, 0, 0, .55); transform: translateX(calc(var(--d, 0) * 9vw)); will-change: transform; pointer-events: none; }
+.kp-tx { grid-column: 2; grid-row: 2; align-self: end; display: grid; gap: 1rem; justify-items: start; padding-bottom: .5rem; }
+.kp-tx .claim { font-size: clamp(1.45rem, 2.3vw, 2.1rem); line-height: 1.14; max-width: 21ch; text-wrap: balance; }
+.kp-tx .sig { color: var(--sign); font-weight: 600; font-size: .95rem; }
+.kp-pull { margin-top: .6rem; }
+.kp.b { grid-template-columns: minmax(0, 1fr) minmax(0, 1.22fr); }
+.kp.b .kp-ph { grid-column: 2; height: 88%; align-self: end; }
+.kp.b .kp-t { grid-column: 1; justify-self: end; margin: -.04em -24% 0 0; }
+.kp.b .kp-tx { grid-column: 1; }
+/* il testo entra quando la portata si ferma al centro */
+.kp-tx > * { opacity: 0; transform: translateY(16px); transition: opacity .35s, transform .35s; }
+.kit.in .kp.on .kp-tx > * { opacity: 1; transform: none; transition: opacity .6s, transform .8s cubic-bezier(.2, .8, .2, 1); }
+.kit.in .kp.on .kp-tx > :nth-child(1) { transition-delay: .12s; } .kit.in .kp.on .kp-tx > :nth-child(2) { transition-delay: .2s; } .kit.in .kp.on .kp-tx > :nth-child(3) { transition-delay: .3s; }
+.kit.in .kp.on .tape[aria-expanded="false"] { animation: tapewig .9s cubic-bezier(.3, 1.4, .5, 1) .75s 1; }
+@keyframes tapewig { 0%, 100% { transform: rotate(-3deg); } 30% { transform: rotate(-7deg) translateY(3px); } 60% { transform: rotate(0deg) translateY(-2px); } }
+
+/* l'appunto si appoggia sulla foto, tenuto dal nastro */
+.kit .page-wrap { display: block; position: absolute; z-index: 6; left: 3.5%; top: 7%; width: min(540px, 54%); visibility: hidden; pointer-events: none; transition: visibility 0s .5s; perspective: 1400px; cursor: auto; }
+.kit .kp.b .page-wrap { left: auto; right: 3.5%; top: 16%; }
+.kit .page-wrap.open { visibility: visible; pointer-events: auto; transition-delay: 0s; }
+.kit .page-wrap > div { overflow: visible; padding: 0; margin: 0; }
+.kit .page { --lh: 29px; --pt: 3.9rem; margin: 0; padding: var(--pt) 2.2rem 2.1rem 4rem; font-size: .95rem; line-height: var(--lh); }
+.kit .page::before { background: linear-gradient(90deg, transparent 0 46px, rgba(196, 64, 54, .38) 46px 47.5px, transparent 47.5px),
+  repeating-linear-gradient(transparent 0 calc(var(--lh) - 1px), rgba(64, 104, 168, .2) calc(var(--lh) - 1px) var(--lh)) 0 calc(var(--pt) - 6px) / 100% calc(100% - var(--pt) + 6px) no-repeat; }
+.kit .page h4 { font-size: 1.12rem; line-height: var(--lh); }
+.kit .page p { max-width: none; }
+.kit .page .stamp { top: 1.15rem; right: 1.5rem; }
+.kit .page .hand { position: static; display: block; text-align: right; line-height: var(--lh); font-size: 1.45rem; transform: rotate(-2deg); }
+.kit .page .kx { all: unset; position: absolute; z-index: 3; left: .95rem; top: .8rem; width: 30px; height: 30px; display: grid; place-items: center; cursor: pointer; font: 700 1.1rem/1 var(--f-body); color: #a3301e; opacity: .75; transition: opacity .2s, transform .3s; }
+.kit .page .kx:hover { opacity: 1; transform: rotate(90deg); }
+.kit .page .kx:focus-visible { outline: 2px solid #a3301e; outline-offset: 2px; }
+#r-anti .page .bg { background-image: url("img/vera/fascicolo-cartone.webp"); }
+#r-dolci .page .bg { background-image: url("img/vera/fascicolo-bruciato.webp"); }
+#r-anti .page::before { -webkit-mask-image: url("img/vera/fascicolo-cartone.webp"); mask-image: url("img/vera/fascicolo-cartone.webp"); }
+#r-dolci .page::before { -webkit-mask-image: url("img/vera/fascicolo-bruciato.webp"); mask-image: url("img/vera/fascicolo-bruciato.webp"); }
+#r-anti .page .clip { left: 14%; top: -15px; width: 128px; height: 38px; transform: rotate(-5deg); background-image: url("img/vera/nastro-09.webp"); filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, .35)); }
+#r-dolci .page .clip { left: auto; right: 16%; top: -15px; width: 126px; height: 38px; transform: rotate(4deg); background-image: url("img/vera/nastro-21.webp"); filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, .35)); }
+#r-dolci .page { padding-bottom: 2.6rem; }
+[aria-controls="r-anti"].tape { background-image: url("img/vera/nastro-07.webp"); rotate: 1deg; }
+[aria-controls="r-dolci"].tape { background-image: url("img/vera/nastro-19.webp"); rotate: -.5deg; }
+
+/* invito a scorrere: la portata dopo si affaccia, la riga si sposta una volta, una nota a mano lo dice */
+.kit-hint { position: absolute; z-index: 4; right: clamp(8px, 2.2vw, 40px); top: 54%; display: flex; align-items: center; gap: .45rem; font: 700 1.55rem/1 var(--f-hand); color: var(--bone); rotate: -5deg; pointer-events: none; opacity: 0; transition: opacity .5s; text-shadow: 0 2px 12px rgba(0, 0, 0, .8); }
+.kit-hint svg { width: 46px; height: 23px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
+.kit.in:not(.used) .kit-hint { opacity: 1; transition-delay: 1.5s; animation: hintx 1.5s ease-in-out 1.8s infinite; }
+@keyframes hintx { 50% { translate: 9px 0; } }
+.kit.in:not(.used) .kit-in { animation: kitnudge 1.25s cubic-bezier(.6, 0, .3, 1) 1.25s 1; }
+@keyframes kitnudge { 45% { transform: translateX(calc(var(--peek) * -.85)); } }
+
+@media (max-width: 900px) {
+  .kit { --peek: 34px; --pw: calc(100vw - 2 * var(--pad) - var(--peek)); --gap: 14px; }
+  .kit-nav { grid-template-columns: minmax(0, 1fr); margin-bottom: 1.3rem; }
+  .kit-arr { display: none; }
+  .kit-tabs { display: flex; gap: 1.5rem; overflow-x: auto; scrollbar-width: none; margin-inline: calc(-1 * var(--gut)); padding-inline: var(--gut); }
+  .kit-tabs::-webkit-scrollbar { display: none; }
+  .kt { flex: none; gap: .55rem; padding-bottom: .85rem; }
+  .ki { width: 30px; height: 30px; }
+  .ki .ring { left: -8px; top: -6px; width: calc(100% + 17px); height: calc(100% + 12px); }
+  .kn { font-size: 1.3rem; }
+  .kit-track { cursor: auto; }
+  .kp, .kp.b { height: auto; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto auto; row-gap: .85rem; align-content: start; }
+  .kp-t, .kp.b .kp-t { grid-column: 1; grid-row: 1; margin: 0; justify-self: start; font-size: clamp(3.2rem, 16vw, 5.2rem); transform: translateX(calc(var(--d, 0) * 14vw)); }
+  .kp-ph, .kp.b .kp-ph { grid-column: 1; grid-row: 2; height: auto; aspect-ratio: 1 / 1; align-self: auto; }
+  .kp-tx, .kp.b .kp-tx { grid-column: 1; grid-row: 3; align-self: start; gap: .7rem; }
+  .kp-tx .claim { font-size: 1.42rem; max-width: none; }
+  .kit .page-wrap, .kit .kp.b .page-wrap { left: -5px; right: auto; top: 3.9rem; width: calc(100% + 10px); }
+  .kit .page { --lh: 27px; --pt: 4.4rem; padding: var(--pt) 1.25rem 1.7rem 3.5rem; font-size: .86rem; }
+  .kit .page h4 { font-size: 1rem; }
+  .kit .page .stamp { top: 1rem; right: 1rem; }
+  .kit .page .hand { font-size: 1.3rem; }
+  #r-anti .page .bg { background-image: url("img/vera/fascicolo-cartone-v.webp"); }
+  #r-dolci .page .bg { background-image: url("img/vera/fascicolo-bruciato-v.webp"); }
+  #r-anti .page::before { -webkit-mask-image: url("img/vera/fascicolo-cartone-v.webp"); mask-image: url("img/vera/fascicolo-cartone-v.webp"); }
+  #r-dolci .page::before { -webkit-mask-image: url("img/vera/fascicolo-bruciato-v.webp"); mask-image: url("img/vera/fascicolo-bruciato-v.webp"); }
+  #r-burger .page .clip, #r-tagl .page .clip { left: 34%; right: auto; top: -14px; transform: rotate(-3deg); }
+  .kit-hint { top: 40%; right: 4px; font-size: 1.3rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kp-ph img, .kp-t { transform: none !important; }
+  .kit-in, .kit-hint, .kit .tape { animation: none !important; }
+  .kp-tx > * { transition: none; }
+}
+
+/* v25, rifinitura */
+.kp.b .kp-t { justify-self: start; margin: -.04em 0 0 0; }
+.kp-t { transform: translateX(calc(var(--d, 0) * -2.5vw)); }
+.kit .page-wrap { left: 3%; top: 17%; width: min(500px, 50%); }
+.kit .kp.b .page-wrap { left: auto; right: 3.5%; top: 17%; width: min(520px, 52%); }
+.kit .page .stamp { right: 2.3rem; font-size: 1.05rem; }
+.kit .page .hand { padding-right: 1.1rem; }
+@media (max-width: 900px) {
+  .kp-t, .kp.b .kp-t { transform: translateX(calc(var(--d, 0) * -6vw)); margin: 0; }
+  .kit .page-wrap, .kit .kp.b .page-wrap { left: -5px; right: auto; top: 3.9rem; width: calc(100% + 10px); }
+  .kit .page .stamp { right: 1.7rem; font-size: .9rem; padding: .4rem .6rem .34rem; }
+  .kit .page .hand { padding-right: 1.3rem; }
+}
+
+@media (max-width: 900px) {
+  #r-dolci .page .clip { right: auto; left: 22%; }
+  .kit .page .stamp { right: 2rem; }
+  .kp-pull { margin-left: .5rem; }
+}
+
+@media (min-width: 901px) and (max-width: 1200px) { .kit .page { --lh: 26px; font-size: .88rem; } .kit .page-wrap, .kit .kp.b .page-wrap { top: 13%; } }
+
 /* su mobile l'header mostra solo logo e menu: niente orologio */
 @media (max-width: 900px) { .top .clock { visibility: hidden !important; } }
 </style>
@@ -1529,78 +1669,123 @@ body.past .deck.swap-in .tt .disc { translate: 0 0; transition: translate 1.1s c
         <h2 class="sign">Pochi piatti.<br><em>Fatti sul serio.</em></h2>
         <p>Piccoli produttori da tutta Italia, ingredienti di stagione, impasti che aspettano il tempo che serve.</p>
       </div>
+    </div>
 
-      <article class="dish">
-        <div class="split sign" aria-label="Pinsa">
-          <span aria-hidden="true">Pin</span>
-          <figure class="win media cut" style="margin:0"><img loading="lazy" src="img/blend-foodanddrink-AL85228.webp" alt="Pinsa con salame piccante, peperoni e granella"></figure>
-          <span aria-hidden="true">sa</span>
+    <div class="kit" id="kit">
+      <div class="w kit-nav">
+        <div class="kit-tabs" id="kit-tabs" role="tablist" aria-label="Le portate">
+          <button type="button" class="kt" role="tab" id="kt-anti" aria-controls="k-anti" aria-selected="true" tabindex="0"><span class="ki"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M15 7v9c0 3 2 5 5 5s5-2 5-5V7M20 7v34"/><path d="M32 41V7c4 3 6 9 5 17h-5"/></svg><svg class="ring" viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M52 6 C82 4 97 18 95 32 C93 48 70 56 46 55 C20 54 4 44 5 29 C6 14 26 5 56 8 C70 10 80 14 86 20"/></svg></span><span class="kn sign">Antipasti</span></button>
+          <button type="button" class="kt" role="tab" id="kt-pinsa" aria-controls="k-pinsa" aria-selected="false" tabindex="-1"><span class="ki"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 31c-3-6 2-14 12-18s20-4 23 2-2 14-12 18-20 4-23-2z"/><circle cx="19" cy="26" r="1.4"/><circle cx="27" cy="21" r="1.4"/><circle cx="33" cy="26" r="1.4"/><path d="M23 30c2-2 4-2 5 0"/></svg><svg class="ring" viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M52 6 C82 4 97 18 95 32 C93 48 70 56 46 55 C20 54 4 44 5 29 C6 14 26 5 56 8 C70 10 80 14 86 20"/></svg></span><span class="kn sign">Pinsa</span></button>
+          <button type="button" class="kt" role="tab" id="kt-burger" aria-controls="k-burger" aria-selected="false" tabindex="-1"><span class="ki"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 22c0-8 7-13 16-13s16 5 16 13z"/><path d="M18 15l1 1M25 13l1 1M31 16l1 1"/><path d="M7 27c3 3 5-2 8 0s5 3 8 0 5-2 8 0 5 3 9 0"/><path d="M9 34h30v2c0 3-2 5-5 5H14c-3 0-5-2-5-5z"/></svg><svg class="ring" viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M52 6 C82 4 97 18 95 32 C93 48 70 56 46 55 C20 54 4 44 5 29 C6 14 26 5 56 8 C70 10 80 14 86 20"/></svg></span><span class="kn sign">Burger</span></button>
+          <button type="button" class="kt" role="tab" id="kt-tagl" aria-controls="k-tagl" aria-selected="false" tabindex="-1"><span class="ki"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 14h26a3 3 0 0 1 3 3v16a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V17a3 3 0 0 1 3-3z"/><path d="M37 22h5a3 3 0 0 1 0 6h-5"/><path d="M10 31l12-9v9z"/><circle cx="28" cy="22" r="3.4"/></svg><svg class="ring" viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M52 6 C82 4 97 18 95 32 C93 48 70 56 46 55 C20 54 4 44 5 29 C6 14 26 5 56 8 C70 10 80 14 86 20"/></svg></span><span class="kn sign">Taglieri</span></button>
+          <button type="button" class="kt" role="tab" id="kt-dolci" aria-controls="k-dolci" aria-selected="false" tabindex="-1"><span class="ki"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 19h20v17a4 4 0 0 1-4 4H18a4 4 0 0 1-4-4z"/><path d="M12 14h24v5H12z"/><path d="M34 22c4 0 5 2 5 4s-2 3-4 3"/><path d="M14 28c4-2 6 2 10 0s6-2 10 0"/></svg><svg class="ring" viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M52 6 C82 4 97 18 95 32 C93 48 70 56 46 55 C20 54 4 44 5 29 C6 14 26 5 56 8 C70 10 80 14 86 20"/></svg></span><span class="kn sign">Dolci</span></button>
         </div>
-        <div class="duo">
-          <div><p class="claim voice">Settantadue ore di lievitazione. Leggera, croccante, mai uguale a se stessa.</p><p class="sig">Da provare: Al Contadino Non Far Sapere</p></div>
-          <div class="secret">
-            <button type="button" class="tape" aria-expanded="false" aria-controls="r-pinsa">il segreto della pinsa <span class="arr" aria-hidden="true">→</span></button>
+        <div class="kit-arr">
+          <button type="button" id="kit-prev" aria-label="Portata precedente" disabled><svg viewBox="0 0 60 30" aria-hidden="true"><path d="M57 18 C44 9 28 9 10 15"/><path d="M19 7 C15 10 11 13 8 15 C13 17 17 20 20 25"/></svg></button>
+          <button type="button" id="kit-next" aria-label="Portata successiva"><svg viewBox="0 0 60 30" aria-hidden="true"><path d="M3 18 C16 9 32 9 50 15"/><path d="M41 7 C45 10 49 13 52 15 C47 17 43 20 40 25"/></svg></button>
+        </div>
+      </div>
+      <div class="kit-track" id="kit-track" tabindex="0" aria-label="Le portate, scorri in orizzontale">
+        <div class="kit-in">
+          <article class="kp a" id="k-anti" role="tabpanel" aria-labelledby="kt-anti">
+            <figure class="kp-ph media cut"><img loading="lazy" draggable="false" src="img/blend-foodanddrink-AL85038.webp" alt="Tartare di Fassona con spuma di Parmigiano, nocciole e petali" style="object-position:50% 50%"></figure>
+            <h3 class="kp-t sign">Antipasti</h3>
+            <div class="kp-tx">
+              <p class="claim voice">Fassona al coltello, polpo scottato, guancia brasata al Negroamaro.</p>
+              <p class="sig">Da provare: From Piemonte With Love</p>
+              <div class="kp-pull"><button type="button" class="tape" aria-expanded="false" aria-controls="r-anti">cosa c'è nel piatto <span class="arr" aria-hidden="true">→</span></button></div>
+            </div>
+            <div class="page-wrap" id="r-anti" role="region" aria-label="cosa c'è nel piatto"><div>
+              <div class="page"><span class="bg paper-tex"></span><span class="clip" aria-hidden="true"></span>
+                <button type="button" class="kx" aria-label="Chiudi l'appunto">✕</button>
+                <h4>Antipasti · appunto n° 01<svg class="ink" viewBox="0 0 200 12" style="left:0;bottom:-6px;width:100%;height:12px" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 7 C40 2, 80 11, 120 5 S 180 9, 198 4"/></svg></h4>
+                <span class="stamp">al coltello</span>
+                <p>From Piemonte With Love: tartare di Fassona tagliata al coltello, spuma di Parmigiano stravecchio, nocciole IGP, chips di topinambur.</p><p>Polpetto: polpo scottato, tortino di patate, polvere di olive di Gaeta.</p><p>Cheek to Cheek: guancia brasata al Negroamaro, patate affumicate.</p><p>Parmigiana Light: melanzane alla scapece, robiola di Roccaverano.</p>
+                <span class="hand">si comincia da qui</span>
+              </div>
+            </div></div>
+          </article>
+          <article class="kp b" id="k-pinsa" role="tabpanel" aria-labelledby="kt-pinsa">
+            <figure class="kp-ph media cut"><img loading="lazy" draggable="false" src="img/blend-foodanddrink-AL85228.webp" alt="Pinsa con salame piccante, peperoni e granella" style="object-position:50% 55%"></figure>
+            <h3 class="kp-t sign">Pinsa</h3>
+            <div class="kp-tx">
+              <p class="claim voice">Settantadue ore di lievitazione. Leggera, croccante, mai uguale a se stessa.</p>
+              <p class="sig">Da provare: Al Contadino Non Far Sapere</p>
+              <div class="kp-pull"><button type="button" class="tape" aria-expanded="false" aria-controls="r-pinsa">il segreto della pinsa <span class="arr" aria-hidden="true">→</span></button></div>
+            </div>
             <div class="page-wrap" id="r-pinsa" role="region" aria-label="il segreto della pinsa"><div>
               <div class="page"><span class="bg paper-tex"></span><span class="clip" aria-hidden="true"></span>
+                <button type="button" class="kx" aria-label="Chiudi l'appunto">✕</button>
                 <h4>Pinsa · appunto n° 07<svg class="ink" viewBox="0 0 200 12" style="left:0;bottom:-6px;width:100%;height:12px" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 7 C40 2, 80 11, 120 5 S 180 9, 198 4"/></svg></h4>
                 <span class="stamp">72 ore</span>
-                <p>Impasto lavorato a mano. Lievitazione naturale: settantadue ore, non una di meno.</p><p>Leggera, digeribile, croccante fuori. Le farciture cambiano con le stagioni.</p><p>La più nostra: Al Contadino Non Far Sapere. Fonduta di Pecorino Romano 20 mesi, pere caramellate, pepe nero, guanciale di Cinta Senese.</p><p>Da bere: IPA artigianale alla spina.</p>
-                <span class="hand" style="right:2.4rem;top:7.6rem;transform:rotate(-6deg)">il tempo è l'ingrediente</span><svg class="ink" viewBox="0 0 90 40" style="right:7rem;top:9.4rem;width:90px;height:40px" aria-hidden="true"><path pathLength="1" d="M86 4 C60 10, 40 22, 8 34 M8 34 L20 24 M8 34 L22 37"/></svg>
-                <svg class="ring" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="46" filter="url(#marker)"/></svg>
+                <p>Impasto lavorato a mano. Lievitazione naturale: settantadue ore, non una di meno.</p><p>Leggera, digeribile, croccante fuori. Le farciture cambiano con le stagioni.</p><p>La più nostra: Al Contadino Non Far Sapere. Fonduta di Pecorino Romano 20 mesi, pere caramellate, pepe nero, guanciale di Cinta Senese.</p>
+                <span class="hand">il tempo è l'ingrediente</span>
               </div>
             </div></div>
-          </div>
-        </div>
-      </article>
-
-      <article class="dish">
-        <div class="split sign wide" aria-label="Burger">
-          <span aria-hidden="true">Bur</span>
-          <figure class="win media cut" style="margin:0"><img loading="lazy" src="img/blend-foodanddrink-AL85121.JPG.webp" alt="Burger sul bancone con una birra rossa"></figure>
-          <span aria-hidden="true">ger</span>
-        </div>
-        <div class="duo">
-          <div><p class="claim voice">Irish Black Angus, duecento grammi, nessuna scorciatoia.</p><p class="sig">Da provare: Warehouse</p></div>
-          <div class="secret">
-            <button type="button" class="tape" aria-expanded="false" aria-controls="r-burger">com'è fatto il warehouse <span class="arr" aria-hidden="true">→</span></button>
+          </article>
+          <article class="kp a" id="k-burger" role="tabpanel" aria-labelledby="kt-burger">
+            <figure class="kp-ph media cut"><img loading="lazy" draggable="false" src="img/blend-foodanddrink-AL85121.JPG.webp" alt="Burger sul bancone con una birra rossa" style="object-position:50% 60%"></figure>
+            <h3 class="kp-t sign">Burger</h3>
+            <div class="kp-tx">
+              <p class="claim voice">Irish Black Angus, duecento grammi, nessuna scorciatoia.</p>
+              <p class="sig">Da provare: Warehouse</p>
+              <div class="kp-pull"><button type="button" class="tape" aria-expanded="false" aria-controls="r-burger">com'è fatto il warehouse <span class="arr" aria-hidden="true">→</span></button></div>
+            </div>
             <div class="page-wrap" id="r-burger" role="region" aria-label="com'è fatto il warehouse"><div>
               <div class="page"><span class="bg paper-tex"></span><span class="clip" aria-hidden="true"></span>
+                <button type="button" class="kx" aria-label="Chiudi l'appunto">✕</button>
                 <h4>Burger · appunto n° 12<svg class="ink" viewBox="0 0 200 12" style="left:0;bottom:-6px;width:100%;height:12px" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 7 C40 2, 80 11, 120 5 S 180 9, 198 4"/></svg></h4>
                 <span class="stamp">200 g</span>
-                <p>Solo Irish Black Angus, 200 grammi. Bun del forno La Mollica, fatto apposta per noi.</p><p>Warehouse: scamorza affumicata, peperoni grigliati, guanciale sardo Su Sirboni, cipolla croccante.</p><p>Barbecue nostra allo scotch torbato Laphroaig 10 anni, e un goccio di tabasco.</p><p>Slow Beef: ventiquattro ore a bassa temperatura, glassato con il suo fondo.</p>
-                <span class="hand red" style="right:2.6rem;top:8rem;transform:rotate(5deg)">la barbecue è il segreto!</span>
-                <svg class="ring" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="46" filter="url(#marker)"/></svg>
+                <p>Solo Irish Black Angus, 200 grammi. Bun del forno La Mollica, fatto apposta per noi.</p><p>Warehouse: scamorza affumicata, peperoni grigliati, guanciale sardo Su Sirboni, cipolla croccante.</p><p>Barbecue nostra allo scotch torbato Laphroaig 10 anni, e un goccio di tabasco.</p>
+                <span class="hand red">la barbecue è il segreto!</span>
               </div>
             </div></div>
-          </div>
-        </div>
-      </article>
-
-      <article class="dish">
-        <div class="split sign sm wide" aria-label="Taglieri">
-          <span aria-hidden="true">Tagl</span>
-          <figure class="win media cut" style="margin:0"><img loading="lazy" src="img/blend-foodanddrink-DSC08213.JPG.webp" alt="Tagliere di salumi e formaggi su un tavolo apparecchiato"></figure>
-          <span aria-hidden="true">ieri</span>
-        </div>
-        <div class="duo">
-          <div><p class="claim voice">Un giro d'Italia su una tavola di legno.</p><p class="sig">Da dividere, nella misura che vuoi</p></div>
-          <div class="secret">
-            <button type="button" class="tape" aria-expanded="false" aria-controls="r-tagl">da dove arrivano <span class="arr" aria-hidden="true">→</span></button>
+          </article>
+          <article class="kp b" id="k-tagl" role="tabpanel" aria-labelledby="kt-tagl">
+            <figure class="kp-ph media cut"><img loading="lazy" draggable="false" src="img/blend-foodanddrink-DSC08213.JPG.webp" alt="Tagliere di salumi e formaggi su un tavolo apparecchiato" style="object-position:50% 60%"></figure>
+            <h3 class="kp-t sign">Taglieri</h3>
+            <div class="kp-tx">
+              <p class="claim voice">Un giro d'Italia su una tavola di legno.</p>
+              <p class="sig">Da dividere, nella misura che vuoi</p>
+              <div class="kp-pull"><button type="button" class="tape" aria-expanded="false" aria-controls="r-tagl">da dove arrivano <span class="arr" aria-hidden="true">→</span></button></div>
+            </div>
             <div class="page-wrap" id="r-tagl" role="region" aria-label="da dove arrivano"><div>
               <div class="page"><span class="bg paper-tex"></span><span class="clip" aria-hidden="true"></span>
+                <button type="button" class="kx" aria-label="Chiudi l'appunto">✕</button>
                 <h4>Taglieri · appunto n° 03<svg class="ink" viewBox="0 0 200 12" style="left:0;bottom:-6px;width:100%;height:12px" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 7 C40 2, 80 11, 120 5 S 180 9, 198 4"/></svg></h4>
                 <span class="stamp">Italia</span>
-                <p>Un viaggio tra le regioni, da piccoli produttori.</p><p>Pecorini, salame di pecora, lardo al mirto Su Sirboni, Blu di bufala lombardo, Parma 24 mesi, caci e ricotte siciliane.</p><p>Miele, composte di frutta bio, pane Guttiau: il carasau con olio e sale marino.</p><p>Abbinamento: Crémant du Jura Extra Brut, Domaine Tissot.</p>
-                <span class="hand" style="right:2.4rem;top:7.8rem;transform:rotate(-4deg)">da dividere. sempre.</span>
-                <svg class="ring" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="46" filter="url(#marker)"/></svg>
+                <p>Un viaggio tra le regioni, da piccoli produttori.</p><p>Pecorini, salame di pecora, lardo al mirto Su Sirboni, Blu di bufala lombardo, Parma 24 mesi, caci e ricotte siciliane.</p><p>Miele, composte di frutta bio, pane Guttiau: il carasau con olio e sale marino.</p>
+                <span class="hand">da dividere. sempre.</span>
               </div>
             </div></div>
-          </div>
+          </article>
+          <article class="kp a" id="k-dolci" role="tabpanel" aria-labelledby="kt-dolci">
+            <figure class="kp-ph media cut"><img loading="lazy" draggable="false" src="img/blend-foodanddrink-AL85246.webp" alt="Salsa versata su un dolce al cucchiaio con scaglie di cioccolato" style="object-position:50% 62%"></figure>
+            <h3 class="kp-t sign">Dolci</h3>
+            <div class="kp-tx">
+              <p class="claim voice">Due dolci, tutti e due con il cioccolato Amedei.</p>
+              <p class="sig">Da provare: Sesto Peccato</p>
+              <div class="kp-pull"><button type="button" class="tape" aria-expanded="false" aria-controls="r-dolci">il sesto peccato <span class="arr" aria-hidden="true">→</span></button></div>
+            </div>
+            <div class="page-wrap" id="r-dolci" role="region" aria-label="il sesto peccato"><div>
+              <div class="page"><span class="bg paper-tex"></span><span class="clip" aria-hidden="true"></span>
+                <button type="button" class="kx" aria-label="Chiudi l'appunto">✕</button>
+                <h4>Dolci · appunto n° 15<svg class="ink" viewBox="0 0 200 12" style="left:0;bottom:-6px;width:100%;height:12px" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 7 C40 2, 80 11, 120 5 S 180 9, 198 4"/></svg></h4>
+                <span class="stamp">Amedei</span>
+                <p>Sesto Peccato: mousse di nocciola, crumble di noci, caramello salato, scaglie di fondente 90% Amedei.</p><p>Chiaroscuro: brownie fondente, namelaka al cioccolato bianco e vaniglia, coulis di amarena e lampone, crumble di mandorle e sesamo nero.</p>
+                <span class="hand red">lascia spazio</span>
+              </div>
+            </div></div>
+          </article>
+          <span class="kit-end" aria-hidden="true"></span>
         </div>
-      </article>
+      </div>
+      <span class="kit-hint" aria-hidden="true">scorri<svg viewBox="0 0 60 30"><path d="M3 18 C16 9 32 9 50 15"/><path d="M41 7 C45 10 49 13 52 15 C47 17 43 20 40 25"/></svg></span>
+    </div>
 
+    <div class="w">
       <div class="coda">
-        <p class="voice">E poi la tartare di Fassona con spuma di Parmigiano stravecchio. E i dolci, se resta spazio.</p>
+        <p class="voice">Focacce, contorni e tutto il resto sono nel menu completo.</p>
         <a class="btn ghost cut" href="https://blendfoodanddrink.it/doc/Menu-blend-food-and-drink.pdf" target="_blank" rel="noopener"><span class="r">Tutto il menu</span></a>
       </div>
     </div>
@@ -2130,6 +2315,7 @@ const CMS = {
   /* il giradischi si fa da parte: resta fuori solo la linguetta */
   let tuckAuto = 0, touched = false;
   function setTuck(t) { deck.classList.toggle("tucked", t); tuck.setAttribute("aria-expanded", !t); tuck.setAttribute("aria-label", t ? "Mostra il giradischi" : "Nascondi il giradischi"); }
+  window.__tuckDeck = () => { clearTimeout(tuckAuto); setTuck(true); };
   tuck.addEventListener("click", () => { touched = true; clearTimeout(tuckAuto); setTuck(!deck.classList.contains("tucked")); });
   deck.addEventListener("pointerenter", () => { touched = true; clearTimeout(tuckAuto); }, { once: true });
   window.__armTuck = () => { if (!touched && !tuckAuto) tuckAuto = setTimeout(() => { if (!touched && !deck.classList.contains("playing")) setTuck(true); }, 6000); };
@@ -2151,6 +2337,67 @@ const CMS = {
     pts.push("100% 100%", "0 100%");
     pg.style.setProperty("--torn", `polygon(${pts.join(",")})`);
   });
+  /* ---------- cucina: le portate scorrono in orizzontale ---------- */
+  const kit = $("#kit");
+  if (kit) {
+    const track = $("#kit-track"), kps = $$(".kp", track), tabsBox = $("#kit-tabs"), tabs = $$(".kt", kit), kPrev = $("#kit-prev"), kNext = $("#kit-next");
+    let cur = -1, kraf = 0, step = 1;
+    const measure = () => { step = kps.length > 1 ? kps[1].offsetLeft - kps[0].offsetLeft : 1; };
+    const closeNotes = () => $$(".page-wrap.open", kit).forEach((w) => { w.classList.remove("open"); const b = $(`[aria-controls="${w.id}"]`, kit); if (b) b.setAttribute("aria-expanded", "false"); });
+    const paint = () => {
+      kraf = 0; const p = track.scrollLeft / step;
+      kps.forEach((k, i) => { const d = Math.max(-1.5, Math.min(1.5, i - p)); k.style.setProperty("--d", d.toFixed(3)); k.style.setProperty("--a", Math.min(1, Math.abs(d)).toFixed(3)); });
+      tabs.forEach((t, i) => t.style.setProperty("--k", Math.max(0, Math.min(1, p - i + 1)).toFixed(3)));
+      const c = Math.max(0, Math.min(kps.length - 1, Math.round(p)));
+      if (c === cur) return;
+      cur = c; closeNotes();
+      kps.forEach((k, i) => k.classList.toggle("on", i === c));
+      tabs.forEach((t, i) => { t.setAttribute("aria-selected", i === c); t.tabIndex = i === c ? 0 : -1; });
+      kPrev.disabled = c === 0; kNext.disabled = c === kps.length - 1;
+      /* su telefono il selettore segue la portata */
+      if (tabsBox.scrollWidth > tabsBox.clientWidth) tabsBox.scrollTo({ left: tabs[c].offsetLeft - tabsBox.offsetLeft - 16, behavior: reduce ? "auto" : "smooth" });
+    };
+    const go = (i) => track.scrollTo({ left: Math.max(0, Math.min(kps.length - 1, i)) * step, behavior: reduce ? "auto" : "smooth" });
+    const used = () => kit.classList.add("used");
+    track.addEventListener("scroll", () => { if (!kraf) kraf = requestAnimationFrame(paint); }, { passive: true });
+    ["touchstart", "pointerdown", "keydown"].forEach((t) => track.addEventListener(t, used, { passive: true }));
+    /* lo swipe laterale del trackpad resta alla riga, quello verticale alla pagina */
+    let wAcc = 0, wT = 0, wFrom = 0;
+    track.addEventListener("wheel", (e) => {
+      if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+      e.stopPropagation(); used();
+      /* rotelle orizzontali e Maiusc+rotella si muovono a scatti e lo snap le riporta indietro: in quel caso passo io alla portata dopo */
+      if (!wT) { wAcc = 0; wFrom = track.scrollLeft; }
+      wAcc += e.deltaX; clearTimeout(wT);
+      wT = setTimeout(() => { wT = 0; const from = Math.round(wFrom / step); if (Math.round(track.scrollLeft / step) === from && Math.abs(wAcc) > 40) go(from + (wAcc > 0 ? 1 : -1)); }, 140);
+    }, { passive: true });
+    tabs.forEach((t, i) => t.addEventListener("click", () => { used(); go(i); }));
+    kPrev.addEventListener("click", () => { used(); go(cur - 1); }); kNext.addEventListener("click", () => { used(); go(cur + 1); });
+    kit.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeNotes();
+      if (e.target.closest(".page")) return;
+      if (e.key === "ArrowRight") { go(cur + 1); e.preventDefault(); } else if (e.key === "ArrowLeft") { go(cur - 1); e.preventDefault(); }
+    });
+    /* appunti: uno alla volta, solo sulla portata in primo piano */
+    $$(".tape", kit).forEach((b) => b.addEventListener("click", () => {
+      const w = document.getElementById(b.getAttribute("aria-controls")), i = kps.indexOf(b.closest(".kp")), open = !w.classList.contains("open");
+      if (i !== cur) { go(i); return; }
+      closeNotes(); if (open) { w.classList.add("open"); b.setAttribute("aria-expanded", "true"); }
+    }));
+    $$(".kx", kit).forEach((x) => x.addEventListener("click", () => { const b = $(`[aria-controls="${x.closest(".page-wrap").id}"]`, kit); closeNotes(); if (b) b.focus({ preventScroll: true }); }));
+    /* con il mouse la riga si trascina */
+    if (fine) {
+      let down = false, moved = false, sx = 0, sl = 0, dragT = 0;
+      track.addEventListener("pointerdown", (e) => { if (e.pointerType !== "mouse" || e.button !== 0 || e.target.closest("button, a, .page")) return; down = true; moved = false; sx = e.clientX; sl = track.scrollLeft; });
+      addEventListener("pointermove", (e) => { if (!down) return; const dx = e.clientX - sx; if (!moved && Math.abs(dx) > 6) { moved = true; clearTimeout(dragT); track.classList.add("drag"); } if (moved) track.scrollLeft = sl - dx; });
+      addEventListener("pointerup", (e) => { if (!down) return; down = false; if (!moved) return; const dx = e.clientX - sx, from = Math.round(sl / step); go(dx < -70 ? from + 1 : dx > 70 ? from - 1 : from); dragT = setTimeout(() => track.classList.remove("drag"), 520); });
+    }
+    measure(); paint(); addEventListener("resize", () => { measure(); cur = -1; paint(); }); addEventListener("load", () => { measure(); paint(); });
+    if ("IntersectionObserver" in window) new IntersectionObserver(([e], o) => { if (e.isIntersecting) { kit.classList.add("in"); o.disconnect(); } }, { threshold: .3 }).observe(track); else kit.classList.add("in");
+    /* il giradischi si fa da parte quando arrivi alle portate: non deve coprire testi e nastri */
+    if ("IntersectionObserver" in window) new IntersectionObserver(([e]) => { if (e.isIntersecting && window.__tuckDeck) window.__tuckDeck(); }, { threshold: .15 }).observe(track);
+  }
+
   $$(".secret .tape").forEach((b) => b.addEventListener("click", () => {
     const open = b.getAttribute("aria-expanded") !== "true", w = document.getElementById(b.getAttribute("aria-controls"));
     b.setAttribute("aria-expanded", open); w.classList.toggle("open", open);
@@ -2345,6 +2592,8 @@ const CMS = {
     reveal(G.timeline().from("#rvtrack > .score, #rvtrack > .pz", { y: 70, rotation: () => G.utils.random(-9, 9), opacity: 0, duration: 1, ease: "expo.out", stagger: .09, onComplete: stringUp }), "#rv", "top 84%");
     reveal(G.timeline().from(".ev", { y: 26, opacity: 0, duration: .8, ease: "expo.out", stagger: .06 }), "#events", "top 90%");
     reveal(G.timeline().fromTo(".map .sheet", { clipPath: "inset(0% 50% 0% 50%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.3, ease: "power4.inOut" }).from(".map .sheet > .bg, .streets", { scale: 1.12, duration: 1.8, ease: "expo.out" }, .2), "#map", "top 82%");
+    /* la cucina entra di lato: fa sentire subito l'asse orizzontale */
+    if ($("#kit")) reveal(G.timeline().from(".kt", { y: 18, opacity: 0, duration: .7, ease: "expo.out", stagger: .05 }).from(".kit-arr", { opacity: 0, duration: .6 }, .2).from(".kp-ph", { x: () => innerWidth * .28, opacity: 0, duration: 1.25, ease: "expo.out", stagger: .09, clearProps: "opacity,transform" }, .05).from(".kp-t", { x: () => innerWidth * .4, opacity: 0, duration: 1.35, ease: "expo.out", stagger: .09, clearProps: "opacity,transform" }, .1), "#kit", "top 82%");
     $$(".secret, .scrap, .ticket").forEach((el) => reveal(G.timeline().from(el, { y: 50, rotation: -10, opacity: 0, duration: 1.1, ease: "expo.out" }), el, "top 94%"));
   }
 })();
