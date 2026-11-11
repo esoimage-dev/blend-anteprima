@@ -8,7 +8,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Caveat:wght@500;700&family=Nothing+You+Could+Do&family=Homemade+Apple&family=Big+Shoulders+Display:wght@500;700;800;900&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Caveat:wght@500;700&family=Nothing+You+Could+Do&family=Homemade+Apple&family=La+Belle+Aurore&family=Big+Shoulders+Display:wght@500;700;800;900&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600&display=swap">
 <meta name="description" content="Cocktail d'autore, cucina di piccoli produttori e jazz dal vivo. Via di Mezzocammino 141, Roma. Tutte le sere fino alle 2.">
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
@@ -1577,6 +1577,49 @@ body.past .deck.swap-in .tt .disc { translate: 0 0; transition: translate 1.1s c
   #kt-tagl .ki { width: 40px; }
   #kt-tagl .ki .ring { left: -8px; width: calc(100% + 16px); }
 }
+/* ---------- v31: puntine vere, filo rosso ritorto, cartellini con l'anello di spago, penna rossa sulla mappa ---------- */
+/* puntine a testa tonda: sfera lucida, ago d'acciaio, ombra che cade sulla carta. Cinque diverse */
+.pz .pin, .map .mark .pin { width: 52px; height: 52px; margin: 0; border-radius: 0; box-shadow: none; background: url("img/vera/puntina-1.webp") 0 0 / 100% 100% no-repeat; pointer-events: none; }
+.pz .pin { left: calc(50% - 20.8px); top: -14px; }
+.pz:nth-of-type(5n + 2) .pin { background-image: url("img/vera/puntina-2.webp"); }
+.pz:nth-of-type(5n + 3) .pin { background-image: url("img/vera/puntina-4.webp"); }
+.pz:nth-of-type(5n + 4) .pin { background-image: url("img/vera/puntina-5.webp"); }
+.pz:nth-of-type(5n) .pin { background-image: url("img/vera/puntina-3.webp"); }
+/* il filo: anima scura, trefoli chiari, un filo di luce sopra, ombra staccata sotto. Niente filtri */
+.rv .string { clip-path: inset(-60px 100% -60px -60px); transition: clip-path 2.6s cubic-bezier(.6, 0, .2, 1); }
+.rv.in .string { clip-path: inset(-60px); }
+.rv .string path { fill: none; stroke-linecap: round; stroke-linejoin: round; filter: none; stroke-dasharray: none; stroke-dashoffset: 0; transition: none; }
+.rv .string .sh path { stroke: #000; stroke-width: 4.2; opacity: .3; transform: translate(3px, 5px); }
+.rv .string { max-width: none; }
+.rv .string .bs path { stroke: #8a1811; stroke-width: 2.6; }
+.rv .string .tx path { stroke: #c42c23; stroke-width: 2.2; stroke-linecap: butt; stroke-dasharray: 2.6 1.1; }
+.rv .string .hl path { stroke: #f08a76; stroke-width: .7; opacity: .5; transform: translate(-.4px, -.7px); stroke-dasharray: 1.6 2.2; }
+@media (max-width: 900px) {
+  .rv .string { clip-path: inset(-60px -60px 100% -60px); }
+  .rv.in .string { clip-path: inset(-60px); }
+}
+/* cartellino: più largo, la scritta entra tutta. Lo spago è un anello chiuso nell'occhiello, col nodo in fondo */
+.pz > .tw { display: none; }
+.pz .tag { width: 164px; height: 86px; right: -46px; bottom: -34px; padding: 0 12px 0 44px; grid-template-rows: 39px 1fr; column-gap: 6px; transform: rotate(-8deg); }
+.pz.nk .tag { left: -34px; right: auto; bottom: -30px; transform: rotate(5deg); }
+.pz .tag b { font-size: .66rem; padding-bottom: 5px; }
+.pz .tag em { font-size: 1.6rem; }
+.pz .tag i { font-size: .86rem; padding-top: 5px; letter-spacing: -.01em; }
+.pz .tag .twn { position: absolute; left: 0; top: 0; width: 164px; height: 86px; overflow: visible; pointer-events: none; }
+.pz .tag .twn path { fill: none; stroke-linecap: round; }
+.pz .tag .twn .sh path { stroke: #000; stroke-width: 2.8; opacity: .4; transform: translate(1.5px, 2.5px); }
+.pz .tag .twn .bs path { stroke: #a8977a; stroke-width: 2.2; }
+.pz .tag .twn .tx path { stroke: #dccfb3; stroke-width: 1.8; stroke-linecap: butt; stroke-dasharray: 2.2 1; }
+.pz .tag .twn .kn { fill: #d2c4a6; stroke: #85735a; stroke-width: .9; }
+.pz .tag .twn .eye { fill: #1a130c; opacity: .55; }
+@media (max-width: 900px) {
+  .pz .tag { right: -10px; }
+  .pz.nk .tag { left: 6px; bottom: -40px; }
+}
+/* mappa: puntina vera; cerchio e appunto con la stessa penna rossa */
+.map .mark .pin { left: 50%; top: 50%; width: 48px; height: 48px; margin: -24px 0 0 -19.2px; background-image: url("img/vera/puntina-5.webp"); }
+.map .mark path { stroke: #b01c17; stroke-width: 2.7; stroke-linejoin: round; filter: url(#pen); transition-duration: 1.7s; }
+.map .mnote { font: 400 clamp(1.55rem, 2.15vw, 2.05rem)/1.1 "La Belle Aurore", "Nothing You Could Do", cursive; letter-spacing: .01em; color: #b01c17; -webkit-text-stroke: .75px #b01c17; filter: url(#pen); padding: .2em .3em; text-shadow: 0 0 5px rgba(236, 224, 196, .9), 0 0 14px rgba(236, 224, 196, .75); }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -1617,6 +1660,7 @@ body.past .deck.swap-in .tt .disc { translate: 0 0; transition: translate 1.1s c
     <feComposite in="d1" in2="fineA" operator="in" result="d2"/>
     <feGaussianBlur in="d2" stdDeviation=".35"/>
   </filter>
+  <filter id="pen" x="-5%" y="-10%" width="110%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".06" numOctaves="2" seed="4" result="w"/><feDisplacementMap in="SourceGraphic" in2="w" scale="1.8" result="d"/><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="1" seed="8" result="g"/><feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -.9 1.25" result="a"/><feComposite in="d" in2="a" operator="in"/></filter>
   <filter id="ink" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="3" result="g"/><feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.6 1.25" result="a"/><feComposite in="SourceGraphic" in2="a" operator="in" result="t"/><feTurbulence type="fractalNoise" baseFrequency=".04" numOctaves="2" seed="9" result="w"/><feDisplacementMap in="t" in2="w" scale="2.5"/></filter>
   <symbol id="blend-logo" viewBox="0 0 2160 1338"><g transform="translate(0,1338) scale(0.1,-0.1)" fill="#fcc650"><path d="M1650 12895 c-78 -18 -125 -40 -169 -81 -40 -36 -55 -57 -396 -564 -109 -162 -249 -370 -311 -462 -149 -220 -169 -262 -209 -429 l-15 -64 0 -362 0 -362 15 -63 c43 -184 52 -200 349 -643 147 -217 266 -400 266 -405 0 -9 -145 -227 -428 -645 -110 -161 -145 -233 -178 -365 l-24 -95 0 -3132 0 -3132 15 -63 c40 -170 66 -222 250 -493 167 -248 401 -594 533 -790 131 -195 140 -203 262 -244 l65 -22 1382 3 1382 3 27 21 c15 11 37 33 48 48 l21 27 0 6107 0 6107 -20 35 c-12 19 -36 43 -55 55 l-35 20 -1360 2 -1360 1 -55 -13z m1874 -1011 c3 -9 6 -440 6 -959 l0 -943 -14 -11 -15 -12 -698 3 -698 3 -36 18 -36 18 -238 356 -237 356 1 221 2 220 235 353 c129 194 244 358 257 364 46 25 97 27 773 28 l692 1 6 -16z m-6 -2936 l12 -12 0 -3718 0 -3717 -17 -8 c-10 -4 -337 -6 -728 -3 l-710 5 -23 16 c-13 9 -129 175 -258 369 l-234 351 0 2990 0 2990 236 355 c130 195 245 359 255 364 45 25 136 28 774 29 l681 1 12 -12z"/><path d="M5825 12901 c-79 -14 -120 -54 -135 -130 l-10 -54 0 -6033 0 -6033 11 -50 10 -50 35 -30 c18 -17 48 -33 66 -36 18 -3 2245 -4 4948 -3 l4915 3 32 24 c18 13 39 41 48 63 l15 38 0 366 0 365 -16 32 c-21 42 -63 86 -94 101 l-25 11 -4465 5 -4465 5 -5 5655 -5 5655 -12 20 c-6 11 -22 30 -36 43 l-24 23 -59 9 c-66 11 -666 11 -729 1z"/><path d="M7795 12886 c-16 -7 -41 -26 -55 -41 l-25 -27 -3 -374 -3 -375 21 -47 c12 -26 38 -74 59 -107 21 -33 69 -114 108 -180 38 -66 137 -232 218 -370 81 -137 193 -326 248 -420 55 -93 149 -251 207 -350 59 -99 139 -234 177 -300 38 -66 87 -146 107 -178 21 -32 36 -66 34 -75 l-3 -17 -467 -5 -467 -5 -28 -21 c-15 -11 -35 -34 -43 -50 l-15 -29 -3 -3575 -3 -3575 11 -37 11 -38 37 -25 37 -25 3854 0 3854 0 35 26 c19 15 40 42 48 60 l14 33 0 366 0 366 -20 39 c-11 22 -28 44 -38 49 -65 35 -1296 51 -4300 58 l-2532 5 -5 22 c-3 11 -4 1220 -3 2686 l3 2665 970 5 970 5 33 23 c18 13 40 38 50 55 l17 32 3 355 4 355 -12 51 -11 51 -27 25 c-15 14 -37 31 -49 37 l-22 11 -350 0 c-192 0 -357 3 -365 6 -14 6 -185 287 -556 914 -53 91 -202 340 -329 554 -128 214 -228 393 -224 397 5 5 417 10 915 11 l907 3 28 21 c15 11 42 43 58 69 l30 48 0 376 0 376 -15 29 c-8 16 -28 39 -43 50 l-28 21 -1497 2 -1497 2 -30 -13z"/><path d="M12140 12883 c-21 -11 -42 -33 -53 -54 l-18 -37 1 -3943 0 -3943 18 -35 17 -36 45 -22 45 -22 372 -1 373 0 40 16 40 16 22 37 23 36 5 3500 5 3500 221 3 c238 3 967 -22 997 -34 10 -3 123 -162 250 -353 l232 -346 5 -3130 5 -3130 20 -35 c12 -21 39 -44 65 -58 l45 -23 387 3 386 3 39 31 c21 17 43 46 50 65 l12 34 0 3181 1 3181 -26 104 c-34 136 -69 203 -228 438 -148 218 -365 540 -535 793 -121 180 -146 207 -231 247 l-55 26 -1270 3 -1270 2 -35 -17z"/><path d="M17012 12880 c-18 -11 -41 -34 -52 -52 l-20 -33 0 -6098 0 -6099 15 -32 c9 -18 30 -44 48 -57 l32 -24 1420 -3 1420 -2 48 10 c66 14 149 56 185 94 17 17 92 123 168 236 75 113 183 273 239 355 435 642 444 658 484 812 l21 82 0 4627 0 4627 -30 103 c-34 118 -61 170 -175 339 -173 255 -378 560 -529 785 -168 251 -188 274 -275 317 l-56 28 -1455 3 -1455 2 -33 -20z m2501 -999 l28 -15 239 -359 240 -359 0 -4457 -1 -4456 -237 -355 -237 -355 -36 -18 -36 -17 -758 -1 -758 0 -8 13 c-10 15 -12 10358 -3 10382 l6 17 767 -3 766 -3 28 -14z"/></g></symbol>
 </svg>
@@ -1916,7 +1960,7 @@ body.past .deck.swap-in .tt .disc { translate: 0 0; transition: translate 1.1s c
     <h2 class="addr sign" id="addr">Via di<br>Mezzocammino <em>141</em></h2>
     <div class="map" id="map">
       <div class="sheet"><span class="bg" aria-hidden="true"></span><div class="streets" id="streets" role="img" aria-label="Mappa della zona: Blend è in Via di Mezzocammino 141, vicino a Via Ascanio Vitozzi"></div>
-        <span class="mark" aria-hidden="true"><svg viewBox="0 0 140 110"><path pathLength="1" d="M70 12 C112 10 132 34 128 58 C124 86 92 100 62 98 C28 96 8 78 10 54 C12 28 40 14 76 16 C96 18 112 26 118 34"/></svg><i class="pin"></i></span>
+        <span class="mark" aria-hidden="true"><svg viewBox="0 0 140 110"><path pathLength="1" d="M50 21 C90 5 133 27 129 60 C126 90 90 103 58 98 C26 93 7 74 12 50 C17 25 47 11 80 13 C113 15 132 37 127 62 C122 87 95 100 65 96 C41 93 22 81 17 63"/></svg><i class="pin"></i></span>
         <span class="mnote" aria-hidden="true">n° 141.<br>Dalle 18 alle 2.</span>
       </div>
       <span class="torch" aria-hidden="true"></span>
@@ -2271,29 +2315,51 @@ const CMS = {
   const KISS = `<img class="kiss" src="img/vera/bacio.webp" alt="" width="360" height="372" aria-hidden="true">`;
   const rot = [-3.5, 2.5, -1.5, 3, -2.5], tagRot = [-4, 3, -2, 5, -3];
   const KIND = { rc: "scontrino", ix: "scheda", co: "sottobicchiere", pg: "pagina strappata", nk: "tovagliolo" }, TAGGED = { co: 1, nk: 1 };
+  /* lo spago del cartellino: un anello chiuso che passa nell'occhiello, con il nodo in fondo. Ogni cartellino ha il suo */
+  const twine = (a, b, k, t) => `<svg class="twn" viewBox="0 0 164 86"><g class="sh"><path d="${a}"/><path d="${b}"/></g><g class="bs"><path d="${a}"/><path d="${b}"/><path d="${t}"/></g><g class="tx"><path d="${a}"/><path d="${b}"/><path d="${t}"/></g><ellipse class="kn" cx="${k[0]}" cy="${k[1]}" rx="3.1" ry="2.5" transform="rotate(${k[2]} ${k[0]} ${k[1]})"/><circle class="eye" cx="18.7" cy="43" r="2.7"/></svg>`;
+  const TWINE = {
+    co: twine("M18.7 43 C8 31 -19 37 -21 68", "M18.7 43 C19 59 -3 74 -21 68", [-21, 68, 35], "M-21 68 c-5 3 -7 8 -6 13 M-21 68 c-6 -1 -10 1 -13 5"),
+    nk: twine("M18.7 43 C4 46 -11 62 -4 86", "M18.7 43 C24 60 13 82 -4 86", [-4, 86, 70], "M-4 86 c-1 5 1 9 5 12 M-4 86 c-5 2 -8 6 -8 11")
+  };
   $("#rvtrack").insertAdjacentHTML("beforeend", CMS.reviews.map((r, i) => {
     const who = `<figcaption class="who">${esc(r.who)}, ${esc(r.where)} · ★★★★★</figcaption>`;
     const inner = r.kind === "rc"
       ? `<b>BLEND FOOD &amp; DRINK</b><br>Via di Mezzocammino 141<hr><span class="rl"><span>1 x Warehouse</span><span>burger</span></span><span class="rl"><span>1 x IPA</span><span>alla spina</span></span><hr><blockquote>${esc(r.q)}</blockquote>${who}`
       : `<blockquote>${esc(r.q)}</blockquote>${who}${r.kind === "nk" ? KISS : ""}${r.kind === "co" ? '<span class="ring" aria-hidden="true"></span>' : ""}`;
-    return `<figure class="pz ${r.kind}" style="--r:${rot[i % rot.length]}deg"><span class="bg" aria-hidden="true"></span><i class="pin" aria-hidden="true"></i>${inner}${TAGGED[r.kind] ? `<svg class="tw" aria-hidden="true" viewBox="0 0 70 90">${r.kind === "nk" ? '<path d="M8 64 C24 58 30 34 64 6"/>' : '<path d="M50 80 C44 60 30 40 6 6"/>'}</svg><span class="tag" aria-hidden="true"><svg class="knot" viewBox="-14 0 40 72"><path d="M15 36 C9 29 1 29 -3 36 C1 43 9 43 15 36"/><path d="M-3 36 c-4 5 -6 11 -5 18 M-3 36 c-5 -1 -9 2 -11 7"/><circle cx="-3" cy="36" r="2.6"/></svg><b>Reperto n°</b><em>${i + 1}</em><i>${KIND[r.kind]}</i></span>` : ""}</figure>`;
+    return `<figure class="pz ${r.kind}" style="--r:${rot[i % rot.length]}deg"><span class="bg" aria-hidden="true"></span><i class="pin" aria-hidden="true"></i>${inner}${TAGGED[r.kind] ? `<span class="tag" aria-hidden="true">${TWINE[r.kind]}<b>Reperto n°</b><em>${i + 1}</em><i>${KIND[r.kind]}</i></span>` : ""}</figure>`;
   }).join(""));
 
   const rvt = $("#rvtrack"), rvp = $("#rv-prog");
-  /* il filo rosso: passa da una puntina all'altra, con un po' di pancia */
+  /* il filo rosso: teso da una puntina all'altra, un giro intorno a ogni ago, i due capi che pendono.
+     Le posizioni si calcolano dal layout (non dai rettangoli a schermo), così l'entrata animata delle prove non le sposta */
   const NS = "http://www.w3.org/2000/svg";
-  const str = document.createElementNS(NS, "svg"); str.setAttribute("class", "string"); str.setAttribute("aria-hidden", "true");
-  const strP = document.createElementNS(NS, "path"); str.appendChild(strP); rvt.prepend(str);
+  const str = document.createElementNS(NS, "svg"); str.setAttribute("class", "string"); str.setAttribute("aria-hidden", "true"); rvt.prepend(str);
+  let strW = 0;
   function stringUp() {
-    const tr = rvt.getBoundingClientRect(), pins = $$(".pin", rvt).map((p) => { const b = p.getBoundingClientRect(); return [b.left - tr.left + rvt.scrollLeft + b.width / 2, b.top - tr.top + b.height / 2]; });
+    const col = getComputedStyle(rvt).flexDirection === "column";
+    const pins = $$(".pz", rvt).filter((z) => z.offsetWidth).map((z) => {
+      const r = (parseFloat(z.style.getPropertyValue("--r")) || 0) * Math.PI / 180, w = z.offsetWidth, h = z.offsetHeight;
+      const ly = 12 - h / 2;                                        /* il foro dell'ago: in alto al centro della prova */
+      return [z.offsetLeft + w / 2 - ly * Math.sin(r), z.offsetTop + h / 2 + ly * Math.cos(r)];
+    });
     if (pins.length < 2) return;
-    str.setAttribute("width", rvt.scrollWidth); str.setAttribute("height", rvt.scrollHeight);
-    let d = `M${pins[0][0]} ${pins[0][1]}`;
-    for (let k = 1; k < pins.length; k++) { const [x0, y0] = pins[k - 1], [x1, y1] = pins[k]; d += ` Q${(x0 + x1) / 2} ${Math.max(y0, y1) + 46} ${x1} ${y1}`; }
-    strP.setAttribute("d", d); str.style.setProperty("--len", Math.ceil(strP.getTotalLength()) + 2);
+    const W = rvt.scrollWidth, H = rvt.scrollHeight; strW = rvt.clientWidth;
+    str.setAttribute("width", W); str.setAttribute("height", H);
+    const f = (n) => n.toFixed(1);
+    /* capo libero all'inizio, poi i tratti tesi (un filo di pancia), poi il capo libero alla fine */
+    const [ax, ay] = pins[0], [zx, zy] = pins[pins.length - 1];
+    let d = col ? `M${f(ax + 26)} ${f(ay - 40)} C${f(ax + 20)} ${f(ay - 22)} ${f(ax + 6)} ${f(ay - 12)} ${f(ax)} ${f(ay)}` : `M${f(ax - 30)} ${f(ay + 46)} C${f(ax - 31)} ${f(ay + 24)} ${f(ax - 12)} ${f(ay + 14)} ${f(ax)} ${f(ay)}`;
+    for (let k = 1; k < pins.length; k++) { const [x0, y0] = pins[k - 1], [x1, y1] = pins[k], L = Math.hypot(x1 - x0, y1 - y0); d += ` Q${f((x0 + x1) / 2 + (col ? (k % 2 ? 1 : -1) * L * .02 : 0))} ${f((y0 + y1) / 2 + (col ? 0 : L * .028))} ${f(x1)} ${f(y1)}`; }
+    d += col ? ` C${f(zx - 8)} ${f(zy + 12)} ${f(zx - 22)} ${f(zy + 16)} ${f(zx - 30)} ${f(zy + 34)}` : ` C${f(zx + 10)} ${f(zy + 16)} ${f(zx + 30)} ${f(zy + 22)} ${f(zx + 27)} ${f(zy + 52)}`;
+    /* il giro intorno a ogni ago */
+    const loops = pins.map(([x, y], k) => `M${f(x - 3)} ${f(y + .6)} a3 2.6 ${k % 2 ? 24 : -18} 1 0 6 -.8 a3 2.6 ${k % 2 ? 24 : -18} 1 0 -6 .8`).join(" ");
+    str.innerHTML = `<g class="sh"><path d="${d}"/></g><g class="bs"><path d="${d}"/><path d="${loops}"/></g><g class="tx"><path d="${d}"/><path d="${loops}"/></g><g class="hl"><path d="${d}"/></g>`;
   }
-  addEventListener("load", stringUp); addEventListener("resize", stringUp); document.fonts && document.fonts.ready.then(stringUp); stringUp();
-  if ("IntersectionObserver" in window) new IntersectionObserver(([e]) => { if (e.isIntersecting) setTimeout(() => { stringUp(); $("#rv").classList.add("in"); }, reduce ? 0 : 1200); }, { threshold: .3 }).observe($("#rv"));
+  addEventListener("load", stringUp); document.fonts && document.fonts.ready.then(stringUp); stringUp();
+  /* su telefono la barra degli indirizzi cambia l'altezza a ogni scroll: si ricalcola solo se cambia la larghezza */
+  addEventListener("resize", () => { if (rvt.clientWidth !== strW) stringUp(); });
+  if ("IntersectionObserver" in window) new IntersectionObserver(([e], o) => { if (e.isIntersecting) { o.disconnect(); setTimeout(() => { stringUp(); $("#rv").classList.add("in"); }, reduce ? 0 : 1200); } }, { threshold: .15 }).observe($("#rv"));
+  else $("#rv").classList.add("in");
   const rvUpd = () => { const m = rvt.scrollWidth - rvt.clientWidth; rvp.style.transform = `scaleX(${m > 0 ? Math.max(.08, rvt.scrollLeft / m) : 1})`; };
   rvt.addEventListener("scroll", rvUpd, { passive: true }); rvUpd();
   if (fine) {
@@ -2649,7 +2715,7 @@ const CMS = {
     /* entrate leggere per liste, schede, recensioni, biglietti */
     reveal(G.timeline().from("#drinks li", { y: 22, opacity: 0, duration: .7, ease: "expo.out", stagger: .03 }), "#drinks", "top 86%");
     reveal(G.timeline().from("#g-ph", { y: 50, opacity: 0, duration: 1.1, ease: "expo.out" }).from(".file", { y: innerWidth > 900 ? 70 : 16, rotation: innerWidth > 900 ? 9 : 3, opacity: 0, duration: 1.1, ease: "expo.out" }, .3), "#glass", "top 84%");
-    reveal(G.timeline().from("#rvtrack > .score, #rvtrack > .pz", { y: 70, rotation: () => G.utils.random(-9, 9), opacity: 0, duration: 1, ease: "expo.out", stagger: .09, onComplete: stringUp }), "#rv", "top 84%");
+    reveal(G.timeline().from("#rvtrack > .score, #rvtrack > .pz", { y: 70, rotation: () => G.utils.random(-9, 9), opacity: 0, duration: 1, ease: "expo.out", stagger: .09 }), "#rv", "top 84%");
     reveal(G.timeline().from(".ev", { y: 26, opacity: 0, duration: .8, ease: "expo.out", stagger: .06 }), "#events", "top 90%");
     reveal(G.timeline().fromTo(".map .sheet", { clipPath: "inset(0% 50% 0% 50%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.3, ease: "power4.inOut" }).from(".map .sheet > .bg, .streets", { scale: 1.12, duration: 1.8, ease: "expo.out" }, .2), "#map", "top 82%");
     /* la cucina entra di lato: fa sentire subito l'asse orizzontale */
