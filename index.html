@@ -1715,6 +1715,59 @@ body.past .deck.swap-in .tt .disc { translate: 0 0; transition: translate 1.1s c
 .next:hover { transform: perspective(600px) translateY(-10px) rotate(2.4deg) scale(1.06) rotateX(calc(var(--ty) * -22deg)) rotateY(calc(var(--tx) * 26deg)); transition: transform .18s ease-out, filter .4s; }
 @media (max-width: 900px) { .hero { height: 200svh; } }
 @media (prefers-reduced-motion: reduce) { .hero { height: 100svh; } .hero .bg, .hero .grain { transition: none; } .hero .w.fin { opacity: 1; translate: none; } }
+/* ---------- v35: le serate. A sinistra la pellicola con chi suona, a destra la pila delle locandine ---------- */
+#serate .city, #serate .beams { display: none; }
+.live { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; margin-top: clamp(2rem, 4vw, 3.5rem); }
+/* la pellicola: base scura, fori ai lati, scritte di bordo. I fotogrammi sono 4:3, come al cinema */
+.film { --pf: clamp(30px, 3.4vw, 46px); position: relative; height: clamp(440px, 46vw, 700px); overflow: hidden; rotate: -2deg; -webkit-mask-image: linear-gradient(180deg, transparent, #000 13%, #000 87%, transparent); mask-image: linear-gradient(180deg, transparent, #000 13%, #000 87%, transparent); }
+.reel { position: relative; display: grid; gap: clamp(8px, .9vw, 12px); padding: 0 var(--pf); background: linear-gradient(90deg, #2a2017, #3a2d20 10%, #33271c 90%, #251c14); animation: tremolio .5s steps(1) infinite; will-change: transform; }
+@keyframes tremolio { 0% { translate: 0 0; } 25% { translate: .5px -.6px; } 50% { translate: -.4px .5px; } 75% { translate: .3px .7px; } }
+.reel::before, .reel::after { content: ""; position: absolute; top: 0; bottom: 0; width: var(--pf); background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 46 60'%3E%3Crect x='13' y='19' width='20' height='27' rx='4.5' fill='%230a0908'/%3E%3Crect x='13.6' y='19.6' width='18.8' height='25.8' rx='4' fill='none' stroke='%23604c36' stroke-width='1'/%3E%3C/svg%3E") 0 0 / 100% auto repeat-y; }
+.reel::before { left: 0; } .reel::after { right: 0; }
+.reel .edge { position: absolute; z-index: 1; top: 0; bottom: 0; writing-mode: vertical-rl; font: 400 clamp(.42rem, .6vw, .54rem)/1 var(--f-type); letter-spacing: .22em; color: #e0a03a; opacity: .75; white-space: nowrap; overflow: hidden; }
+.reel .edge.l { left: 2px; } .reel .edge.r { right: 2px; rotate: 180deg; }
+.reel .fr { position: relative; display: block; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 5px; background: #0c0a08; }
+.reel .fr img, .reel .fr video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: sepia(.28) saturate(.9) contrast(1.06) brightness(1.05); }
+.reel .fr::after { content: ""; position: absolute; inset: -40px; background: url("img/grana.png") 0 0 / 180px 180px; opacity: .22; mix-blend-mode: overlay; animation: grana 1s steps(1) infinite; pointer-events: none; }
+.reel .fr.main img, .reel .fr.main video { filter: sepia(.12) saturate(1.05) contrast(1.08); animation: sfarfallio 3.2s steps(1) infinite; }
+@keyframes sfarfallio { 0%, 100% { opacity: 1; } 31% { opacity: .93; } 33% { opacity: 1; } 68% { opacity: .96; } 70% { opacity: 1; } }
+/* la pila: stampe piccole, una sull'altra, ognuna col suo nastro */
+.bill { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(1.2rem, 2.4vw, 2.4rem); align-items: end; }
+.pile { position: relative; width: clamp(230px, 23.5vw, 340px); aspect-ratio: 3 / 4; cursor: pointer; outline: none; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.pile:focus-visible { outline: 2px solid var(--sign); outline-offset: 14px; }
+.pile .card { position: absolute; inset: 0; margin: 0; --d: 0; --fx: 1; transform: translate(calc(var(--d) * 9px), calc(var(--d) * -7px)) rotate(calc(var(--r) * (.35 + var(--d) * .6))); transition: transform .55s cubic-bezier(.2, .8, .2, 1), filter .5s, opacity .4s; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .6)) drop-shadow(0 14px 18px rgba(0, 0, 0, .5)) brightness(calc(1 - var(--d) * .13)); }
+.pile .card.deep { opacity: 0; }
+.pile .card .ph { display: block; width: 100%; height: 100%; object-fit: cover; background: #1b1830; pointer-events: none; }
+.pile .card .tp { position: absolute; z-index: 1; left: 50%; top: -15px; width: 34%; height: auto; translate: -50% 0; rotate: calc(var(--r) * -1.6); pointer-events: none; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .35)); }
+.pile:hover .card:not(.out):not(.under) { transform: translate(calc(var(--d) * 13px), calc(var(--d) * -10px - 4px)) rotate(calc(var(--r) * (.35 + var(--d) * .8))); }
+.pile .card.out { transform: translate(calc(var(--fx) * 118%), -9%) rotate(calc(var(--fx) * 15deg)); transition: transform .36s cubic-bezier(.5, 0, .75, .4); }
+.pile .card.under { transition: transform .52s cubic-bezier(.15, .8, .25, 1), filter .5s, opacity .5s; }
+/* il talloncino: battuto a macchina, cambia con la locandina */
+.slip { position: relative; isolation: isolate; max-width: 330px; padding: 1.5rem 1.5rem 1.4rem; color: #1d150d; rotate: 1.4deg; margin-bottom: .6rem; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .5)) drop-shadow(0 14px 18px rgba(0, 0, 0, .45)); }
+.slip > .bg { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(120, 70, 20, .12), transparent 30%), url("img/carta/macchiata.webp") 60% 30% / 230% auto, #e9dfc8; }
+.slip .ct { position: absolute; right: 1.1rem; top: 1rem; margin: 0; font: 400 .7rem/1 var(--f-type); letter-spacing: .1em; color: #6b5335; }
+.slip .tg { display: block; font: 400 .7rem/1 var(--f-type); letter-spacing: .16em; text-transform: uppercase; color: #a3261c; }
+.slip h3 { margin: .55rem 0 .7rem; font: 900 clamp(1.9rem, 2.7vw, 2.6rem)/.9 var(--f-sign); text-transform: uppercase; letter-spacing: .005em; }
+.slip .ln { margin: 0; font: 400 .92rem/1.45 var(--f-type); }
+.slip .tm { margin: .65rem 0 0; padding-top: .6rem; border-top: 1px dashed rgba(40, 24, 8, .45); font: 400 .8rem/1.3 var(--f-type); color: #4b3820; }
+.slip #slip-b.in > * { animation: battuta .5s cubic-bezier(.2, .8, .2, 1) both; }
+.slip #slip-b.in > :nth-child(2) { animation-delay: .05s; } .slip #slip-b.in > :nth-child(3) { animation-delay: .1s; } .slip #slip-b.in > :nth-child(4) { animation-delay: .15s; } .slip #slip-b.in > :nth-child(5) { animation-delay: .2s; }
+@keyframes battuta { from { opacity: 0; translate: 0 8px; } }
+.slip .go { display: flex; flex-wrap: wrap; align-items: center; gap: .9rem 1.2rem; margin-top: 1.15rem; }
+.slip .nx { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: .5rem; font: 700 1.25rem/1 var(--f-hand); color: #1f3a74; }
+.slip .nx svg { width: 34px; height: 14px; overflow: visible; transition: translate .3s cubic-bezier(.2, .8, .2, 1); }
+.slip .nx path { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.slip .nx:hover svg { translate: 6px 0; }
+.slip .nx:focus-visible { outline: 2px solid #1f3a74; outline-offset: 4px; }
+@media (max-width: 1100px) { .bill { grid-template-columns: 1fr; justify-items: start; } }
+@media (max-width: 900px) {
+  .live { grid-template-columns: 1fr; gap: 2.6rem; }
+  .film { height: 78vw; rotate: -1.5deg; margin-inline: -4px; }
+  .bill { justify-items: center; gap: 1.6rem; }
+  .pile { width: min(62vw, 250px); margin-top: .6rem; }
+  .slip { max-width: min(330px, 100%); width: 100%; rotate: -1deg; }
+}
+@media (prefers-reduced-motion: reduce) { .reel, .reel .fr::after, .reel .fr.main img, .reel .fr.main video { animation: none; } .pile .card { transition: none; } }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -1990,15 +2043,36 @@ body.past .deck.swap-in .tt .disc { translate: 0 0; transition: translate 1.1s c
   </section>
 
   <section class="ch" id="serate" data-time="21:30" data-label="Le serate">
-    <canvas class="city" id="city" aria-hidden="true"></canvas>
-    <span class="beams" aria-hidden="true"><i></i><i></i></span>
     <div class="w">
       <div class="hd">
         <h2 class="sign">Jazz, vinili<br><em>e altre buone scuse per fare tardi.</em></h2>
       </div>
-      <div class="feat" id="feat"></div>
-      <div class="ev-list" id="events"><span class="small">Poi in programma</span></div>
-      <p class="proto">Prototipo: le serate arrivano dal back office. Alberto carica locandina, data e orario dal telefono e la serata compare qui e nell'hero. Quelle marcate "esempio" non sono reali.</p>
+      <div class="live">
+        <div class="film" aria-hidden="true">
+          <div class="reel" id="reel">
+            <span class="edge l">BLEND · SAFETY FILM &nbsp;&nbsp;&nbsp; 20 ▸ 20A &nbsp;&nbsp;&nbsp; 21 ▸ 21A &nbsp;&nbsp;&nbsp; 22 ▸ 22A &nbsp;&nbsp;&nbsp; BLEND · SAFETY FILM &nbsp;&nbsp;&nbsp; 23 ▸ 23A</span>
+            <span class="edge r">MEZZOCAMMINO 141 &nbsp;&nbsp;&nbsp; ROMA &nbsp;&nbsp;&nbsp; DAL VIVO &nbsp;&nbsp;&nbsp; MEZZOCAMMINO 141 &nbsp;&nbsp;&nbsp; ROMA</span>
+            <span class="fr"><img src="img/ev-bottiglie.jpg" alt="" loading="lazy"></span>
+            <span class="fr main"><video muted loop playsinline preload="none" data-src="video/dj.mp4"></video></span>
+            <span class="fr"><img src="img/ev-vinile.jpg" alt="" loading="lazy"></span>
+            <span class="fr"><video muted loop playsinline preload="none" data-src="video/toast.mp4"></video></span>
+          </div>
+        </div>
+        <div class="bill">
+          <div class="pile" id="pile" role="group" aria-label="Le prossime serate" tabindex="0"></div>
+          <div class="slip" id="slip" aria-live="polite">
+            <span class="bg" aria-hidden="true"></span>
+            <p class="ct"><span id="slip-n">1</span> / <span id="slip-t">6</span></p>
+            <div id="slip-b"></div>
+            <div class="go">
+              <a class="btn cut" href="https://blendfoodanddrink.plateform.app/reserve" target="_blank" rel="noopener"><span class="r">Prenota</span></a>
+              <button type="button" class="nx" id="pile-next" aria-label="Serata successiva"><span>La prossima</span><svg viewBox="0 0 40 16" aria-hidden="true"><path d="M2 8 C12 6 24 9 37 8 M29 2 C32 5 35 7 38 8 C35 10 32 12 30 14"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div hidden><div id="feat"></div><div id="events"></div></div>
+      <p class="proto">Prototipo: le serate arrivano dal back office. Alberto carica locandina, data e orario dal telefono e la serata compare qui e nell'hero.</p>
     </div>
   </section>
 
@@ -2175,6 +2249,14 @@ const CMS = {
     { n: "Snow White", p: [4, 2, 0, 0, 1], base: "Senza alcol", c: "Senza alcol", q: "Pesca bianca e fava tonka, con le bollicine.", ing: ["Purea di pesca bianca", "Rosa canina e fava tonka", "Lime", "Soda"] }
   ],
   next: { title: "Blend in Jazz", when: "Mercoledì", sub: "Ogni due settimane", sets: ["Primo set 20:30", "Secondo set 21:45"], body: "Il meglio del jazz romano, dal vivo, a due passi dal bancone. I tavoli vicino ai musicisti finiscono presto.", img: "img/blend-in-jazz-2026_copertina_ottobre.webp" },
+  shows: [
+    { tag: "Prossima serata", title: "Blend in Jazz", lines: ["Mercoledì · il meglio del jazz romano"], time: "Primo set 20:30 · secondo 21:45", img: "img/blend-in-jazz-2026_copertina_ottobre.webp", tape: "04" },
+    { tag: "Dicembre", title: "Mystery Pacific Trio", lines: ["Mer 23 dic · swing"], time: "Ore 21:00 - 23:00", img: "img/serate/urban-dic.webp", tape: "11" },
+    { tag: "Gennaio", title: "Django's month", lines: ["Mer 6 gen · Hot Jazz Trio", "Mer 20 gen · Belleville Trio"], time: "Ore 21:00 - 23:00 · manouche", img: "img/serate/urban-gen.webp", tape: "14" },
+    { tag: "Febbraio", title: "Urban Jazz", lines: ["Mer 10 feb · Sunside Trio", "Mer 24 feb · Red Hot Serenaders"], time: "Ore 21:00 - 23:00", img: "img/serate/urban-feb.webp", tape: "05" },
+    { tag: "Marzo", title: "Hot Jazz Trio", lines: ["Mer 10 mar · jazz, italoswing, bossa"], time: "Ore 21:00 - 23:00", img: "img/serate/urban-mar.webp", tape: "16" },
+    { tag: "Aprile", title: "Sunside Trio", lines: ["Mer 14 apr · bossa, italoswing, trad jazz"], time: "Ore 21:00 - 23:00", img: "img/serate/urban-apr.webp", tape: "18" }
+  ],
   events: [
     { title: "Vinile, solo vinile", dow: 5, meta: "Dj set dalle 22:30", img: "img/ev-vinile.jpg" },
     { title: "Spine nuove", dow: 4, meta: "Tre birre artigianali appena attaccate", img: "img/blend-foodanddrink-birra5.webp" },
@@ -2326,6 +2408,30 @@ const CMS = {
     let raf = 0; addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; onScroll(); }); }, { passive: true });
     let lw0 = 0; addEventListener("resize", () => { if (innerWidth !== lw0 || fine) { lw0 = innerWidth; size(); } });
     addEventListener("load", size); document.fonts && document.fonts.ready.then(size); lw0 = innerWidth; size();
+  })();
+
+  /* ---------- le serate: la pila delle locandine. Quella in cima scivola via e finisce sotto ---------- */
+  (function pile() {
+    const el = $("#pile"), body = $("#slip-b"), S = CMS.shows, n = S.length, rotv = [-2.5, 3, -1.2, 2.2, -3.4, 1.4];
+    el.innerHTML = S.map((x, i) => `<figure class="card" style="--r:${rotv[i % rotv.length]}deg"><img class="tp" src="img/vera/nastro-${x.tape}.webp" alt="" aria-hidden="true"><img class="ph" src="${x.img}" alt="Locandina: ${esc(x.title)}" ${i > 1 ? 'loading="lazy"' : ""} draggable="false"></figure>`).join("");
+    const cards = $$(".card", el); let top = 0, busy = false;
+    $("#slip-t").textContent = n;
+    function lay() { cards.forEach((c, i) => { const d = (i - top + n) % n; c.style.setProperty("--d", d); c.style.zIndex = n - d; c.classList.toggle("deep", d > 3); }); }
+    function slip() { const x = S[top]; $("#slip-n").textContent = top + 1;
+      body.innerHTML = `<span class="tg">${esc(x.tag)}</span><h3>${esc(x.title)}</h3>${x.lines.map((l) => `<p class="ln">${esc(l)}</p>`).join("")}<p class="tm">${esc(x.time)}</p>`;
+      body.classList.remove("in"); void body.offsetWidth; body.classList.add("in"); }
+    function next(dir) {
+      if (busy) return; busy = true; const c = cards[top];
+      c.style.setProperty("--fx", dir < 0 ? -1 : 1); c.classList.add("out");
+      setTimeout(() => { top = (top + 1) % n; lay(); slip(); c.classList.add("under"); c.classList.remove("out"); setTimeout(() => { c.classList.remove("under"); busy = false; }, reduce ? 0 : 520); }, reduce ? 0 : 360);
+    }
+    lay(); slip();
+    $("#pile-next").addEventListener("click", () => next(1));
+    el.addEventListener("keydown", (e) => { if (e.key === "ArrowRight" || e.key === "Enter" || e.key === " ") { e.preventDefault(); next(1); } });
+    /* click o trascinamento: se la tiri di lato, parte */
+    let sx = 0, sy = 0, down = false;
+    el.addEventListener("pointerdown", (e) => { down = true; sx = e.clientX; sy = e.clientY; });
+    addEventListener("pointerup", (e) => { if (!down) return; down = false; const dx = e.clientX - sx, dy = e.clientY - sy; if (Math.abs(dx) > 30 && Math.abs(dx) > Math.abs(dy)) next(dx); else if (Math.abs(dx) < 6 && Math.abs(dy) < 6 && el.contains(e.target)) next(1); });
   })();
 
   /* ---------- prossima serata: hero e sezione serate ---------- */
@@ -2839,6 +2945,10 @@ const CMS = {
     });
     /* l'hero si allontana mentre scendi */
     /* (v32) lo zoom nel logo è gestito da heroWin, sotto */
+    if ($("#reel")) {
+      G.fromTo("#reel", { yPercent: -9 }, { yPercent: -27, ease: "none", scrollTrigger: { trigger: "#serate", start: "top bottom", end: "bottom top", scrub: .5 } });
+      reveal(G.timeline().from("#pile .card", { y: 90, x: 40, rotation: 14, opacity: 0, duration: 1, ease: "expo.out", stagger: { each: .07, from: "end" }, clearProps: "transform,opacity" }).from("#slip", { y: 40, opacity: 0, duration: .9, ease: "expo.out", clearProps: "all" }, .35), ".bill", "top 80%");
+    }
     G.from(".hero .low > *", { y: 28, opacity: 0, duration: 1.2, ease: "expo.out", stagger: 0.12, delay: 3, clearProps: "all" });
     /* le serate: il disco esce dalla copertina e gira mentre scendi */
     if ($("#lp")) {
