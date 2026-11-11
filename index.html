@@ -1665,6 +1665,41 @@ body.past .deck.swap-in .tt .disc { translate: 0 0; transition: translate 1.1s c
   .hero .hint-down { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { .hero { height: 100svh; } .hero .win .edge { transition: none; } }
+/* ---------- v33: hero in due tempi. Prima solo logo e biglietto, poi il video pieno con il titolo. Grana sul video ---------- */
+.hero { height: 270svh; }
+.hero .bg video, .hero .bg img { filter: saturate(1.08) contrast(1.1) brightness(.86) sepia(.12); }
+/* grana da pellicola: una piastrella piccola che salta di posto, niente filtri */
+.hero .grain { position: absolute; inset: -60px; z-index: 0; pointer-events: none; background: url("img/grana.png") 0 0 / 180px 180px; opacity: .2; mix-blend-mode: overlay; animation: grana 1s steps(1) infinite; }
+@keyframes grana { 0% { translate: 0 0; } 20% { translate: -37px 22px; } 40% { translate: 18px -41px; } 60% { translate: -52px -13px; } 80% { translate: 29px 44px; } }
+.hero .shade { position: absolute; inset: 0; z-index: 0; pointer-events: none; background: linear-gradient(180deg, rgba(10, 9, 8, .5), transparent 24%, transparent 42%, rgba(10, 9, 8, .82) 100%); opacity: 0; transition: opacity .6s; }
+.hero .pinx.fin .shade { opacity: 1; }
+.hero .hint-down { display: none; }
+.hero .w.first .low { display: flex; justify-content: space-between; align-items: flex-end; gap: 1.5rem; opacity: 1; translate: none; visibility: visible !important; transition: opacity .45s, translate .6s cubic-bezier(.2, .8, .2, 1); }
+.hero .pinx.gone .w.first .low { opacity: 0; translate: 0 -30px; pointer-events: none; }
+/* l'invito a scendere: battuto a macchina, con una freccia a penna */
+.godown { margin: 0 0 .5rem; display: flex; align-items: flex-end; gap: .7rem; font: 400 .95rem/1 var(--f-type); letter-spacing: .04em; color: var(--bone); opacity: .82; }
+.godown svg { width: 22px; height: 32px; overflow: visible; animation: giu 2.2s cubic-bezier(.5, 0, .3, 1) infinite; }
+.godown path { fill: none; stroke: #c9352b; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; filter: url(#pen); }
+@keyframes giu { 0%, 100% { translate: 0 -3px; } 50% { translate: 0 5px; } }
+/* a video pieno: il titolo grande in basso, la frase e il tasto a destra */
+.hero .w.fin { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto; align-items: end; align-content: end; gap: 2rem 4rem; opacity: 0; translate: 0 40px; transition: opacity .7s, translate .9s cubic-bezier(.2, .8, .2, 1); }
+.hero .pinx.fin .w.fin { opacity: 1; translate: 0 0; }
+.hero .pinx.fin .w.fin > * { pointer-events: auto; }
+.hero .w.fin .kick { font-size: clamp(3.2rem, 9.4vw, 9rem); line-height: .92; letter-spacing: -.01em; margin: 0; text-shadow: 0 2px 30px rgba(0, 0, 0, .5); }
+.hero .w.fin .side { max-width: 30ch; padding-bottom: .6rem; display: grid; gap: 1.2rem; justify-items: start; }
+.hero .w.fin .sub { margin: 0; opacity: .9; max-width: none; }
+/* il biglietto respira piano; col mouse si solleva e segue il cursore */
+.next { --tx: 0; --ty: 0; animation: respira 7s ease-in-out infinite; transform: perspective(700px) rotateX(calc(var(--ty) * -14deg)) rotateY(calc(var(--tx) * 16deg)); transition: transform .5s cubic-bezier(.2, .8, .2, 1), filter .4s; }
+.next:hover { rotate: none; translate: none; transition-duration: .15s, .4s; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .6)) drop-shadow(0 26px 28px rgba(0, 0, 0, .6)); }
+@keyframes respira { 0%, 100% { rotate: -3deg; translate: 0 0; } 50% { rotate: -1.9deg; translate: 0 -5px; } }
+@media (max-width: 900px) {
+  .hero { height: 240svh; }
+  .hero .w.first .low { flex-direction: column; align-items: flex-start; gap: 1.1rem; }
+  .hero .w.first { padding-bottom: calc(1.4rem + env(safe-area-inset-bottom, 0px)) !important; }
+  .hero .w.fin { grid-template-columns: 1fr; gap: 1rem; padding-bottom: calc(5.6rem + env(safe-area-inset-bottom, 0px)) !important; }
+  .hero .w.fin .kick { font-size: clamp(3rem, 15vw, 4.4rem); }
+}
+@media (prefers-reduced-motion: reduce) { .hero .grain, .next, .godown svg { animation: none; } .hero .pinx .w.fin { position: static; opacity: 1; translate: none; } }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -1763,17 +1798,21 @@ body.past .deck.swap-in .tt .disc { translate: 0 0; transition: translate 1.1s c
       <div class="bg"><video id="hv" muted loop playsinline preload="auto" poster="img/poster.jpg"><source src="video/hero-loop.mp4" type="video/mp4"></video></div>
       <h1 class="sr">Blend Food &amp; Drink</h1>
       <svg class="win" id="win" aria-hidden="true"><g id="win-g"><path class="cover" fill-rule="evenodd"/><path class="edge" pathLength="1" vector-effect="non-scaling-stroke"/></g></svg>
-      <div class="w">
+      <span class="grain" aria-hidden="true"></span>
+      <span class="shade" aria-hidden="true"></span>
+      <div class="w first">
         <div class="low" id="hero-low">
-          <div>
-            <p class="kick voice">Mescoliamo bene.</p>
-            <p class="sub">Cocktail, cucina e jazz dal vivo. A Mezzocammino, tutte le sere dalle 18 alle&nbsp;2.</p>
-            <div class="row"><a class="btn ghost cut" href="https://blendfoodanddrink.it/doc/Menu-blend-food-and-drink.pdf" target="_blank" rel="noopener"><span class="r">Scopri il menu</span></a></div>
-          </div>
+          <p class="godown" aria-hidden="true"><span>Scendi. È aperto.</span><svg viewBox="0 0 30 44"><path d="M15 3 C13 14 17 24 14 39 M5 29 C9 33 12 37 14 40 C17 36 21 32 26 29"/></svg></p>
           <a class="next" href="#serate" id="next"></a>
         </div>
       </div>
-      <span class="hint-down" aria-hidden="true">Entra</span>
+      <div class="w fin" id="hero-fin">
+        <p class="kick voice">Mescoliamo bene.</p>
+        <div class="side">
+          <p class="sub">Cocktail, cucina e jazz dal vivo. A Mezzocammino, tutte le sere dalle 18 alle&nbsp;2.</p>
+          <a class="btn ghost cut" href="https://blendfoodanddrink.it/doc/Menu-blend-food-and-drink.pdf" target="_blank" rel="noopener"><span class="r">Scopri il menu</span></a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -2177,7 +2216,8 @@ const CMS = {
     chapters.forEach((c) => io.observe(c));
   }
   const top = $("#top");
-  const onScroll = () => { top.classList.toggle("solid", scrollY > innerHeight * 0.55); document.body.classList.toggle("past", scrollY > innerHeight * 0.35); if (scrollY > innerHeight * 0.35 && window.__armTuck) window.__armTuck(); };
+  const onScroll = () => { top.classList.toggle("solid", scrollY > innerHeight * 0.55); const dk = scrollY > deckAt; document.body.classList.toggle("past", dk); if (dk && window.__armTuck) window.__armTuck(); };
+  let deckAt = 1e9; const deckWhere = () => { const sc = $("#locale .scrap"); if (sc) deckAt = sc.getBoundingClientRect().top + scrollY - innerHeight * .78; }; addEventListener("load", () => { deckWhere(); onScroll(); }); addEventListener("resize", deckWhere); deckWhere();
   addEventListener("scroll", onScroll, { passive: true }); onScroll();
 
   /* ---------- neon: 3D con bloom se c'è WebGL, altrimenti SVG ---------- */
@@ -2232,6 +2272,11 @@ const CMS = {
     if (N3) N3.look(x, y);
   });
 
+  /* il biglietto segue appena il cursore, come carta sollevata da un dito */
+  if (fine && !reduce) { const nx = $("#next");
+    nx.addEventListener("pointermove", (e) => { const r = nx.getBoundingClientRect(); nx.style.setProperty("--tx", ((e.clientX - r.left) / r.width - .5).toFixed(3)); nx.style.setProperty("--ty", ((e.clientY - r.top) / r.height - .5).toFixed(3)); });
+    nx.addEventListener("pointerleave", () => { nx.style.setProperty("--tx", 0); nx.style.setProperty("--ty", 0); }); }
+
   /* ---------- hero: il logo è una finestra sul locale. Scorrendo ci si entra dentro ---------- */
   (function heroWin() {
     const svg = $("#win"), g = $("#win-g"), low = $("#hero-low"), pinx = $("#pinx");
@@ -2243,17 +2288,18 @@ const CMS = {
     const ease = (t) => t * t * (3 - 2 * t);
     function draw(p) {
       if (p === last) return; last = p;
-      const k = ease(Math.min(1, p / .92)), sc = s0 * Math.pow(s1 / s0, k);
+      const k = ease(Math.min(1, p / .7)), sc = s0 * Math.pow(s1 / s0, k);
       const fx = x0 + FX * s0 + (W / 2 - (x0 + FX * s0)) * k, fy = y0 + FY * s0 + (H / 2 - (y0 + FY * s0)) * k;
       /* i tracciati del logo sono in decimi di unità, con l'asse y capovolto */
       g.setAttribute("transform", `translate(${(fx - FX * sc).toFixed(2)} ${(fy - FY * sc).toFixed(2)}) scale(${(sc * .1).toFixed(5)} ${(-sc * .1).toFixed(5)}) translate(0 -13380)`);
-      svg.style.display = p >= .999 ? "none" : "";
+      svg.style.display = p >= .7 ? "none" : "";
+      pinx.classList.toggle("gone", p > .16); pinx.classList.toggle("fin", p > .66);
       pinx.style.setProperty("--p", p.toFixed(3));
     }
     function size() {
       W = pinx.clientWidth; H = pinx.clientHeight;
-      const top = W < 700 ? 96 : 92, bottom = low.offsetTop + low.offsetParent.offsetTop - (W < 700 ? 30 : 22), room = Math.max(140, bottom - top);
-      const lw = Math.min(W * (W < 700 ? .88 : .82), 1400, room * LW / LH);
+      const top = W < 700 ? 110 : 96, bottom = H - (W < 700 ? 190 : 150), room = Math.max(140, bottom - top);
+      const lw = Math.min(W * (W < 700 ? .88 : .84), 1500, room * LW / LH);
       s0 = lw / LW; x0 = (W - lw) / 2; y0 = top + (room - lw * LH / LW) / 2;
       s1 = Math.max(H, W * .2) * 1.5 / BAR; last = -1; onScroll();
     }
@@ -2505,10 +2551,11 @@ const CMS = {
   /* il giradischi si fa da parte: resta fuori solo la linguetta */
   let tuckAuto = 0, touched = false;
   function setTuck(t) { deck.classList.toggle("tucked", t); tuck.setAttribute("aria-expanded", !t); tuck.setAttribute("aria-label", t ? "Mostra il giradischi" : "Nascondi il giradischi"); }
+  if (innerWidth <= 900) setTuck(true);
   window.__tuckDeck = () => { clearTimeout(tuckAuto); setTuck(true); };
   tuck.addEventListener("click", () => { touched = true; clearTimeout(tuckAuto); setTuck(!deck.classList.contains("tucked")); });
   deck.addEventListener("pointerenter", () => { touched = true; clearTimeout(tuckAuto); }, { once: true });
-  window.__armTuck = () => { if (!touched && !tuckAuto) tuckAuto = setTimeout(() => { if (!touched && !deck.classList.contains("playing")) setTuck(true); }, 6000); };
+  window.__armTuck = () => { if (!touched && !tuckAuto && innerWidth > 900) tuckAuto = setTimeout(() => { if (!touched && !deck.classList.contains("playing")) setTuck(true); }, 6000); };
   snd.addEventListener("click", () => { touched = true; clearTimeout(tuckAuto); music(snd.getAttribute("aria-pressed") !== "true"); });
 
   /* ---------- carta strappata: bordi irregolari generati ---------- */
@@ -2776,7 +2823,7 @@ const CMS = {
     });
     /* l'hero si allontana mentre scendi */
     /* (v32) lo zoom nel logo è gestito da heroWin, sotto */
-    G.from(".hero .low > *", { y: 28, opacity: 0, duration: 1.2, ease: "expo.out", stagger: 0.12, delay: 3 });
+    G.from(".hero .low > *", { y: 28, opacity: 0, duration: 1.2, ease: "expo.out", stagger: 0.12, delay: 3, clearProps: "all" });
     /* le serate: il disco esce dalla copertina e gira mentre scendi */
     if ($("#lp")) {
       reveal(G.timeline().fromTo("#lp", { "--out": "0%" }, { "--out": innerWidth > 900 ? "34%" : "22%", duration: 1.4, ease: "power3.inOut" }), "#feat", "top 72%");
