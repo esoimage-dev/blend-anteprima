@@ -6,6 +6,13 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Blend · Back office</title>
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="admin.webmanifest">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<meta name="theme-color" content="#0a0908">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Blend">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&family=Special+Elite&family=Caveat:wght@600;700&family=Newsreader:ital,opsz,wght@1,6..72,400&display=swap" rel="stylesheet">
@@ -506,6 +513,126 @@ kbd { display: inline-block; min-width: 1.4em; padding: .05rem .3rem; border-rad
 }
 .scard.done { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .8rem; }
 .scard.done h3 { font-size: 3rem; }
+
+/* ---------- v3: motore di advertising, foto preparate, bozze, aspetto da app su telefono ---------- */
+.lead2 { margin: 0 0 1rem; color: var(--ash); max-width: 70ch; }
+pre { margin: 0; padding: 1rem; border-radius: 6px; background: #050504; border: 1px solid var(--line); font: 400 .74rem/1.5 ui-monospace, Menlo, monospace; color: #c9c2b4; overflow: auto; max-height: 420px; white-space: pre; }
+code { font: 400 .74rem/1.4 ui-monospace, Menlo, monospace; color: var(--ash); }
+.seg { display: flex; gap: .3rem; padding: .3rem; border-radius: 8px; background: var(--n1); border: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; margin-bottom: .2rem; }
+.seg::-webkit-scrollbar { display: none; }
+.seg button { all: unset; flex: none; padding: .55rem .95rem; border-radius: 6px; font-size: .86rem; font-weight: 600; color: var(--ash); cursor: pointer; white-space: nowrap; transition: background .2s, color .2s; }
+.seg button[aria-selected="true"] { background: var(--sign); color: var(--night); }
+.seg button:not([aria-selected="true"]):hover { color: var(--bone); background: var(--n2); }
+/* simulatore */
+.sim { background: radial-gradient(120% 140% at 0% 0%, rgba(252, 198, 80, .1), transparent 55%), var(--n1); }
+.simh { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+.simv { display: flex; align-items: baseline; gap: .7rem; margin: .3rem 0 .8rem; }
+.simv span { font: 900 3.2rem/1 var(--f-sign); color: var(--bone); }
+.simv small { color: var(--ash); }
+input[type="range"] { width: 100%; accent-color: var(--sign); height: 28px; }
+.simk { display: grid; grid-template-columns: 1fr 1fr 2fr; gap: 1rem; margin-top: 1rem; }
+.simk > div { display: grid; gap: .2rem; align-content: start; }
+.simk .v { font: 900 2.3rem/1 var(--f-sign); } .simk .v.y { color: var(--sign); } .simk .v.up { color: var(--ok); }
+.simk small { color: var(--ash); font-size: .8rem; line-height: 1.35; }
+.dist { display: flex; gap: 3px; height: 14px; margin-top: .6rem; border-radius: 4px; overflow: hidden; }
+.dist i { display: block; min-width: 3px; transition: flex .3s; }
+.dleg { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .8rem; margin-top: .8rem; }
+.dleg span { display: grid; gap: .1rem; font-size: .82rem; color: var(--ash); }
+.dleg span i { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: .35rem; vertical-align: 0; }
+.dleg b { font: 800 1.2rem/1 var(--f-sign); color: var(--bone); }
+.dleg small { font-size: .74rem; color: var(--dim); }
+.kpi .v.ok { color: var(--ok); font-size: 2rem; }
+/* azioni del pilota */
+.acts { display: grid; gap: .6rem; }
+.pa { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: .8rem; align-items: start; padding: .8rem .9rem; border-radius: 6px; background: var(--n2); border-left: 3px solid var(--ok); transition: opacity .3s, transform .3s; }
+.pa.ask { border-left-color: var(--sign); background: rgba(252, 198, 80, .06); }
+.pa.gone { opacity: 0; transform: translateX(20px); pointer-events: none; height: 0; padding: 0; margin: -.3rem 0; overflow: hidden; }
+.pa .ai { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: var(--n3); font-size: .9rem; }
+.pa b { display: block; font-weight: 600; font-size: .88rem; }
+.pa p { margin: .2rem 0 0; font-size: .84rem; color: var(--ash); line-height: 1.45; }
+.pa .ab { display: flex; gap: .35rem; }
+/* creazione guidata */
+.wiz { display: grid; gap: 1.4rem; max-width: 980px; }
+.steps { display: flex; gap: .4rem; margin: 0; padding: 0; list-style: none; counter-reset: s; }
+.steps li { flex: 1; display: flex; align-items: center; gap: .5rem; padding: .6rem .7rem; border-radius: 6px; background: var(--n1); font-size: .84rem; font-weight: 600; color: var(--dim); }
+.steps li span { width: 22px; height: 22px; flex: none; display: grid; place-items: center; border-radius: 50%; background: var(--n3); font-size: .74rem; }
+.steps li.on { color: var(--bone); box-shadow: inset 0 0 0 1px var(--sign); } .steps li.on span { background: var(--sign); color: var(--night); }
+.steps li.ok { color: var(--ash); } .steps li.ok span { background: var(--ok); color: var(--night); }
+.wf { display: flex; justify-content: space-between; gap: 1rem; position: sticky; bottom: 0; padding: 1rem 0; background: linear-gradient(transparent, var(--night) 30%); }
+.goals { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.goal { all: unset; box-sizing: border-box; display: grid; gap: .5rem; align-content: start; padding: 1.4rem 1.3rem; border-radius: 10px; background: var(--n1); border: 1.5px solid var(--line2); cursor: pointer; transition: border-color .2s, transform .2s, background .2s; }
+.goal:hover { transform: translateY(-2px); border-color: var(--ash); }
+.goal.on { border-color: var(--sign); background: rgba(252, 198, 80, .07); }
+.goal .gi { font-size: 1.8rem; }
+.goal b { font: 900 1.7rem/1 var(--f-sign); text-transform: uppercase; }
+.goal small { color: var(--ash); font-size: .86rem; line-height: 1.45; }
+.pick { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: .7rem; }
+.pk { all: unset; position: relative; display: grid; border-radius: 8px; overflow: hidden; background: var(--n1); border: 2px solid transparent; cursor: pointer; aspect-ratio: 4 / 5; }
+.pk img, .pk .ph0 { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.pk .ph0 { display: grid; place-items: center; background: #3b1e3b; color: #f2a6ea; font-weight: 700; }
+.pk .pt { position: absolute; left: 0; right: 0; bottom: 0; padding: 1.4rem .6rem .5rem; background: linear-gradient(transparent, rgba(0, 0, 0, .85)); font-size: .78rem; font-weight: 600; line-height: 1.2; }
+.pk .pt small { display: block; font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: var(--sign); }
+.pk i { position: absolute; right: .4rem; top: .4rem; width: 24px; height: 24px; display: grid; place-items: center; border-radius: 50%; background: var(--sign); color: var(--night); font-style: normal; font-weight: 800; font-size: .8rem; opacity: 0; transform: scale(.6); transition: .2s; }
+.pk.on { border-color: var(--sign); } .pk.on i { opacity: 1; transform: none; }
+.txs { display: grid; gap: .9rem; margin-bottom: .6rem; }
+.sum { margin: 0; padding-left: 1.1rem; display: grid; gap: .6rem; line-height: 1.5; }
+.sum b { color: var(--bone); }
+.tech { margin-top: 1.2rem; }
+.tech summary { cursor: pointer; font-size: .86rem; font-weight: 600; color: var(--ash); padding: .5rem 0; }
+.tech[open] summary { color: var(--sign); }
+/* pubblici */
+.pubs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.pub { display: grid; gap: .7rem; padding: 1.2rem 1.3rem; border-radius: 8px; background: var(--n1); border: 1px solid var(--line); border-top: 3px solid var(--c); }
+.puh { display: flex; justify-content: space-between; align-items: center; }
+.puh b { font: 900 1.5rem/1 var(--f-sign); text-transform: uppercase; }
+.pub p { margin: 0; color: var(--ash); font-size: .9rem; }
+.pun { display: flex; gap: 2rem; }
+.pun span { display: grid; font-size: .76rem; color: var(--dim); } .pun b { font: 800 1.4rem/1.1 var(--f-sign); color: var(--bone); }
+.pub code { display: block; padding-top: .6rem; border-top: 1px dashed var(--line2); font-size: .7rem; }
+/* pilota */
+.rules { display: grid; gap: .5rem; }
+.sw.big b { font: 900 1.4rem/1.1 var(--f-sign); text-transform: uppercase; }
+/* segnale */
+.fun { display: grid; gap: .7rem; }
+.fn { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 2fr) 70px; gap: 1rem; align-items: center; }
+.fn > span:first-child b { display: block; font-weight: 600; font-size: .9rem; } .fn code { font-size: .7rem; }
+.fb { height: 12px; border-radius: 3px; background: var(--n2); overflow: hidden; } .fb i { display: block; height: 100%; background: var(--sign); border-radius: 3px; }
+.fv2 { text-align: right; font: 800 1.2rem/1 var(--f-sign); }
+/* foto: esito della preparazione */
+.drop .warn { display: block; margin-top: .6rem; font-size: .78rem; line-height: 1.4; color: var(--ok); }
+.drop .warn.w { color: var(--warn); }
+.drop .pv video { width: 100%; height: 100%; object-fit: cover; }
+/* annulla */
+.undo { width: 36px; height: 36px; font-size: 1.1rem; color: var(--ash); }
+.undo[disabled] { opacity: .3; cursor: default; }
+/* aspetto da app */
+.btn:active, .item:active, .goal:active, .pk:active, .tabs button:active, .seg button:active { transform: scale(.97); }
+@media (max-width: 1100px) { .goals { grid-template-columns: 1fr; } .simk { grid-template-columns: 1fr 1fr; } .simk > div:last-child { grid-column: 1 / -1; } }
+@media (max-width: 860px) {
+  .bar h1 { font-size: 1.65rem; }
+  .bar .act { gap: .3rem; }
+  .bar .btn { padding: .6rem .9rem; }
+  .view.enter > * { animation: entra .32s cubic-bezier(.2, .8, .2, 1) both; }
+  @keyframes entra { from { opacity: 0; transform: translateX(22px); } }
+  .proto { font-size: .72rem; }
+  .card, .kpi, .tile { border-radius: 14px; }
+  .item { padding: .8rem; border-radius: 12px; }
+  .seg { position: sticky; top: calc(62px + env(safe-area-inset-top, 0px)); z-index: 10; margin: 0 -1rem; border-radius: 0; border-width: 0 0 1px; background: rgba(18, 16, 16, .97); padding: .4rem 1rem; }
+  .simv span { font-size: 2.6rem; }
+  .dleg { grid-template-columns: 1fr 1fr; }
+  .steps li { font-size: 0; gap: 0; justify-content: center; padding: .5rem; } .steps li span { font-size: .74rem; }
+  .steps li.on { font-size: .8rem; gap: .4rem; flex: 3; }
+  .wf { bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
+  .pubs { grid-template-columns: 1fr; }
+  .fn { grid-template-columns: 1fr 60px; } .fn .fb { grid-column: 1 / -1; grid-row: 2; }
+  .pa { grid-template-columns: auto minmax(0, 1fr); } .pa > :last-child { grid-column: 2; justify-self: start; }
+  pre { font-size: .66rem; max-height: 300px; }
+}
+@media (display-mode: standalone) { .proto { display: none; } }
+:root { color-scheme: dark; }
+.ads > *, .card, .kpi, .wb, .wiz, .form, .mail, .mcol, .split > *, .split2 > * { min-width: 0; }
+pre { max-width: 100%; }
+main { overflow-x: clip; }
 </style>
 </head>
 <body>
@@ -519,7 +646,7 @@ kbd { display: inline-block; min-width: 1.4em; padding: .05rem .3rem; border-rad
     <header class="bar">
       <button class="back" id="back" type="button" aria-label="Indietro" hidden>←</button>
       <div><h1 id="title">Panoramica</h1><div class="sub" id="sub"></div></div>
-      <div class="act"><span class="pill" id="state"><i></i><span>Tutto pubblicato</span></span><button class="btn cut" id="pub" type="button">Pubblica</button></div>
+      <div class="act"><button class="x undo" id="undo" type="button" aria-label="Annulla l'ultima modifica" title="Annulla" disabled>↶</button><span class="pill" id="state"><i></i><span>Tutto pubblicato</span></span><button class="btn cut" id="pub" type="button">Pubblica</button></div>
     </header>
     <p class="proto"><b>Prototipo di design.</b> Puoi provare tutto: niente viene salvato né pubblicato. L'accesso riservato arriva con il passaggio a Cloudflare.</p>
     <div class="view" id="view"></div>
@@ -530,6 +657,9 @@ kbd { display: inline-block; min-width: 1.4em; padding: .05rem .3rem; border-rad
 </div>
 <div class="toast" id="toast" role="status"></div>
 
+<script src="admin-motore.js"></script>
+<script src="admin-media.js"></script>
+<script src="admin-store.js"></script>
 <script>
 const CMS = {
   characters: {
@@ -669,15 +799,20 @@ const KITCHEN = [{"id": "anti", "titolo": "Antipasti", "frase": "Fassona al colt
   const route = () => { const [s, i] = location.hash.slice(1).split("/"); return { s: SECT.some((x) => x[0] === s) ? s : "panoramica", i: i === undefined ? null : +i }; };
   $("#back").addEventListener("click", () => { location.hash = route().s; });
 
+  const snap = () => ({ D: { shows: D.shows, drinks: D.drinks, kitchen: D.kitchen, reviews: D.reviews, apps: D.apps, scores: D.scores }, MK: MK.posts, camps: ADS.camps, AD: { mese: AD.mese, cpbObiettivo: AD.cpbObiettivo, pilota: AD.pilota, conferma: AD.conferma, attivi: AD.attivi, regole: AD.regole }, dirty });
+  function applica(x) { if (!x) return; Object.assign(D, clone(x.D || {})); if (x.MK) MK.posts = clone(x.MK); if (x.camps) ADS.camps = clone(x.camps); if (x.AD) Object.assign(AD, clone(x.AD)); }
+  let saveT = 0;
+  function salvaBozza() { clearTimeout(saveT); saveT = setTimeout(() => { if (!window.Bozza) return; const x = snap(); Bozza.ricorda(x); if (!Bozza.salva(x)) toast("La bozza è troppo pesante per questo dispositivo: pubblica per non perdere le foto."); $("#undo").disabled = !Bozza.puoAnnullare(); }, 400); }
   function setDirty(n = 1) {
     dirty += n; const st = $("#state");
-    st.classList.toggle("dirty", dirty > 0); st.lastElementChild.textContent = dirty ? `${dirty} ${dirty === 1 ? "modifica" : "modifiche"} da pubblicare` : "Tutto pubblicato";
+    st.classList.toggle("dirty", dirty > 0); st.lastElementChild.textContent = dirty ? "Bozza da pubblicare" : "Tutto pubblicato";
+    if (n) salvaBozza();
   }
   function toast(t) { const el = $("#toast"); el.textContent = t; el.classList.add("on"); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove("on"), 2600); }
   const publish = () => {
     const bad = $$(".f.bad"); if (bad.length) { bad[0].scrollIntoView({ behavior: "smooth", block: "center" }); toast("Prima sistema i campi in rosso: non entrerebbero nel foglietto."); return; }
     if (!dirty) { toast("Niente di nuovo da pubblicare."); return; }
-    dirty = 0; setDirty(0); toast("Pubblicato. Il sito si aggiorna in un minuto (in questo prototipo per finta).");
+    dirty = 0; setDirty(0); if (window.Bozza) { Bozza.scarta(); Bozza.ricorda(snap()); } $("#undo").disabled = true; toast("Pubblicato. Il sito si aggiorna in un minuto (in questo prototipo per finta).");
   };
   $("#pub").addEventListener("click", publish);
 
@@ -699,14 +834,25 @@ const KITCHEN = [{"id": "anti", "titolo": "Antipasti", "frase": "Fassona al colt
     root.addEventListener("input", (e) => { const f = e.target.closest(".f"); if (f && f.dataset.max) check(f); onChange(e); setDirty(dirty ? 0 : 1); $$(".saved").forEach((x) => (x.textContent = "Bozza salvata · adesso")); });
   }
   /* foto: carica (in memoria), punto di fuoco con un tocco */
-  function drop(src, focus, label, wide) {
+  function drop(src, focus, label, wide, fmt = "drink") {
     const [fx, fy] = (focus || "50% 50%").split(" ").map(parseFloat);
-    return `<div class="drop" data-drop><div class="pv ${wide ? "wide" : ""}" data-focus title="Tocca il punto che deve restare sempre al centro">${src ? `<img src="${esc(src)}" alt="" style="object-position:${fx}% ${fy}%">` : ""}<span class="dot" style="left:${fx}%;top:${fy}%"></span></div><div><b>${label}</b><small>JPG o PNG, anche dal telefono. La ritagliamo e alleggeriamo noi. Tocca la foto per scegliere il punto che resta sempre in vista.</small><label class="btn ghost sm cut"><input type="file" accept="image/*">Carica un'altra foto</label></div></div>`;
+    const F = window.Media ? Media.FORMATI[fmt] : null;
+    return `<div class="drop" data-drop data-fmt="${fmt}"><div class="pv ${wide ? "wide" : ""}" data-focus title="Tocca il punto che deve restare sempre al centro">${src ? `<img src="${esc(src)}" alt="" style="object-position:${fx}% ${fy}%">` : ""}<span class="dot" style="left:${fx}%;top:${fy}%"></span></div><div><b>${label}</b><small>${F ? `Va in ${F.nome}. ` : ""}Anche dal telefono: la ritagliamo, la riduciamo e la alleggeriamo noi. Tocca la foto per scegliere il punto che resta sempre in vista.</small><label class="btn ghost sm cut"><input type="file" accept="${fmt === "storia" || fmt === "post" ? "image/*,video/*" : "image/*"}">${src ? "Cambia foto" : "Scegli una foto"}</label><span class="warn" aria-live="polite"></span></div></div>`;
   }
   function wireDrop(root, onImg, onFocus) {
     const d = $("[data-drop]", root); if (!d) return;
     const inp = $("input[type=file]", d), pv = $("[data-focus]", d);
-    const take = (file) => { if (!file) return; const r = new FileReader(); r.onload = () => { pv.innerHTML = `<img src="${r.result}" alt=""><span class="dot" style="left:50%;top:50%"></span>`; onImg(r.result); setDirty(1); toast("Foto caricata: controlla l'anteprima."); }; r.readAsDataURL(file); };
+    const warn = $(".warn", d);
+    const take = async (file) => {
+      if (!file) return;
+      if (/^video\//.test(file.type)) { const u = URL.createObjectURL(file); pv.innerHTML = `<video src="${u}" muted autoplay loop playsinline></video>`; onImg(u); setDirty(1); warn.className = "warn"; warn.textContent = "Video pronto. In produzione lo comprimiamo sul server."; return; }
+      warn.className = "warn"; warn.textContent = "Preparo la foto…";
+      try {
+        const r = await Media.prepara(file, d.dataset.fmt, "50% 50%");
+        pv.innerHTML = `<img src="${r.dati}" alt=""><span class="dot" style="left:50%;top:50%"></span>`; onImg(r.dati); setDirty(1);
+        warn.className = "warn" + (r.avvisi.length ? " w" : ""); warn.textContent = r.avvisi.length ? r.avvisi.join(" ") : `Pronta: ${r.larghezza}×${r.altezza} px, ${r.kb} KB.`;
+      } catch (e) { warn.className = "warn w"; warn.textContent = e.message || "Questa foto non si apre: prova a esportarla in JPG."; }
+    };
     inp.addEventListener("change", () => take(inp.files[0]));
     ["dragenter", "dragover"].forEach((t) => d.addEventListener(t, (e) => { e.preventDefault(); d.classList.add("over"); }));
     ["dragleave", "drop"].forEach((t) => d.addEventListener(t, () => d.classList.remove("over")));
@@ -764,7 +910,7 @@ const KITCHEN = [{"id": "anti", "titolo": "Antipasti", "frase": "Fassona al colt
     const sel = i ?? 0, x = D.shows[sel];
     const list = `<div class="list"><div class="lhead"><span>${D.shows.length} serate · in ordine di data</span></div>${D.shows.map((s, k) => `<button class="item" type="button" data-go="serate/${k}" ${k === sel ? 'aria-current="true"' : ""}>${s.img ? `<img class="th" src="${esc(s.img)}" alt="">` : '<span class="th"></span>'}<span><b>${esc(s.title || "Senza titolo")}</b><small>${esc(s.tag)} · ${esc(s.lines[0] || "")}</small></span><span class="st ${s.on ? "on" : ""}">${s.on ? "Online" : "Bozza"}</span></button>`).join("")}<button class="add" type="button" data-go="serate/new">+ Nuova serata</button></div>`;
     const form = `<div class="form" id="form">
-      <div class="card"><h2>Locandina <small>Verticale 3:4. Se è diversa la ritagliamo noi.</small></h2>${drop(x.img, "50% 50%", x.img ? "Locandina caricata" : "Trascina qui la locandina")}</div>
+      <div class="card"><h2>Locandina <small>Verticale 3:4. Se è diversa la ritagliamo noi.</small></h2>${drop(x.img, "50% 50%", x.img ? "Locandina caricata" : "Trascina qui la locandina", false, "locandina")}</div>
       <div class="card"><h2>Il foglietto <small>Quello che si legge accanto alla pila</small></h2>
         <div class="row">${field("Etichetta", x.tag, LIM.tag, { k: "tag", ph: "Dicembre" })}${field("Titolo", x.title, LIM.title, { k: "title", ph: "Blend in Jazz" })}</div>
         <div style="margin-top:1.1rem">${lineList(x.lines, LIM.line, 3, "lines", "Date e gruppi")}</div>
@@ -807,7 +953,7 @@ const KITCHEN = [{"id": "anti", "titolo": "Antipasti", "frase": "Fassona al colt
       <div class="card"><h2>Il drink</h2><div class="row">${field("Nome", d.n, LIM.dn, { k: "n" })}${field("Base", d.base, LIM.base, { k: "base", ph: "Gin, Rum, Senza alcol" })}</div>
         <div class="f" style="margin-top:1.1rem"><div class="lb"><span>Carattere</span></div><div class="chips" id="chars">${CH.map((c) => `<button type="button" aria-pressed="${c === d.c}">${esc(c)}</button>`).join("")}</div><span class="hint">Decide il timbro sul fascicolo e la foto del bicchiere.</span></div>
         <div style="margin-top:1.1rem">${field("Descrizione", d.q, LIM.q, { k: "q", area: true, rows: 3 })}</div></div>
-      <div class="card"><h2>Foto del bicchiere <small>${d.foto ? "Foto sua" : "Per ora usa la foto del carattere «" + esc(d.c) + "»"}</small></h2>${drop(dfoto(d), d.fuoco, d.foto ? "Foto caricata" : "Carica la foto di questo drink", false)}</div>
+      <div class="card"><h2>Foto del bicchiere <small>${d.foto ? "Foto sua" : "Per ora usa la foto del carattere «" + esc(d.c) + "»"}</small></h2>${drop(dfoto(d), d.fuoco, d.foto ? "Foto caricata" : "Carica la foto di questo drink", false, "drink")}</div>
       <div class="card"><h2>Profilo di gusto <small>Le X sul fascicolo</small></h2><div class="taste">${sl(0, "Dolce", "Amaro")}${sl(1, "Leggero", "Forte")}${sl(2, "Pulito", "Speziato")}</div></div>
       <div class="card"><h2>Ingredienti</h2>${lineList(d.ing, LIM.ing, 6, "ing", "Uno per riga")}</div>
       <div class="foot"><button class="danger" type="button" data-del>Togli dalla carta</button><span class="saved" aria-live="polite">Le modifiche restano in bozza finché non premi Pubblica</span></div>
@@ -841,7 +987,7 @@ const KITCHEN = [{"id": "anti", "titolo": "Antipasti", "frase": "Fassona al colt
     const sel = i ?? 0, k = D.kitchen[sel];
     const list = `<div class="list"><div class="lhead"><span>Cinque portate · ordine fisso</span></div>${D.kitchen.map((x, n) => `<button class="item" type="button" data-go="cucina/${n}" ${n === sel ? 'aria-current="true"' : ""}><img class="th" src="${esc(x.foto)}" alt="" style="object-position:${esc(x.fuoco)}"><span><b>${esc(x.titolo)}</b><small>${esc(x.prova)}</small></span><span></span></button>`).join("")}</div>`;
     const form = `<div class="form" id="form">
-      <div class="card"><h2>Foto <small>Quadrata o orizzontale</small></h2>${drop(k.foto, k.fuoco, k.titolo, true)}</div>
+      <div class="card"><h2>Foto <small>Quadrata o orizzontale</small></h2>${drop(k.foto, k.fuoco, k.titolo, true, "piatto")}</div>
       <div class="card"><h2>Accanto alla foto</h2>${field("Frase", k.frase, LIM.frase, { k: "frase", area: true, rows: 2 })}<div class="row" style="margin-top:1.1rem">${field("Da provare", k.prova, LIM.prova, { k: "prova" })}${field("Scritta sul nastro", k.nastro, LIM.nastro, { k: "nastro" })}</div></div>
       <div class="card"><h2>L'appunto <small>Si apre toccando il nastro</small></h2>${field("Intestazione", k.appunto, LIM.ap, { k: "appunto" })}<div style="margin-top:1.1rem">${lineList(k.testo, LIM.para, 4, "testo", "Righe dell'appunto")}</div>
         <div class="row" style="margin-top:1.1rem">${field("Nota a penna", k.mano, LIM.mano, { k: "mano", ph: "facoltativa" })}${field("Parola cerchiata", k.parola, LIM.parola, { k: "parola", ph: "facoltativa" })}</div></div>
@@ -975,7 +1121,7 @@ const KITCHEN = [{"id": "anti", "titolo": "Antipasti", "frase": "Fassona al colt
         <div class="row three" style="margin-top:1rem"><div class="f"><label><span>Giorno</span></label><select data-k="d">${DAYS.map((dl, d) => `<option value="${d}" ${m.d === d ? "selected" : ""}>${dl}</option>`).join("")}</select></div><div class="f"><label><span>Ora</span></label><input type="text" value="${esc(m.time)}" data-k="time"></div><div class="f"><label><span>Collegato a</span></label><input type="text" value="${esc(m.link)}" data-k="link" placeholder="Serata, drink, cucina"></div></div>
         <div style="margin-top:1rem">${field("Titolo interno", m.title, [3, 60, "Lo vedi solo tu nel calendario."], { k: "title" })}</div>
         <div style="margin-top:1rem">${field("Didascalia", m.cap, [0, 2200, "Le prime 125 battute si leggono senza toccare «altro»: lì va la cosa importante."], { k: "cap", area: true, rows: 4 })}</div></div>
-      <div class="card"><h2>Foto o video</h2>${drop(m.img, "50% 50%", m.type === "Post" ? "Foto 4:5" : "Video verticale 9:16", false)}</div>
+      <div class="card"><h2>Foto o video</h2>${drop(m.img, "50% 50%", m.type === "Post" ? "Foto 4:5" : "Video verticale 9:16", false, m.type === "Post" ? "post" : "storia")}</div>
       <div class="card"><h2>Stato</h2><div class="chips" data-chip="st">${MST.map((t) => `<button type="button" aria-pressed="${m.st === t}">${t}</button>`).join("")}</div></div>
       <div class="foot"><button class="danger" type="button" data-del>Elimina</button><span class="saved">Le modifiche restano in bozza finché non premi Pubblica</span></div></div>` : "";
     const prev = m ? `<div class="prev"><div class="ph"><span>Anteprima</span></div><div class="stage" id="stage">${phone(m)}</div></div>` : "";
@@ -991,42 +1137,161 @@ const KITCHEN = [{"id": "anti", "titolo": "Antipasti", "frase": "Fassona al colt
     } };
   };
 
-  /* ---------- advertising: quanto costa riempire un tavolo ---------- */
-  let feedT = 0, per = "Stasera";
   const spark = (a) => { const mx = Math.max(...a, 1); return `<svg class="spk" viewBox="0 0 70 22" preserveAspectRatio="none"><polyline points="${a.map((v, k) => `${(k / (a.length - 1) * 70).toFixed(1)},${(20 - v / mx * 18).toFixed(1)}`).join(" ")}"/></svg>`; };
+  /* ---------- advertising: il motore. Alberto sceglie cosa e quanto, il motore fa il resto su Meta e spiega perché ---------- */
+  let feedT = 0, per = "Stasera";
+  const M = window.Motore, PUB = M.PUBBLICI, PCOL = { vicini: "#6f8fb8", simili: "#fcc650", sito: "#8fc58a", clienti: "#e0533f" };
+  const AD = {
+    mese: 900, cpbObiettivo: 4.5, pilota: true, conferma: 30, attivi: PUB.map((p) => p.id),
+    regole: [["soldi", "Sposta i soldi dove ogni prenotazione costa meno", true], ["piano", "Cambi piccoli: al massimo +20% al giorno, così Meta non riparte da zero", true], ["ferma", "Ferma gli annunci che spendono senza portare tavoli", true], ["stanca", "Proponi una creatività nuova quando la gente si stanca", true], ["sala", "Guarda la sala: se stasera è piena, spendi meno", true], ["serate", "Spingi le serate in calendario che si riempiono piano", true]],
+    fatto: [], wiz: { passo: 0, obiettivo: null, cosa: [], testi: null, budget: 15, dal: "2026-11-16", al: "2026-11-29" }
+  };
+  const euro = (n, d = 2) => "€" + Number(n).toFixed(d).replace(".", ",");
+  const statoPilota = () => ({
+    cpbObiettivo: AD.cpbObiettivo, salaStasera: 0.62,
+    annunci: [{ nome: "Reel · Aperiblend 18-20", spesa: 61, pren: 22, budget: 15, frequenza: 2.1 }, { nome: "Ricerca · pinsa Mezzocammino", spesa: 10, pren: 0, budget: 6, frequenza: 1.2 }, { nome: "Storie · Blend in Jazz", spesa: 31, pren: 7, budget: 8, frequenza: 3.9 }],
+    serate: [{ titolo: D.shows[0].title, giorniMancanti: 2, riempimento: 0.34 }]
+  });
+  const ASUB = [["andamento", "Andamento"], ["nuova", "Nuova campagna"], ["pubblici", "Pubblici"], ["pilota", "Pilota automatico"], ["segnale", "Segnale"]];
+  function distrib(r, tot) { return `<div class="dist">${r.filter((x) => x.euro).map((x) => `<i style="flex:${x.euro};background:${PCOL[x.id]}" title="${x.nome}: ${euro(x.euro, 0)}"></i>`).join("")}</div><div class="dleg">${r.map((x) => `<span><i style="background:${PCOL[x.id]}"></i>${x.nome}<b>${euro(x.euro, 0)}</b><small>${x.pren ? euro(x.cpb) + " a tavolo" : "—"}</small></span>`).join("")}</div>`; }
+
   V.advertising = () => {
     head("advertising", null);
+    const sub = (location.hash.split("/")[1] || "andamento"), pg = ASUB.some((x) => x[0] === sub) ? sub : "andamento";
+    const tabs = `<div class="seg" role="tablist">${ASUB.map(([id, t]) => `<button type="button" role="tab" data-go="advertising/${id}" aria-selected="${pg === id}">${t}</button>`).join("")}</div>`;
+    const body = ({ andamento: adAndamento, nuova: adNuova, pubblici: adPubblici, pilota: adPilota, segnale: adSegnale })[pg]();
+    return { html: `<div class="ads">${tabs}${body.html}</div>`, after: (root) => body.after && body.after(root) };
+  };
+
+  /* ---------- andamento ---------- */
+  function adAndamento() {
     const T = ADS.today, mul = per === "Stasera" ? 1 : per === "7 giorni" ? 4.1 : 17.3, f = (n) => Math.round(n * mul);
-    const mxS = Math.max(...ADS.days.map((d) => d[1]));
-    const bars = ADS.days.map(([b, sp], k) => `<div class="bc"><span class="bb" style="height:${(sp / mxS * 100).toFixed(0)}%"><i style="height:${(b / sp * 100 * 2.4).toFixed(0)}%"></i></span><small>${["L", "M", "M", "G", "V", "S", "D"][k]}</small></div>`).join("");
-    return { html: `<div class="ads">
+    const pv = M.previsione(AD.mese), az = M.pilota(statoPilota()), mxS = Math.max(...ADS.days.map((d) => d[1]));
+    const bars = ADS.days.map(([b, sp], k) => `<div class="bc"><span class="bb" style="height:${(sp / mxS * 100).toFixed(0)}%"><i style="height:${Math.min(100, b / sp * 240).toFixed(0)}%"></i></span><small>${["L", "M", "M", "G", "V", "S", "D"][k]}</small></div>`).join("");
+    return { html: `
+      <div class="sim card"><div class="simh"><div><p class="gl" style="padding:0">Quanto vuoi spendere al mese</p><div class="simv"><span id="mese">${euro(AD.mese, 0)}</span><small>${euro(AD.mese / 30, 0)} al giorno</small></div></div><span class="live"><i></i>Pilota ${AD.pilota ? "acceso" : "spento"}</span></div>
+        <input type="range" min="150" max="3000" step="50" value="${AD.mese}" id="mese-r" aria-label="Budget al mese">
+        <div class="simk" id="simk"></div>
+        <p class="gl" style="padding:0;margin-top:1.2rem">Dove vanno i soldi oggi</p><div id="simd">${distrib(pv.righe)}</div></div>
       <div class="adtop"><div class="chips">${["Stasera", "7 giorni", "30 giorni"].map((x) => `<button type="button" data-per="${x}" aria-pressed="${per === x}">${x}</button>`).join("")}</div><span class="live"><i></i>In diretta</span></div>
       <div class="kpis">
-        <div class="kpi"><span class="k">Prenotazioni dalla pubblicità</span><span class="v y">${f(T.book)}</span><span class="s">su ${f(61)} prenotazioni totali</span></div>
-        <div class="kpi"><span class="k">Spesa</span><span class="v">€${f(T.spend)}</span><span class="s">Meta e Google</span></div>
-        <div class="kpi"><span class="k">Costo per prenotazione</span><span class="v">€${T.cpb}</span><span class="s"><b class="up">−63%</b> rispetto a prima (€${T.prev})</span></div>
-        <div class="kpi"><span class="k">Ritorno per euro</span><span class="v">${T.roas}×</span><span class="s">coperti × scontrino medio, diviso la spesa</span></div>
+        <div class="kpi"><span class="k">Tavoli dalla pubblicità</span><span class="v y" id="kbook">${f(T.book)}</span><span class="s">su ${f(61)} prenotazioni</span></div>
+        <div class="kpi"><span class="k">Spesa</span><span class="v">${euro(f(41), 0)}</span><span class="s">Meta</span></div>
+        <div class="kpi"><span class="k">Costo a tavolo</span><span class="v">€${T.cpb}</span><span class="s"><b class="up">−63%</b> da quando c'è il motore</span></div>
+        <div class="kpi"><span class="k">Ritorno per euro</span><span class="v">${T.roas}×</span><span class="s">valore dei tavoli diviso la spesa</span></div>
       </div>
       <div class="adgrid">
-        <div class="card"><h2>Stasera, in diretta <small>Ogni prenotazione con la sua provenienza</small></h2><div class="feed" id="feed">${ADS.feed.map(([t, w, src, c]) => `<div class="fr"><time>${t}</time><b>${esc(w)}</b><span class="src ${c}">${esc(src)}</span></div>`).join("")}</div></div>
-        <div class="card"><h2>Ultimi sette giorni <small><i class="lg sp"></i> spesa · <i class="lg bk"></i> prenotazioni</small></h2><div class="bars">${bars}</div></div>
+        <div class="card"><h2>Il pilota <small>Cosa ha fatto e cosa ti chiede</small></h2><div class="acts">${az.map((a, n) => `<div class="pa ${a.auto ? "auto" : "ask"}" data-a="${n}"><span class="ai">${{ pausa: "⏸", aumenta: "↑", riduci: "↓", creativita: "↻", spinta: "⚡" }[a.tipo]}</span><div><b>${a.auto ? "Fatto" : "Ti chiede"} · ${esc(a.su)}</b><p>${esc(a.perche)}</p></div>${a.auto ? '<button class="mini" type="button" data-undo>Annulla</button>' : '<span class="ab"><button class="btn sm cut" type="button" data-ok>Sì</button><button class="btn ghost sm cut" type="button" data-no>No</button></span>'}</div>`).join("")}</div></div>
+        <div class="card"><h2>Stasera, in diretta <small>Ogni tavolo con la sua provenienza</small></h2><div class="feed" id="feed">${ADS.feed.map(([t, w, src, c]) => `<div class="fr"><time>${t}</time><b>${esc(w)}</b><span class="src ${c}">${esc(src)}</span></div>`).join("")}</div>
+          <h2 style="margin-top:1.4rem">Ultimi sette giorni <small><i class="lg sp"></i> spesa · <i class="lg bk"></i> tavoli</small></h2><div class="bars">${bars}</div></div>
       </div>
-      <div class="tip"><span class="ti">Consiglio</span><p>Il reel dell'Aperiblend porta prenotazioni a <b>€2,77</b> l'una, la ricerca su Google a <b>€6,00</b>. Sposta 5 € al giorno da Google al reel.</p><button class="btn sm cut" type="button" data-apply>Applica</button></div>
-      <div class="card"><h2>Campagne <small>Accendi, spegni, cambia il budget al giorno</small></h2><div class="camps">
-        <div class="cr chd"><span>Campagna</span><span>Budget/giorno</span><span>Spesa</span><span>Prenotazioni</span><span>€ a prenotazione</span><span>Andamento</span></div>
-        ${ADS.camps.map((c, k) => `<div class="cr ${c.on ? "" : "off"}"><span class="cn"><label class="sw0"><input type="checkbox" data-on="${k}" ${c.on ? "checked" : ""} aria-label="Attiva"></label><span><b>${esc(c.n)}</b><small class="src ${c.ch === "Meta" ? "m" : "g"}">${c.ch}</small></span></span><span class="cb">€ <input type="number" min="0" value="${c.bud}" data-bud="${k}" aria-label="Budget al giorno"></span><span data-l="Spesa">€${f(c.spend)}</span><span data-l="Prenotazioni">${f(c.book)}</span><span data-l="€ a pren.">${c.book ? "€" + (c.spend / c.book).toFixed(2).replace(".", ",") : "—"}</span><span>${spark(c.trend)}</span></div>`).join("")}
-      </div></div>
-      <p class="hint" style="color:var(--dim);font-size:.8rem;margin-top:1rem">Come contiamo: ogni link (reel, annuncio Google, storia) porta un'etichetta fino alla prenotazione, così sappiamo da dove arriva ogni tavolo. In questo prototipo i numeri sono di prova.</p>
-    </div>`, after: (root) => {
-      $$("[data-per]", root).forEach((b) => b.addEventListener("click", () => { per = b.dataset.per; render(); }));
-      $$("[data-on]", root).forEach((c) => c.addEventListener("change", () => { ADS.camps[+c.dataset.on].on = c.checked; setDirty(1); render(); toast(c.checked ? "Campagna accesa." : "Campagna in pausa."); }));
-      $$("[data-bud]", root).forEach((c) => c.addEventListener("change", () => { ADS.camps[+c.dataset.bud].bud = +c.value; setDirty(1); toast(`Budget aggiornato: €${c.value} al giorno.`); }));
-      $("[data-apply]", root).addEventListener("click", (e) => { ADS.camps[0].bud += 5; ADS.camps[1].bud = Math.max(0, ADS.camps[1].bud - 5); setDirty(1); e.target.closest(".tip").classList.add("done"); render(); toast("Fatto: +5 € al reel, −5 € a Google."); });
-      /* finta diretta: ogni tanto arriva una prenotazione */
-      const more = [["21:45", "Tavolo per 4", "Reel su Meta", "m"], ["22:00", "Tavolo per 2", "Google", "g"], ["22:15", "Tavolo per 5", "Storia su Meta", "m"]];
-      let n = 0; feedT = setInterval(() => { const fd = $("#feed"); if (!fd || n >= more.length) return clearInterval(feedT); const [t, w, src, c] = more[n++]; ADS.feed.unshift(more[n - 1]); ADS.today.book++; fd.insertAdjacentHTML("afterbegin", `<div class="fr new"><time>${t}</time><b>${esc(w)}</b><span class="src ${c}">${esc(src)}</span><span class="nw">Nuova</span></div>`); const kv = $(".kpi .v.y", root); if (kv) kv.textContent = Math.round(ADS.today.book * (per === "Stasera" ? 1 : per === "7 giorni" ? 4.1 : 17.3)); }, 5000);
-    } };
-  };
+      <div class="card"><h2>Campagne <small>Accendi, spegni, cambia il budget</small></h2><div class="camps">
+        <div class="cr chd"><span>Campagna</span><span>Budget/giorno</span><span>Spesa</span><span>Tavoli</span><span>€ a tavolo</span><span>Andamento</span></div>
+        ${ADS.camps.map((c, k) => `<div class="cr ${c.on ? "" : "off"}"><span class="cn"><label class="sw0"><input type="checkbox" data-on="${k}" ${c.on ? "checked" : ""} aria-label="Attiva"></label><span><b>${esc(c.n)}</b><small class="src ${c.ch === "Meta" ? "m" : "g"}">${c.ch}</small></span></span><span class="cb">€ <input type="number" min="0" value="${c.bud}" data-bud="${k}" aria-label="Budget al giorno"></span><span data-l="Spesa">${euro(f(c.spend), 0)}</span><span data-l="Tavoli">${f(c.book)}</span><span data-l="€ a tavolo">${c.book ? euro(c.spend / c.book) : "—"}</span><span>${spark(c.trend)}</span></div>`).join("")}
+      </div><button class="add" type="button" data-go="advertising/nuova" style="margin-top:1rem">+ Nuova campagna</button></div>`,
+      after: (root) => {
+        const sim = () => { const p = M.previsione(AD.mese); $("#mese").textContent = euro(AD.mese, 0); $("#mese").nextElementSibling.textContent = euro(AD.mese / 30, 0) + " al giorno";
+          $("#simk").innerHTML = `<div><span class="v y">${p.prenMese}</span><small>tavoli previsti al mese</small></div><div><span class="v">${euro(p.cpb)}</span><small>a tavolo</small></div><div><span class="v up">−${Math.round(p.risparmio * 100)}%</span><small>rispetto a un «boost» senza motore (${euro(p.senza.cpb)} a tavolo, ${p.senza.prenMese} tavoli)</small></div>`;
+          $("#simd").innerHTML = distrib(p.righe); };
+        sim(); $("#mese-r").addEventListener("input", (e) => { AD.mese = +e.target.value; sim(); });
+        $("#mese-r").addEventListener("change", () => setDirty(1));
+        $$("[data-per]", root).forEach((b) => b.addEventListener("click", () => { per = b.dataset.per; render(); }));
+        $$("[data-on]", root).forEach((c) => c.addEventListener("change", () => { ADS.camps[+c.dataset.on].on = c.checked; setDirty(1); render(); toast(c.checked ? "Campagna accesa." : "Campagna in pausa."); }));
+        $$("[data-bud]", root).forEach((c) => c.addEventListener("change", () => { ADS.camps[+c.dataset.bud].bud = +c.value; setDirty(1); toast(`Budget aggiornato: €${c.value} al giorno.`); }));
+        $$(".pa", root).forEach((el) => el.addEventListener("click", (e) => {
+          if (e.target.closest("[data-undo]")) { el.classList.add("gone"); toast("Annullato: il pilota non lo rifarà per 24 ore."); }
+          if (e.target.closest("[data-ok]")) { el.classList.replace("ask", "auto"); el.querySelector(".ab").outerHTML = '<span class="mini" style="color:var(--ok)">Fatto</span>'; toast("Ok, lo faccio."); }
+          if (e.target.closest("[data-no]")) { el.classList.add("gone"); toast("Va bene, lascio com'è."); }
+        }));
+        const more = [["21:45", "Tavolo per 4", "Reel su Meta", "m"], ["22:00", "Tavolo per 2", "Storia su Meta", "m"], ["22:15", "Tavolo per 5", "Simili ai clienti", "m"]];
+        let n = 0; feedT = setInterval(() => { const fd = $("#feed"); if (!fd || n >= more.length) return clearInterval(feedT); const [t, w, src, c] = more[n++]; ADS.today.book++; fd.insertAdjacentHTML("afterbegin", `<div class="fr new"><time>${t}</time><b>${esc(w)}</b><span class="src ${c}">${esc(src)}</span><span class="nw">Nuovo</span></div>`); const kv = $("#kbook"); if (kv) kv.textContent = Math.round(ADS.today.book * mul); }, 5000);
+      } };
+  }
+
+  /* ---------- nuova campagna: tre passi in italiano, il motore traduce per Meta ---------- */
+  function testiProposti(w) {
+    const x = w.cosa[0] || {}, t = x.titolo || "Blend";
+    const base = { tavoli: [`${t}. Tavoli dalle 18, prenoti in un minuto.`, `Stasera da Blend: ${t.toLowerCase()}. Il primo giro è il più bello.`, `Mezzocammino, 18-2. ${t}, un tavolo per voi.`], serata: [`${t}: musica dal vivo a due passi dal bancone.`, `Mercoledì c'è ${t}. I tavoli vicino ai musicisti finiscono presto.`, `${t}. Jazz, cocktail e niente fretta.`], tornare: ["È un po' che non passi. Il bancone ti aspetta.", "Carta nuova, stessa luce bassa. Torna a trovarci.", "Ti teniamo il tavolo di sempre?"] };
+    return (base[w.obiettivo] || base.tavoli).map((s) => ({ testo: s.slice(0, 125), ok: true }));
+  }
+  function adNuova() {
+    const w = AD.wiz, P = ["Cosa vuoi", "Cosa mostriamo", "Quando e quanto", "Riepilogo"];
+    const step = `<ol class="steps">${P.map((t, n) => `<li class="${n === w.passo ? "on" : n < w.passo ? "ok" : ""}"><span>${n + 1}</span>${t}</li>`).join("")}</ol>`;
+    const giorni = Math.max(1, Math.round((new Date(w.al) - new Date(w.dal)) / 864e5) + 1);
+    let corpo = "";
+    if (w.passo === 0) corpo = `<div class="goals">${Object.entries(M.OBIETTIVI).map(([k, o]) => `<button type="button" class="goal ${w.obiettivo === k ? "on" : ""}" data-goal="${k}"><span class="gi">${{ tavoli: "🍸", serata: "🎷", tornare: "↩" }[k]}</span><b>${o.nome}</b><small>${{ tavoli: "Più prenotazioni nelle sere che scegli. Il motore ottimizza su chi prenota davvero.", serata: "Fai sapere a chi abita vicino che c'è una serata. Poi riproponiamo la serata a chi ha guardato.", tornare: "Ricorda a chi è già venuto che il Blend c'è ancora. Costa pochissimo." }[k]}</small></button>`).join("")}</div>`;
+    if (w.passo === 1) {
+      const opts = [...D.shows.slice(0, 4).map((s) => ({ tipo: "Serata", titolo: s.title, img: s.img })), ...D.drinks.slice(0, 4).map((d) => ({ tipo: "Drink", titolo: d.n, img: dfoto(d) })), ...MK.posts.filter((p) => p.type === "Reel").map((p) => ({ tipo: "Reel", titolo: p.title, img: p.img || "" }))];
+      if (!w.testi) w.testi = testiProposti(w);
+      corpo = `<p class="lead2">Scegli fino a tre cose dal back office. Il motore le mette in prova e tiene quella che porta più tavoli.</p><div class="pick">${opts.map((o, n) => { const on = w.cosa.some((c) => c.titolo === o.titolo); return `<button type="button" class="pk ${on ? "on" : ""}" data-pk="${n}">${o.img ? `<img src="${esc(o.img)}" alt="">` : '<span class="ph0">Reel</span>'}<span class="pt"><small>${o.tipo}</small>${esc(o.titolo)}</span><i>✓</i></button>`; }).join("")}</div>
+        <div class="card" style="margin-top:1.2rem"><h2>Testi proposti <small>Scritti dal motore, li puoi cambiare. Meta mostra le prime 125 battute.</small></h2><div class="txs">${w.testi.map((t, n) => `<div class="f" data-min="10" data-max="125"><label><span>Variante ${"ABC"[n]}</span><span class="cnt"></span></label><textarea rows="2" data-tx="${n}">${esc(t.testo)}</textarea><span class="hint"></span></div>`).join("")}</div><button class="mini" type="button" data-rigen>↻ Proponi altri testi</button></div>`;
+      w._opts = opts;
+    }
+    if (w.passo === 2) {
+      const d = M.distribuisci(w.budget, PUB, M.OBIETTIVI[w.obiettivo || "tavoli"].pubblici);
+      corpo = `<div class="row"><div class="f"><label><span>Dal</span></label><input type="date" value="${w.dal}" data-w="dal"></div><div class="f"><label><span>Al</span></label><input type="date" value="${w.al}" data-w="al"></div></div>
+        <div class="card" style="margin-top:1.2rem"><h2>Budget al giorno <small>${giorni} giorni · ${euro(w.budget * giorni, 0)} in tutto</small></h2><div class="simv"><span>${euro(w.budget, 0)}</span><small>al giorno</small></div><input type="range" min="5" max="60" step="1" value="${w.budget}" data-w="budget" aria-label="Budget al giorno">
+          <div class="simk"><div><span class="v y">${Math.round(d.prenGiorno * giorni)}</span><small>tavoli previsti</small></div><div><span class="v">${euro(d.cpb)}</span><small>a tavolo</small></div></div>${distrib(d.righe)}</div>`;
+    }
+    if (w.passo === 3) {
+      const o = M.OBIETTIVI[w.obiettivo || "tavoli"], calls = M.chiamateMeta({ obiettivo: w.obiettivo || "tavoli", nome: `Blend · ${o.nome} · ${w.dal}`, budgetGiorno: w.budget, inizio: w.dal + "T15:00:00+0100", fine: w.al + "T23:59:00+0100" });
+      const d = M.distribuisci(w.budget, PUB, o.pubblici);
+      corpo = `<div class="card"><h2>Cosa facciamo su Meta per te</h2><ul class="sum">
+        <li><b>${o.nome}</b> dal ${new Date(w.dal).toLocaleDateString("it-IT", { day: "numeric", month: "long" })} al ${new Date(w.al).toLocaleDateString("it-IT", { day: "numeric", month: "long" })}, ${euro(w.budget, 0)} al giorno.</li>
+        <li>Mostriamo ${w.cosa.length ? w.cosa.map((c) => `«${esc(c.titolo)}»`).join(", ") : "le creatività migliori del back office"} con ${w.testi ? w.testi.length : 3} testi diversi, e teniamo quello che porta più tavoli.</li>
+        <li>Lo facciamo vedere a: ${d.righe.filter((r) => r.euro).map((r) => `<b>${r.nome}</b> (${euro(r.euro, 0)}/giorno)`).join(", ")}. Mai a chi ha già prenotato negli ultimi 3 giorni.</li>
+        <li>${o.evento ? "Meta impara da chi prenota davvero (evento <b>Schedule</b> dal sito e dal server)." : "Limitiamo a 2 volte a settimana: chi la vede non si stanca."}</li>
+        <li>Il pilota automatico la controlla ogni ora e ti scrive cosa cambia.</li></ul>
+        <details class="tech"><summary>Dettagli tecnici: le chiamate a Meta Marketing API (${calls.length})</summary><pre>${esc(JSON.stringify(calls, null, 2))}</pre></details></div>`;
+    }
+    const canNext = w.passo === 0 ? !!w.obiettivo : w.passo === 1 ? true : true;
+    return { html: `<div class="wiz">${step}<div class="wb">${corpo}</div><div class="wf">${w.passo ? '<button class="btn ghost cut" type="button" data-prev>Indietro</button>' : "<span></span>"}${w.passo < 3 ? `<button class="btn cut" type="button" data-next ${canNext ? "" : "disabled"}>Avanti</button>` : '<button class="btn cut" type="button" data-launch>Avvia la campagna</button>'}</div></div>`,
+      after: (root) => {
+        $$("[data-goal]", root).forEach((b) => b.addEventListener("click", () => { w.obiettivo = b.dataset.goal; w.testi = null; render(); }));
+        $$("[data-pk]", root).forEach((b) => b.addEventListener("click", () => { const o = w._opts[+b.dataset.pk], i = w.cosa.findIndex((c) => c.titolo === o.titolo); if (i >= 0) w.cosa.splice(i, 1); else if (w.cosa.length < 3) w.cosa.push(o); else return toast("Al massimo tre: toglierne una prima."); w.testi = testiProposti(w); render(); }));
+        const tx = $(".txs", root); if (tx) { wire(tx, (e) => { const n = e.target.dataset.tx; if (n !== undefined) w.testi[+n].testo = e.target.value; }); }
+        const rg = $("[data-rigen]", root); if (rg) rg.addEventListener("click", () => { w.testi = testiProposti(w).reverse(); render(); toast("Nuove proposte (in produzione le scrive Claude)."); });
+        $$("[data-w]", root).forEach((el) => el.addEventListener(el.type === "range" ? "input" : "change", () => { w[el.dataset.w] = el.type === "range" ? +el.value : el.value; if (el.type === "range") { clearTimeout(adNuova.t); adNuova.t = setTimeout(render, 60); } else render(); }));
+        const nx = $("[data-next]", root); if (nx) nx.addEventListener("click", () => { w.passo++; render(); });
+        const pv = $("[data-prev]", root); if (pv) pv.addEventListener("click", () => { w.passo--; render(); });
+        const la = $("[data-launch]", root); if (la) la.addEventListener("click", () => { const o = M.OBIETTIVI[w.obiettivo || "tavoli"]; ADS.camps.unshift({ n: `${o.nome}${w.cosa[0] ? " · " + w.cosa[0].titolo : ""}`, ch: "Meta", on: true, bud: w.budget, spend: 0, book: 0, trend: [0, 0, 0, 0, 0, 0, 0] }); AD.wiz = { passo: 0, obiettivo: null, cosa: [], testi: null, budget: 15, dal: w.dal, al: w.al }; setDirty(1); location.hash = "advertising/andamento"; toast("Campagna creata in pausa su Meta: parte quando la approva il revisore di Meta (per finta)."); });
+      } };
+  }
+
+  /* ---------- pubblici ---------- */
+  function adPubblici() {
+    return { html: `<p class="lead2">Quattro gruppi di persone, spiegati semplici. Dietro, il motore tiene aggiornate le regole su Meta.</p>
+      <div class="pubs">${PUB.map((p) => `<div class="pub" style="--c:${PCOL[p.id]}"><div class="puh"><b>${p.nome}</b><label class="sw0"><input type="checkbox" data-pub="${p.id}" ${AD.attivi.includes(p.id) ? "checked" : ""} aria-label="Usa ${p.nome}"></label></div><p>${p.spiega}</p><div class="pun"><span><b>${p.persone.toLocaleString("it-IT")}</b>persone</span><span><b>${euro(p.cpb)}</b>a tavolo, di base</span></div><code>${esc(p.meta)}</code></div>`).join("")}</div>
+      <div class="card" style="margin-top:1.2rem"><h2>Esclusi sempre</h2><ul class="sum"><li>Chi ha prenotato negli ultimi 3 giorni: ha già il tavolo.</li><li>Chi lavora al Blend (lista dal back office).</li><li>Fuori dal raggio di ${M.LOCALE.raggioKm} km: non verrebbe.</li></ul></div>`,
+      after: (root) => $$("[data-pub]", root).forEach((c) => c.addEventListener("change", () => { AD.attivi = c.checked ? [...AD.attivi, c.dataset.pub] : AD.attivi.filter((x) => x !== c.dataset.pub); setDirty(1); toast(c.checked ? "Pubblico riacceso." : "Pubblico spento: il budget va sugli altri."); })) };
+  }
+
+  /* ---------- pilota automatico ---------- */
+  function adPilota() {
+    return { html: `<div class="card"><label class="sw big"><span><b>Pilota automatico</b><small>Controlla le campagne ogni ora e fa i cambi piccoli da solo. Quelli grandi te li chiede.</small></span><input type="checkbox" id="pil" ${AD.pilota ? "checked" : ""}></label></div>
+      <div class="row" style="margin-top:1.2rem"><div class="card"><h2>Tetto al mese</h2><div class="simv"><span id="tv">${euro(AD.mese, 0)}</span></div><input type="range" min="150" max="3000" step="50" value="${AD.mese}" id="tetto"><span class="hint">Oltre questa cifra il motore si ferma, sempre.</span></div>
+      <div class="card"><h2>Costo obiettivo a tavolo</h2><div class="simv"><span id="ov">${euro(AD.cpbObiettivo)}</span></div><input type="range" min="2" max="10" step=".25" value="${AD.cpbObiettivo}" id="obj"><span class="hint">Sopra questa cifra un annuncio viene messo in pausa.</span></div></div>
+      <div class="card" style="margin-top:1.2rem"><h2>Le regole <small>In parole semplici. Ogni volta che una scatta, la trovi in Andamento con il perché.</small></h2><div class="rules">${AD.regole.map(([k, t, on], n) => `<label class="sw"><span><b>${t}</b></span><input type="checkbox" data-rule="${n}" ${on ? "checked" : ""}></label>`).join("")}</div>
+        <div class="f" style="margin-top:1.1rem"><label><span>Chiedimi conferma se il budget del giorno sale più del</span><span class="cnt">${AD.conferma}%</span></label><input type="range" min="10" max="100" step="5" value="${AD.conferma}" id="conf"></div></div>`,
+      after: (root) => {
+        $("#pil").addEventListener("change", (e) => { AD.pilota = e.target.checked; setDirty(1); toast(AD.pilota ? "Pilota acceso." : "Pilota spento: le campagne restano come sono."); });
+        $("#tetto").addEventListener("input", (e) => { AD.mese = +e.target.value; $("#tv").textContent = euro(AD.mese, 0); });
+        $("#obj").addEventListener("input", (e) => { AD.cpbObiettivo = +e.target.value; $("#ov").textContent = euro(AD.cpbObiettivo); });
+        $("#conf").addEventListener("input", (e) => { AD.conferma = +e.target.value; e.target.previousElementSibling.lastElementChild.textContent = AD.conferma + "%"; });
+        $$("[data-rule]", root).forEach((c) => c.addEventListener("change", () => { AD.regole[+c.dataset.rule][2] = c.checked; setDirty(1); }));
+      } };
+  }
+
+  /* ---------- segnale: pixel e Conversions API ---------- */
+  function adSegnale() {
+    const pren = [{ id: 1042, nome: "Giulia Ferri", email: "giulia@example.com", telefono: "333 120 4471", fbp: "fb.1.1731.42", fbc: "", coperti: 4, fonte: "reel-aperiblend" }, { id: 1043, nome: "Marco", email: "marco@example.com", telefono: "", fbp: "fb.1.1731.77", fbc: "fb.1.1731.Ab", coperti: 2 }, { id: 1044, nome: "", email: "", telefono: "320 554 0098", fbp: "", fbc: "", coperti: 3 }];
+    const q = M.qualita(pren), fun = [["PageView", "Apre il sito", 1240], ["ViewContent", "Guarda menu, drink o serate", 610], ["InitiateCheckout", "Apre la prenotazione", 140], ["Schedule", "Prenota", 61], ["Purchase", "Si presenta al tavolo", 48]];
+    return { html: `<p class="lead2">Meta ottimizza solo su quello che vede. Qui controlli che veda tutto: dal sito (pixel) e dal nostro server (Conversions API), senza doppioni.</p>
+      <div class="kpis"><div class="kpi"><span class="k">Pixel</span><span class="v ok">Attivo</span><span class="s">ultimo evento 1 min fa</span></div><div class="kpi"><span class="k">Conversions API</span><span class="v ok">Attiva</span><span class="s">dal server, anche se il browser blocca</span></div><div class="kpi"><span class="k">Doppioni tolti</span><span class="v">98%</span><span class="s">stesso event_id da sito e server</span></div><div class="kpi"><span class="k">Qualità corrispondenza</span><span class="v y">${q.toFixed(1).replace(".", ",")}</span><span class="s">su 10: Meta riconosce le persone</span></div></div>
+      <div class="card" style="margin-top:1.2rem"><h2>Il percorso, ultimi 7 giorni</h2><div class="fun">${fun.map(([e, t, n]) => `<div class="fn"><span><b>${t}</b><code>${e}</code></span><span class="fb"><i style="width:${(n / fun[0][2] * 100).toFixed(1)}%"></i></span><b class="fv2">${n.toLocaleString("it-IT")}</b></div>`).join("")}</div><p class="hint" style="margin-top:.8rem;color:var(--dim)">«Si presenta al tavolo» lo segna la sala dal back office: è il segnale che fa la differenza, perché Meta impara da chi viene davvero.</p></div>
+      <div class="card" style="margin-top:1.2rem"><h2>Esempio di evento inviato <small>Prenotazione n° 1042: email, telefono e nome partono in hash SHA-256, mai in chiaro</small></h2><pre id="capi">Calcolo l'hash…</pre></div>`,
+      after: async () => { const ev = await M.eventoCapi(pren[0]); const el = $("#capi"); if (el) el.textContent = JSON.stringify({ data: [ev] }, null, 2); } };
+  }
 
   /* ---------- disegno ---------- */
   function render() {
@@ -1037,9 +1302,12 @@ const KITCHEN = [{"id": "anti", "titolo": "Antipasti", "frase": "Fassona al colt
     const out = V[r.s](i);
     const v = $("#view");
     if (typeof out === "string") v.innerHTML = out; else { v.innerHTML = out.html; out.after(v); }
+    if (location.hash !== lastHash) { v.classList.remove("enter"); void v.offsetWidth; if (mob()) v.classList.add("enter"); lastHash = location.hash; }
     const ti = $("#title"); if (r.s !== "panoramica" && mob() && i !== null) { const it = $(".item[aria-current=true] b", v); if (it) ti.textContent = it.textContent; }
   }
-  let lastW = innerWidth;
+  $("#undo").addEventListener("click", () => { const x = window.Bozza && Bozza.annulla(); if (!x) return; applica(x); Bozza.salva(x); $("#undo").disabled = !Bozza.puoAnnullare(); render(); toast("Annullato."); });
+  { const b = window.Bozza && Bozza.leggi(); if (b && b.dati) { applica(b.dati); dirty = b.dati.dirty || 1; setDirty(0); const t = new Date(b.quando); setTimeout(() => toast(`Ho ripreso la tua bozza di ${t.toLocaleDateString("it-IT", { weekday: "long" })} alle ${t.toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit" })}.`), 600); } if (window.Bozza) Bozza.ricorda(snap()); }
+  let lastW = innerWidth, lastHash = "";
   addEventListener("hashchange", () => { render(); scrollTo(0, 0); });
   addEventListener("resize", () => { if ((innerWidth <= 860) !== (lastW <= 860)) render(); lastW = innerWidth; });
   render();
