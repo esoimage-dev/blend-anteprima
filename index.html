@@ -1866,6 +1866,27 @@ body:has(.intro:not(.out)) #clk { opacity: 0; }
 .bigck .dg { height: 1.16em; } .bigck .rl i { height: 1.16em; line-height: 1.16; }
 .intro.roll .dg:nth-child(2) .rl, .intro.roll .dg:nth-child(4) .rl, .intro.roll .dg:nth-child(5) .rl { transform: translateY(-1.16em); }
 .bigck .cl { line-height: 1.16; }
+/* ---------- v41: orologio d'apertura più pulito, biglietto che sale davvero, Aperiblend più unita ---------- */
+.bigck .rl { transition: transform .62s cubic-bezier(.7, 0, .3, 1); }
+.intro.roll .dg:nth-child(5) .rl { transition-delay: 0s; }
+.intro.roll .dg:nth-child(4) .rl { transition-delay: .07s; }
+.intro.roll .dg:nth-child(2) .rl { transition-delay: .22s; }
+.bigck { transition: opacity .7s ease, translate .9s cubic-bezier(.16, 1, .3, 1), color .4s ease .1s, transform .8s cubic-bezier(.76, 0, .24, 1); }
+.intro.out { transition: opacity .35s ease .1s; }
+body:has(.intro.out) #clk { opacity: 1; transition: opacity .25s ease .05s; }
+/* biglietto: il passaggio usa "top", indipendente dall'oscillazione e da ogni trasformazione */
+.next { top: 0; transform: none !important; transition: top .35s cubic-bezier(.2, .8, .2, 1), filter .35s; }
+.next:hover { top: -12px; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .6)) drop-shadow(0 30px 30px rgba(0, 0, 0, .6)); }
+.next:hover, .next:focus-visible { animation-play-state: paused; }
+/* Aperiblend: il biglietto si aggancia sotto il video, frase e testo ai lati */
+@media (min-width: 901px) {
+  #aperiblend .duo { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 0 clamp(2rem, 4vw, 4rem); margin-top: clamp(-6.5rem, -6vw, -4rem); position: relative; z-index: 2; align-items: start; }
+  #aperiblend .duo > div:first-child { display: contents; }
+  #aperiblend .duo .claim { grid-column: 1; grid-row: 1; justify-self: end; text-align: right; padding-top: clamp(6.5rem, 7.5vw, 8.5rem); }
+  #aperiblend .duo .ticket { grid-column: 2; grid-row: 1; margin-top: 0; }
+  #aperiblend .duo p.body { grid-column: 3; grid-row: 1; padding-top: clamp(6.6rem, 7.6vw, 8.6rem); max-width: 34ch; }
+}
+.bigck .dg { width: .486em; text-align: center; } .bigck .rl i { text-align: center; } .bigck .cl { width: .278em; margin: 0; text-align: center; }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -2441,9 +2462,13 @@ const CMS = {
     setTimeout(() => intro.classList.add("roll"), 900);
     /* il grande orologio si rimpicciolisce e si posa esattamente sull'orologio dell'header */
     setTimeout(() => {
-      const a = big.getBoundingClientRect(), b = $("#clk").getBoundingClientRect();
-      if (b.width && b.top >= 0 && getComputedStyle($("#top .clock")).visibility !== "hidden") { const k = b.height / a.height; big.style.transform = `translate3d(${(b.left - a.left).toFixed(1)}px, ${(b.top - a.top).toFixed(1)}px, 0) scale(${k.toFixed(4)})`; }
-      else { big.style.transform = "translate3d(0, -36px, 0)"; big.style.opacity = "0"; }
+      const a = big.getBoundingClientRect(), hd = $$("#clk .dg").map((d) => d.getBoundingClientRect()), bd = $$(".dg", big).map((d) => d.getBoundingClientRect());
+      if (hd.length === 4 && hd[0].width && getComputedStyle($("#top .clock")).visibility !== "hidden") {
+        /* prima e ultima cifra del grande orologio esattamente sopra quelle dell'header */
+        const k = (hd[3].right - hd[0].left) / (bd[3].right - bd[0].left);
+        const hcy = hd[0].top + hd[0].height / 2, bcy = bd[0].top + (bd[0].height / 1.16) / 2;
+        big.style.transform = `translate3d(${(hd[0].left - (a.left + k * (bd[0].left - a.left))).toFixed(2)}px, ${(hcy - (a.top + k * (bcy - a.top))).toFixed(2)}px, 0) scale(${k.toFixed(5)})`;
+      } else { big.style.transform = "translate3d(0, -36px, 0)"; big.style.opacity = "0"; }
       intro.classList.add("fly"); hero.classList.add("on"); playHero();
     }, 1750);
     setTimeout(endIntro, 2450);
@@ -2999,7 +3024,7 @@ const CMS = {
 
       reveal(G.timeline().from("#pile .card", { y: 90, x: 40, rotation: 14, opacity: 0, duration: 1, ease: "expo.out", stagger: { each: .07, from: "end" }, clearProps: "transform,opacity" }).from("#slip", { y: 40, opacity: 0, duration: .9, ease: "expo.out", clearProps: "all" }, .35), "#pile", "top 82%");
     }
-    G.from(".hero .low > *", { y: 28, opacity: 0, duration: 1.2, ease: "expo.out", stagger: 0.12, delay: 3, clearProps: "all" });
+    G.from(".hero .low > .godown", { y: 28, opacity: 0, duration: 1.2, ease: "expo.out", stagger: 0.12, delay: 3, clearProps: "all" });
     /* le serate: il disco esce dalla copertina e gira mentre scendi */
     /* entrate leggere per liste, schede, recensioni, biglietti */
     reveal(G.timeline().from("#drinks li", { y: 22, opacity: 0, duration: .7, ease: "expo.out", stagger: .03 }), "#drinks", "top 86%");

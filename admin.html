@@ -290,6 +290,222 @@ main { min-width: 0; display: flex; flex-direction: column; }
   .stage { min-height: 300px; padding: 1.6rem 1rem; }
 }
 @media (min-width: 861px) { .pubm { display: none; } }
+
+/* ---------- v2: gruppi nel menu, foto dei drink, voti ai curriculum, marketing, advertising ---------- */
+.nav { gap: 0; }
+.nav .grp { display: grid; gap: 2px; }
+.nav .grp + .grp { margin-top: 1.5rem; padding-top: 1.1rem; border-top: 1px solid var(--line); }
+.gl { margin: 0 0 .45rem; padding: 0 .7rem; font: 600 .66rem/1 var(--f-ui); letter-spacing: .16em; text-transform: uppercase; color: var(--dim); }
+.side { overflow-y: auto; }
+.saved { font-size: .8rem; color: var(--dim); }
+.th2 { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+.kp2 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: .4rem; }
+.kp2 > div { display: grid; }
+.kp2 .v { font-size: 2.4rem; }
+.nxp { display: grid; gap: .3rem; margin-top: .4rem; justify-items: start; }
+.nxp b { font: 800 1.5rem/1.05 var(--f-sign); text-transform: uppercase; }
+.ty { display: inline-block; padding: .2rem .45rem; border-radius: 3px; font: 700 .64rem/1 var(--f-ui); letter-spacing: .08em; text-transform: uppercase; background: var(--n3); color: var(--bone); }
+.ty.reel { background: #3b1e3b; color: #f2a6ea; } .ty.post { background: #1d2c3d; color: #9cc8f2; } .ty.storia { background: #3b2a12; color: var(--sign); }
+/* serate: locandina e foglietto affiancati, niente carta sopra la locandina */
+.sv { grid-template-columns: 44% 1fr; gap: 14px; align-items: center; }
+.sv .pos { rotate: -1.5deg; }
+.slip { margin: 0; rotate: 1.5deg; }
+/* drink: miniatura nell'elenco e foto nell'anteprima */
+.dth { position: relative; width: 40px; height: 48px; flex: none; }
+.dth img { width: 100%; height: 100%; object-fit: cover; border-radius: 3px; }
+.dth i { position: absolute; right: -6px; bottom: -6px; min-width: 20px; height: 20px; padding: 0 5px; display: grid; place-items: center; border-radius: 10px; background: var(--night); border: 1px solid var(--line2); font: 800 .7rem/1 var(--f-sign); font-style: normal; color: var(--ash); }
+.dv { position: relative; width: 100%; min-height: 470px; }
+.dv .dph { position: absolute; left: 0; top: 0; width: 56%; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 3px; box-shadow: 0 18px 30px rgba(0, 0, 0, .5); }
+.dv .dph img { width: 100%; height: 100%; object-fit: cover; }
+.dv .fv { position: absolute; right: -6px; top: 90px; width: 74%; padding: 1.7rem 1.2rem 1.3rem 1.3rem; }
+.dv .fv h3 { font-size: 1.25rem; } .dv .fv .q { font-size: .64rem; } .dv .fv .ing { font-size: .6rem; } .dv .fv .pr { font-size: .54rem; grid-template-columns: 3rem minmax(0, 1fr) 3.2rem; }
+/* candidature */
+.clist { display: grid; gap: .8rem; align-content: start; }
+.smista { all: unset; box-sizing: border-box; --cut: 8px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .95rem 1.1rem; background: var(--sign); color: var(--night); cursor: pointer; transition: filter .2s; }
+.smista b { display: block; font: 800 1.15rem/1.05 var(--f-sign); text-transform: uppercase; }
+.smista small { font-size: .8rem; opacity: .75; }
+.smista .arr { font-size: 1.3rem; transition: translate .25s; }
+.smista:hover .arr { translate: 4px 0; }
+.smista[disabled] { background: var(--n2); color: var(--ash); cursor: default; }
+.vt { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; font: 800 .9rem/1 var(--f-ui); flex: none; }
+.vt.none { background: var(--n3); color: var(--dim); }
+.vt.no { background: rgba(224, 83, 63, .18); color: var(--red); } .vt.forse { background: rgba(240, 166, 64, .16); color: var(--warn); }
+.vt.buono { background: rgba(143, 197, 138, .16); color: var(--ok); } .vt.top { background: var(--sign); color: var(--night); }
+.keys { margin: .2rem 0 0; font-size: .76rem; color: var(--dim); }
+kbd { display: inline-block; min-width: 1.4em; padding: .05rem .3rem; border-radius: 3px; border: 1px solid var(--line2); font: 600 .72rem/1.3 var(--f-ui); text-align: center; color: var(--ash); background: var(--n2); }
+.rate { display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; }
+.rate button { all: unset; box-sizing: border-box; position: relative; display: flex; align-items: center; justify-content: center; gap: .5rem; padding: .75rem .6rem; border-radius: 6px; background: var(--n1); border: 1px solid var(--line2); font-weight: 600; color: var(--ash); cursor: pointer; transition: background .15s, color .15s, border-color .15s, transform .15s; }
+.rate button i { font-style: normal; font-size: 1.05rem; }
+.rate button kbd { position: absolute; right: .45rem; top: .4rem; min-width: 0; padding: 0 .25rem; font-size: .6rem; opacity: .6; }
+.rate button:hover { color: var(--bone); border-color: var(--ash); }
+.rate button:active { transform: scale(.97); }
+.rate .no[aria-pressed="true"] { background: rgba(224, 83, 63, .18); border-color: var(--red); color: var(--red); }
+.rate .forse[aria-pressed="true"] { background: rgba(240, 166, 64, .14); border-color: var(--warn); color: var(--warn); }
+.rate .buono[aria-pressed="true"] { background: rgba(143, 197, 138, .14); border-color: var(--ok); color: var(--ok); }
+.rate .top[aria-pressed="true"] { background: var(--sign); border-color: var(--sign); color: var(--night); }
+.inbox { grid-template-columns: 340px minmax(0, 1fr); }
+.mgrid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 1.2rem; align-items: start; }
+.mcol { display: grid; gap: 1.2rem; }
+.pdf { border-radius: 6px; overflow: hidden; border: 1px solid var(--line); background: var(--n1); position: sticky; top: 92px; }
+.pbar { display: flex; align-items: center; gap: .6rem; padding: .6rem .7rem; border-bottom: 1px solid var(--line); }
+.pbar .ic { width: 30px; height: 36px; display: grid; place-items: center; border-radius: 3px; background: #3a1a14; color: #ff9b86; font: 800 .6rem/1 var(--f-ui); flex: none; }
+.pbar b { font-weight: 600; font-size: .88rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pbar small { color: var(--ash); font-size: .74rem; white-space: nowrap; }
+.pbar .sp { flex: 1; }
+.pview { height: min(640px, calc(100vh - 220px)); overflow: auto; padding: 1.2rem; background: #2a2622; }
+.ppage { width: calc(100% * var(--z)); margin: 0 auto; aspect-ratio: 210 / 297; background: #fbfaf7; color: #1d1d1b; box-shadow: 0 6px 20px rgba(0, 0, 0, .4); container-type: inline-size; transition: width .2s; }
+.cvp { padding: 8cqi 8cqi; font: 400 2.6cqi/1.5 var(--f-ui); }
+.cvh b { display: block; font: 700 6cqi/1.1 var(--f-ui); }
+.cvh span { color: #6b6b67; font-size: 2.4cqi; }
+.cvr { margin: 1.5cqi 0 5cqi; font-weight: 600; color: #b0261a; }
+.cvp h5 { margin: 4cqi 0 1.5cqi; font: 700 2.3cqi/1 var(--f-ui); letter-spacing: .14em; text-transform: uppercase; color: #6b6b67; border-bottom: 1px solid #ddd; padding-bottom: 1cqi; }
+.cvp p { margin: 0; }
+.cve { display: grid; grid-template-columns: 26cqi 1fr; gap: 2cqi; margin-bottom: 1cqi; }
+.cve span:first-child { color: #6b6b67; }
+.cvl { height: 1.6cqi; margin-top: 2.4cqi; border-radius: 1cqi; background: #ecebe7; } .cvl.s { width: 62%; }
+/* smistamento a carte */
+.smi { position: fixed; inset: 0; z-index: 60; display: none; place-items: center; padding: 1rem; background: rgba(6, 5, 4, .9); }
+.smi.on { display: grid; }
+.sbox { width: min(460px, 100%); display: grid; gap: 1rem; }
+.stop { display: flex; justify-content: space-between; align-items: center; font: 800 1.2rem/1 var(--f-sign); text-transform: uppercase; }
+.sstage { position: relative; height: min(560px, calc(100svh - 230px)); }
+.scard { position: absolute; inset: 0; display: grid; grid-template-rows: auto minmax(0, 1fr); gap: .8rem; padding: 1.1rem; border-radius: 10px; background: var(--n1); border: 1px solid var(--line2); box-shadow: 0 20px 50px rgba(0, 0, 0, .5); touch-action: none; cursor: grab; user-select: none; transition: transform .38s cubic-bezier(.5, 0, .75, .4), opacity .38s; }
+.scard .cnt { font-size: .74rem; color: var(--dim); }
+.scard h3 { margin: .2rem 0; font: 900 2rem/.95 var(--f-sign); text-transform: uppercase; }
+.scard .s { font-size: .84rem; color: var(--ash); }
+.scv { overflow: hidden; border-radius: 4px; background: #2a2622; padding: .8rem; }
+.scv .ppage { width: calc(100% * var(--z)); }
+.scv .msg { margin: 0; }
+.scard .stamp2 { position: absolute; left: 50%; top: 40%; translate: -50% -50%; rotate: -12deg; padding: .4rem 1rem; border: 4px solid currentColor; border-radius: 6px; font: 900 2.6rem/1 var(--f-sign); text-transform: uppercase; font-style: normal; opacity: 0; pointer-events: none; }
+.scard[data-hint="no"] .stamp2, .scard.out.no .stamp2 { opacity: 1; color: var(--red); }
+.scard[data-hint="buono"] .stamp2, .scard.out.buono .stamp2 { opacity: 1; color: var(--ok); }
+.scard[data-hint="top"] .stamp2, .scard.out.top .stamp2 { opacity: 1; color: var(--sign); }
+.scard.out.forse .stamp2 { opacity: 1; color: var(--warn); }
+.scard[data-hint="no"] .stamp2::before { content: "No"; } .scard[data-hint="buono"] .stamp2::before { content: "Buono"; } .scard[data-hint="top"] .stamp2::before { content: "Top"; }
+.scard.out { opacity: 0; } .scard.out.no { transform: translateX(-120%) rotate(-14deg); } .scard.out.buono { transform: translateX(120%) rotate(14deg); } .scard.out.top { transform: translateY(-120%); } .scard.out.forse { transform: translateY(40px) scale(.94); }
+.scard.done { place-content: center; text-align: center; cursor: default; justify-items: center; }
+.srate { display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; }
+.srate button { all: unset; display: grid; justify-items: center; gap: .2rem; padding: .7rem .3rem; border-radius: 8px; background: var(--n1); border: 1px solid var(--line2); font-size: .8rem; font-weight: 600; color: var(--ash); cursor: pointer; }
+.srate button i { font-style: normal; font-size: 1.4rem; line-height: 1; }
+.srate .no i { color: var(--red); } .srate .forse i { color: var(--warn); } .srate .buono i { color: var(--ok); } .srate .top i { color: var(--sign); }
+.smi .keys { text-align: center; }
+/* marketing */
+.mk { display: grid; gap: 1.6rem; }
+.cal { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: .5rem; }
+.cd { display: grid; gap: .4rem; align-content: start; min-height: 150px; padding: .5rem; border-radius: 6px; background: var(--n1); border: 1px solid var(--line); }
+.cdh { margin: 0 0 .2rem; font: 700 .74rem/1 var(--f-ui); letter-spacing: .08em; text-transform: uppercase; color: var(--ash); }
+.pc { all: unset; box-sizing: border-box; display: grid; gap: .3rem; justify-items: start; padding: .55rem; border-radius: 5px; background: var(--n2); border: 1px solid transparent; cursor: pointer; }
+.pc:hover { border-color: var(--line2); } .pc.on { border-color: var(--sign); }
+.pc b { font-size: .8rem; font-weight: 600; line-height: 1.25; }
+.pc small { font-size: .7rem; color: var(--ash); }
+.ps { font-size: .62rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--dim); }
+.ps.s1 { color: var(--warn); } .ps.s2 { color: #9cc8f2; } .ps.s3 { color: var(--ok); }
+.ideas { margin-top: 1rem; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .6rem; }
+.ideas .gl { grid-column: 1 / -1; margin: 0; padding: 0; }
+.idea { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: .7rem; align-items: center; padding: .7rem .8rem; border-radius: 6px; border: 1px dashed var(--line2); }
+.idea b { display: block; font-size: .86rem; font-weight: 600; } .idea small { color: var(--ash); font-size: .74rem; }
+.split2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 380px); gap: 1.6rem; align-items: start; }
+.phone { width: 270px; border-radius: 26px; padding: .7rem .6rem 1rem; background: #000; border: 1px solid #2a2a2a; box-shadow: 0 20px 40px rgba(0, 0, 0, .5); }
+.pht { display: flex; align-items: center; gap: .45rem; padding: .2rem .3rem .6rem; font-size: .74rem; }
+.pav { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--sign); color: var(--night); font: 900 .9rem/1 var(--f-sign); }
+.dim { color: var(--dim); }
+.pht .dim { margin-left: auto; }
+.phm { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 4px; background: var(--n2); display: grid; place-items: center; }
+.phm.tall { aspect-ratio: 9 / 16; }
+.phm img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.phm .empty { padding: 0; font-size: .8rem; }
+.phm .play { position: absolute; font-size: 2rem; color: rgba(255, 255, 255, .85); }
+.phc { margin: .6rem .3rem 0; font-size: .74rem; line-height: 1.4; color: #ddd; }
+/* advertising */
+.ads { display: grid; gap: 1.2rem; }
+.adtop { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.live { display: inline-flex; align-items: center; gap: .5rem; font-size: .8rem; font-weight: 600; color: var(--ok); }
+.live i { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); animation: pulse 1.6s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: .3; } }
+.kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+.kpi { display: grid; gap: .25rem; padding: 1.1rem 1.2rem; border-radius: 6px; background: var(--n1); border: 1px solid var(--line); }
+.kpi .k { font: 600 .7rem/1.2 var(--f-ui); letter-spacing: .12em; text-transform: uppercase; color: var(--ash); }
+.kpi .v { font: 900 2.8rem/1 var(--f-sign); } .kpi .v.y, .tile .v.y { color: var(--sign); }
+.kpi .s { font-size: .8rem; color: var(--ash); } .kpi .up { color: var(--ok); }
+.adgrid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 1.2rem; }
+.feed { display: grid; }
+.fr { display: grid; grid-template-columns: 52px minmax(0, 1fr) auto auto; gap: .8rem; align-items: center; padding: .7rem 0; border-top: 1px solid var(--line); font-size: .9rem; }
+.fr:first-child { border-top: 0; }
+.fr time { font-variant-numeric: tabular-nums; color: var(--ash); }
+.fr b { font-weight: 600; }
+.src { padding: .22rem .5rem; border-radius: 3px; font: 700 .64rem/1 var(--f-ui); letter-spacing: .08em; text-transform: uppercase; background: var(--n3); color: var(--ash); }
+.src.m { background: rgba(252, 198, 80, .15); color: var(--sign); } .src.g { background: rgba(156, 200, 242, .14); color: #9cc8f2; }
+.fr.new { animation: arriva .6s cubic-bezier(.2, .8, .2, 1); }
+.fr .nw { font-size: .66rem; font-weight: 700; color: var(--night); background: var(--ok); padding: .2rem .4rem; border-radius: 3px; }
+@keyframes arriva { from { opacity: 0; transform: translateY(-10px); background: rgba(143, 197, 138, .12); } }
+.bars { display: grid; grid-template-columns: repeat(7, 1fr); gap: .6rem; align-items: end; height: 190px; padding-top: .6rem; }
+.bc { display: grid; grid-template-rows: 1fr auto; height: 100%; justify-items: center; gap: .4rem; }
+.bb { position: relative; align-self: end; width: 100%; max-width: 34px; border-radius: 3px 3px 0 0; background: var(--n3); display: flex; align-items: flex-end; }
+.bb i { display: block; width: 100%; max-height: 100%; border-radius: 3px 3px 0 0; background: var(--sign); }
+.bc small { font-size: .72rem; color: var(--dim); }
+.lg { display: inline-block; width: 9px; height: 9px; border-radius: 2px; vertical-align: -1px; margin-left: .4rem; } .lg.sp { background: var(--n3); } .lg.bk { background: var(--sign); }
+.tip { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 1rem; align-items: center; padding: 1rem 1.2rem; border-radius: 6px; background: linear-gradient(90deg, rgba(252, 198, 80, .12), rgba(252, 198, 80, .03)); border: 1px solid rgba(252, 198, 80, .3); }
+.tip .ti { font: 800 1rem/1 var(--f-sign); text-transform: uppercase; color: var(--sign); }
+.tip p { margin: 0; font-size: .92rem; }
+.tip.done { opacity: .5; }
+.camps { display: grid; }
+.cr { display: grid; grid-template-columns: minmax(0, 2.2fr) 1fr .8fr .9fr 1fr 90px; gap: 1rem; align-items: center; padding: .8rem 0; border-top: 1px solid var(--line); font-size: .9rem; font-variant-numeric: tabular-nums; }
+.cr.chd { border-top: 0; padding-top: 0; font-size: .7rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); }
+.cr.off > span:not(.cn) { opacity: .4; }
+.cn { display: flex; align-items: center; gap: .8rem; min-width: 0; }
+.cn b { display: block; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cn .src { display: inline-block; margin-top: .25rem; }
+.cb input { width: 64px; padding: .4rem .5rem; border: 1px solid var(--line2); border-radius: 4px; background: var(--night); }
+.sw0 input { appearance: none; width: 36px; height: 20px; border-radius: 10px; background: var(--n3); position: relative; cursor: pointer; margin: 0; transition: background .2s; flex: none; }
+.sw0 input::after { content: ""; position: absolute; left: 3px; top: 3px; width: 14px; height: 14px; border-radius: 50%; background: var(--ash); transition: transform .2s, background .2s; }
+.sw0 input:checked { background: var(--ok); } .sw0 input:checked::after { transform: translateX(16px); background: var(--night); }
+.spk { width: 70px; height: 22px; } .spk polyline { fill: none; stroke: var(--sign); stroke-width: 1.6; vector-effect: non-scaling-stroke; }
+/* menu Altro su telefono */
+.sheet { position: fixed; inset: 0; z-index: 40; display: none; align-items: end; background: rgba(6, 5, 4, .7); }
+.sheet.on { display: flex; }
+.sheet .sp { width: 100%; padding: .7rem 1rem calc(1.2rem + env(safe-area-inset-bottom, 0px)); border-radius: 16px 16px 0 0; background: var(--n1); border-top: 1px solid var(--line2); animation: su .3s cubic-bezier(.2, .8, .2, 1); }
+.sheet .grab { display: block; width: 40px; height: 4px; margin: 0 auto .9rem; border-radius: 2px; background: var(--line2); }
+@keyframes su { from { transform: translateY(40px); opacity: 0; } }
+@media (max-width: 1280px) {
+  .mgrid { grid-template-columns: 1fr; }
+  .mgrid .mcol:last-child { order: -1; }
+  .pdf { position: static; }
+  .split2 { grid-template-columns: 1fr; }
+  .ideas { grid-template-columns: 1fr; }
+  .cal { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 860px) {
+  .tabs { grid-template-columns: repeat(5, 1fr); }
+  .inbox { grid-template-columns: 1fr; }
+  .inbox.open .clist { display: none; }
+  .inbox:not(.open) .mail { display: none; }
+  .rate button { padding: .7rem .2rem; flex-direction: column; gap: .15rem; font-size: .78rem; }
+  .rate button kbd { display: none; }
+  .pview { height: 70svh; padding: .7rem; }
+  .keys { display: none; }
+  .smi .keys { display: block; }
+  .kpis { grid-template-columns: 1fr 1fr; gap: .7rem; }
+  .kpi .v { font-size: 2.2rem; }
+  .adgrid { grid-template-columns: 1fr; }
+  .tip { grid-template-columns: 1fr; }
+  .cr.chd { display: none; }
+  .cr { grid-template-columns: 1fr 1fr 1fr; gap: .5rem .8rem; padding: 1rem 0; }
+  .cr .cn { grid-column: 1 / -1; }
+  .cr > span[data-l]::before { content: attr(data-l); display: block; font-size: .66rem; letter-spacing: .08em; text-transform: uppercase; color: var(--dim); }
+  .cr > span:last-child { display: none; }
+  .cal { grid-template-columns: 1fr; }
+  .cd { min-height: 0; grid-template-columns: 1fr; }
+  .cd:not(:has(.pc)) { display: none; }
+  .mk.open .mkl { display: none; }
+  .mk:not(.open) .split2 { display: none; }
+  .split2 .prev { position: static; }
+  .phone { width: 240px; margin: 0 auto; }
+  .kp2 .v { font-size: 2rem; }
+  .dv { min-height: 420px; }
+  .tile .th2 { flex-wrap: wrap; }
+}
+.scard.done { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .8rem; }
+.scard.done h3 { font-size: 3rem; }
 </style>
 </head>
 <body>
@@ -309,6 +525,8 @@ main { min-width: 0; display: flex; flex-direction: column; }
     <div class="view" id="view"></div>
   </main>
   <nav class="tabs" id="tabs"></nav>
+  <div class="sheet" id="sheet"><div class="sp"><span class="grab"></span><div class="sl nav"></div></div></div>
+  <div class="smi" id="smi" role="dialog" aria-label="Smista le candidature"></div>
 </div>
 <div class="toast" id="toast" role="status"></div>
 
@@ -374,15 +592,35 @@ const KITCHEN = [{"id": "anti", "titolo": "Antipasti", "frase": "Fassona al colt
     drinks: clone(CMS.drinks), kitchen: clone(KITCHEN), reviews: clone(CMS.reviews),
     scores: { trip: "4,7", tripN: "307", google: "4,4", googleN: "292" },
     apps: [
-      { id: 1, name: "Giulia Ferri", role: "Bancone", when: "Oggi, 11:42", email: "giulia.ferri@example.com", tel: "333 120 4471", disp: "Sere e weekend, da subito", msg: "Lavoro da tre anni in un cocktail bar a Ostiense, sono abituata ai sabati pieni. Mi piacerebbe crescere sulla parte di miscelazione.", cv: "CV_Giulia_Ferri.pdf", size: "212 KB", status: "Nuova", replies: [], notes: "" },
-      { id: 2, name: "Marco De Santis", role: "Cucina", when: "Ieri, 19:05", email: "marco.ds@example.com", tel: "349 880 1123", disp: "Dal mese prossimo", msg: "Aiuto cuoco, esperienza con impasti a lunga lievitazione. Cerco un posto dove fare sul serio.", cv: "Marco_DeSantis_cv.pdf", size: "180 KB", status: "Nuova", replies: [], notes: "" },
-      { id: 3, name: "Sara Liguori", role: "Sala", when: "Lun 9 nov", email: "sara.liguori@example.com", tel: "", disp: "Weekend", msg: "Studio all'università, cerco qualcosa per il fine settimana. Ho fatto due stagioni in un lido a Fregene.", cv: "", size: "", status: "Nuova", replies: [], notes: "" },
-      { id: 4, name: "Luca Proietti", role: "Bancone", when: "Ven 6 nov", email: "luca.p@example.com", tel: "320 554 0098", disp: "Tutte le sere", msg: "Barback da un anno, voglio passare dietro al bancone.", cv: "LucaProietti.pdf", size: "96 KB", status: "Colloquio", replies: [{ when: "Sab 7 nov", text: "Ciao Luca, grazie. Passi martedì alle 17 per due chiacchiere? Alberto" }], notes: "Simpatico al telefono. Martedì 17:00." },
-      { id: 5, name: "Elena Russo", role: "Altro", when: "Mar 3 nov", email: "elena.russo@example.com", tel: "", disp: "Da gennaio", msg: "Grafica e social, se vi serve una mano con le locandine.", cv: "portfolio_elena.pdf", size: "2,1 MB", status: "Archiviata", replies: [], notes: "" }
+      { id: 1, voto: 0, exp: [["2022 · oggi", "Barista, Mezcaleria Ostiense, Roma"], ["2020 · 2022", "Barback, Hotel Locarno, Roma"]], name: "Giulia Ferri", role: "Bancone", when: "Oggi, 11:42", email: "giulia.ferri@example.com", tel: "333 120 4471", disp: "Sere e weekend, da subito", msg: "Lavoro da tre anni in un cocktail bar a Ostiense, sono abituata ai sabati pieni. Mi piacerebbe crescere sulla parte di miscelazione.", cv: "CV_Giulia_Ferri.pdf", size: "212 KB", status: "Nuova", replies: [], notes: "" },
+      { id: 2, voto: 0, exp: [["2021 · oggi", "Aiuto cuoco, Pinseria Romana, Monteverde"], ["2019 · 2021", "Commis, Trattoria Da Enzo"]], name: "Marco De Santis", role: "Cucina", when: "Ieri, 19:05", email: "marco.ds@example.com", tel: "349 880 1123", disp: "Dal mese prossimo", msg: "Aiuto cuoco, esperienza con impasti a lunga lievitazione. Cerco un posto dove fare sul serio.", cv: "Marco_DeSantis_cv.pdf", size: "180 KB", status: "Nuova", replies: [], notes: "" },
+      { id: 3, voto: 0, exp: [], name: "Sara Liguori", role: "Sala", when: "Lun 9 nov", email: "sara.liguori@example.com", tel: "", disp: "Weekend", msg: "Studio all'università, cerco qualcosa per il fine settimana. Ho fatto due stagioni in un lido a Fregene.", cv: "", size: "", status: "Nuova", replies: [], notes: "" },
+      { id: 4, voto: 3, exp: [["2023 · oggi", "Barback, Drink Kong, Roma"]], name: "Luca Proietti", role: "Bancone", when: "Ven 6 nov", email: "luca.p@example.com", tel: "320 554 0098", disp: "Tutte le sere", msg: "Barback da un anno, voglio passare dietro al bancone.", cv: "LucaProietti.pdf", size: "96 KB", status: "Colloquio", replies: [{ when: "Sab 7 nov", text: "Ciao Luca, grazie. Passi martedì alle 17 per due chiacchiere? Alberto" }], notes: "Simpatico al telefono. Martedì 17:00." },
+      { id: 5, voto: 1, exp: [["2021 · oggi", "Grafica freelance"]], name: "Elena Russo", role: "Altro", when: "Mar 3 nov", email: "elena.russo@example.com", tel: "", disp: "Da gennaio", msg: "Grafica e social, se vi serve una mano con le locandine.", cv: "portfolio_elena.pdf", size: "2,1 MB", status: "Archiviata", replies: [], notes: "" }
     ],
     log: [["Ieri", "Aggiunta la serata «Sunside Trio» di aprile"], ["Lun", "Cambiata la foto dei taglieri"], ["5 nov", "Drink list d'autunno: 16 cocktail"]]
   };
   let dirty = 0;
+  /* dati di prova per Marketing e Advertising */
+  const ADS = {
+    today: { book: 38, cpb: "4,10", roas: "6,4", spend: 156, prev: "11,20" },
+    days: [[12, 64], [15, 78], [11, 52], [19, 81], [24, 96], [38, 156], [9, 40]],
+    feed: [["21:30", "Tavolo per 3", "Diretta", ""], ["20:00", "Tavolo per 2 · bancone", "Google", "g"], ["19:30", "Tavolo per 4", "Reel su Meta", "m"], ["19:10", "Tavolo per 6", "Reel su Meta", "m"], ["18:40", "Tavolo per 2", "Storia su Meta", "m"]],
+    camps: [
+      { n: "Reel · Aperiblend 18-20", ch: "Meta", on: true, bud: 15, spend: 61, book: 22, trend: [3, 4, 3, 5, 6, 8, 9] },
+      { n: "Ricerca · cocktail bar Roma sud", ch: "Google", on: true, bud: 12, spend: 54, book: 9, trend: [2, 2, 1, 2, 2, 2, 3] },
+      { n: "Storie · Blend in Jazz mercoledì", ch: "Meta", on: true, bud: 8, spend: 31, book: 7, trend: [0, 1, 1, 1, 2, 3, 4] },
+      { n: "Ricerca · pinsa Mezzocammino", ch: "Google", on: false, bud: 6, spend: 10, book: 0, trend: [1, 0, 0, 1, 0, 0, 0] }
+    ]
+  };
+  const MK = { posts: [
+    { day: "Lun 16", d: 0, time: "18:00", type: "Reel", ch: "Instagram", title: "Il primo giro: Aperiblend in 15 secondi", st: "Pubblicato", link: "Aperiblend", cap: "Tutti i giorni dalle 18 alle 20. Il primo giro, prima che si riempia." },
+    { day: "Mar 17", d: 1, time: "12:30", type: "Post", ch: "Instagram", title: "Smokey Joe, il fascicolo n° 01", st: "Programmato", link: "Drink · Smokey Joe", cap: "Joe non parla molto. Rye whiskey, fumo e pessime decisioni prese con calma." },
+    { day: "Mar 17", d: 1, time: "19:00", type: "Storia", ch: "Instagram", title: "Sondaggio: pinsa o tagliere?", st: "Programmato", link: "Cucina", cap: "Stasera cosa dividiamo?" },
+    { day: "Mer 18", d: 2, time: "18:00", type: "Reel", ch: "Instagram", title: "Blend in Jazz: il backstage", st: "In lavorazione", link: "Serata · Blend in Jazz", cap: "Mercoledì il meglio del jazz romano, a due passi dal bancone. Primo set alle 20:30." },
+    { day: "Ven 20", d: 4, time: "17:30", type: "Post", ch: "Facebook", title: "Weekend: tavoli vicino ai musicisti", st: "Idea", link: "Prenotazioni", cap: "" },
+    { day: "Sab 21", d: 5, time: "21:00", type: "Storia", ch: "Instagram", title: "Diretta dal bancone", st: "Idea", link: "", cap: "" }
+  ] };
 
   /* ---------- limiti: misurati sui foglietti del sito, carta per carta ---------- */
   const LIM = {
@@ -406,21 +644,27 @@ const KITCHEN = [{"id": "anti", "titolo": "Antipasti", "frase": "Fassona al colt
   const I = {
     home: '<path d="M4 11 12 4l8 7v9h-5v-6H9v6H4z"/>', serate: '<rect x="5" y="3" width="14" height="18" rx="1"/><path d="M8 8h8M8 12h8M8 16h5"/>',
     drink: '<path d="M5 4h14l-7 8zM12 12v8M8 20h8"/>', cucina: '<path d="M7 3v8a3 3 0 0 0 6 0V3M10 3v18M17 21V3c2 2 3 5 3 8h-3"/>',
-    rec: '<path d="M4 5h16v11H9l-5 4z"/>', cand: '<path d="M3 6h18v12H3zM3 7l9 6 9-6"/>', more: '<circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/>'
+    rec: '<path d="M4 5h16v11H9l-5 4z"/>', cand: '<path d="M3 6h18v12H3zM3 7l9 6 9-6"/>',
+    mkt: '<path d="M4 10v4h3l6 4V6L7 10zM16 9c1.5 1 1.5 5 0 6M18.5 7c3 2.5 3 7.5 0 10"/>', ads: '<path d="M4 20V10M10 20V4M16 20v-7M21 20H3"/>', more: '<circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/>'
   };
   const SECT = [
     ["panoramica", "Panoramica", I.home, "Come va il sito, cosa c'è da fare"], ["serate", "Serate", I.serate, "Locandine e date: compaiono nella pila e nel biglietto dell'apertura"],
     ["drink", "Drink list", I.drink, "I fascicoli della carta: ordine, testi, profilo di gusto"], ["cucina", "Cucina", I.cucina, "Le cinque portate: foto, frase e appunto"],
-    ["recensioni", "Recensioni", I.rec, "Le prove sulla bacheca e i voti"], ["candidature", "Candidature", I.cand, "Chi vuole lavorare al Blend"]
+    ["recensioni", "Recensioni", I.rec, "Le prove sulla bacheca e i voti"], ["candidature", "Candidature", I.cand, "Chi vuole lavorare al Blend"],
+    ["marketing", "Marketing", I.mkt, "Post, reel e storie: cosa esce e quando"], ["advertising", "Advertising", I.ads, "La pubblicità che riempie i tavoli, e quanto costa ogni prenotazione"]
   ];
+  const GROUPS = [[null, ["panoramica"]], ["Il sito", ["serate", "drink", "cucina", "recensioni"]], ["Persone", ["candidature"]], ["Crescita", ["marketing", "advertising"]]];
   const newApps = () => D.apps.filter((a) => a.status === "Nuova").length;
   function drawNav() {
-    const cur = route().s, bd = newApps();
-    $("#nav").innerHTML = SECT.map(([id, t, ic], k) => `${k === 5 ? '<span class="sep"></span>' : ""}<button type="button" data-go="${id}" ${cur === id ? 'aria-current="page"' : ""}><svg viewBox="0 0 24 24">${ic}</svg>${t}${id === "candidature" && bd ? `<span class="bd">${bd}</span>` : ""}</button>`).join("");
-    const tabs = [["panoramica", "Home", I.home], ["serate", "Serate", I.serate], ["drink", "Drink", I.drink], ["cucina", "Cucina", I.cucina], ["candidature", "Candidati", I.cand]];
-    const tc = cur === "recensioni" ? "panoramica" : cur;
-    $("#tabs").innerHTML = tabs.map(([id, t, ic]) => `<button type="button" data-go="${id}" ${tc === id ? 'aria-current="page"' : ""}><svg viewBox="0 0 24 24">${ic}</svg>${t}${id === "candidature" && bd ? `<span class="bd">${bd}</span>` : ""}</button>`).join("");
+    const cur = route().s, bd = newApps(), S = (id) => SECT.find((x) => x[0] === id);
+    const btn = (id) => { const [, t, ic] = S(id); return `<button type="button" data-go="${id}" ${cur === id ? 'aria-current="page"' : ""}><svg viewBox="0 0 24 24">${ic}</svg>${t}${id === "candidature" && bd ? `<span class="bd">${bd}</span>` : ""}</button>`; };
+    $("#nav").innerHTML = GROUPS.map(([g, ids]) => `<div class="grp">${g ? `<p class="gl">${g}</p>` : ""}${ids.map(btn).join("")}</div>`).join("");
+    const tabs = [["panoramica", "Home", I.home], ["serate", "Serate", I.serate], ["drink", "Drink", I.drink], ["candidature", "Candidati", I.cand]];
+    const inTabs = tabs.some((t) => t[0] === cur);
+    $("#tabs").innerHTML = tabs.map(([id, t, ic]) => `<button type="button" data-go="${id}" ${cur === id ? 'aria-current="page"' : ""}><svg viewBox="0 0 24 24">${ic}</svg>${t}${id === "candidature" && bd ? `<span class="bd">${bd}</span>` : ""}</button>`).join("") + `<button type="button" id="more" ${!inTabs ? 'aria-current="page"' : ""}><svg viewBox="0 0 24 24">${I.more}</svg>Altro</button>`;
+    $("#sheet .sl").innerHTML = GROUPS.map(([g, ids]) => `<div class="grp">${g ? `<p class="gl">${g}</p>` : ""}${ids.map(btn).join("")}</div>`).join("");
   }
+  document.addEventListener("click", (e) => { if (e.target.closest("#more")) { $("#sheet").classList.add("on"); } else if (e.target.closest("#sheet [data-go]") || e.target === $("#sheet")) $("#sheet").classList.remove("on"); });
   document.addEventListener("click", (e) => { const b = e.target.closest("[data-go]"); if (b) { location.hash = b.dataset.go; } });
   const route = () => { const [s, i] = location.hash.slice(1).split("/"); return { s: SECT.some((x) => x[0] === s) ? s : "panoramica", i: i === undefined ? null : +i }; };
   $("#back").addEventListener("click", () => { location.hash = route().s; });
@@ -452,7 +696,7 @@ const KITCHEN = [{"id": "anti", "titolo": "Antipasti", "frase": "Fassona al colt
   }
   function wire(root, onChange) {
     $$(".f", root).forEach((f) => { if (f.dataset.max) check(f); });
-    root.addEventListener("input", (e) => { const f = e.target.closest(".f"); if (f && f.dataset.max) check(f); onChange(e); setDirty(dirty ? 0 : 1); });
+    root.addEventListener("input", (e) => { const f = e.target.closest(".f"); if (f && f.dataset.max) check(f); onChange(e); setDirty(dirty ? 0 : 1); $$(".saved").forEach((x) => (x.textContent = "Bozza salvata · adesso")); });
   }
   /* foto: carica (in memoria), punto di fuoco con un tocco */
   function drop(src, focus, label, wide) {
@@ -497,19 +741,21 @@ const KITCHEN = [{"id": "anti", "titolo": "Antipasti", "frase": "Fassona al colt
     head("panoramica", null);
     const n = D.shows[0], bd = newApps();
     return `<div class="dash">
-      <div class="tile w6"><span class="k">Prossima serata</span><div class="nextev"><img src="${esc(n.img)}" alt=""><div><span class="s">${esc(n.tag)}</span><h3>${esc(n.title)}</h3><span class="s">${esc(n.lines[0])}</span><div class="quick" style="margin-top:.9rem"><button class="btn sm cut" data-go="serate/0">Modifica</button><button class="btn ghost sm cut" data-go="serate/new">Nuova serata</button></div></div></div></div>
+      <div class="tile w6"><div class="th2"><span class="k">Prossima serata</span><button class="mini" data-go="serate/new">+ Aggiungi una serata</button></div><div class="nextev"><img src="${esc(n.img)}" alt=""><div><span class="s">${esc(n.tag)}</span><h3>${esc(n.title)}</h3><span class="s">${esc(n.lines[0])} · ${esc(n.time)}</span><div style="margin-top:1rem"><button class="btn sm cut" data-go="serate/0">Modifica la serata</button></div></div></div></div>
       <div class="tile half" style="grid-column:span 3"><span class="k">Candidature nuove</span><span class="v ${bd ? "y" : ""}">${bd}</span><span class="s">${bd ? "da leggere" : "tutto letto"}</span><button class="mini" data-go="candidature">Leggile →</button></div>
       <div class="tile half" style="grid-column:span 3"><span class="k">In programma</span><span class="v">${D.shows.filter((x) => x.on).length}</span><span class="s">serate nella pila</span><button class="mini" data-go="serate">Vedi →</button></div>
       <div class="tile w4 half"><span class="k">Drink in carta</span><span class="v">${D.drinks.length}</span><span class="s">cambia ogni sei mesi</span><button class="mini" data-go="drink">Apri la carta →</button></div>
       <div class="tile w4 half"><span class="k">Voti</span><span class="v">${esc(D.scores.trip)}</span><span class="s">Tripadvisor · Google ${esc(D.scores.google)}</span><button class="mini" data-go="recensioni">Recensioni →</button></div>
       <div class="tile w4"><span class="k">Il sito</span><span class="v" style="font-size:1.6rem;margin:.3rem 0">Online</span><span class="s">Ultima pubblicazione ieri alle 18:40</span><a class="mini" href="index.html" target="_blank" rel="noopener">Apri il sito ↗</a></div>
+      <div class="tile w6"><div class="th2"><span class="k">Stasera dalla pubblicità</span><button class="mini" data-go="advertising">Advertising →</button></div><div class="kp2"><div><span class="v y">${ADS.today.book}</span><span class="s">prenotazioni</span></div><div><span class="v">€${ADS.today.cpb}</span><span class="s">l'una</span></div><div><span class="v">${ADS.today.roas}×</span><span class="s">ritorno</span></div></div></div>
+      <div class="tile w6"><div class="th2"><span class="k">Prossimo contenuto</span><button class="mini" data-go="marketing">Marketing →</button></div>${(() => { const m = MK.posts.find((x) => x.st !== "Pubblicato"); return `<div class="nxp"><span class="ty ${m.type.toLowerCase()}">${m.type}</span><b>${esc(m.title)}</b><span class="s">${m.day} · ${m.time} · ${m.ch}</span></div>`; })()}</div>
       <div class="tile w12"><span class="k">Ultime modifiche</span><div class="log">${D.log.map(([t, x]) => `<div><time>${t}</time><span>${esc(x)}</span></div>`).join("")}</div></div>
     </div>`;
   };
 
   /* serate */
   function svPreview(x) {
-    return `<div class="sv"><div class="pos">${x.img ? `<img src="${esc(x.img)}" alt="">` : '<span class="empty">Carica la locandina</span>'}<img class="tp" src="img/vera/nastro-${esc(x.tape || "04")}.webp" alt=""></div>
+    return `<div class="sv"><div class="pos">${x.img ? `<img src="${esc(x.img)}" alt="">` : '<span class="empty">Carica la locandina</span>'}</div>
       <div class="slip"><span class="tg">${esc(x.tag)}</span><h3>${esc(x.title)}</h3>${x.lines.filter(Boolean).map((l) => `<p>${esc(l)}</p>`).join("")}<p class="tm">${esc(x.time)}</p><div class="go"><span class="stp">PRENOTA</span><span class="nx">la prossima →</span></div></div></div>`;
   }
   V.serate = (i) => {
@@ -527,7 +773,7 @@ const KITCHEN = [{"id": "anti", "titolo": "Antipasti", "frase": "Fassona al colt
       <div class="card"><h2>Dove compare</h2><div style="display:grid;gap:.6rem">
         <label class="sw"><span><b>Online</b><small>Se spento resta in bozza e non si vede sul sito.</small></span><input type="checkbox" data-sw="on" ${x.on ? "checked" : ""}></label>
         <label class="sw"><span><b>Biglietto dell'apertura</b><small>Il biglietto «Prossima serata» nella prima schermata. Una serata sola alla volta.</small></span><input type="checkbox" data-sw="hero" ${x.hero ? "checked" : ""}></label></div></div>
-      <div class="foot"><button class="danger" type="button" data-del>Elimina la serata</button><button class="btn cut" type="button" data-save>Salva</button></div>
+      <div class="foot"><button class="danger" type="button" data-del>Elimina la serata</button><span class="saved" aria-live="polite">Le modifiche restano in bozza finché non premi Pubblica</span></div>
     </div>`;
     const prev = `<div class="prev"><div class="ph"><span>Anteprima</span><a href="index.html#serate" target="_blank" rel="noopener">Sul sito ↗</a></div><div class="stage" id="stage">${svPreview(x)}</div>${x.hero ? '<div class="ticket">🎟 <span>Anche nel <b>biglietto dell\'apertura</b></span></div>' : ""}</div>`;
     return { html: `<div class="split ${i !== null ? "open" : ""}">${list}${form}${prev}</div>`, after: (root) => {
@@ -537,11 +783,13 @@ const KITCHEN = [{"id": "anti", "titolo": "Antipasti", "frase": "Fassona al colt
       wireDrop(root, (src) => { x.img = src; draw(); }, () => {});
       $$("[data-sw]", root).forEach((c) => c.addEventListener("change", () => { if (c.dataset.sw === "hero" && c.checked) D.shows.forEach((s) => (s.hero = false)); x[c.dataset.sw] = c.checked; setDirty(1); render(); }));
       $("[data-del]", root).addEventListener("click", () => { if (confirm("Eliminare questa serata?")) { D.shows.splice(sel, 1); setDirty(1); location.hash = "serate"; } });
-      $("[data-save]", root).addEventListener("click", () => toast("Salvato in bozza. Premi Pubblica per mandarlo online."));
+      $("[data-save]", root)?.addEventListener("click", () => toast("Salvato in bozza. Premi Pubblica per mandarlo online."));
     } };
   };
 
   /* drink */
+  const dfoto = (d) => d.foto || CMS.characters[d.c] || "";
+  function dvPreview(d, pos) { return `<div class="dv"><div class="dph">${dfoto(d) ? `<img src="${esc(dfoto(d))}" alt="" style="object-position:${esc(d.fuoco || "50% 50%")}">` : ""}</div>${fvPreview(d, pos)}</div>`; }
   function fvPreview(d, pos) {
     const sl = SLOT[pos % 4], p = d.p || [2, 2, 2, 2, 2], v = [(p[2] - p[0] + 5) / 10, p[3] / 5, p[4] / 5].map((x) => Math.round(6 + x * 88));
     const rows = [["dolce", "amaro"], ["leggero", "forte"], ["pulito", "speziato"]];
@@ -552,25 +800,27 @@ const KITCHEN = [{"id": "anti", "titolo": "Antipasti", "frase": "Fassona al colt
     head("drink", i);
     if (i === "new" || Number.isNaN(i)) { D.drinks.push({ n: "Nuovo drink", p: [2, 2, 2, 2, 2], base: "Gin", c: CH[0], q: "", ing: [""] }); setDirty(1); history.replaceState(null, "", "#drink/" + (D.drinks.length - 1)); i = D.drinks.length - 1; head("drink", i); }
     const sel = i ?? 0, d = D.drinks[sel];
-    const list = `<div class="list" id="dl"><div class="lhead"><span>${D.drinks.length} drink · trascina per riordinare</span></div>${D.drinks.map((x, k) => `<div class="item" role="button" tabindex="0" draggable="true" data-k="${k}" data-go="drink/${k}" ${k === sel ? 'aria-current="true"' : ""}><span class="num">${k + 1}</span><span><b>${esc(x.n)}</b><small>${esc(x.base)} · carta ${SLOT[k % 4].n.toLowerCase()}</small></span><span class="grip" aria-hidden="true">⋮⋮</span></div>`).join("")}<button class="add" type="button" data-go="drink/new">+ Nuovo drink</button></div>`;
+    const list = `<div class="list" id="dl"><div class="lhead"><span>${D.drinks.length} drink · trascina per riordinare</span></div>${D.drinks.map((x, k) => `<div class="item" role="button" tabindex="0" draggable="true" data-k="${k}" data-go="drink/${k}" ${k === sel ? 'aria-current="true"' : ""}><span class="dth"><img src="${esc(dfoto(x))}" alt=""><i>${k + 1}</i></span><span><b>${esc(x.n)}</b><small>${esc(x.base)} · carta ${SLOT[k % 4].n.toLowerCase()}</small></span><span class="grip" aria-hidden="true">⋮⋮</span></div>`).join("")}<button class="add" type="button" data-go="drink/new">+ Nuovo drink</button></div>`;
     const sl = (k, a, b) => { const p = d.p, val = k === 0 ? p[2] - p[0] : k === 1 ? p[3] : p[4]; return `<div class="tr"><span>${a}</span><input type="range" min="${k === 0 ? -5 : 0}" max="5" step="1" value="${val}" data-t="${k}" aria-label="${a} ${b}"><span>${b}</span></div>`; };
     const form = `<div class="form" id="form">
       <div class="note"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg><span>Le carte restano al loro posto: il drink n° ${sel + 1} usa sempre la carta <b>${SLOT[sel % 4].n.toLowerCase()}</b>. Se sposti un drink prende la carta della nuova posizione, così due carte uguali non sono mai vicine.</span></div>
       <div class="card"><h2>Il drink</h2><div class="row">${field("Nome", d.n, LIM.dn, { k: "n" })}${field("Base", d.base, LIM.base, { k: "base", ph: "Gin, Rum, Senza alcol" })}</div>
         <div class="f" style="margin-top:1.1rem"><div class="lb"><span>Carattere</span></div><div class="chips" id="chars">${CH.map((c) => `<button type="button" aria-pressed="${c === d.c}">${esc(c)}</button>`).join("")}</div><span class="hint">Decide il timbro sul fascicolo e la foto del bicchiere.</span></div>
         <div style="margin-top:1.1rem">${field("Descrizione", d.q, LIM.q, { k: "q", area: true, rows: 3 })}</div></div>
+      <div class="card"><h2>Foto del bicchiere <small>${d.foto ? "Foto sua" : "Per ora usa la foto del carattere «" + esc(d.c) + "»"}</small></h2>${drop(dfoto(d), d.fuoco, d.foto ? "Foto caricata" : "Carica la foto di questo drink", false)}</div>
       <div class="card"><h2>Profilo di gusto <small>Le X sul fascicolo</small></h2><div class="taste">${sl(0, "Dolce", "Amaro")}${sl(1, "Leggero", "Forte")}${sl(2, "Pulito", "Speziato")}</div></div>
       <div class="card"><h2>Ingredienti</h2>${lineList(d.ing, LIM.ing, 6, "ing", "Uno per riga")}</div>
-      <div class="foot"><button class="danger" type="button" data-del>Togli dalla carta</button><button class="btn cut" type="button" data-save>Salva</button></div>
+      <div class="foot"><button class="danger" type="button" data-del>Togli dalla carta</button><span class="saved" aria-live="polite">Le modifiche restano in bozza finché non premi Pubblica</span></div>
     </div>`;
-    const prev = `<div class="prev"><div class="ph"><span>Anteprima · fascicolo n° ${sel + 1}</span><a href="index.html#carta" target="_blank" rel="noopener">Sul sito ↗</a></div><div class="stage" id="stage">${fvPreview(d, sel)}</div></div>`;
+    const prev = `<div class="prev"><div class="ph"><span>Anteprima · fascicolo n° ${sel + 1}</span><a href="index.html#carta" target="_blank" rel="noopener">Sul sito ↗</a></div><div class="stage" id="stage">${dvPreview(d, sel)}</div></div>`;
     return { html: `<div class="split ${i !== null ? "open" : ""}">${list}${form}${prev}</div>`, after: (root) => {
-      const draw = () => { $("#stage").innerHTML = fvPreview(d, sel); };
+      const draw = () => { $("#stage").innerHTML = dvPreview(d, sel); };
+      wireDrop(root, (src) => { d.foto = src; d.fuoco = "50% 50%"; draw(); }, (f) => { d.fuoco = f; draw(); });
       wire($("#form"), (e) => { const k = e.target.dataset.k; if (k) d[k] = e.target.value; const t = e.target.dataset.t; if (t !== undefined) { const v = +e.target.value; if (t === "0") { d.p[0] = Math.max(0, -v); d.p[2] = Math.max(0, v); } else d.p[+t + 2] = v; } draw(); });
       wireLines($("#form"), () => d.ing, (k, v) => { d.ing = v; draw(); }, LIM.ing);
       $("#chars").addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; d.c = b.textContent; $$("#chars button").forEach((x) => x.setAttribute("aria-pressed", x === b)); setDirty(1); draw(); });
       $("[data-del]", root).addEventListener("click", () => { if (confirm("Togliere questo drink dalla carta?")) { D.drinks.splice(sel, 1); setDirty(1); location.hash = "drink"; } });
-      $("[data-save]", root).addEventListener("click", () => toast("Salvato in bozza. Premi Pubblica per mandarlo online."));
+      $("[data-save]", root)?.addEventListener("click", () => toast("Salvato in bozza. Premi Pubblica per mandarlo online."));
       /* riordino: trascina (desktop) */
       let from = null; const L = $("#dl");
       L.addEventListener("dragstart", (e) => { const it = e.target.closest(".item"); if (!it) return; from = +it.dataset.k; it.classList.add("drag"); e.dataTransfer.effectAllowed = "move"; });
@@ -595,7 +845,7 @@ const KITCHEN = [{"id": "anti", "titolo": "Antipasti", "frase": "Fassona al colt
       <div class="card"><h2>Accanto alla foto</h2>${field("Frase", k.frase, LIM.frase, { k: "frase", area: true, rows: 2 })}<div class="row" style="margin-top:1.1rem">${field("Da provare", k.prova, LIM.prova, { k: "prova" })}${field("Scritta sul nastro", k.nastro, LIM.nastro, { k: "nastro" })}</div></div>
       <div class="card"><h2>L'appunto <small>Si apre toccando il nastro</small></h2>${field("Intestazione", k.appunto, LIM.ap, { k: "appunto" })}<div style="margin-top:1.1rem">${lineList(k.testo, LIM.para, 4, "testo", "Righe dell'appunto")}</div>
         <div class="row" style="margin-top:1.1rem">${field("Nota a penna", k.mano, LIM.mano, { k: "mano", ph: "facoltativa" })}${field("Parola cerchiata", k.parola, LIM.parola, { k: "parola", ph: "facoltativa" })}</div></div>
-      <div class="foot"><span></span><button class="btn cut" type="button" data-save>Salva</button></div>
+      <div class="foot"><span></span><span class="saved" aria-live="polite">Le modifiche restano in bozza finché non premi Pubblica</span></div>
     </div>`;
     const prev = `<div class="prev"><div class="ph"><span>Anteprima</span><a href="index.html#cucina" target="_blank" rel="noopener">Sul sito ↗</a></div><div class="stage" id="stage" style="padding:1.2rem">${kvPreview(k)}</div></div>`;
     return { html: `<div class="split ${i !== null ? "open" : ""}">${list}${form}${prev}</div>`, after: (root) => {
@@ -603,7 +853,7 @@ const KITCHEN = [{"id": "anti", "titolo": "Antipasti", "frase": "Fassona al colt
       wire($("#form"), (e) => { const f = e.target.dataset.k; if (f) k[f] = e.target.value; draw(); });
       wireLines($("#form"), () => k.testo, (n, v) => { k.testo = v; draw(); }, LIM.para);
       wireDrop(root, (src) => { k.foto = src; k.fuoco = "50% 50%"; draw(); }, (f) => { k.fuoco = f; draw(); });
-      $("[data-save]", root).addEventListener("click", () => toast("Salvato in bozza. Premi Pubblica per mandarlo online."));
+      $("[data-save]", root)?.addEventListener("click", () => toast("Salvato in bozza. Premi Pubblica per mandarlo online."));
     } };
   };
 
@@ -619,46 +869,168 @@ const KITCHEN = [{"id": "anti", "titolo": "Antipasti", "frase": "Fassona al colt
         <div class="score"><div class="big">${esc(D.scores.google)}</div><div class="row" style="margin-top:.6rem"><div class="f"><label><span>Google</span></label><input type="text" value="${esc(D.scores.google)}" data-s="google"></div><div class="f"><label><span>Recensioni</span></label><input type="text" value="${esc(D.scores.googleN)}" data-s="googleN"></div></div></div></div></div>
       <div class="card"><h2>${RPROP[r.kind][0]} <small>Ogni prova ha il suo spazio: il ${RPROP[r.kind][0].toLowerCase()} regge al massimo ${LIM.rq[r.kind]} caratteri.</small></h2>${field("Frase della recensione", r.q, [8, LIM.rq[r.kind], "Copiala com'è, anche corta: corta si legge meglio."], { k: "q", area: true, rows: 2 })}
         <div class="row" style="margin-top:1.1rem">${field("Chi l'ha scritta", r.who, [2, 18, ""], { k: "who" })}${field("Dove", r.where, [2, 14, ""], { k: "where", ph: "Google" })}</div></div>
-      <div class="foot"><span></span><button class="btn cut" type="button" data-save>Salva</button></div></div>`;
+      <div class="foot"><span></span><span class="saved" aria-live="polite">Le modifiche restano in bozza finché non premi Pubblica</span></div></div>`;
     const prev = `<div class="prev"><div class="ph"><span>Anteprima</span><a href="index.html#resta" target="_blank" rel="noopener">Sul sito ↗</a></div><div class="stage" id="stage">${rvPreview(r)}</div></div>`;
     return { html: `<div class="split ${i !== null ? "open" : ""}">${list}${form}${prev}</div>`, after: (root) => {
       wire($("#form"), (e) => { const k = e.target.dataset.k; if (k) r[k] = e.target.value; const sk = e.target.dataset.s; if (sk) { D.scores[sk] = e.target.value; $$(".score .big", root)[sk.startsWith("trip") ? 0 : 1].textContent = sk.endsWith("N") ? $$(".score .big", root)[sk.startsWith("trip") ? 0 : 1].textContent : e.target.value; } $("#stage").innerHTML = rvPreview(r); });
-      $("[data-save]", root).addEventListener("click", () => toast("Salvato in bozza. Premi Pubblica per mandarlo online."));
+      $("[data-save]", root)?.addEventListener("click", () => toast("Salvato in bozza. Premi Pubblica per mandarlo online."));
     } };
   };
 
-  /* candidature */
-  let filt = "Tutte";
+  /* candidature: voto veloce (tasti 1-4), curriculum aperto accanto, smistamento a carte */
+  let filt = "Tutte", sortV = false;
+  const VOTI = [null, { k: "no", t: "No", ic: "✕" }, { k: "forse", t: "Forse", ic: "?" }, { k: "buono", t: "Buono", ic: "✓" }, { k: "top", t: "Top", ic: "★" }];
+  const vb = (v) => v ? `<span class="vt ${VOTI[v].k}" title="${VOTI[v].t}">${VOTI[v].ic}</span>` : '<span class="vt none" title="Da votare">·</span>';
   const TPL = [["Colloquio", "Ciao {nome}, grazie per averci scritto. Ti va di passare al locale per due chiacchiere? Dimmi tu quando sei libero questa settimana. Alberto"], ["Più avanti", "Ciao {nome}, grazie. Per ora siamo al completo, ma teniamo il tuo curriculum: se si libera un posto ti scriviamo noi. Alberto"], ["Grazie, no", "Ciao {nome}, grazie del tempo. Questa volta non siamo riusciti a trovare il posto giusto per te. In bocca al lupo. Alberto"]];
+  /* la pagina del curriculum: in produzione è il PDF vero, qui una pagina di prova */
+  const cvPage = (a) => `<div class="cvp"><div class="cvh"><b>${esc(a.name)}</b><span>${esc(a.email)}${a.tel ? " · " + esc(a.tel) : ""}</span></div><p class="cvr">${esc(a.role)} · Roma</p><h5>Esperienza</h5>${(a.exp || []).map(([y, t]) => `<div class="cve"><span>${esc(y)}</span><span>${esc(t)}</span></div>`).join("") || '<p class="cvx">Prima esperienza.</p>'}<h5>Su di me</h5><p>${esc(a.msg)}</p><h5>Disponibilità</h5><p>${esc(a.disp)}</p><div class="cvl"></div><div class="cvl s"></div><div class="cvl"></div></div>`;
+  function viewer(a) {
+    if (!a.cv) return `<div class="att"><span class="ic" style="background:var(--n3);color:var(--ash)">—</span><span><b>Nessun curriculum</b><small>Ha scritto solo il messaggio.</small></span></div>`;
+    return `<div class="pdf"><div class="pbar"><span class="ic">PDF</span><b>${esc(a.cv)}</b><small>${esc(a.size)} · pagina 1 di 1</small><span class="sp"></span><button class="x" type="button" data-zoom="-1" aria-label="Rimpicciolisci">−</button><button class="x" type="button" data-zoom="1" aria-label="Ingrandisci">+</button><button class="btn ghost sm cut" type="button" data-cv>Scarica</button></div><div class="pview" id="pview"><div class="ppage" style="--z:1">${cvPage(a)}</div></div></div>`;
+  }
+  const rateBar = (a) => `<div class="rate" id="rate" role="group" aria-label="Voto">${VOTI.slice(1).map((v, n) => `<button type="button" class="${v.k}" data-v="${n + 1}" aria-pressed="${a.voto === n + 1}"><i>${v.ic}</i>${v.t}<kbd>${n + 1}</kbd></button>`).join("")}</div>`;
   V.candidature = (i) => {
     head("candidature", i);
-    const FS = ["Tutte", "Nuova", "Colloquio", "Archiviata"], shown = D.apps.filter((a) => filt === "Tutte" || a.status === filt);
+    const FS = ["Tutte", "Nuova", "Colloquio", "Archiviata"];
+    let shown = D.apps.filter((a) => filt === "Tutte" || a.status === filt);
+    if (sortV) shown = shown.slice().sort((x, y) => (y.voto || 0) - (x.voto || 0));
     const sel = i ?? (mob() ? null : (shown[0] ? D.apps.indexOf(shown[0]) : null)), a = sel !== null ? D.apps[sel] : null;
     if (a && a.status === "Nuova" && i !== null) { a.status = "Letta"; drawNav(); }
-    const list = `<div><div class="filters chips">${FS.map((f) => `<button type="button" data-f="${f}" aria-pressed="${f === filt}">${f === "Nuova" ? "Nuove" : f === "Archiviata" ? "Archiviate" : f}${f !== "Tutte" ? ` · ${D.apps.filter((x) => x.status === f).length}` : ""}</button>`).join("")}</div>
-      <div class="list" style="position:static;max-height:none">${shown.map((x) => { const k = D.apps.indexOf(x); return `<button class="item" type="button" data-go="candidature/${k}" ${k === sel ? 'aria-current="true"' : ""}><span class="num" style="color:var(--bone)">${esc(x.name[0])}</span><span><b>${esc(x.name)}</b><small>${esc(x.role)} · ${esc(x.when)}</small></span><span class="st ${x.status === "Nuova" ? "new" : x.status === "Colloquio" ? "on" : ""}">${esc(x.status)}</span></button>`; }).join("") || '<p class="empty">Nessuna candidatura qui.</p>'}</div></div>`;
+    const todo = D.apps.filter((x) => !x.voto && x.status !== "Archiviata").length;
+    const list = `<div class="clist"><button class="smista cut" type="button" id="smista" ${todo ? "" : "disabled"}><span><b>Smista le candidature</b><small>${todo ? `${todo} da votare, una alla volta` : "Tutte votate"}</small></span><span class="arr">→</span></button>
+      <div class="filters chips">${FS.map((f) => `<button type="button" data-f="${f}" aria-pressed="${f === filt}">${f === "Nuova" ? "Nuove" : f === "Archiviata" ? "Archiviate" : f}${f !== "Tutte" ? ` · ${D.apps.filter((x) => x.status === f).length}` : ""}</button>`).join("")}<button type="button" data-sortv aria-pressed="${sortV}">Per voto</button></div>
+      <div class="list" style="position:static;max-height:none">${shown.map((x) => { const k = D.apps.indexOf(x); return `<button class="item" type="button" data-go="candidature/${k}" ${k === sel ? 'aria-current="true"' : ""}>${vb(x.voto)}<span><b>${esc(x.name)}</b><small>${esc(x.role)} · ${esc(x.when)}${x.cv ? " · CV" : ""}</small></span><span class="st ${x.status === "Nuova" ? "new" : x.status === "Colloquio" ? "on" : ""}">${esc(x.status)}</span></button>`; }).join("") || '<p class="empty">Nessuna candidatura qui.</p>'}</div>
+      <p class="keys">Tasti: <kbd>1</kbd>–<kbd>4</kbd> voto · <kbd>J</kbd> <kbd>K</kbd> scorri</p></div>`;
     const mail = a ? `<div class="mail" id="mail">
       <div class="mhead"><div><h2>${esc(a.name)}</h2><div class="meta"><span>${esc(a.role)}</span><a href="mailto:${esc(a.email)}">${esc(a.email)}</a>${a.tel ? `<a href="tel:${esc(a.tel.replace(/\s/g, ""))}">${esc(a.tel)}</a>` : ""}<span>${esc(a.disp)}</span></div></div>
-        <div class="status" id="stat">${["Letta", "Colloquio", "Archiviata"].map((s) => `<button type="button" aria-pressed="${a.status === s}">${s}</button>`).join("")}</div></div>
-      <div class="msg">${esc(a.msg)}</div>
-      ${a.cv ? `<div class="att"><span class="ic">PDF</span><span><b>${esc(a.cv)}</b><small>${esc(a.size)}</small></span><button class="btn ghost sm cut" type="button" data-cv>Apri</button></div>` : '<div class="att"><span class="ic" style="background:var(--n3);color:var(--ash)">—</span><span><b>Nessun curriculum</b><small>Ha scritto solo il messaggio.</small></span></div>'}
-      <div class="card"><h2>Note interne <small>Le vedi solo tu</small></h2><div class="f"><textarea rows="2" data-note placeholder="Es. richiamare giovedì">${esc(a.notes)}</textarea></div></div>
-      ${a.replies.length ? `<div class="thread">${a.replies.map((r) => `<div class="bubble"><small>Tu, ${esc(r.when)}</small>${esc(r.text)}</div>`).join("")}</div>` : ""}
-      <div class="card"><h2>Rispondi <small>Parte da lavoro@blendfoodanddrink.it</small></h2><div class="compose"><div class="tpl chips">${TPL.map(([t], n) => `<button type="button" data-tpl="${n}">${t}</button>`).join("")}</div><div class="f"><textarea rows="5" id="reply" placeholder="Scrivi a ${esc(a.name.split(" ")[0])}…"></textarea></div><div class="foot"><span class="hint" style="font-size:.78rem;color:var(--dim)">Arriva nella sua casella, la risposta torna qui.</span><button class="btn cut" type="button" data-send>Invia</button></div></div></div>
+        <div class="status" id="stat">${["Letta", "Colloquio", "Archiviata"].map((x) => `<button type="button" aria-pressed="${a.status === x}">${x}</button>`).join("")}</div></div>
+      ${rateBar(a)}
+      <div class="mgrid"><div class="mcol">
+        <div class="msg">${esc(a.msg)}</div>
+        <div class="card"><h2>Note interne <small>Le vedi solo tu</small></h2><div class="f"><textarea rows="2" data-note placeholder="Es. richiamare giovedì">${esc(a.notes)}</textarea></div></div>
+        ${a.replies.length ? `<div class="thread">${a.replies.map((r) => `<div class="bubble"><small>Tu, ${esc(r.when)}</small>${esc(r.text)}</div>`).join("")}</div>` : ""}
+        <div class="card"><h2>Rispondi <small>Parte da lavoro@blendfoodanddrink.it</small></h2><div class="compose"><div class="tpl chips">${TPL.map(([t], n) => `<button type="button" data-tpl="${n}">${t}</button>`).join("")}</div><div class="f"><textarea rows="5" id="reply" placeholder="Scrivi a ${esc(a.name.split(" ")[0])}…"></textarea></div><div class="foot"><span class="hint" style="font-size:.78rem;color:var(--dim)">La risposta arriva nella sua casella e torna qui.</span><button class="btn cut" type="button" data-send>Invia</button></div></div></div>
+      </div><div class="mcol">${viewer(a)}</div></div>
     </div>` : `<div class="mail"><p class="empty">Scegli una candidatura a sinistra.</p></div>`;
     return { html: `<div class="inbox ${i !== null ? "open" : ""}">${list}${mail}</div>`, after: (root) => {
       $$("[data-f]", root).forEach((b) => b.addEventListener("click", () => { filt = b.dataset.f; render(); }));
+      $("[data-sortv]", root).addEventListener("click", () => { sortV = !sortV; render(); });
+      $("#smista", root).addEventListener("click", openSmista);
       if (!a) return;
+      const setV = (v) => { a.voto = a.voto === v ? 0 : v; render(); toast(a.voto ? `Voto: ${VOTI[a.voto].t}` : "Voto tolto"); };
+      $("#rate").addEventListener("click", (e) => { const b = e.target.closest("[data-v]"); if (b) setV(+b.dataset.v); });
+      keyH = (e) => { if (e.target.closest("input, textarea")) return; if (/^[1-4]$/.test(e.key)) setV(+e.key); const k = shown.indexOf(a); if (e.key === "j" && shown[k + 1]) location.hash = "candidature/" + D.apps.indexOf(shown[k + 1]); if (e.key === "k" && shown[k - 1]) location.hash = "candidature/" + D.apps.indexOf(shown[k - 1]); };
       $("#stat").addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; a.status = b.textContent; render(); toast(`Segnata come «${a.status}».`); });
       $("[data-note]", root).addEventListener("input", (e) => { a.notes = e.target.value; });
       $$("[data-tpl]", root).forEach((b) => b.addEventListener("click", () => { $("#reply").value = TPL[+b.dataset.tpl][1].replace("{nome}", a.name.split(" ")[0]); $("#reply").focus(); }));
       $("[data-send]", root).addEventListener("click", () => { const t = $("#reply").value.trim(); if (!t) { toast("Scrivi qualcosa prima di inviare."); return; } a.replies.push({ when: "adesso", text: t }); if (a.status === "Letta" || a.status === "Nuova") a.status = "Colloquio"; render(); toast(`Risposta inviata a ${a.name.split(" ")[0]} (per finta).`); });
-      const cv = $("[data-cv]", root); if (cv) cv.addEventListener("click", () => toast("Qui si apre il PDF del curriculum."));
+      const cv = $("[data-cv]", root); if (cv) cv.addEventListener("click", () => toast("Qui si scarica il PDF del curriculum."));
+      $$("[data-zoom]", root).forEach((b) => b.addEventListener("click", () => { const pg = $(".ppage", root), z = Math.min(1.6, Math.max(.6, (+pg.style.getPropertyValue("--z") || 1) + b.dataset.zoom * .2)); pg.style.setProperty("--z", z.toFixed(1)); }));
+    } };
+  };
+  let keyH = null;
+  addEventListener("keydown", (e) => { if (route().s === "candidature" && keyH && !$("#smi.on")) keyH(e); });
+  /* smistamento: una carta alla volta, si scorre col dito o con i tasti */
+  function openSmista() {
+    const q = D.apps.filter((x) => !x.voto && x.status !== "Archiviata"); if (!q.length) return;
+    let n = 0; const ov = $("#smi");
+    const card = () => { const a = q[n]; return a ? `<div class="scard" id="scard"><div class="sch"><span class="cnt">${n + 1} di ${q.length}</span><h3>${esc(a.name)}</h3><span class="s">${esc(a.role)} · ${esc(a.disp)}</span></div><div class="scv">${a.cv ? `<div class="ppage" style="--z:.78">${cvPage(a)}</div>` : `<p class="msg">${esc(a.msg)}</p>`}</div><i class="stamp2"></i></div>` : `<div class="scard done"><h3>Fatto.</h3><p>Hai votato tutte le candidature.</p><button class="btn cut" type="button" data-close>Torna all'elenco</button></div>`; };
+    const draw = () => { $(".sstage", ov).innerHTML = card(); $(".srate", ov).style.visibility = q[n] ? "" : "hidden"; };
+    const vote = (v) => { const a = q[n]; if (!a) return; a.voto = v; const c = $("#scard"); c.classList.add("out", VOTI[v].k); $(".stamp2", c).textContent = VOTI[v].t; setTimeout(() => { n++; draw(); }, 380); };
+    ov.innerHTML = `<div class="sbox"><div class="stop"><b>Smista le candidature</b><button class="x" type="button" data-close aria-label="Chiudi">✕</button></div><div class="sstage"></div><div class="srate">${VOTI.slice(1).map((v, k) => `<button type="button" class="${v.k}" data-v="${k + 1}"><i>${v.ic}</i>${v.t}</button>`).join("")}</div><p class="keys">Trascina a sinistra per No, a destra per Buono, in alto per Top · tasti <kbd>1</kbd>–<kbd>4</kbd></p></div>`;
+    ov.classList.add("on"); draw();
+    const close = () => { ov.classList.remove("on"); removeEventListener("keydown", kh); drawNav(); render(); };
+    const kh = (e) => { if (/^[1-4]$/.test(e.key)) vote(+e.key); if (e.key === "Escape") close(); };
+    addEventListener("keydown", kh);
+    ov.onclick = (e) => { const b = e.target.closest("[data-v]"); if (b) vote(+b.dataset.v); if (e.target.closest("[data-close]")) close(); };
+    let sx = 0, sy = 0, dn = false;
+    ov.onpointerdown = (e) => { const c = e.target.closest("#scard"); if (!c || c.classList.contains("done")) return; dn = true; sx = e.clientX; sy = e.clientY; c.setPointerCapture(e.pointerId); c.style.transition = "none"; };
+    ov.onpointermove = (e) => { if (!dn) return; const c = $("#scard"), dx = e.clientX - sx, dy = e.clientY - sy; c.style.transform = `translate(${dx}px, ${Math.min(0, dy)}px) rotate(${dx / 18}deg)`; c.dataset.hint = dy < -90 ? "top" : dx > 80 ? "buono" : dx < -80 ? "no" : ""; };
+    ov.onpointerup = (e) => { if (!dn) return; dn = false; const c = $("#scard"), h = c.dataset.hint; c.style.transition = ""; c.style.transform = ""; if (h) vote(h === "top" ? 4 : h === "buono" ? 3 : 1); };
+  }
+
+  /* ---------- marketing: piano dei contenuti ---------- */
+  const DAYS = ["Lun 16", "Mar 17", "Mer 18", "Gio 19", "Ven 20", "Sab 21", "Dom 22"];
+  const MST = ["Idea", "In lavorazione", "Programmato", "Pubblicato"];
+  const ideas = () => [
+    { type: "Reel", title: `Il giorno prima di «${D.shows[0].title}»`, link: "Serata · " + D.shows[0].title, d: 1, cap: `${D.shows[0].lines[0]}. ${D.shows[0].time}. I tavoli vicino ai musicisti finiscono presto.` },
+    { type: "Post", title: `Fascicolo di «${D.drinks[3].n}»`, link: "Drink · " + D.drinks[3].n, d: 3, cap: D.drinks[3].q },
+    { type: "Storia", title: "Aperiblend: il primo giro alle 18", link: "Aperiblend", d: 4, cap: "Dalle 18 alle 20, prima che si riempia." }
+  ];
+  function phone(m) {
+    const tall = m.type !== "Post";
+    return `<div class="phone"><div class="pht"><span class="pav">B</span><b>blendfoodanddrink</b><span class="dim">${esc(m.ch)}</span></div>
+      <div class="phm ${tall ? "tall" : ""}">${m.img ? `<img src="${esc(m.img)}" alt="">` : `<span class="empty">${tall ? "Video verticale 9:16" : "Foto 4:5"}</span>`}${m.type === "Reel" ? '<span class="play">▶</span>' : ""}</div>
+      ${m.type === "Storia" ? "" : `<p class="phc"><b>blendfoodanddrink</b> ${esc(m.cap.slice(0, 125))}${m.cap.length > 125 ? '<span class="dim">… altro</span>' : ""}</p>`}</div>`;
+  }
+  V.marketing = (i) => {
+    head("marketing", i);
+    const P = MK.posts, sel = i ?? (mob() ? null : 0), m = sel !== null ? P[sel] : null;
+    const cal = `<div class="cal">${DAYS.map((dl, d) => `<div class="cd"><p class="cdh">${dl}</p>${P.map((x, k) => x.d === d ? `<button type="button" class="pc ${k === sel ? "on" : ""}" data-go="marketing/${k}"><span class="ty ${x.type.toLowerCase()}">${x.type}</span><b>${esc(x.title)}</b><small>${x.time} · ${esc(x.ch)}</small><span class="ps s${MST.indexOf(x.st)}">${x.st}</span></button>` : "").join("")}</div>`).join("")}</div>`;
+    const idea = `<div class="ideas"><p class="gl">Idee dal sito</p>${ideas().map((x, n) => `<div class="idea"><span class="ty ${x.type.toLowerCase()}">${x.type}</span><span><b>${esc(x.title)}</b><small>${DAYS[x.d]}</small></span><button class="btn ghost sm cut" type="button" data-idea="${n}">Crea bozza</button></div>`).join("")}</div>`;
+    const ed = m ? `<div class="form" id="form">
+      <div class="card"><h2>Contenuto</h2>
+        <div class="f"><div class="lb"><span>Tipo</span></div><div class="chips" data-chip="type">${["Post", "Reel", "Storia"].map((t) => `<button type="button" aria-pressed="${m.type === t}">${t}</button>`).join("")}</div></div>
+        <div class="f" style="margin-top:1rem"><div class="lb"><span>Dove</span></div><div class="chips" data-chip="ch">${["Instagram", "Facebook", "TikTok"].map((t) => `<button type="button" aria-pressed="${m.ch === t}">${t}</button>`).join("")}</div></div>
+        <div class="row three" style="margin-top:1rem"><div class="f"><label><span>Giorno</span></label><select data-k="d">${DAYS.map((dl, d) => `<option value="${d}" ${m.d === d ? "selected" : ""}>${dl}</option>`).join("")}</select></div><div class="f"><label><span>Ora</span></label><input type="text" value="${esc(m.time)}" data-k="time"></div><div class="f"><label><span>Collegato a</span></label><input type="text" value="${esc(m.link)}" data-k="link" placeholder="Serata, drink, cucina"></div></div>
+        <div style="margin-top:1rem">${field("Titolo interno", m.title, [3, 60, "Lo vedi solo tu nel calendario."], { k: "title" })}</div>
+        <div style="margin-top:1rem">${field("Didascalia", m.cap, [0, 2200, "Le prime 125 battute si leggono senza toccare «altro»: lì va la cosa importante."], { k: "cap", area: true, rows: 4 })}</div></div>
+      <div class="card"><h2>Foto o video</h2>${drop(m.img, "50% 50%", m.type === "Post" ? "Foto 4:5" : "Video verticale 9:16", false)}</div>
+      <div class="card"><h2>Stato</h2><div class="chips" data-chip="st">${MST.map((t) => `<button type="button" aria-pressed="${m.st === t}">${t}</button>`).join("")}</div></div>
+      <div class="foot"><button class="danger" type="button" data-del>Elimina</button><span class="saved">Le modifiche restano in bozza finché non premi Pubblica</span></div></div>` : "";
+    const prev = m ? `<div class="prev"><div class="ph"><span>Anteprima</span></div><div class="stage" id="stage">${phone(m)}</div></div>` : "";
+    return { html: `<div class="mk ${i !== null ? "open" : ""}"><div class="mkl">${cal}${idea}</div>${m ? `<div class="split2">${ed}${prev}</div>` : ""}</div>`, after: (root) => {
+      $$("[data-idea]", root).forEach((b) => b.addEventListener("click", () => { const x = ideas()[+b.dataset.idea]; P.push({ ...x, day: DAYS[x.d], time: "18:00", ch: "Instagram", st: "Idea" }); setDirty(1); location.hash = "marketing/" + (P.length - 1); toast("Bozza creata con il testo preso dal sito."); }));
+      if (!m) return;
+      const draw = () => { $("#stage").innerHTML = phone(m); };
+      wire($("#form"), (e) => { const k = e.target.dataset.k; if (k === "d") { m.d = +e.target.value; m.day = DAYS[m.d]; render(); return; } if (k) m[k] = e.target.value; draw(); });
+      $("#form").addEventListener("change", (e) => { if (e.target.dataset.k === "d") { m.d = +e.target.value; m.day = DAYS[m.d]; setDirty(1); render(); } });
+      $$("[data-chip]", root).forEach((g) => g.addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; m[g.dataset.chip] = b.textContent; setDirty(1); render(); }));
+      wireDrop(root, (src) => { m.img = src; draw(); }, () => {});
+      $("[data-del]", root).addEventListener("click", () => { if (confirm("Eliminare questo contenuto?")) { P.splice(sel, 1); setDirty(1); location.hash = "marketing"; } });
+    } };
+  };
+
+  /* ---------- advertising: quanto costa riempire un tavolo ---------- */
+  let feedT = 0, per = "Stasera";
+  const spark = (a) => { const mx = Math.max(...a, 1); return `<svg class="spk" viewBox="0 0 70 22" preserveAspectRatio="none"><polyline points="${a.map((v, k) => `${(k / (a.length - 1) * 70).toFixed(1)},${(20 - v / mx * 18).toFixed(1)}`).join(" ")}"/></svg>`; };
+  V.advertising = () => {
+    head("advertising", null);
+    const T = ADS.today, mul = per === "Stasera" ? 1 : per === "7 giorni" ? 4.1 : 17.3, f = (n) => Math.round(n * mul);
+    const mxS = Math.max(...ADS.days.map((d) => d[1]));
+    const bars = ADS.days.map(([b, sp], k) => `<div class="bc"><span class="bb" style="height:${(sp / mxS * 100).toFixed(0)}%"><i style="height:${(b / sp * 100 * 2.4).toFixed(0)}%"></i></span><small>${["L", "M", "M", "G", "V", "S", "D"][k]}</small></div>`).join("");
+    return { html: `<div class="ads">
+      <div class="adtop"><div class="chips">${["Stasera", "7 giorni", "30 giorni"].map((x) => `<button type="button" data-per="${x}" aria-pressed="${per === x}">${x}</button>`).join("")}</div><span class="live"><i></i>In diretta</span></div>
+      <div class="kpis">
+        <div class="kpi"><span class="k">Prenotazioni dalla pubblicità</span><span class="v y">${f(T.book)}</span><span class="s">su ${f(61)} prenotazioni totali</span></div>
+        <div class="kpi"><span class="k">Spesa</span><span class="v">€${f(T.spend)}</span><span class="s">Meta e Google</span></div>
+        <div class="kpi"><span class="k">Costo per prenotazione</span><span class="v">€${T.cpb}</span><span class="s"><b class="up">−63%</b> rispetto a prima (€${T.prev})</span></div>
+        <div class="kpi"><span class="k">Ritorno per euro</span><span class="v">${T.roas}×</span><span class="s">coperti × scontrino medio, diviso la spesa</span></div>
+      </div>
+      <div class="adgrid">
+        <div class="card"><h2>Stasera, in diretta <small>Ogni prenotazione con la sua provenienza</small></h2><div class="feed" id="feed">${ADS.feed.map(([t, w, src, c]) => `<div class="fr"><time>${t}</time><b>${esc(w)}</b><span class="src ${c}">${esc(src)}</span></div>`).join("")}</div></div>
+        <div class="card"><h2>Ultimi sette giorni <small><i class="lg sp"></i> spesa · <i class="lg bk"></i> prenotazioni</small></h2><div class="bars">${bars}</div></div>
+      </div>
+      <div class="tip"><span class="ti">Consiglio</span><p>Il reel dell'Aperiblend porta prenotazioni a <b>€2,77</b> l'una, la ricerca su Google a <b>€6,00</b>. Sposta 5 € al giorno da Google al reel.</p><button class="btn sm cut" type="button" data-apply>Applica</button></div>
+      <div class="card"><h2>Campagne <small>Accendi, spegni, cambia il budget al giorno</small></h2><div class="camps">
+        <div class="cr chd"><span>Campagna</span><span>Budget/giorno</span><span>Spesa</span><span>Prenotazioni</span><span>€ a prenotazione</span><span>Andamento</span></div>
+        ${ADS.camps.map((c, k) => `<div class="cr ${c.on ? "" : "off"}"><span class="cn"><label class="sw0"><input type="checkbox" data-on="${k}" ${c.on ? "checked" : ""} aria-label="Attiva"></label><span><b>${esc(c.n)}</b><small class="src ${c.ch === "Meta" ? "m" : "g"}">${c.ch}</small></span></span><span class="cb">€ <input type="number" min="0" value="${c.bud}" data-bud="${k}" aria-label="Budget al giorno"></span><span data-l="Spesa">€${f(c.spend)}</span><span data-l="Prenotazioni">${f(c.book)}</span><span data-l="€ a pren.">${c.book ? "€" + (c.spend / c.book).toFixed(2).replace(".", ",") : "—"}</span><span>${spark(c.trend)}</span></div>`).join("")}
+      </div></div>
+      <p class="hint" style="color:var(--dim);font-size:.8rem;margin-top:1rem">Come contiamo: ogni link (reel, annuncio Google, storia) porta un'etichetta fino alla prenotazione, così sappiamo da dove arriva ogni tavolo. In questo prototipo i numeri sono di prova.</p>
+    </div>`, after: (root) => {
+      $$("[data-per]", root).forEach((b) => b.addEventListener("click", () => { per = b.dataset.per; render(); }));
+      $$("[data-on]", root).forEach((c) => c.addEventListener("change", () => { ADS.camps[+c.dataset.on].on = c.checked; setDirty(1); render(); toast(c.checked ? "Campagna accesa." : "Campagna in pausa."); }));
+      $$("[data-bud]", root).forEach((c) => c.addEventListener("change", () => { ADS.camps[+c.dataset.bud].bud = +c.value; setDirty(1); toast(`Budget aggiornato: €${c.value} al giorno.`); }));
+      $("[data-apply]", root).addEventListener("click", (e) => { ADS.camps[0].bud += 5; ADS.camps[1].bud = Math.max(0, ADS.camps[1].bud - 5); setDirty(1); e.target.closest(".tip").classList.add("done"); render(); toast("Fatto: +5 € al reel, −5 € a Google."); });
+      /* finta diretta: ogni tanto arriva una prenotazione */
+      const more = [["21:45", "Tavolo per 4", "Reel su Meta", "m"], ["22:00", "Tavolo per 2", "Google", "g"], ["22:15", "Tavolo per 5", "Storia su Meta", "m"]];
+      let n = 0; feedT = setInterval(() => { const fd = $("#feed"); if (!fd || n >= more.length) return clearInterval(feedT); const [t, w, src, c] = more[n++]; ADS.feed.unshift(more[n - 1]); ADS.today.book++; fd.insertAdjacentHTML("afterbegin", `<div class="fr new"><time>${t}</time><b>${esc(w)}</b><span class="src ${c}">${esc(src)}</span><span class="nw">Nuova</span></div>`); const kv = $(".kpi .v.y", root); if (kv) kv.textContent = Math.round(ADS.today.book * (per === "Stasera" ? 1 : per === "7 giorni" ? 4.1 : 17.3)); }, 5000);
     } };
   };
 
   /* ---------- disegno ---------- */
   function render() {
+    clearInterval(feedT); keyH = null;
     const r = route(), raw = location.hash.slice(1).split("/")[1];
     const i = raw === "new" ? "new" : r.i;
     drawNav();
