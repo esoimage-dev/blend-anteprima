@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Blend · Back office</title>
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&family=Special+Elite&family=Caveat:wght@600;700&family=Newsreader:ital,opsz,wght@1,6..72,400&display=swap" rel="stylesheet">
+<style>
+/* Back office di Blend. Prototipo di design: i dati vivono in memoria, niente viene salvato. */
+:root {
+  --night: #0a0908; --n1: #121010; --n2: #191613; --n3: #221e1a; --line: rgba(239, 231, 216, .1); --line2: rgba(239, 231, 216, .18);
+  --bone: #efe7d8; --ash: #9a9183; --dim: #6d665c; --sign: #fcc650; --red: #e0533f; --ok: #8fc58a; --warn: #f0a640;
+  --f-ui: "Hanken Grotesk", system-ui, sans-serif; --f-sign: "Big Shoulders Display", Impact, sans-serif; --f-type: "Special Elite", "Courier New", monospace; --f-hand: "Caveat", cursive; --f-voice: "Newsreader", Georgia, serif;
+  --cut: 8px; --side: 232px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { background: var(--night); color: var(--bone); font: 400 15px/1.5 var(--f-ui); -webkit-font-smoothing: antialiased; }
+button, input, textarea, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+a { color: inherit; }
+img { display: block; max-width: 100%; }
+.cut { clip-path: polygon(var(--cut) 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, var(--cut) 100%, 0 calc(100% - var(--cut)), 0 var(--cut)); }
+:focus-visible { outline: 2px solid var(--sign); outline-offset: 2px; }
+
+/* ---------- struttura ---------- */
+.app { display: grid; grid-template-columns: var(--side) minmax(0, 1fr); min-height: 100%; }
+.side { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; gap: 1.6rem; padding: 1.4rem 1rem 1.2rem; border-right: 1px solid var(--line); background: var(--n1); }
+.brand { display: flex; align-items: center; gap: .7rem; padding: 0 .5rem; text-decoration: none; }
+.brand img { width: 62px; }
+.brand span { font: 600 .66rem/1.2 var(--f-ui); letter-spacing: .16em; text-transform: uppercase; color: var(--ash); border-left: 1px solid var(--line2); padding-left: .7rem; }
+.nav { display: grid; gap: 2px; }
+.nav button { all: unset; box-sizing: border-box; display: flex; align-items: center; gap: .75rem; padding: .62rem .7rem; border-radius: 4px; color: var(--ash); font-weight: 500; cursor: pointer; transition: background .2s, color .2s; }
+.nav button svg { width: 19px; height: 19px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.nav button:hover { color: var(--bone); background: var(--n2); }
+.nav button[aria-current="page"] { color: var(--night); background: var(--sign); }
+.nav button .bd { margin-left: auto; min-width: 20px; height: 20px; padding: 0 6px; border-radius: 10px; display: grid; place-items: center; font: 700 .7rem/1 var(--f-ui); background: var(--red); color: #fff; }
+.nav button[aria-current="page"] .bd { background: var(--night); color: var(--sign); }
+.nav .sep { height: 1px; margin: .6rem .7rem; background: var(--line); }
+.who { margin-top: auto; display: flex; align-items: center; gap: .7rem; padding: .7rem; border-top: 1px solid var(--line); }
+.who .av { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--n3); font: 800 1rem/1 var(--f-sign); color: var(--sign); }
+.who b { display: block; font-weight: 600; }
+.who a { font-size: .8rem; color: var(--ash); text-decoration: none; }
+.who a:hover { color: var(--sign); }
+
+main { min-width: 0; display: flex; flex-direction: column; }
+.bar { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 1rem; padding: 1rem 2rem; border-bottom: 1px solid var(--line); background: rgba(10, 9, 8, .94); }
+.bar .back { display: none; }
+.bar h1 { margin: 0; font: 800 1.9rem/1 var(--f-sign); text-transform: uppercase; letter-spacing: .01em; }
+.bar .sub { color: var(--ash); font-size: .88rem; margin-top: .2rem; }
+.bar .act { margin-left: auto; display: flex; align-items: center; gap: .7rem; }
+.pill { display: inline-flex; align-items: center; gap: .45rem; padding: .35rem .7rem; border-radius: 99px; font-size: .8rem; color: var(--ash); background: var(--n2); white-space: nowrap; }
+.pill i { width: 7px; height: 7px; border-radius: 50%; background: var(--ok); }
+.pill.dirty i { background: var(--warn); }
+.btn { --cut: 7px; position: relative; display: inline-flex; align-items: center; gap: .5rem; padding: .7rem 1.15rem; border: 0; background: var(--sign); color: var(--night); font-weight: 700; font-size: .9rem; text-decoration: none; white-space: nowrap; transition: padding .25s cubic-bezier(.2, .8, .2, 1), filter .2s; }
+.btn::after { content: "→"; width: 0; overflow: hidden; transition: width .25s cubic-bezier(.2, .8, .2, 1); }
+.btn:hover { padding-right: 1.5rem; } .btn:hover::after { width: 1em; }
+.btn.ghost { background: none; color: var(--bone); box-shadow: inset 0 0 0 1px var(--line2); }
+.btn.ghost::after { display: none; } .btn.ghost:hover { padding-right: 1.15rem; background: var(--n2); }
+.btn[disabled] { filter: grayscale(1) brightness(.6); cursor: not-allowed; }
+.btn.sm { padding: .5rem .85rem; font-size: .82rem; }
+.proto { margin: 0; padding: .55rem 2rem; font-size: .78rem; color: var(--ash); background: #1b1408; border-bottom: 1px solid rgba(252, 198, 80, .15); }
+.proto b { color: var(--sign); font-weight: 600; }
+.view { padding: 1.8rem 2rem 4rem; }
+.tabs { display: none; }
+
+/* ---------- tre colonne: elenco, modulo, anteprima ---------- */
+.split { display: grid; grid-template-columns: 300px minmax(0, 1fr) minmax(320px, 400px); gap: 1.6rem; align-items: start; }
+.list { display: grid; gap: .5rem; position: sticky; top: 92px; max-height: calc(100vh - 120px); overflow: auto; padding-right: 4px; }
+.lhead { display: flex; align-items: center; justify-content: space-between; gap: .6rem; margin-bottom: .3rem; }
+.lhead span { font: 600 .72rem/1 var(--f-ui); letter-spacing: .14em; text-transform: uppercase; color: var(--ash); }
+.item { all: unset; box-sizing: border-box; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: .8rem; padding: .6rem .7rem; border-radius: 5px; background: var(--n1); border: 1px solid transparent; cursor: pointer; transition: border-color .2s, background .2s; }
+.item:hover { background: var(--n2); }
+.item[aria-current="true"] { border-color: var(--sign); background: var(--n2); }
+.item .th { width: 42px; height: 52px; object-fit: cover; border-radius: 2px; background: var(--n3); }
+.item .num { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; background: var(--n3); font: 800 .95rem/1 var(--f-sign); color: var(--ash); }
+.item b { display: block; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.item small { display: block; color: var(--ash); font-size: .78rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.item .st { font-size: .7rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: .2rem .45rem; border-radius: 3px; background: var(--n3); color: var(--ash); }
+.item .st.on { background: rgba(143, 197, 138, .14); color: var(--ok); }
+.item .st.new { background: rgba(224, 83, 63, .16); color: var(--red); }
+.item .grip { color: var(--dim); cursor: grab; font-size: 1.1rem; letter-spacing: -2px; }
+.item.drag { opacity: .4; }
+.item.over { border-color: var(--line2); border-style: dashed; }
+.add { all: unset; box-sizing: border-box; display: flex; align-items: center; justify-content: center; gap: .5rem; padding: .7rem; border: 1px dashed var(--line2); border-radius: 5px; color: var(--ash); cursor: pointer; font-size: .88rem; }
+.add:hover { color: var(--sign); border-color: var(--sign); }
+
+/* ---------- modulo ---------- */
+.form { display: grid; gap: 1.4rem; min-width: 0; }
+.card { padding: 1.4rem 1.5rem 1.5rem; border-radius: 6px; background: var(--n1); border: 1px solid var(--line); }
+.card > h2 { margin: 0 0 1.1rem; display: flex; align-items: baseline; gap: .6rem; font: 800 1.15rem/1 var(--f-sign); text-transform: uppercase; letter-spacing: .03em; }
+.card > h2 small { font: 400 .8rem/1.3 var(--f-ui); text-transform: none; letter-spacing: 0; color: var(--ash); }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem 1.2rem; }
+.row.three { grid-template-columns: 1fr 1fr 1fr; }
+.f { display: grid; gap: .38rem; min-width: 0; }
+.f > label, .f > .lb { display: flex; align-items: baseline; justify-content: space-between; gap: .6rem; font-size: .8rem; font-weight: 600; color: var(--ash); }
+.f .cnt { font: 500 .74rem/1 var(--f-ui); font-variant-numeric: tabular-nums; color: var(--dim); }
+.f .cnt.near { color: var(--warn); } .f .cnt.over { color: var(--red); }
+.f input[type="text"], .f input[type="url"], .f input[type="number"], .f textarea, .f select { width: 100%; padding: .68rem .8rem; border: 1px solid var(--line2); border-radius: 4px; background: var(--night); outline: none; transition: border-color .2s, box-shadow .2s; }
+.f textarea { resize: vertical; min-height: 92px; line-height: 1.5; }
+.f input:focus, .f textarea:focus, .f select:focus { border-color: var(--sign); box-shadow: 0 0 0 3px rgba(252, 198, 80, .15); }
+.f.bad input, .f.bad textarea { border-color: var(--red); }
+.f .hint { font-size: .78rem; color: var(--dim); line-height: 1.4; }
+.f.bad .hint { color: var(--red); }
+.lines { display: grid; gap: .5rem; }
+.lines .ln { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: .5rem; align-items: center; }
+.lines .ln .cnt { min-width: 44px; text-align: right; }
+.x { all: unset; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 4px; color: var(--dim); cursor: pointer; }
+.x:hover { color: var(--red); background: var(--n2); }
+.mini { all: unset; justify-self: start; font-size: .84rem; color: var(--sign); cursor: pointer; padding: .2rem 0; }
+.mini:hover { text-decoration: underline; }
+.mini[disabled] { color: var(--dim); cursor: default; text-decoration: none; }
+.sw { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .8rem .9rem; border-radius: 5px; background: var(--night); border: 1px solid var(--line2); cursor: pointer; }
+.sw b { display: block; font-weight: 600; font-size: .92rem; }
+.sw small { color: var(--ash); font-size: .8rem; }
+.sw input { appearance: none; width: 42px; height: 24px; flex: none; border-radius: 12px; background: var(--n3); position: relative; cursor: pointer; transition: background .2s; margin: 0; }
+.sw input::after { content: ""; position: absolute; left: 3px; top: 3px; width: 18px; height: 18px; border-radius: 50%; background: var(--ash); transition: transform .2s, background .2s; }
+.sw input:checked { background: var(--sign); } .sw input:checked::after { transform: translateX(18px); background: var(--night); }
+/* foto: caricamento e punto di fuoco */
+.drop { position: relative; display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 1.1rem; align-items: center; padding: .9rem; border: 1px dashed var(--line2); border-radius: 6px; background: var(--night); }
+.drop .pv { position: relative; aspect-ratio: 3 / 4; overflow: hidden; border-radius: 3px; background: var(--n3); cursor: crosshair; }
+.drop .pv.wide { aspect-ratio: 1; }
+.drop .pv img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.drop .pv .dot { position: absolute; width: 18px; height: 18px; margin: -9px 0 0 -9px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 2px rgba(0, 0, 0, .5); pointer-events: none; }
+.drop b { display: block; font-weight: 600; }
+.drop small { display: block; color: var(--ash); font-size: .8rem; margin: .2rem 0 .7rem; }
+.drop input[type="file"] { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.drop.over { border-color: var(--sign); background: rgba(252, 198, 80, .05); }
+/* gusto */
+.taste { display: grid; gap: .9rem; }
+.taste .tr { display: grid; grid-template-columns: 82px minmax(0, 1fr) 82px; gap: .8rem; align-items: center; font-size: .84rem; color: var(--ash); }
+.taste .tr span:last-child { text-align: right; }
+.taste input[type="range"] { width: 100%; accent-color: var(--sign); }
+.chips { display: flex; flex-wrap: wrap; gap: .4rem; }
+.chips button { all: unset; padding: .42rem .75rem; border-radius: 99px; border: 1px solid var(--line2); font-size: .84rem; color: var(--ash); cursor: pointer; }
+.chips button[aria-pressed="true"] { background: var(--sign); color: var(--night); border-color: var(--sign); font-weight: 600; }
+.note { display: flex; gap: .8rem; padding: .9rem 1rem; border-radius: 5px; background: rgba(252, 198, 80, .07); border: 1px solid rgba(252, 198, 80, .2); font-size: .86rem; color: var(--bone); }
+.note svg { flex: none; width: 18px; height: 18px; margin-top: 2px; fill: none; stroke: var(--sign); stroke-width: 1.8; }
+.foot { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.danger { all: unset; font-size: .85rem; color: var(--dim); cursor: pointer; }
+.danger:hover { color: var(--red); }
+
+/* ---------- anteprima: gli stessi materiali del sito ---------- */
+.prev { position: sticky; top: 92px; display: grid; gap: .8rem; }
+.prev .ph { display: flex; align-items: center; justify-content: space-between; font: 600 .72rem/1 var(--f-ui); letter-spacing: .14em; text-transform: uppercase; color: var(--ash); }
+.prev .ph a { letter-spacing: 0; text-transform: none; font-weight: 500; color: var(--sign); text-decoration: none; }
+.stage { position: relative; overflow: hidden; padding: 2rem 1.4rem; border-radius: 6px; background: radial-gradient(ellipse at 50% 30%, #1d1914, #0b0a09 75%); border: 1px solid var(--line); min-height: 360px; display: grid; place-items: center; }
+/* serata */
+.sv { position: relative; width: 100%; display: grid; grid-template-columns: 46% 1fr; align-items: end; }
+.sv .pos { position: relative; aspect-ratio: 3 / 4; rotate: -2deg; box-shadow: 0 1px 2px rgba(0, 0, 0, .6), 0 14px 22px rgba(0, 0, 0, .5); background: #1b1830; }
+.sv .pos img { width: 100%; height: 100%; object-fit: cover; }
+.sv .pos .tp { position: absolute; left: 50%; top: -11px; width: 38%; translate: -50% 0; rotate: 3deg; }
+.sv .pos .empty { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 1rem; font-size: .8rem; color: var(--ash); }
+.slip { position: relative; isolation: isolate; margin: 0 0 1.2rem -12px; padding: 1.25rem 1.6rem 1.1rem 1.2rem; color: #1d150d; rotate: 2deg; filter: drop-shadow(0 10px 14px rgba(0, 0, 0, .45)); }
+.slip::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("img/carta/quaderno-2.webp") 0 0 / 100% 100% no-repeat; }
+.slip .tg { display: block; font: 400 .56rem/1 var(--f-type); letter-spacing: .16em; text-transform: uppercase; color: #a3261c; }
+.slip h3 { margin: .4rem 0 .5rem; font: 900 1.45rem/.9 var(--f-sign); text-transform: uppercase; overflow-wrap: anywhere; }
+.slip p { margin: 0; font: 400 .7rem/1.45 var(--f-type); }
+.slip .tm { margin-top: .45rem; padding-top: .4rem; border-top: 1px dashed rgba(40, 24, 8, .45); color: #4b3820; }
+.slip .go { display: flex; justify-content: space-between; align-items: center; margin-top: .8rem; }
+.slip .stp { padding: .25rem .45rem .2rem; border: 2px solid #a3261c; border-radius: 3px; font: 900 .85rem/1 var(--f-sign); letter-spacing: .08em; color: #a3261c; rotate: -5deg; }
+.slip .nx { font: 700 .95rem/1 var(--f-hand); color: #1f3a74; }
+.ticket { margin-top: .6rem; display: flex; align-items: center; gap: .6rem; padding: .55rem .8rem; border-radius: 5px; background: var(--n2); font-size: .8rem; color: var(--ash); }
+.ticket b { color: var(--bone); font-weight: 600; }
+/* fascicolo */
+.fv { position: relative; isolation: isolate; width: 100%; max-width: 330px; padding: 2.1rem 1.6rem 1.7rem 1.7rem; color: #24180d; rotate: 1.2deg; filter: drop-shadow(0 16px 20px rgba(0, 0, 0, .5)); }
+.fv::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--paper) 0 0 / 100% 100% no-repeat; }
+.fv .clip { position: absolute; top: -12px; left: 50%; width: 110px; height: 32px; translate: -50% 0; rotate: -3deg; background: var(--tape) center / 100% 100% no-repeat; }
+.fv .stamp { float: right; margin: -.2rem -.2rem .6rem .7rem; padding: .32rem .5rem .26rem; border: 2.5px solid #a51f15; border-radius: 3px; outline: 1px solid #a51f15; outline-offset: -5px; font: 900 .78rem/1 var(--f-sign); letter-spacing: .14em; text-transform: uppercase; color: #a51f15; rotate: -8deg; opacity: .9; }
+.fv .no { font: 400 .64rem/1.4 var(--f-type); letter-spacing: .05em; color: #3b2c1b; }
+.fv h3 { clear: none; margin: .4rem 0 .4rem; font: 900 1.55rem/.92 var(--f-sign); text-transform: uppercase; overflow-wrap: anywhere; }
+.fv .q { margin: 0; font: 400 .72rem/1.5 var(--f-type); }
+.fv .pf { display: grid; gap: .3rem; margin: .8rem 0 .7rem; padding: .45rem 0; border-top: 1px solid rgba(40, 24, 8, .3); border-bottom: 1px solid rgba(40, 24, 8, .3); clear: both; }
+.fv .pr { display: grid; grid-template-columns: 3.4rem minmax(0, 1fr) 3.6rem; align-items: center; gap: .4rem; font: 400 .6rem/1 var(--f-type); }
+.fv .pr span:last-child { text-align: right; }
+.fv .dots { position: relative; height: 14px; background: linear-gradient(90deg, rgba(40, 24, 8, .4) 0 1px, transparent 1px) 0 50% / 20% 7px repeat-x; border-bottom: 1px solid rgba(40, 24, 8, .4); }
+.fv .dots i { position: absolute; top: 50%; width: 14px; height: 14px; margin: -7px 0 0 -7px; }
+.fv .dots i::before, .fv .dots i::after { content: ""; position: absolute; left: 50%; top: 0; width: 2px; height: 100%; margin-left: -1px; background: #b0261a; border-radius: 1px; rotate: 45deg; }
+.fv .dots i::after { rotate: -45deg; }
+.fv .ing { margin: 0; font: 400 .66rem/1.5 var(--f-type); }
+.fv .ing b { display: block; font-size: .56rem; letter-spacing: .14em; text-transform: uppercase; color: #6a5236; margin-bottom: .1rem; }
+/* appunto della cucina */
+.kv { width: 100%; display: grid; gap: 0; }
+.kv .kph { aspect-ratio: 4 / 3; overflow: hidden; border-radius: 3px; }
+.kv .kph img { width: 100%; height: 100%; object-fit: cover; }
+.kv .pg { position: relative; isolation: isolate; margin: -2.6rem .6rem 0 1.2rem; padding: 2rem 1.3rem 1.3rem 2.2rem; color: #2a2016; rotate: -1.4deg; filter: drop-shadow(0 14px 18px rgba(0, 0, 0, .55)); font: 400 .7rem/20px var(--f-type); }
+.kv .pg::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--paper) 0 0 / 100% 100% no-repeat; }
+.kv .pg h4 { margin: 0 0 .3rem; font: 400 .82rem/20px var(--f-type); text-decoration: underline; text-decoration-color: #b0261a; text-underline-offset: 4px; }
+.kv .pg p { margin: 0; }
+.kv .pg .hd { display: block; text-align: right; font: 700 1rem/20px var(--f-hand); color: #a3261c; rotate: -2deg; }
+.kv .pg .wd { position: absolute; right: 1rem; top: .8rem; padding: .3rem .6rem; font: 700 .95rem/1 var(--f-hand); color: #3d3d3b; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 50' preserveAspectRatio='none'%3E%3Cpath d='M64 5 C99 4 116 14 114 26 C112 40 86 47 56 46 C26 45 6 37 7 24 C8 12 33 5 66 6 C82 7 97 10 105 15' fill='none' stroke='%234a4a48' stroke-width='1.6'/%3E%3C/svg%3E") center / 100% 100% no-repeat; }
+.kv .tape { justify-self: start; margin: .8rem 0 0 .4rem; padding: .35rem .9rem; font: 700 .95rem/1 var(--f-hand); color: #2a2016; background: url("img/vera/nastro-16.webp") center / 100% 100% no-repeat; rotate: -2deg; }
+.kv .claim { margin: .9rem 0 .2rem; font: italic 400 1rem/1.3 var(--f-voice); color: var(--bone); }
+.kv .sig { font-size: .74rem; color: var(--sign); }
+/* recensione */
+.rv { position: relative; isolation: isolate; width: 260px; padding: 1.6rem 1.4rem 1.4rem; color: #24180d; text-align: center; rotate: -2deg; filter: drop-shadow(0 14px 18px rgba(0, 0, 0, .5)); }
+.rv::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--paper) 0 0 / 100% 100% no-repeat; }
+.rv.co { aspect-ratio: 1; display: grid; place-content: center; padding: 2.4rem; }
+.rv blockquote { margin: 0; font: 700 1.35rem/1.08 var(--f-hand); color: #1f3a74; }
+.rv.co blockquote, .rv.ix blockquote { font: 400 .82rem/1.45 var(--f-type); color: #24180d; }
+.rv.nk blockquote { color: #b8323a; }
+.rv .who { display: block; margin-top: .7rem; font: 400 .62rem/1.2 var(--f-type); opacity: .75; }
+.scores { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.score { padding: 1rem 1.1rem; border-radius: 6px; background: var(--night); border: 1px solid var(--line2); }
+.score .big { font: 900 2.4rem/1 var(--f-sign); color: var(--sign); }
+
+/* ---------- panoramica ---------- */
+.dash { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 1.2rem; }
+.tile { grid-column: span 3; padding: 1.2rem 1.3rem; border-radius: 6px; background: var(--n1); border: 1px solid var(--line); display: grid; gap: .3rem; align-content: start; }
+.tile .k { font: 600 .72rem/1 var(--f-ui); letter-spacing: .14em; text-transform: uppercase; color: var(--ash); }
+.tile .v { font: 900 3rem/1 var(--f-sign); }
+.tile .v.y { color: var(--sign); }
+.tile .s { font-size: .82rem; color: var(--ash); }
+.tile.w6 { grid-column: span 6; } .tile.w4 { grid-column: span 4; } .tile.w8 { grid-column: span 8; } .tile.w12 { grid-column: span 12; }
+.nextev { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 1.1rem; align-items: center; }
+.nextev img { aspect-ratio: 3 / 4; object-fit: cover; border-radius: 3px; }
+.nextev h3 { margin: .2rem 0; font: 900 1.9rem/.95 var(--f-sign); text-transform: uppercase; }
+.log { display: grid; gap: 0; }
+.log div { display: grid; grid-template-columns: 70px minmax(0, 1fr); gap: 1rem; padding: .6rem 0; border-top: 1px solid var(--line); font-size: .88rem; }
+.log div:first-child { border-top: 0; }
+.log time { color: var(--dim); font-size: .8rem; }
+.quick { display: flex; flex-wrap: wrap; gap: .6rem; }
+
+/* ---------- candidature ---------- */
+.inbox { display: grid; grid-template-columns: 360px minmax(0, 1fr); gap: 1.6rem; align-items: start; }
+.filters { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: .8rem; }
+.mail { display: grid; gap: 1.2rem; }
+.mhead { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.mhead h2 { margin: 0; font: 900 2.2rem/.95 var(--f-sign); text-transform: uppercase; }
+.mhead .meta { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; margin-top: .5rem; color: var(--ash); font-size: .88rem; }
+.mhead .meta a { color: var(--bone); }
+.status { display: flex; gap: .3rem; flex-wrap: wrap; }
+.status button { all: unset; padding: .4rem .7rem; border-radius: 4px; font-size: .8rem; font-weight: 600; color: var(--ash); background: var(--n2); cursor: pointer; }
+.status button[aria-pressed="true"] { background: var(--bone); color: var(--night); }
+.msg { padding: 1.2rem 1.3rem; border-radius: 6px; background: var(--n1); border: 1px solid var(--line); font-size: .95rem; line-height: 1.6; }
+.att { display: flex; align-items: center; gap: .9rem; padding: .8rem 1rem; border-radius: 6px; background: var(--n1); border: 1px solid var(--line); }
+.att .ic { width: 38px; height: 46px; display: grid; place-items: center; border-radius: 3px; background: #3a1a14; color: #ff9b86; font: 800 .7rem/1 var(--f-ui); }
+.att b { display: block; font-weight: 600; } .att small { color: var(--ash); }
+.att .btn { margin-left: auto; }
+.thread { display: grid; gap: .7rem; }
+.bubble { padding: .9rem 1.1rem; border-radius: 6px; background: var(--n2); border-left: 3px solid var(--sign); font-size: .9rem; }
+.bubble small { display: block; color: var(--ash); margin-bottom: .3rem; }
+.compose { display: grid; gap: .7rem; }
+.tpl { display: flex; flex-wrap: wrap; gap: .4rem; }
+.empty { padding: 3rem 1rem; text-align: center; color: var(--ash); }
+
+.toast { position: fixed; left: 50%; bottom: 1.6rem; z-index: 50; translate: -50% 220%; opacity: 0; padding: .8rem 1.2rem; border-radius: 6px; background: var(--bone); color: var(--night); font-weight: 600; font-size: .9rem; box-shadow: 0 14px 40px rgba(0, 0, 0, .5); transition: translate .4s cubic-bezier(.2, .8, .2, 1), opacity .3s; }
+.toast.on { translate: -50% 0; opacity: 1; }
+
+/* ---------- schermi medi: anteprima sotto il modulo ---------- */
+@media (max-width: 1280px) {
+  .split { grid-template-columns: 280px minmax(0, 1fr); }
+  .split .prev { grid-column: 2; position: static; }
+}
+/* ---------- telefono: un livello alla volta, barra in basso ---------- */
+@media (max-width: 860px) {
+  :root { --side: 0px; }
+  .app { grid-template-columns: 1fr; }
+  .side { display: none; }
+  .bar { padding: .8rem 1rem; padding-top: calc(.8rem + env(safe-area-inset-top, 0px)); }
+  .bar h1 { font-size: 1.5rem; }
+  .bar .sub { display: none; }
+  .bar .pill { display: none; }
+  .bar .back { display: grid; place-items: center; width: 36px; height: 36px; margin-left: -.4rem; border: 0; background: none; font-size: 1.3rem; }
+  .bar .back[hidden] { display: none; }
+  .proto { padding: .5rem 1rem; }
+  .view { padding: 1rem 1rem calc(6rem + env(safe-area-inset-bottom, 0px)); }
+  .split, .inbox { grid-template-columns: 1fr; gap: 1rem; }
+  .list { position: static; max-height: none; overflow: visible; }
+  .split.open .list, .inbox.open > :first-child { display: none; }
+  .split:not(.open) .form, .split:not(.open) .prev, .inbox:not(.open) .mail { display: none; }
+  .split .prev { grid-column: 1; }
+  .card { padding: 1.1rem 1rem 1.2rem; }
+  .row, .row.three { grid-template-columns: 1fr; }
+  .drop { grid-template-columns: 96px minmax(0, 1fr); }
+  .dash { grid-template-columns: 1fr 1fr; gap: .8rem; }
+  .tile, .tile.w4, .tile.w6, .tile.w8, .tile.w12 { grid-column: span 2; }
+  .tile.half { grid-column: span 1; }
+  .tile .v { font-size: 2.4rem; }
+  .tabs { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: grid; grid-template-columns: repeat(5, 1fr); padding: .4rem .3rem calc(.4rem + env(safe-area-inset-bottom, 0px)); background: rgba(18, 16, 16, .97); border-top: 1px solid var(--line); }
+  .tabs button { all: unset; position: relative; display: grid; justify-items: center; gap: .2rem; padding: .35rem 0; font-size: .66rem; font-weight: 600; color: var(--dim); cursor: pointer; }
+  .tabs button svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .tabs button[aria-current="page"] { color: var(--sign); }
+  .tabs .bd { position: absolute; top: 0; left: 55%; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 8px; display: grid; place-items: center; background: var(--red); color: #fff; font-size: .6rem; }
+  .pubm { position: fixed; right: 1rem; bottom: calc(4.6rem + env(safe-area-inset-bottom, 0px)); z-index: 29; }
+  .stage { min-height: 300px; padding: 1.6rem 1rem; }
+}
+@media (min-width: 861px) { .pubm { display: none; } }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <a class="brand" href="#panoramica"><img src="img/blend-logo.svg" alt="Blend"><span>Back<br>office</span></a>
+    <nav class="nav" id="nav"></nav>
+    <div class="who"><span class="av">A</span><div><b>Alberto</b><a href="index.html" target="_blank" rel="noopener">Vedi il sito ↗</a></div></div>
+  </aside>
+  <main>
+    <header class="bar">
+      <button class="back" id="back" type="button" aria-label="Indietro" hidden>←</button>
+      <div><h1 id="title">Panoramica</h1><div class="sub" id="sub"></div></div>
+      <div class="act"><span class="pill" id="state"><i></i><span>Tutto pubblicato</span></span><button class="btn cut" id="pub" type="button">Pubblica</button></div>
+    </header>
+    <p class="proto"><b>Prototipo di design.</b> Puoi provare tutto: niente viene salvato né pubblicato. L'accesso riservato arriva con il passaggio a Cloudflare.</p>
+    <div class="view" id="view"></div>
+  </main>
+  <nav class="tabs" id="tabs"></nav>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const CMS = {
+  characters: {
+    "Fresco": "img/drink/CRTYSTAL-SEA.jpg", "Fruttato": "img/drink/KOKOMO.jpg", "Cremoso": "img/drink/ESTATHE_.jpg",
+    "Fumé": "img/drink/OLD-FRESHIONED.jpg", "Amaro": "img/drink/STARDUST.jpg", "Piccante": "img/drink/SANGRE-DE-VIDA.jpg",
+    "Senza alcol": "img/drink/CHEWING-GUM-MULE-2.jpg"
+  },
+  drinks: [
+    { n: "Smokey Joe", p: [1, 0, 4, 4, 5], base: "Rye whiskey", c: "Fumé", q: "Joe non parla molto. Se ne sta nella sua poltrona vicino al camino, a prendere pessime decisioni con molta calma.", ing: ["Bulleit Rye al Lapsang", "Bitter Fusetti", "Vermouth Cocchi Storico", "Liquore Quaglia al rabarbaro"] },
+    { n: "Don Fuego Salgado", p: [2, 3, 1, 3, 5], base: "Tequila", c: "Piccante", q: "Saluta sempre tutti quando entra in un locale. Poi gli dà fuoco.", ing: ["Tequila Espolòn", "Cordial di ananas arrosto", "Lime", "Ancho Reyes Verde", "Chipotle bitters"] },
+    { n: "Greenhouse Fizz", p: [2, 3, 1, 2, 1], base: "Gin", c: "Fresco", q: "Come entrare in una serra e uscirne storti e contenti.", ing: ["Gin The Botanist", "Cordial timo e salvia", "Limone", "Soda cetriolo e basilico"] },
+    { n: "Midnight Amarena", p: [5, 1, 1, 3, 2], base: "Rum", c: "Cremoso", q: "Il lato oscuro dell'amarena. Cremoso, notturno, leggermente vizioso.", ing: ["Rum Abuelo 7 anni", "Kraken Black Spiced", "Disaronno", "Gelato fiordilatte", "Nettare d'amarena"] },
+    { n: "Tuco Salamanca", p: [1, 4, 1, 3, 5], base: "Mezcal", c: "Piccante", q: "Il nipote di Hector. Ti piacerà, è solo un po' fuori controllo.", ing: ["Mezcal Encantado", "Pickle brine", "Lime", "Agave", "Green Tabasco", "Tintura di habanero"] },
+    { n: "Silent Rose", p: [2, 3, 0, 2, 1], base: "Vodka", c: "Fresco", q: "Come una rosa lasciata sul cuscino, senza biglietto.", ing: ["Vodka ai petali di rosa", "Timur Berry", "Lime"] },
+    { n: "Silk Road", p: [3, 2, 2, 3, 4], base: "Irish whiskey", c: "Fumé", q: "Un'antica rotta tra tè, spezie e legno tostato. Si parte lenti, si arriva lontano.", ing: ["Bushmills Sherry Cask", "Tè Assam", "Miele Thun al limone", "Zenzero", "Black cardamom e toasted oak bitters"] },
+    { n: "Made in Abyss", p: [3, 2, 1, 3, 2], base: "Gin", c: "Cremoso", q: "Sembra morbido. Sembra innocuo. Poi inizi a scendere.", ing: ["Gin Roku", "Milk punch al lampone", "Palo santo", "Ming River", "Sherry Fino"] },
+    { n: "Ashes and Blood", p: [2, 0, 4, 4, 4], base: "Mezcal", c: "Amaro", q: "You walk along the edge of danger, and it will change you.", ing: ["Mezcal Alipús", "Campari", "Porto", "Vermouth Antica Formula"] },
+    { n: "Wasabi Tensei", p: [3, 3, 0, 3, 4], base: "Bourbon", c: "Piccante", q: "Burro d'arachidi e wasabi: non dovevano incontrarsi. Per fortuna l'hanno fatto.", ing: ["Bulleit 10 anni al burro d'arachidi", "Limone", "Zucchero", "Velluto al wasabi"] },
+    { n: "Baby Donkey Kong", p: [4, 1, 0, 3, 1], base: "Rum", c: "Fruttato", q: "In questa pazza giungla vuole solo fare festa con te.", ing: ["Plantation Coconut", "Plantation 3 Stars", "Shrub di banana caramellata"] },
+    { n: "Holywood", p: [3, 2, 2, 3, 2], base: "Rum", c: "Fruttato", q: "Dicono che sia da Oscar. Si è montato la testa.", ing: ["Pampero Especial", "Bitter Fusetti cacao", "Cordial mango e passion fruit", "Palo santo"] },
+    { n: "Nebula Smash", p: [2, 3, 1, 2, 2], base: "Gin", c: "Fresco", q: "Un Basil Smash decollato da Tokyo e perso in una nebulosa.", ing: ["London Dry Gin", "Purple Shiso", "Cordial limone", "Bitters tè nero e bergamotto"] },
+    { n: "Fake Mezcal 'n Cola", p: [2, 2, 2, 3, 4], base: "Mezcal", c: "Fumé", q: "Una cola con il fumo negli occhi e il pepe dove non te lo aspetti.", ing: ["Mezcal Vida", "Cordial tamarindo e lime", "Quaglia al chinotto", "Five peppers bitters", "Soda"] },
+    { n: "The Cure", p: [1, 1, 4, 0, 3], base: "Senza alcol", c: "Senza alcol", q: "Amaro, affumicato, adulto. Senza un grammo di alcol.", ing: ["Aperitivo Amàrico", "Bitter Giffard", "Amaro Kura Kura", "Tè Lapsang"] },
+    { n: "Snow White", p: [4, 2, 0, 0, 1], base: "Senza alcol", c: "Senza alcol", q: "Pesca bianca e fava tonka, con le bollicine.", ing: ["Purea di pesca bianca", "Rosa canina e fava tonka", "Lime", "Soda"] }
+  ],
+  next: { title: "Blend in Jazz", when: "Mercoledì", sub: "Ogni due settimane", sets: ["Primo set 20:30", "Secondo set 21:45"], body: "Il meglio del jazz romano, dal vivo, a due passi dal bancone. I tavoli vicino ai musicisti finiscono presto.", img: "img/blend-in-jazz-2026_copertina_ottobre.webp" },
+  shows: [
+    { tag: "Prossima serata", title: "Blend in Jazz", lines: ["Mercoledì · il meglio del jazz romano"], time: "Primo set 20:30 · secondo 21:45", img: "img/blend-in-jazz-2026_copertina_ottobre.webp", tape: "04" },
+    { tag: "Dicembre", title: "Mystery Pacific Trio", lines: ["Mer 23 dic · swing"], time: "Ore 21:00 - 23:00", img: "img/serate/urban-dic.webp", tape: "11" },
+    { tag: "Gennaio", title: "Django's month", lines: ["Mer 6 gen · Hot Jazz Trio", "Mer 20 gen · Belleville Trio"], time: "Ore 21:00 - 23:00 · manouche", img: "img/serate/urban-gen.webp", tape: "14" },
+    { tag: "Febbraio", title: "Urban Jazz", lines: ["Mer 10 feb · Sunside Trio", "Mer 24 feb · Red Hot Serenaders"], time: "Ore 21:00 - 23:00", img: "img/serate/urban-feb.webp", tape: "05" },
+    { tag: "Marzo", title: "Hot Jazz Trio", lines: ["Mer 10 mar · jazz, italoswing, bossa"], time: "Ore 21:00 - 23:00", img: "img/serate/urban-mar.webp", tape: "16" },
+    { tag: "Aprile", title: "Sunside Trio", lines: ["Mer 14 apr · bossa, italoswing, trad jazz"], time: "Ore 21:00 - 23:00", img: "img/serate/urban-apr.webp", tape: "18" }
+  ],
+  events: [
+    { title: "Vinile, solo vinile", dow: 5, meta: "Dj set dalle 22:30", img: "img/ev-vinile.jpg" },
+    { title: "Spine nuove", dow: 4, meta: "Tre birre artigianali appena attaccate", img: "img/blend-foodanddrink-birra5.webp" },
+    { title: "Notte del mezcal", dow: 6, meta: "Degustazione al bancone, ore 22", img: "img/ev-bottiglie.jpg" }
+  ],
+  reviews: [
+    { q: "Il migliore burger della mia vita.", who: "Luca", where: "Sluurpy", kind: "rc" },
+    { q: "Ricercatezza nei dettagli, sia a tavola che nel design del locale.", who: "Recensione", where: "Google", kind: "ix" },
+    { q: "Ho preso The Cure, analcolico. Non ho per niente sentito la mancanza dell'alcol.", who: "Recensione", where: "Google", kind: "co" },
+    { q: "La pinsa ha un impasto veramente buono, con ottimi condimenti.", who: "Recensione", where: "Google", kind: "pg" },
+    { q: "Mi sono sentita come a casa, veramente.", who: "Valentina", where: "Google", kind: "nk" }
+  ]
+};
+const KITCHEN = [{"id": "anti", "titolo": "Antipasti", "frase": "Fassona al coltello, polpo scottato, guancia brasata al Negroamaro.", "prova": "From Piemonte With Love", "nastro": "cosa c'è nel piatto", "foto": "img/blend-foodanddrink-AL85038.webp", "fuoco": "50% 50%", "appunto": "Antipasti · appunto n° 01", "testo": ["From Piemonte With Love: tartare di Fassona tagliata al coltello, spuma di Parmigiano stravecchio, nocciole IGP, chips di topinambur.", "Polpetto: polpo scottato, tortino di patate, polvere di olive di Gaeta.", "Cheek to Cheek: guancia brasata al Negroamaro, patate affumicate.", "Parmigiana Light: melanzane alla scapece, robiola di Roccaverano."], "mano": "si comincia da qui", "parola": "al coltello"}, {"id": "pinsa", "titolo": "Pinsa", "frase": "Settantadue ore di lievitazione. Leggera, croccante, mai uguale a se stessa.", "prova": "Al Contadino Non Far Sapere", "nastro": "il segreto della pinsa", "foto": "img/blend-foodanddrink-AL85228.webp", "fuoco": "50% 55%", "appunto": "Pinsa · appunto n° 07", "testo": ["Impasto lavorato a mano. Lievitazione naturale: settantadue ore, non una di meno.", "Leggera, digeribile, croccante fuori. Le farciture cambiano con le stagioni.", "La più nostra: Al Contadino Non Far Sapere. Fonduta di Pecorino Romano 20 mesi, pere caramellate, pepe nero, guanciale di Cinta Senese."], "mano": "il tempo è l'ingrediente", "parola": "72 ore"}, {"id": "burger", "titolo": "Burger", "frase": "Irish Black Angus, duecento grammi, nessuna scorciatoia.", "prova": "Warehouse", "nastro": "com'è fatto il warehouse", "foto": "img/blend-foodanddrink-AL85121.JPG.webp", "fuoco": "50% 60%", "appunto": "Burger · appunto n° 12", "testo": ["Solo Irish Black Angus, 200 grammi. Bun del forno La Mollica, fatto apposta per noi.", "Warehouse: scamorza affumicata, peperoni grigliati, guanciale sardo Su Sirboni, cipolla croccante.", "Barbecue nostra allo scotch torbato Laphroaig 10 anni, e un goccio di tabasco."], "mano": "", "parola": "200 g"}, {"id": "tagl", "titolo": "Taglieri", "frase": "Un giro d'Italia su una tavola di legno.", "prova": "Da dividere, nella misura che vuoi", "nastro": "da dove arrivano", "foto": "img/blend-foodanddrink-DSC08213.JPG.webp", "fuoco": "50% 60%", "appunto": "Taglieri · appunto n° 03", "testo": ["Un viaggio tra le regioni, da piccoli produttori.", "Pecorini, salame di pecora, lardo al mirto Su Sirboni, Blu di bufala lombardo, Parma 24 mesi, caci e ricotte siciliane.", "Miele, composte di frutta bio, pane Guttiau: il carasau con olio e sale marino."], "mano": "da dividere. sempre.", "parola": "Italia"}, {"id": "dolci", "titolo": "Dolci", "frase": "Due dolci, tutti e due con il cioccolato Amedei.", "prova": "Sesto Peccato", "nastro": "il sesto peccato", "foto": "img/blend-foodanddrink-AL85246.webp", "fuoco": "50% 62%", "appunto": "Dolci · appunto n° 15", "testo": ["Sesto Peccato: mousse di nocciola, crumble di noci, caramello salato, scaglie di fondente 90% Amedei.", "Chiaroscuro: brownie fondente, namelaka al cioccolato bianco e vaniglia, coulis di amarena e lampone, crumble di mandorle e sesamo nero."], "mano": "", "parola": "Amedei"}];
+</script>
+<script>
+(function () {
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const clone = (o) => JSON.parse(JSON.stringify(o));
+  const mob = () => innerWidth <= 860;
+
+  /* ---------- dati (copia di lavoro) ---------- */
+  const D = {
+    shows: clone(CMS.shows).map((x, i) => ({ ...x, on: true, hero: i === 0, link: "https://blendfoodanddrink.plateform.app/reserve" })),
+    drinks: clone(CMS.drinks), kitchen: clone(KITCHEN), reviews: clone(CMS.reviews),
+    scores: { trip: "4,7", tripN: "307", google: "4,4", googleN: "292" },
+    apps: [
+      { id: 1, name: "Giulia Ferri", role: "Bancone", when: "Oggi, 11:42", email: "giulia.ferri@example.com", tel: "333 120 4471", disp: "Sere e weekend, da subito", msg: "Lavoro da tre anni in un cocktail bar a Ostiense, sono abituata ai sabati pieni. Mi piacerebbe crescere sulla parte di miscelazione.", cv: "CV_Giulia_Ferri.pdf", size: "212 KB", status: "Nuova", replies: [], notes: "" },
+      { id: 2, name: "Marco De Santis", role: "Cucina", when: "Ieri, 19:05", email: "marco.ds@example.com", tel: "349 880 1123", disp: "Dal mese prossimo", msg: "Aiuto cuoco, esperienza con impasti a lunga lievitazione. Cerco un posto dove fare sul serio.", cv: "Marco_DeSantis_cv.pdf", size: "180 KB", status: "Nuova", replies: [], notes: "" },
+      { id: 3, name: "Sara Liguori", role: "Sala", when: "Lun 9 nov", email: "sara.liguori@example.com", tel: "", disp: "Weekend", msg: "Studio all'università, cerco qualcosa per il fine settimana. Ho fatto due stagioni in un lido a Fregene.", cv: "", size: "", status: "Nuova", replies: [], notes: "" },
+      { id: 4, name: "Luca Proietti", role: "Bancone", when: "Ven 6 nov", email: "luca.p@example.com", tel: "320 554 0098", disp: "Tutte le sere", msg: "Barback da un anno, voglio passare dietro al bancone.", cv: "LucaProietti.pdf", size: "96 KB", status: "Colloquio", replies: [{ when: "Sab 7 nov", text: "Ciao Luca, grazie. Passi martedì alle 17 per due chiacchiere? Alberto" }], notes: "Simpatico al telefono. Martedì 17:00." },
+      { id: 5, name: "Elena Russo", role: "Altro", when: "Mar 3 nov", email: "elena.russo@example.com", tel: "", disp: "Da gennaio", msg: "Grafica e social, se vi serve una mano con le locandine.", cv: "portfolio_elena.pdf", size: "2,1 MB", status: "Archiviata", replies: [], notes: "" }
+    ],
+    log: [["Ieri", "Aggiunta la serata «Sunside Trio» di aprile"], ["Lun", "Cambiata la foto dei taglieri"], ["5 nov", "Drink list d'autunno: 16 cocktail"]]
+  };
+  let dirty = 0;
+
+  /* ---------- limiti: misurati sui foglietti del sito, carta per carta ---------- */
+  const LIM = {
+    tag: [3, 18, "Sopra il titolo, in rosso. Es. Dicembre o Prossima serata."], title: [3, 24, "Oltre 24 caratteri il titolo va su tre righe e il foglietto si allunga."],
+    line: [6, 44, "Una data per riga: giorno, gruppo, genere."], time: [5, 34, ""],
+    dn: [3, 20, "Il nome va in stampatello grande: oltre 20 caratteri va a capo male."], base: [3, 16, ""], q: [40, 120, "Una o due frasi. Sotto i 40 caratteri il fascicolo resta vuoto, sopra i 120 spinge giù gli ingredienti."], ing: [3, 36, ""],
+    frase: [30, 80, "La frase in corsivo accanto alla foto."], prova: [3, 34, ""], nastro: [8, 26, "La scritta sul nastro che apre l'appunto."], ap: [6, 30, ""], para: [20, 140, ""], mano: [0, 26, "Nota a penna rossa in fondo all'appunto. Facoltativa."], parola: [0, 12, "La parola cerchiata a matita. Facoltativa."],
+    rq: { rc: 40, ix: 80, co: 90, pg: 75, nk: 45 }
+  };
+  const CH = Object.keys(CMS.characters);
+  const SLOT = [
+    { paper: "img/vera/fascicolo-bruciato.webp", tape: "img/vera/nastro-03.webp", n: "Bruciato" },
+    { paper: "img/vera/fascicolo-strappato.webp", tape: "img/vera/nastro-17.webp", n: "Strappato" },
+    { paper: "img/vera/fascicolo-pila.webp", tape: "img/vera/nastro-10.webp", n: "Pila" },
+    { paper: "img/vera/fascicolo-cartone.webp", tape: "img/vera/nastro-20.webp", n: "Cartone" }
+  ];
+  const KPAPER = { anti: "img/vera/fascicolo-cartone.webp", pinsa: "img/vera/foglio-griglia.webp", burger: "img/vera/foglio-kraft.webp", tagl: "img/vera/foglio-antico.webp", dolci: "img/vera/fascicolo-bruciato.webp" };
+  const RPROP = { rc: ["Scontrino", "img/carta/scontrino.webp"], ix: ["Scheda", "img/carta/scheda.webp"], co: ["Sottobicchiere", "img/carta/sottobicchiere.webp"], pg: ["Pagina strappata", "img/carta/pagina.webp"], nk: ["Tovagliolo", "img/vera/tovagliolo.webp"] };
+
+  /* ---------- navigazione ---------- */
+  const I = {
+    home: '<path d="M4 11 12 4l8 7v9h-5v-6H9v6H4z"/>', serate: '<rect x="5" y="3" width="14" height="18" rx="1"/><path d="M8 8h8M8 12h8M8 16h5"/>',
+    drink: '<path d="M5 4h14l-7 8zM12 12v8M8 20h8"/>', cucina: '<path d="M7 3v8a3 3 0 0 0 6 0V3M10 3v18M17 21V3c2 2 3 5 3 8h-3"/>',
+    rec: '<path d="M4 5h16v11H9l-5 4z"/>', cand: '<path d="M3 6h18v12H3zM3 7l9 6 9-6"/>', more: '<circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/>'
+  };
+  const SECT = [
+    ["panoramica", "Panoramica", I.home, "Come va il sito, cosa c'è da fare"], ["serate", "Serate", I.serate, "Locandine e date: compaiono nella pila e nel biglietto dell'apertura"],
+    ["drink", "Drink list", I.drink, "I fascicoli della carta: ordine, testi, profilo di gusto"], ["cucina", "Cucina", I.cucina, "Le cinque portate: foto, frase e appunto"],
+    ["recensioni", "Recensioni", I.rec, "Le prove sulla bacheca e i voti"], ["candidature", "Candidature", I.cand, "Chi vuole lavorare al Blend"]
+  ];
+  const newApps = () => D.apps.filter((a) => a.status === "Nuova").length;
+  function drawNav() {
+    const cur = route().s, bd = newApps();
+    $("#nav").innerHTML = SECT.map(([id, t, ic], k) => `${k === 5 ? '<span class="sep"></span>' : ""}<button type="button" data-go="${id}" ${cur === id ? 'aria-current="page"' : ""}><svg viewBox="0 0 24 24">${ic}</svg>${t}${id === "candidature" && bd ? `<span class="bd">${bd}</span>` : ""}</button>`).join("");
+    const tabs = [["panoramica", "Home", I.home], ["serate", "Serate", I.serate], ["drink", "Drink", I.drink], ["cucina", "Cucina", I.cucina], ["candidature", "Candidati", I.cand]];
+    const tc = cur === "recensioni" ? "panoramica" : cur;
+    $("#tabs").innerHTML = tabs.map(([id, t, ic]) => `<button type="button" data-go="${id}" ${tc === id ? 'aria-current="page"' : ""}><svg viewBox="0 0 24 24">${ic}</svg>${t}${id === "candidature" && bd ? `<span class="bd">${bd}</span>` : ""}</button>`).join("");
+  }
+  document.addEventListener("click", (e) => { const b = e.target.closest("[data-go]"); if (b) { location.hash = b.dataset.go; } });
+  const route = () => { const [s, i] = location.hash.slice(1).split("/"); return { s: SECT.some((x) => x[0] === s) ? s : "panoramica", i: i === undefined ? null : +i }; };
+  $("#back").addEventListener("click", () => { location.hash = route().s; });
+
+  function setDirty(n = 1) {
+    dirty += n; const st = $("#state");
+    st.classList.toggle("dirty", dirty > 0); st.lastElementChild.textContent = dirty ? `${dirty} ${dirty === 1 ? "modifica" : "modifiche"} da pubblicare` : "Tutto pubblicato";
+  }
+  function toast(t) { const el = $("#toast"); el.textContent = t; el.classList.add("on"); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove("on"), 2600); }
+  const publish = () => {
+    const bad = $$(".f.bad"); if (bad.length) { bad[0].scrollIntoView({ behavior: "smooth", block: "center" }); toast("Prima sistema i campi in rosso: non entrerebbero nel foglietto."); return; }
+    if (!dirty) { toast("Niente di nuovo da pubblicare."); return; }
+    dirty = 0; setDirty(0); toast("Pubblicato. Il sito si aggiorna in un minuto (in questo prototipo per finta).");
+  };
+  $("#pub").addEventListener("click", publish);
+
+  /* ---------- campi con contatore e limite ---------- */
+  const uid = (() => { let n = 0; return () => "f" + (++n); })();
+  function field(label, val, lim, opt = {}) {
+    const [mn, mx, hint] = lim, id = uid(), tag = opt.area ? "textarea" : "input";
+    return `<div class="f" data-min="${mn}" data-max="${mx}"><label for="${id}"><span>${label}</span><span class="cnt"></span></label><${tag} id="${id}" ${opt.area ? `rows="${opt.rows || 3}"` : 'type="text"'} data-k="${opt.k || ""}" placeholder="${esc(opt.ph || "")}">${opt.area ? esc(val) : ""}</${tag}>${hint ? `<span class="hint" data-h="${esc(hint)}">${esc(hint)}</span>` : '<span class="hint"></span>'}</div>`.replace(`data-k="${opt.k || ""}"`, `data-k="${opt.k || ""}" ${opt.area ? "" : `value="${esc(val)}"`}`);
+  }
+  function check(f) {
+    const inp = $("input, textarea", f), n = inp.value.trim().length, mn = +f.dataset.min, mx = +f.dataset.max, c = $(".cnt", f), h = $(".hint", f);
+    c.textContent = `${n} / ${mx}`; c.classList.toggle("near", n > mx * .88 && n <= mx); c.classList.toggle("over", n > mx);
+    const bad = n > mx || (n > 0 && n < mn) || (mn > 0 && n === 0 && !f.closest(".lines"));
+    f.classList.toggle("bad", bad);
+    if (h) h.textContent = n > mx ? `Troppo lungo di ${n - mx}: nel foglietto non entra.` : (n < mn && mn > 0) ? `Almeno ${mn} caratteri.` : (h.dataset.h || "");
+  }
+  function wire(root, onChange) {
+    $$(".f", root).forEach((f) => { if (f.dataset.max) check(f); });
+    root.addEventListener("input", (e) => { const f = e.target.closest(".f"); if (f && f.dataset.max) check(f); onChange(e); setDirty(dirty ? 0 : 1); });
+  }
+  /* foto: carica (in memoria), punto di fuoco con un tocco */
+  function drop(src, focus, label, wide) {
+    const [fx, fy] = (focus || "50% 50%").split(" ").map(parseFloat);
+    return `<div class="drop" data-drop><div class="pv ${wide ? "wide" : ""}" data-focus title="Tocca il punto che deve restare sempre al centro">${src ? `<img src="${esc(src)}" alt="" style="object-position:${fx}% ${fy}%">` : ""}<span class="dot" style="left:${fx}%;top:${fy}%"></span></div><div><b>${label}</b><small>JPG o PNG, anche dal telefono. La ritagliamo e alleggeriamo noi. Tocca la foto per scegliere il punto che resta sempre in vista.</small><label class="btn ghost sm cut"><input type="file" accept="image/*">Carica un'altra foto</label></div></div>`;
+  }
+  function wireDrop(root, onImg, onFocus) {
+    const d = $("[data-drop]", root); if (!d) return;
+    const inp = $("input[type=file]", d), pv = $("[data-focus]", d);
+    const take = (file) => { if (!file) return; const r = new FileReader(); r.onload = () => { pv.innerHTML = `<img src="${r.result}" alt=""><span class="dot" style="left:50%;top:50%"></span>`; onImg(r.result); setDirty(1); toast("Foto caricata: controlla l'anteprima."); }; r.readAsDataURL(file); };
+    inp.addEventListener("change", () => take(inp.files[0]));
+    ["dragenter", "dragover"].forEach((t) => d.addEventListener(t, (e) => { e.preventDefault(); d.classList.add("over"); }));
+    ["dragleave", "drop"].forEach((t) => d.addEventListener(t, () => d.classList.remove("over")));
+    d.addEventListener("drop", (e) => { e.preventDefault(); take(e.dataTransfer.files[0]); });
+    pv.addEventListener("click", (e) => { const r = pv.getBoundingClientRect(), x = Math.round((e.clientX - r.left) / r.width * 100), y = Math.round((e.clientY - r.top) / r.height * 100);
+      $(".dot", pv).style.cssText = `left:${x}%;top:${y}%`; const im = $("img", pv); if (im) im.style.objectPosition = `${x}% ${y}%`; onFocus(`${x}% ${y}%`); setDirty(1); });
+  }
+  const lineList = (vals, lim, max, k, label) => `<div class="f" style="gap:.5rem"><div class="lb"><span>${label}</span><span class="cnt">${vals.length} / ${max}</span></div><div class="lines" data-lines="${k}" data-max-n="${max}">${vals.map((v) => lineRow(v, lim)).join("")}</div><button type="button" class="mini" data-addline="${k}" ${vals.length >= max ? "disabled" : ""}>+ aggiungi una riga</button></div>`;
+  const lineRow = (v, lim) => `<div class="ln"><div class="f" data-min="${lim[0]}" data-max="${lim[1]}"><input type="text" value="${esc(v)}" aria-label="riga"><span class="cnt" style="display:none"></span><span class="hint" style="display:none"></span></div><span class="cnt"></span><button type="button" class="x" aria-label="Togli la riga">✕</button></div>`;
+  function wireLines(root, get, set, lim) {
+    const sync = () => $$("[data-lines]", root).forEach((L) => {
+      const vals = $$("input", L).map((i) => i.value); set(L.dataset.lines, vals);
+      $$(".ln", L).forEach((r) => { const n = $("input", r).value.length, c = r.children[1]; c.textContent = `${n}/${lim[1]}`; c.className = "cnt" + (n > lim[1] ? " over" : n > lim[1] * .88 ? " near" : ""); r.firstElementChild.classList.toggle("bad", n > lim[1]); });
+      const wrap = L.parentElement; $(".lb .cnt", wrap).textContent = `${vals.length} / ${L.dataset.maxN}`; $("[data-addline]", wrap).disabled = vals.length >= +L.dataset.maxN;
+    });
+    root.addEventListener("click", (e) => {
+      const a = e.target.closest("[data-addline]"); if (a) { const L = $(`[data-lines="${a.dataset.addline}"]`, root); L.insertAdjacentHTML("beforeend", lineRow("", lim)); $("input", L.lastElementChild).focus(); sync(); setDirty(1); }
+      const x = e.target.closest(".ln .x"); if (x) { x.closest(".ln").remove(); sync(); setDirty(1); }
+    });
+    root.addEventListener("input", (e) => { if (e.target.closest("[data-lines]")) sync(); });
+    sync();
+  }
+
+  /* ---------- viste ---------- */
+  const V = {};
+  function head(s, i, extra) {
+    const S = SECT.find((x) => x[0] === s); $("#title").textContent = extra || S[1]; $("#sub").textContent = S[3];
+    $("#back").hidden = !(mob() && i !== null && s !== "panoramica");
+  }
+
+  V.panoramica = () => {
+    head("panoramica", null);
+    const n = D.shows[0], bd = newApps();
+    return `<div class="dash">
+      <div class="tile w6"><span class="k">Prossima serata</span><div class="nextev"><img src="${esc(n.img)}" alt=""><div><span class="s">${esc(n.tag)}</span><h3>${esc(n.title)}</h3><span class="s">${esc(n.lines[0])}</span><div class="quick" style="margin-top:.9rem"><button class="btn sm cut" data-go="serate/0">Modifica</button><button class="btn ghost sm cut" data-go="serate/new">Nuova serata</button></div></div></div></div>
+      <div class="tile half" style="grid-column:span 3"><span class="k">Candidature nuove</span><span class="v ${bd ? "y" : ""}">${bd}</span><span class="s">${bd ? "da leggere" : "tutto letto"}</span><button class="mini" data-go="candidature">Leggile →</button></div>
+      <div class="tile half" style="grid-column:span 3"><span class="k">In programma</span><span class="v">${D.shows.filter((x) => x.on).length}</span><span class="s">serate nella pila</span><button class="mini" data-go="serate">Vedi →</button></div>
+      <div class="tile w4 half"><span class="k">Drink in carta</span><span class="v">${D.drinks.length}</span><span class="s">cambia ogni sei mesi</span><button class="mini" data-go="drink">Apri la carta →</button></div>
+      <div class="tile w4 half"><span class="k">Voti</span><span class="v">${esc(D.scores.trip)}</span><span class="s">Tripadvisor · Google ${esc(D.scores.google)}</span><button class="mini" data-go="recensioni">Recensioni →</button></div>
+      <div class="tile w4"><span class="k">Il sito</span><span class="v" style="font-size:1.6rem;margin:.3rem 0">Online</span><span class="s">Ultima pubblicazione ieri alle 18:40</span><a class="mini" href="index.html" target="_blank" rel="noopener">Apri il sito ↗</a></div>
+      <div class="tile w12"><span class="k">Ultime modifiche</span><div class="log">${D.log.map(([t, x]) => `<div><time>${t}</time><span>${esc(x)}</span></div>`).join("")}</div></div>
+    </div>`;
+  };
+
+  /* serate */
+  function svPreview(x) {
+    return `<div class="sv"><div class="pos">${x.img ? `<img src="${esc(x.img)}" alt="">` : '<span class="empty">Carica la locandina</span>'}<img class="tp" src="img/vera/nastro-${esc(x.tape || "04")}.webp" alt=""></div>
+      <div class="slip"><span class="tg">${esc(x.tag)}</span><h3>${esc(x.title)}</h3>${x.lines.filter(Boolean).map((l) => `<p>${esc(l)}</p>`).join("")}<p class="tm">${esc(x.time)}</p><div class="go"><span class="stp">PRENOTA</span><span class="nx">la prossima →</span></div></div></div>`;
+  }
+  V.serate = (i) => {
+    head("serate", i);
+    if (i === "new" || Number.isNaN(i)) { D.shows.push({ tag: "", title: "Nuova serata", lines: [""], time: "Ore 21:00 - 23:00", img: "", tape: ["04", "11", "14", "05", "16", "18"][D.shows.length % 6], on: false, hero: false, link: "https://blendfoodanddrink.plateform.app/reserve" }); setDirty(1); history.replaceState(null, "", "#serate/" + (D.shows.length - 1)); i = D.shows.length - 1; head("serate", i); }
+    const sel = i ?? 0, x = D.shows[sel];
+    const list = `<div class="list"><div class="lhead"><span>${D.shows.length} serate · in ordine di data</span></div>${D.shows.map((s, k) => `<button class="item" type="button" data-go="serate/${k}" ${k === sel ? 'aria-current="true"' : ""}>${s.img ? `<img class="th" src="${esc(s.img)}" alt="">` : '<span class="th"></span>'}<span><b>${esc(s.title || "Senza titolo")}</b><small>${esc(s.tag)} · ${esc(s.lines[0] || "")}</small></span><span class="st ${s.on ? "on" : ""}">${s.on ? "Online" : "Bozza"}</span></button>`).join("")}<button class="add" type="button" data-go="serate/new">+ Nuova serata</button></div>`;
+    const form = `<div class="form" id="form">
+      <div class="card"><h2>Locandina <small>Verticale 3:4. Se è diversa la ritagliamo noi.</small></h2>${drop(x.img, "50% 50%", x.img ? "Locandina caricata" : "Trascina qui la locandina")}</div>
+      <div class="card"><h2>Il foglietto <small>Quello che si legge accanto alla pila</small></h2>
+        <div class="row">${field("Etichetta", x.tag, LIM.tag, { k: "tag", ph: "Dicembre" })}${field("Titolo", x.title, LIM.title, { k: "title", ph: "Blend in Jazz" })}</div>
+        <div style="margin-top:1.1rem">${lineList(x.lines, LIM.line, 3, "lines", "Date e gruppi")}</div>
+        <div class="row" style="margin-top:1.1rem">${field("Orario", x.time, LIM.time, { k: "time", ph: "Ore 21:00 - 23:00" })}<div class="f"><label><span>Link per prenotare</span></label><input type="url" value="${esc(x.link)}" data-k="link"><span class="hint">Per ora Plateform. Poi le prenotazioni nostre.</span></div></div>
+      </div>
+      <div class="card"><h2>Dove compare</h2><div style="display:grid;gap:.6rem">
+        <label class="sw"><span><b>Online</b><small>Se spento resta in bozza e non si vede sul sito.</small></span><input type="checkbox" data-sw="on" ${x.on ? "checked" : ""}></label>
+        <label class="sw"><span><b>Biglietto dell'apertura</b><small>Il biglietto «Prossima serata» nella prima schermata. Una serata sola alla volta.</small></span><input type="checkbox" data-sw="hero" ${x.hero ? "checked" : ""}></label></div></div>
+      <div class="foot"><button class="danger" type="button" data-del>Elimina la serata</button><button class="btn cut" type="button" data-save>Salva</button></div>
+    </div>`;
+    const prev = `<div class="prev"><div class="ph"><span>Anteprima</span><a href="index.html#serate" target="_blank" rel="noopener">Sul sito ↗</a></div><div class="stage" id="stage">${svPreview(x)}</div>${x.hero ? '<div class="ticket">🎟 <span>Anche nel <b>biglietto dell\'apertura</b></span></div>' : ""}</div>`;
+    return { html: `<div class="split ${i !== null ? "open" : ""}">${list}${form}${prev}</div>`, after: (root) => {
+      const draw = () => { $("#stage").innerHTML = svPreview(x); };
+      wire($("#form"), (e) => { const k = e.target.dataset.k; if (k) x[k] = e.target.value; draw(); });
+      wireLines($("#form"), () => x.lines, (k, v) => { x.lines = v; draw(); }, LIM.line);
+      wireDrop(root, (src) => { x.img = src; draw(); }, () => {});
+      $$("[data-sw]", root).forEach((c) => c.addEventListener("change", () => { if (c.dataset.sw === "hero" && c.checked) D.shows.forEach((s) => (s.hero = false)); x[c.dataset.sw] = c.checked; setDirty(1); render(); }));
+      $("[data-del]", root).addEventListener("click", () => { if (confirm("Eliminare questa serata?")) { D.shows.splice(sel, 1); setDirty(1); location.hash = "serate"; } });
+      $("[data-save]", root).addEventListener("click", () => toast("Salvato in bozza. Premi Pubblica per mandarlo online."));
+    } };
+  };
+
+  /* drink */
+  function fvPreview(d, pos) {
+    const sl = SLOT[pos % 4], p = d.p || [2, 2, 2, 2, 2], v = [(p[2] - p[0] + 5) / 10, p[3] / 5, p[4] / 5].map((x) => Math.round(6 + x * 88));
+    const rows = [["dolce", "amaro"], ["leggero", "forte"], ["pulito", "speziato"]];
+    return `<div class="fv" style="--paper:url('${sl.paper}');--tape:url('${sl.tape}')"><span class="clip"></span><span class="stamp">${esc(d.c)}</span><span class="no">Fascicolo n° ${String(pos + 1).padStart(2, "0")}, base ${esc((d.base || "").toLowerCase())}</span><h3>${esc(d.n)}</h3><p class="q">${esc(d.q)}</p>
+      <div class="pf">${rows.map((r, k) => `<div class="pr"><span>${r[0]}</span><span class="dots"><i style="left:${v[k]}%"></i></span><span>${r[1]}</span></div>`).join("")}</div><p class="ing"><b>Ingredienti</b>${d.ing.filter(Boolean).map(esc).join(", ")}</p></div>`;
+  }
+  V.drink = (i) => {
+    head("drink", i);
+    if (i === "new" || Number.isNaN(i)) { D.drinks.push({ n: "Nuovo drink", p: [2, 2, 2, 2, 2], base: "Gin", c: CH[0], q: "", ing: [""] }); setDirty(1); history.replaceState(null, "", "#drink/" + (D.drinks.length - 1)); i = D.drinks.length - 1; head("drink", i); }
+    const sel = i ?? 0, d = D.drinks[sel];
+    const list = `<div class="list" id="dl"><div class="lhead"><span>${D.drinks.length} drink · trascina per riordinare</span></div>${D.drinks.map((x, k) => `<div class="item" role="button" tabindex="0" draggable="true" data-k="${k}" data-go="drink/${k}" ${k === sel ? 'aria-current="true"' : ""}><span class="num">${k + 1}</span><span><b>${esc(x.n)}</b><small>${esc(x.base)} · carta ${SLOT[k % 4].n.toLowerCase()}</small></span><span class="grip" aria-hidden="true">⋮⋮</span></div>`).join("")}<button class="add" type="button" data-go="drink/new">+ Nuovo drink</button></div>`;
+    const sl = (k, a, b) => { const p = d.p, val = k === 0 ? p[2] - p[0] : k === 1 ? p[3] : p[4]; return `<div class="tr"><span>${a}</span><input type="range" min="${k === 0 ? -5 : 0}" max="5" step="1" value="${val}" data-t="${k}" aria-label="${a} ${b}"><span>${b}</span></div>`; };
+    const form = `<div class="form" id="form">
+      <div class="note"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg><span>Le carte restano al loro posto: il drink n° ${sel + 1} usa sempre la carta <b>${SLOT[sel % 4].n.toLowerCase()}</b>. Se sposti un drink prende la carta della nuova posizione, così due carte uguali non sono mai vicine.</span></div>
+      <div class="card"><h2>Il drink</h2><div class="row">${field("Nome", d.n, LIM.dn, { k: "n" })}${field("Base", d.base, LIM.base, { k: "base", ph: "Gin, Rum, Senza alcol" })}</div>
+        <div class="f" style="margin-top:1.1rem"><div class="lb"><span>Carattere</span></div><div class="chips" id="chars">${CH.map((c) => `<button type="button" aria-pressed="${c === d.c}">${esc(c)}</button>`).join("")}</div><span class="hint">Decide il timbro sul fascicolo e la foto del bicchiere.</span></div>
+        <div style="margin-top:1.1rem">${field("Descrizione", d.q, LIM.q, { k: "q", area: true, rows: 3 })}</div></div>
+      <div class="card"><h2>Profilo di gusto <small>Le X sul fascicolo</small></h2><div class="taste">${sl(0, "Dolce", "Amaro")}${sl(1, "Leggero", "Forte")}${sl(2, "Pulito", "Speziato")}</div></div>
+      <div class="card"><h2>Ingredienti</h2>${lineList(d.ing, LIM.ing, 6, "ing", "Uno per riga")}</div>
+      <div class="foot"><button class="danger" type="button" data-del>Togli dalla carta</button><button class="btn cut" type="button" data-save>Salva</button></div>
+    </div>`;
+    const prev = `<div class="prev"><div class="ph"><span>Anteprima · fascicolo n° ${sel + 1}</span><a href="index.html#carta" target="_blank" rel="noopener">Sul sito ↗</a></div><div class="stage" id="stage">${fvPreview(d, sel)}</div></div>`;
+    return { html: `<div class="split ${i !== null ? "open" : ""}">${list}${form}${prev}</div>`, after: (root) => {
+      const draw = () => { $("#stage").innerHTML = fvPreview(d, sel); };
+      wire($("#form"), (e) => { const k = e.target.dataset.k; if (k) d[k] = e.target.value; const t = e.target.dataset.t; if (t !== undefined) { const v = +e.target.value; if (t === "0") { d.p[0] = Math.max(0, -v); d.p[2] = Math.max(0, v); } else d.p[+t + 2] = v; } draw(); });
+      wireLines($("#form"), () => d.ing, (k, v) => { d.ing = v; draw(); }, LIM.ing);
+      $("#chars").addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; d.c = b.textContent; $$("#chars button").forEach((x) => x.setAttribute("aria-pressed", x === b)); setDirty(1); draw(); });
+      $("[data-del]", root).addEventListener("click", () => { if (confirm("Togliere questo drink dalla carta?")) { D.drinks.splice(sel, 1); setDirty(1); location.hash = "drink"; } });
+      $("[data-save]", root).addEventListener("click", () => toast("Salvato in bozza. Premi Pubblica per mandarlo online."));
+      /* riordino: trascina (desktop) */
+      let from = null; const L = $("#dl");
+      L.addEventListener("dragstart", (e) => { const it = e.target.closest(".item"); if (!it) return; from = +it.dataset.k; it.classList.add("drag"); e.dataTransfer.effectAllowed = "move"; });
+      L.addEventListener("dragover", (e) => { const it = e.target.closest(".item"); if (from === null || !it) return; e.preventDefault(); $$(".item.over", L).forEach((x) => x.classList.remove("over")); it.classList.add("over"); });
+      L.addEventListener("drop", (e) => { const it = e.target.closest(".item"); if (from === null || !it) return; e.preventDefault(); const to = +it.dataset.k; const [m] = D.drinks.splice(from, 1); D.drinks.splice(to, 0, m); from = null; setDirty(1); location.hash = "drink/" + to; render(); toast(`Spostato in posizione ${to + 1}: ora usa la carta ${SLOT[to % 4].n.toLowerCase()}.`); });
+      L.addEventListener("dragend", () => { from = null; $$(".item", L).forEach((x) => x.classList.remove("drag", "over")); });
+    } };
+  };
+
+  /* cucina */
+  function kvPreview(k) {
+    return `<div class="kv"><div class="kph"><img src="${esc(k.foto)}" alt="" style="object-position:${esc(k.fuoco || "50% 50%")}"></div>
+      <div class="pg" style="--paper:url('${KPAPER[k.id]}')">${k.parola ? `<span class="wd">${esc(k.parola)}</span>` : ""}<h4>${esc(k.appunto)}</h4>${k.testo.filter(Boolean).map((t) => `<p>${esc(t)}</p>`).join("")}${k.mano ? `<span class="hd">${esc(k.mano)}</span>` : ""}</div>
+      <span class="tape">${esc(k.nastro)} →</span><p class="claim">${esc(k.frase)}</p><span class="sig">Da provare: ${esc(k.prova)}</span></div>`;
+  }
+  V.cucina = (i) => {
+    head("cucina", i);
+    const sel = i ?? 0, k = D.kitchen[sel];
+    const list = `<div class="list"><div class="lhead"><span>Cinque portate · ordine fisso</span></div>${D.kitchen.map((x, n) => `<button class="item" type="button" data-go="cucina/${n}" ${n === sel ? 'aria-current="true"' : ""}><img class="th" src="${esc(x.foto)}" alt="" style="object-position:${esc(x.fuoco)}"><span><b>${esc(x.titolo)}</b><small>${esc(x.prova)}</small></span><span></span></button>`).join("")}</div>`;
+    const form = `<div class="form" id="form">
+      <div class="card"><h2>Foto <small>Quadrata o orizzontale</small></h2>${drop(k.foto, k.fuoco, k.titolo, true)}</div>
+      <div class="card"><h2>Accanto alla foto</h2>${field("Frase", k.frase, LIM.frase, { k: "frase", area: true, rows: 2 })}<div class="row" style="margin-top:1.1rem">${field("Da provare", k.prova, LIM.prova, { k: "prova" })}${field("Scritta sul nastro", k.nastro, LIM.nastro, { k: "nastro" })}</div></div>
+      <div class="card"><h2>L'appunto <small>Si apre toccando il nastro</small></h2>${field("Intestazione", k.appunto, LIM.ap, { k: "appunto" })}<div style="margin-top:1.1rem">${lineList(k.testo, LIM.para, 4, "testo", "Righe dell'appunto")}</div>
+        <div class="row" style="margin-top:1.1rem">${field("Nota a penna", k.mano, LIM.mano, { k: "mano", ph: "facoltativa" })}${field("Parola cerchiata", k.parola, LIM.parola, { k: "parola", ph: "facoltativa" })}</div></div>
+      <div class="foot"><span></span><button class="btn cut" type="button" data-save>Salva</button></div>
+    </div>`;
+    const prev = `<div class="prev"><div class="ph"><span>Anteprima</span><a href="index.html#cucina" target="_blank" rel="noopener">Sul sito ↗</a></div><div class="stage" id="stage" style="padding:1.2rem">${kvPreview(k)}</div></div>`;
+    return { html: `<div class="split ${i !== null ? "open" : ""}">${list}${form}${prev}</div>`, after: (root) => {
+      const draw = () => { $("#stage").innerHTML = kvPreview(k); };
+      wire($("#form"), (e) => { const f = e.target.dataset.k; if (f) k[f] = e.target.value; draw(); });
+      wireLines($("#form"), () => k.testo, (n, v) => { k.testo = v; draw(); }, LIM.para);
+      wireDrop(root, (src) => { k.foto = src; k.fuoco = "50% 50%"; draw(); }, (f) => { k.fuoco = f; draw(); });
+      $("[data-save]", root).addEventListener("click", () => toast("Salvato in bozza. Premi Pubblica per mandarlo online."));
+    } };
+  };
+
+  /* recensioni */
+  function rvPreview(r) { return `<div class="rv ${r.kind}" style="--paper:url('${RPROP[r.kind][1]}')"><blockquote>${esc(r.q)}</blockquote><span class="who">${esc(r.who)}, ${esc(r.where)} · ★★★★★</span></div>`; }
+  V.recensioni = (i) => {
+    head("recensioni", i);
+    const sel = i ?? 0, r = D.reviews[sel];
+    const list = `<div class="list"><div class="lhead"><span>Cinque prove sulla bacheca</span></div>${D.reviews.map((x, n) => `<button class="item" type="button" data-go="recensioni/${n}" ${n === sel ? 'aria-current="true"' : ""}><span class="num">${n + 1}</span><span><b>${RPROP[x.kind][0]}</b><small>${esc(x.q)}</small></span><span></span></button>`).join("")}</div>`;
+    const form = `<div class="form" id="form">
+      <div class="card"><h2>Voti <small>In grande sopra la bacheca</small></h2><div class="scores">
+        <div class="score"><div class="big">${esc(D.scores.trip)}</div><div class="row" style="margin-top:.6rem"><div class="f"><label><span>Tripadvisor</span></label><input type="text" value="${esc(D.scores.trip)}" data-s="trip"></div><div class="f"><label><span>Recensioni</span></label><input type="text" value="${esc(D.scores.tripN)}" data-s="tripN"></div></div></div>
+        <div class="score"><div class="big">${esc(D.scores.google)}</div><div class="row" style="margin-top:.6rem"><div class="f"><label><span>Google</span></label><input type="text" value="${esc(D.scores.google)}" data-s="google"></div><div class="f"><label><span>Recensioni</span></label><input type="text" value="${esc(D.scores.googleN)}" data-s="googleN"></div></div></div></div></div>
+      <div class="card"><h2>${RPROP[r.kind][0]} <small>Ogni prova ha il suo spazio: il ${RPROP[r.kind][0].toLowerCase()} regge al massimo ${LIM.rq[r.kind]} caratteri.</small></h2>${field("Frase della recensione", r.q, [8, LIM.rq[r.kind], "Copiala com'è, anche corta: corta si legge meglio."], { k: "q", area: true, rows: 2 })}
+        <div class="row" style="margin-top:1.1rem">${field("Chi l'ha scritta", r.who, [2, 18, ""], { k: "who" })}${field("Dove", r.where, [2, 14, ""], { k: "where", ph: "Google" })}</div></div>
+      <div class="foot"><span></span><button class="btn cut" type="button" data-save>Salva</button></div></div>`;
+    const prev = `<div class="prev"><div class="ph"><span>Anteprima</span><a href="index.html#resta" target="_blank" rel="noopener">Sul sito ↗</a></div><div class="stage" id="stage">${rvPreview(r)}</div></div>`;
+    return { html: `<div class="split ${i !== null ? "open" : ""}">${list}${form}${prev}</div>`, after: (root) => {
+      wire($("#form"), (e) => { const k = e.target.dataset.k; if (k) r[k] = e.target.value; const sk = e.target.dataset.s; if (sk) { D.scores[sk] = e.target.value; $$(".score .big", root)[sk.startsWith("trip") ? 0 : 1].textContent = sk.endsWith("N") ? $$(".score .big", root)[sk.startsWith("trip") ? 0 : 1].textContent : e.target.value; } $("#stage").innerHTML = rvPreview(r); });
+      $("[data-save]", root).addEventListener("click", () => toast("Salvato in bozza. Premi Pubblica per mandarlo online."));
+    } };
+  };
+
+  /* candidature */
+  let filt = "Tutte";
+  const TPL = [["Colloquio", "Ciao {nome}, grazie per averci scritto. Ti va di passare al locale per due chiacchiere? Dimmi tu quando sei libero questa settimana. Alberto"], ["Più avanti", "Ciao {nome}, grazie. Per ora siamo al completo, ma teniamo il tuo curriculum: se si libera un posto ti scriviamo noi. Alberto"], ["Grazie, no", "Ciao {nome}, grazie del tempo. Questa volta non siamo riusciti a trovare il posto giusto per te. In bocca al lupo. Alberto"]];
+  V.candidature = (i) => {
+    head("candidature", i);
+    const FS = ["Tutte", "Nuova", "Colloquio", "Archiviata"], shown = D.apps.filter((a) => filt === "Tutte" || a.status === filt);
+    const sel = i ?? (mob() ? null : (shown[0] ? D.apps.indexOf(shown[0]) : null)), a = sel !== null ? D.apps[sel] : null;
+    if (a && a.status === "Nuova" && i !== null) { a.status = "Letta"; drawNav(); }
+    const list = `<div><div class="filters chips">${FS.map((f) => `<button type="button" data-f="${f}" aria-pressed="${f === filt}">${f === "Nuova" ? "Nuove" : f === "Archiviata" ? "Archiviate" : f}${f !== "Tutte" ? ` · ${D.apps.filter((x) => x.status === f).length}` : ""}</button>`).join("")}</div>
+      <div class="list" style="position:static;max-height:none">${shown.map((x) => { const k = D.apps.indexOf(x); return `<button class="item" type="button" data-go="candidature/${k}" ${k === sel ? 'aria-current="true"' : ""}><span class="num" style="color:var(--bone)">${esc(x.name[0])}</span><span><b>${esc(x.name)}</b><small>${esc(x.role)} · ${esc(x.when)}</small></span><span class="st ${x.status === "Nuova" ? "new" : x.status === "Colloquio" ? "on" : ""}">${esc(x.status)}</span></button>`; }).join("") || '<p class="empty">Nessuna candidatura qui.</p>'}</div></div>`;
+    const mail = a ? `<div class="mail" id="mail">
+      <div class="mhead"><div><h2>${esc(a.name)}</h2><div class="meta"><span>${esc(a.role)}</span><a href="mailto:${esc(a.email)}">${esc(a.email)}</a>${a.tel ? `<a href="tel:${esc(a.tel.replace(/\s/g, ""))}">${esc(a.tel)}</a>` : ""}<span>${esc(a.disp)}</span></div></div>
+        <div class="status" id="stat">${["Letta", "Colloquio", "Archiviata"].map((s) => `<button type="button" aria-pressed="${a.status === s}">${s}</button>`).join("")}</div></div>
+      <div class="msg">${esc(a.msg)}</div>
+      ${a.cv ? `<div class="att"><span class="ic">PDF</span><span><b>${esc(a.cv)}</b><small>${esc(a.size)}</small></span><button class="btn ghost sm cut" type="button" data-cv>Apri</button></div>` : '<div class="att"><span class="ic" style="background:var(--n3);color:var(--ash)">—</span><span><b>Nessun curriculum</b><small>Ha scritto solo il messaggio.</small></span></div>'}
+      <div class="card"><h2>Note interne <small>Le vedi solo tu</small></h2><div class="f"><textarea rows="2" data-note placeholder="Es. richiamare giovedì">${esc(a.notes)}</textarea></div></div>
+      ${a.replies.length ? `<div class="thread">${a.replies.map((r) => `<div class="bubble"><small>Tu, ${esc(r.when)}</small>${esc(r.text)}</div>`).join("")}</div>` : ""}
+      <div class="card"><h2>Rispondi <small>Parte da lavoro@blendfoodanddrink.it</small></h2><div class="compose"><div class="tpl chips">${TPL.map(([t], n) => `<button type="button" data-tpl="${n}">${t}</button>`).join("")}</div><div class="f"><textarea rows="5" id="reply" placeholder="Scrivi a ${esc(a.name.split(" ")[0])}…"></textarea></div><div class="foot"><span class="hint" style="font-size:.78rem;color:var(--dim)">Arriva nella sua casella, la risposta torna qui.</span><button class="btn cut" type="button" data-send>Invia</button></div></div></div>
+    </div>` : `<div class="mail"><p class="empty">Scegli una candidatura a sinistra.</p></div>`;
+    return { html: `<div class="inbox ${i !== null ? "open" : ""}">${list}${mail}</div>`, after: (root) => {
+      $$("[data-f]", root).forEach((b) => b.addEventListener("click", () => { filt = b.dataset.f; render(); }));
+      if (!a) return;
+      $("#stat").addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; a.status = b.textContent; render(); toast(`Segnata come «${a.status}».`); });
+      $("[data-note]", root).addEventListener("input", (e) => { a.notes = e.target.value; });
+      $$("[data-tpl]", root).forEach((b) => b.addEventListener("click", () => { $("#reply").value = TPL[+b.dataset.tpl][1].replace("{nome}", a.name.split(" ")[0]); $("#reply").focus(); }));
+      $("[data-send]", root).addEventListener("click", () => { const t = $("#reply").value.trim(); if (!t) { toast("Scrivi qualcosa prima di inviare."); return; } a.replies.push({ when: "adesso", text: t }); if (a.status === "Letta" || a.status === "Nuova") a.status = "Colloquio"; render(); toast(`Risposta inviata a ${a.name.split(" ")[0]} (per finta).`); });
+      const cv = $("[data-cv]", root); if (cv) cv.addEventListener("click", () => toast("Qui si apre il PDF del curriculum."));
+    } };
+  };
+
+  /* ---------- disegno ---------- */
+  function render() {
+    const r = route(), raw = location.hash.slice(1).split("/")[1];
+    const i = raw === "new" ? "new" : r.i;
+    drawNav();
+    const out = V[r.s](i);
+    const v = $("#view");
+    if (typeof out === "string") v.innerHTML = out; else { v.innerHTML = out.html; out.after(v); }
+    const ti = $("#title"); if (r.s !== "panoramica" && mob() && i !== null) { const it = $(".item[aria-current=true] b", v); if (it) ti.textContent = it.textContent; }
+  }
+  let lastW = innerWidth;
+  addEventListener("hashchange", () => { render(); scrollTo(0, 0); });
+  addEventListener("resize", () => { if ((innerWidth <= 860) !== (lastW <= 860)) render(); lastW = innerWidth; });
+  render();
+})();
+</script>
+</body>
+</html>
