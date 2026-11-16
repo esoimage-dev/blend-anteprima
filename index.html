@@ -1956,7 +1956,7 @@ body::after { background-image: url("img/grana-a.png"); background-size: 160px 1
   .kit-tabs { padding-top: .2rem; }
   .kt { padding-bottom: .6rem; }
   .kit .kp-t, .kit .kp.b .kp-t { font-size: clamp(2.6rem, 13vw, 3.6rem); line-height: .9; margin: .55rem 0 .5rem !important; }
-  .kp-ph, .kp.b .kp-ph { aspect-ratio: 16 / 11 !important; max-height: 38svh; }
+  .kp-ph, .kp.b .kp-ph { aspect-ratio: auto !important; height: min(calc((100vw - 2 * var(--gut)) * .82), calc(100svh - 425px)) !important; max-height: none; }
   .kit .kp .claim { font-size: 1.22rem; line-height: 1.2; margin-top: .7rem; }
   .kit .kp .sig { margin-top: .45rem; font-size: .92rem; }
   .kit .kp-pull { margin-top: .7rem; }
