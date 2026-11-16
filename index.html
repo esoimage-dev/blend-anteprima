@@ -1962,6 +1962,18 @@ body::after { background-image: url("img/grana-a.png"); background-size: 160px 1
   .kit .kp-pull { margin-top: .7rem; }
 }
 @media (max-width: 900px) { .kit .kp-pull .tape { max-width: calc(100vw - 2 * var(--gut) - 108px); white-space: nowrap; font-size: clamp(1rem, 4.6vw, 1.25rem); } }
+/* ---------- v48: prima schermata su telefono, biglietto più piccolo e centrato, l'invito a scendere sotto ---------- */
+@media (max-width: 900px) {
+  .hero .w.first .low { gap: 1.6rem; }
+  .hero .w.first .low .next { order: 1; width: min(290px, calc(100vw - 2 * var(--gut) - 40px)); grid-template-columns: 60px minmax(0, 1fr); }
+  .hero .w.first .low .godown { order: 2; font-size: .88rem; }
+  .next b { font-size: 1.3rem; }
+  .next .lb { font-size: .6rem; }
+  .next .wh { font-size: .7rem; }
+  .next .stub { margin: 9px 0 9px 11px; }
+  .next .body { padding: 9px 22px 9px 11px; }
+  .hero .w.first { padding-bottom: calc(1.6rem + env(safe-area-inset-bottom, 0px)) !important; }
+}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
