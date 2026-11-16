@@ -1974,6 +1974,16 @@ body::after { background-image: url("img/grana-a.png"); background-size: 160px 1
   .next .body { padding: 9px 22px 9px 11px; }
   .hero .w.first { padding-bottom: calc(1.6rem + env(safe-area-inset-bottom, 0px)) !important; }
 }
+/* ---------- v49: menu, in fondo solo lingua, Lavora con noi e Instagram su una riga; voci un po' più grandi e un filo distanziate ---------- */
+.ov .base, .ov .base { flex-direction: row !important; flex-wrap: nowrap; align-items: center !important; justify-content: flex-start; gap: 1.6rem !important; padding-top: 1.1rem; }
+.ov .base .lk, .ov .base a { font-size: .92rem; white-space: nowrap; }
+.ov .base a { margin-left: auto; }
+.ov .rows a.row { padding: .03em 0 !important; }
+@media (max-width: 900px) {
+  .ov .rows .nm { font-size: clamp(2.6rem, min(calc((100vw - 2 * var(--gut) - 72px) / 4.75), calc((100svh - 240px) / 6.6)), 6.4rem) !important; }
+  .ov .rows a.row { padding: .09em 0 !important; }
+  .ov .base { gap: 1.2rem !important; padding-top: 1rem; padding-bottom: calc(.4rem + env(safe-area-inset-bottom, 0px)); }
+}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -2045,7 +2055,7 @@ body::after { background-image: url("img/grana-a.png"); background-size: 160px 1
       <li><a class="row" href="#carta"><span class="tm">22:30</span><span class="nm sign" data-t="Drink list">Drink list</span><span class="note">sedici sospettati</span></a></li>
       <li><a class="row" href="#dove"><span class="tm">02:00</span><span class="nm sign" data-t="Dove siamo">Dove siamo</span><span class="note">segui la mappa</span></a></li>
     </ol>
-    <div class="base"><div class="lang" role="group" aria-label="Lingua"><button type="button" data-lang="it" aria-pressed="true">IT</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div><span>Via di Mezzocammino 141, Roma</span><span>Tutte le sere dalle 18 alle 2</span><button type="button" class="lk" data-job>Lavora con noi</button><a href="https://www.instagram.com/blendfoodanddrink/" target="_blank" rel="noopener">Instagram</a></div>
+    <div class="base"><div class="lang" role="group" aria-label="Lingua"><button type="button" data-lang="it" aria-pressed="true">IT</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div><button type="button" class="lk" data-job>Lavora con noi</button><a href="https://www.instagram.com/blendfoodanddrink/" target="_blank" rel="noopener">Instagram</a></div>
   </div>
 </div>
 <div class="deck" id="deck">
