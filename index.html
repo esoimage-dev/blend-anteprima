@@ -2076,6 +2076,24 @@ body.past .deck.swap-in .tt .disc, .deck.swap-in .disc { translate: 0 0; opacity
   body.pren-hero .dock { opacity: 1 !important; translate: none !important; pointer-events: auto !important; transition: none !important; }
   .pren-slot { display: inline-block; }
 }
+/* ---------- v54 ---------- */
+@media (max-width: 900px) {
+  /* hero alta quanto lo schermo SENZA barra degli indirizzi (lvh): quando la barra sparisce non cambia niente e non lampeggia.
+     I contenuti in basso restano sopra la barra finché c'è */
+  .hero { height: 200lvh !important; }
+  .hero .pinx { height: 100lvh !important; }
+  .hero .w.first { padding-bottom: calc(1.6rem + env(safe-area-inset-bottom, 0px) + 100lvh - 100svh) !important; }
+  .hero .w.fin { padding-bottom: calc(5.6rem + env(safe-area-inset-bottom, 0px) + 100lvh - 100svh) !important; }
+  /* Prenota nasce già a destra: poi scende soltanto */
+  .fin-btns { justify-content: space-between; flex-wrap: nowrap; }
+  /* striscia dei nomi dei drink: stesso nero della pagina, niente stacco sotto */
+  .drinks { background: linear-gradient(rgba(10, 9, 8, 0) 0, rgba(10, 9, 8, .6) 35%, var(--night) 72%) !important; }
+  /* fascicoli: meno carta vuota sotto gli ingredienti */
+  .file[data-v="0"], .file[data-v="1"] { padding-bottom: 7% !important; }
+  .file[data-v="2"] { padding-bottom: 26% !important; }
+  .file[data-v="3"] { padding-bottom: 5% !important; }
+}
+@media (max-width: 385px) { .file[data-v="0"], .file[data-v="1"] { padding-bottom: 11% !important; } .file[data-v="2"] { padding-bottom: 33% !important; } .file[data-v="3"] { padding-bottom: 8% !important; } }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -2691,7 +2709,7 @@ const CMS = {
     /* un solo tracciato: tutto lo schermo scuro, bucato dalle lettere (evenodd). Niente maschere, costa poco */
     $(".cover", svg).setAttribute("d", "M-9e6 -9e6H9e6V9e6H-9e6Z " + d); $(".edge", svg).setAttribute("d", d);
     const LW = 2160, LH = 1338, FX = 1120, FY = 1249, BAR = 80;      /* si entra dalla barra lunga della L */
-    let W = 0, H = 0, s0 = 1, x0 = 0, y0 = 0, s1 = 1, last = -1, span0 = 0, heroTop = 0;
+    let W = 0, H = 0, s0 = 1, x0 = 0, y0 = 0, s1 = 1, last = -1, span0 = 0, heroTop = 0, hv0 = 0;
     const ease = (t) => t * t * (3 - 2 * t);
     function draw(p) {
       if (p === last) return; last = p;
@@ -2708,9 +2726,9 @@ const CMS = {
     }
     function size() {
       /* sui telefoni l'altezza della hero si fissa in pixel alla prima misura: quando la barra degli indirizzi sparisce non cambia niente */
-      if (!fine) { const v = Math.round(innerHeight); document.documentElement.style.setProperty("--hv", v + "px"); }
+      if (!fine && !hv0) { hv0 = Math.round(innerHeight); document.documentElement.style.setProperty("--hv", hv0 + "px"); }
       W = pinx.clientWidth; H = pinx.clientHeight; heroTop = hero.offsetTop; span0 = hero.offsetHeight - H;
-      const top = W < 700 ? 110 : 96, bottom = H - (W < 700 ? 200 : 205), room = Math.max(140, bottom - top);
+      const Hv = fine ? H : Math.min(H, hv0); const top = W < 700 ? 110 : 96, bottom = Hv - (W < 700 ? 200 : 205), room = Math.max(140, bottom - top);
       const lw = Math.min(W * (W < 700 ? .86 : .74), 1300, room * LW / LH);
       s0 = lw / LW; x0 = (W - lw) / 2; y0 = top + (room - lw * LH / LW) / 2;
       s1 = Math.max(H, W * .2) * 1.5 / BAR; last = -1; onScroll();
@@ -2813,14 +2831,14 @@ const CMS = {
       raf = 0;
       if (innerWidth > 900) { btn.style.transform = ""; btn.style.removeProperty("--g"); document.body.classList.remove("pren-hero"); return; }
       const f = +(fin.style.opacity || 0), heroEnd = hero.offsetTop + hero.offsetHeight;
-      const t = Math.min(1, Math.max(0, (scrollY - (heroEnd - innerHeight)) / (innerHeight * .5)));
+      const ph = $("#pinx").offsetHeight, t = Math.min(1, Math.max(0, (scrollY - (heroEnd - ph)) / (ph * .5)));
       const inHero = f > .01 && t < 1;
       document.body.classList.toggle("pren-hero", inHero);
       if (!inHero) { btn.style.transform = ""; btn.style.removeProperty("--g"); btn.style.opacity = ""; return; }
       /* posto naturale nell'angolo, calcolato (non letto): niente errori che si accumulano */
       const cs = getComputedStyle(dock), baseX = innerWidth - parseFloat(cs.right) - bw, baseY = innerHeight - parseFloat(cs.bottom) - bh;
       const sr = slot.getBoundingClientRect(), k = ez(t);
-      btn.style.transform = `translate3d(${lerp(sr.left - baseX, 0, k).toFixed(2)}px, ${lerp(sr.top - baseY, 0, k).toFixed(2)}px, 0)`;
+      btn.style.transform = `translate3d(0, ${lerp(sr.top - baseY, 0, k).toFixed(2)}px, 0)`;
       btn.style.setProperty("--g", (1 - Math.min(1, t * 1.6)).toFixed(3));
       btn.style.opacity = t > 0 ? "1" : Math.min(1, f * 1.15).toFixed(3);
     }
