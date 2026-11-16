@@ -1951,6 +1951,17 @@ body::after { background-image: url("img/grana-a.png"); background-size: 160px 1
   .next { justify-self: center; align-self: center; width: min(340px, calc(100vw - 2 * var(--gut))); margin: 0 auto; text-align: left; }
   .hero .w.first { padding-bottom: calc(2.2rem + env(safe-area-inset-bottom, 0px)) !important; }
 }
+/* ---------- v47: cucina su telefono, tutta in una schermata (voci, titolo, foto, frase, nastro) ---------- */
+@media (max-width: 900px) {
+  .kit-tabs { padding-top: .2rem; }
+  .kt { padding-bottom: .6rem; }
+  .kit .kp-t, .kit .kp.b .kp-t { font-size: clamp(2.6rem, 13vw, 3.6rem); line-height: .9; margin: .55rem 0 .5rem !important; }
+  .kp-ph, .kp.b .kp-ph { aspect-ratio: 16 / 11 !important; max-height: 38svh; }
+  .kit .kp .claim { font-size: 1.22rem; line-height: 1.2; margin-top: .7rem; }
+  .kit .kp .sig { margin-top: .45rem; font-size: .92rem; }
+  .kit .kp-pull { margin-top: .7rem; }
+}
+@media (max-width: 900px) { .kit .kp-pull .tape { max-width: calc(100vw - 2 * var(--gut) - 108px); white-space: nowrap; font-size: clamp(1rem, 4.6vw, 1.25rem); } }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -2573,7 +2584,7 @@ const CMS = {
       /* i tracciati del logo sono in decimi di unità, con l'asse y capovolto */
       g.setAttribute("transform", `translate(${(fx - FX * sc).toFixed(2)} ${(fy - FY * sc).toFixed(2)}) scale(${(sc * .1).toFixed(5)} ${(-sc * .1).toFixed(5)}) translate(0 -13380)`);
       svg.style.display = p >= .72 ? "none" : "";
-      pinx.classList.toggle("gone", p > .14); document.body.classList.toggle("hero-top", p <= .14 && scrollY < hero.offsetTop + hero.offsetHeight); pinx.classList.toggle("fin", p > .6);
+      pinx.classList.toggle("gone", p > .14); document.body.classList.toggle("hero-top", p <= .62 && scrollY < hero.offsetTop + hero.offsetHeight); pinx.classList.toggle("fin", p > .6);
       const f = Math.min(1, Math.max(0, (p - .5) / .26));
       fin.style.opacity = (f * f).toFixed(3); fin.style.transform = `translate3d(0, ${((1 - f) * 70).toFixed(1)}px, 0)`; fin.style.visibility = f > 0 ? "" : "hidden";
       shade.style.opacity = f.toFixed(3);
@@ -2913,7 +2924,11 @@ const CMS = {
       /* su telefono il selettore segue la portata */
       if (tabsBox.scrollWidth > tabsBox.clientWidth) tabsBox.scrollTo({ left: tabs[c].offsetLeft - tabsBox.offsetLeft - 16, behavior: reduce ? "auto" : "smooth" });
     };
-    const go = (i) => track.scrollTo({ left: Math.max(0, Math.min(kps.length - 1, i)) * step, behavior: reduce ? "auto" : "smooth" });
+    const go = (i) => {
+      /* su telefono, cambiando portata con un appunto aperto: si chiude e si torna alle voci, così la nuova portata si vede intera */
+      if (innerWidth <= 900 && $(".page-wrap.open", kit)) { closeNotes(); const top = $("#top"); if (lenis) lenis.scrollTo($(".kit-tabs", kit), { offset: -((top ? top.offsetHeight : 72) + 8), duration: .7 }); }
+      track.scrollTo({ left: Math.max(0, Math.min(kps.length - 1, i)) * step, behavior: reduce ? "auto" : "smooth" });
+    };
     const used = () => kit.classList.add("used");
     track.addEventListener("scroll", () => { if (!kraf) kraf = requestAnimationFrame(paint); }, { passive: true });
     ["touchstart", "pointerdown", "keydown"].forEach((t) => track.addEventListener(t, used, { passive: true }));
@@ -2941,8 +2956,10 @@ const CMS = {
       closeNotes(); if (open) { w.classList.add("open"); b.setAttribute("aria-expanded", "true"); }
       /* su telefono l'appunto si apre sotto: la pagina scende quel tanto che basta per leggerlo; richiudendo risale al nome della portata */
       if (innerWidth <= 900 && lenis) {
-        if (open) setTimeout(() => lenis.scrollTo(b, { offset: -150, duration: .9 }), 120);
-        else lenis.scrollTo($(".kp-t", kps[i]), { offset: -88, duration: .8 });
+        /* aprendo: il nastro sale sotto l'header e l'appunto si legge sotto; chiudendo: torna tutta la portata, dalle voci al nastro */
+        const top = $("#top"), hh = top ? top.offsetHeight : 72;
+        if (open) setTimeout(() => lenis.scrollTo(b, { offset: -(hh + 14), duration: .9, easing: (t) => 1 - Math.pow(1 - t, 3) }), 80);
+        else setTimeout(() => lenis.scrollTo($(".kit-tabs", kit) || kit, { offset: -(hh + 8), duration: .8, easing: (t) => 1 - Math.pow(1 - t, 3) }), 60);
       }
     }));
     /* quando un appunto si apre o si chiude sotto, le scene più in basso ricalcolano dove stanno */
