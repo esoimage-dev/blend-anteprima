@@ -2003,6 +2003,49 @@ html { -webkit-tap-highlight-color: transparent; }
   .jpaper { margin: -6px -24px 14px -20px; padding: 3.2rem 3.6rem 3.4rem 2.9rem !important; rotate: -.8deg; }
   .jpaper > .pbg { inset: -8px -6px -10px -6px; }
 }
+/* ---------- v51 ---------- */
+/* giradischi: solo la linguetta. Compare senza scivolare; si muove solo quando lo tiri fuori tu */
+.deck, body.past .deck { transition: opacity .5s ease !important; translate: 0 0; }
+.deck.tucked { translate: calc(-1 * (var(--gut) + var(--ttw) + 2px)) 0 !important; }
+@media (max-width: 900px) { .deck.tucked { translate: calc(-1 * (10px + var(--ttw) + 2px)) 0 !important; } }
+.deck:not(.mosso) { transition: opacity .5s ease !important; }
+.deck.mosso, body.past .deck.mosso { transition: translate .7s cubic-bezier(.65, 0, .2, 1), opacity .5s !important; }
+.deck:not(.mosso) .dl { transition: none; }
+/* Prenota piccolo: via quando arriva quello grande in fondo */
+@media (max-width: 900px) { body.in-fondo .dock { opacity: 0; translate: 0 130%; pointer-events: none; } }
+/* Candidati */
+.facts button.go.cand { gap: .55rem; font: 700 1.7rem/1 var(--f-hand); color: var(--sign); margin-top: .3rem; }
+.go.cand svg { width: 40px; height: 16px; overflow: visible; animation: spingi 1.8s cubic-bezier(.5, 0, .3, 1) infinite; }
+.go.cand path { fill: none; stroke: #d6362b; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.go.cand:hover svg { animation-duration: .9s; }
+@keyframes spingi { 0%, 100% { translate: 0 0; } 50% { translate: 6px 0; } }
+/* le serate: niente scotch sulle locandine */
+.pile .card .tp { display: none !important; }
+/* menu su telefono: voci un filo più distanziate */
+@media (max-width: 900px) { .ov .rows a.row { padding: .14em 0 !important; } }
+/* fascicoli su telefono: il testo resta nella parte scrivibile di ogni carta (bordi, strappi, fogli sotto esclusi) */
+@media (max-width: 900px) {
+  .file .q { line-height: 1.38 !important; }
+  .file .ing { line-height: 1.38 !important; }
+  .file h3 { margin: .3rem 0 .4rem !important; }
+  .file .prof { margin: .55rem 0 .45rem !important; padding: .4rem 0 !important; gap: .25rem !important; }
+  .file[data-v="0"] { padding-bottom: 11% !important; }
+  .file[data-v="1"] { padding-bottom: 11% !important; }
+  .file[data-v="2"] { padding: 15% 9% 34% 13% !important; }
+  .file[data-v="3"] { padding-bottom: 8% !important; }
+}
+/* serate su telefono: locandine più grandi, foglietto più piccolo che si allunga se c'è una frase in più */
+.slip .ds { margin: .45rem 0 0; font: 400 .82rem/1.45 var(--f-type); color: #3b2c1b; max-width: 34ch; }
+@media (max-width: 900px) {
+  .sera .pile { width: 58vw !important; margin: -44vw 0 0 0 !important; }
+  .film2 { width: 66vw !important; }
+  .sera .slip { width: min(300px, calc(100% - 24px)) !important; margin: 1.8rem 0 0 !important; padding: 1.5rem 1.3rem 1.2rem 1.4rem !important; }
+  .slip h3 { font-size: 1.8rem !important; }
+  .slip .ln { font-size: .84rem; }
+  .slip .tm { font-size: .74rem; }
+  .stampa { font-size: 1.2rem; }
+  .slip .nx { font-size: 1.15rem; }
+}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -2370,7 +2413,7 @@ html { -webkit-tap-highlight-color: transparent; }
       <div><h4>Quando</h4><p>Tutte le sere,<br>dalle 18 alle 2</p></div>
       <div><h4>Dove</h4><p>Villaggio Azzurro, Roma. Parcheggio in strada.</p><a class="go" href="https://g.page/BlendFoodAndDrink" target="_blank" rel="noopener">Indicazioni <i></i></a></div>
       <div><h4>Contatti</h4><a class="t" href="tel:+390645675221">06 4567 5221</a><a class="t" href="mailto:info@blendfoodanddrink.it">info@blendfoodanddrink.it</a></div>
-      <div><h4>Lavora con noi</h4><p>Cerchiamo persone da bancone, sala e cucina.</p><button type="button" class="go" data-job>Candidati <i></i></button></div>
+      <div><h4>Lavora con noi</h4><p>Cerchiamo persone da bancone, sala e cucina.</p><button type="button" class="go cand" data-job>Candidati <svg viewBox="0 0 40 16" aria-hidden="true"><path d="M2 8 C12 6 24 9 37 8 M29 2 C32 5 35 7 38 8 C35 10 32 12 30 14"/></svg></button></div>
     </div>
     <div class="endrow">
       <p class="voice" style="font-size:clamp(1.4rem,2.4vw,2rem)">La sala è raccolta: conviene prenotare.</p>
@@ -2474,7 +2517,7 @@ const CMS = {
   ],
   next: { title: "Blend in Jazz", when: "Mercoledì", sub: "Ogni due settimane", sets: ["Primo set 20:30", "Secondo set 21:45"], body: "Il meglio del jazz romano, dal vivo, a due passi dal bancone. I tavoli vicino ai musicisti finiscono presto.", img: "img/blend-in-jazz-2026_copertina_ottobre.webp" },
   shows: [
-    { tag: "Prossima serata", title: "Blend in Jazz", lines: ["Mercoledì · il meglio del jazz romano"], time: "Primo set 20:30 · secondo 21:45", img: "img/blend-in-jazz-2026_copertina_ottobre.webp", tape: "04" },
+    { tag: "Prossima serata", title: "Blend in Jazz", lines: ["Mercoledì · il meglio del jazz romano"], desc: "I tavoli vicino ai musicisti finiscono presto.", time: "Primo set 20:30 · secondo 21:45", img: "img/blend-in-jazz-2026_copertina_ottobre.webp", tape: "04" },
     { tag: "Dicembre", title: "Mystery Pacific Trio", lines: ["Mer 23 dic · swing"], time: "Ore 21:00 - 23:00", img: "img/serate/urban-dic.webp", tape: "11" },
     { tag: "Gennaio", title: "Django's month", lines: ["Mer 6 gen · Hot Jazz Trio", "Mer 20 gen · Belleville Trio"], time: "Ore 21:00 - 23:00 · manouche", img: "img/serate/urban-gen.webp", tape: "14" },
     { tag: "Febbraio", title: "Urban Jazz", lines: ["Mer 10 feb · Sunside Trio", "Mer 24 feb · Red Hot Serenaders"], time: "Ore 21:00 - 23:00", img: "img/serate/urban-feb.webp", tape: "05" },
@@ -2655,7 +2698,7 @@ const CMS = {
     $("#slip-t").textContent = n;
     function lay() { cards.forEach((c, i) => { const d = (i - top + n) % n; c.style.setProperty("--d", d); c.style.zIndex = n - d; c.classList.toggle("deep", d > 3); }); }
     function slip() { const x = S[top]; $("#slip-n").textContent = top + 1;
-      body.innerHTML = `<span class="tg">${esc(x.tag)}</span><h3>${esc(x.title)}</h3>${x.lines.map((l) => `<p class="ln">${esc(l)}</p>`).join("")}<p class="tm">${esc(x.time)}</p>`;
+      body.innerHTML = `<span class="tg">${esc(x.tag)}</span><h3>${esc(x.title)}</h3>${x.lines.map((l) => `<p class="ln">${esc(l)}</p>`).join("")}${x.desc ? `<p class="ds">${esc(x.desc)}</p>` : ""}<p class="tm">${esc(x.time)}</p>`;
       body.classList.remove("in"); void body.offsetWidth; body.classList.add("in"); }
     function next(dir) {
       if (busy) return; busy = true; const c = cards[top], fx = dir < 0 ? -1 : 1;
@@ -2791,6 +2834,8 @@ const CMS = {
   renderDrinks();
   /* mentre sei nella carta il tasto Prenota si fa da parte: non copre i nomi dei drink */
   if ("IntersectionObserver" in window) new IntersectionObserver(([e]) => document.body.classList.toggle("in-carta", e.isIntersecting), { rootMargin: "0px 0px -35% 0px" }).observe($(".bar"));
+  /* in fondo c'è già "Prenota un tavolo": quello piccolo se ne va un attimo prima che arrivi */
+  if ("IntersectionObserver" in window && $(".endrow")) new IntersectionObserver(([e]) => document.body.classList.toggle("in-fondo", e.isIntersecting), { rootMargin: "0px 0px 25% 0px" }).observe($(".endrow"));
   /* sfoglia: frecce e swipe sul fascicolo */
   const step = (dir) => { const items = CMS.drinks.filter((x) => cur === "Tutti" || x.c === cur), k = items.findIndex((x) => x.n === sel); pick(items[(k + dir + items.length) % items.length].n, false); };
   $("#g-prev").addEventListener("click", () => step(-1)); $("#g-next").addEventListener("click", () => step(1));
@@ -2922,11 +2967,11 @@ const CMS = {
   /* il giradischi si fa da parte: resta fuori solo la linguetta */
   let tuckAuto = 0, touched = false;
   function setTuck(t) { deck.classList.toggle("tucked", t); tuck.setAttribute("aria-expanded", !t); tuck.setAttribute("aria-label", t ? "Mostra il giradischi" : "Nascondi il giradischi"); }
-  if (innerWidth <= 900) setTuck(true);
+  setTuck(true);
   window.__tuckDeck = () => { clearTimeout(tuckAuto); setTuck(true); };
-  tuck.addEventListener("click", () => { touched = true; clearTimeout(tuckAuto); setTuck(!deck.classList.contains("tucked")); });
+  tuck.addEventListener("click", () => { touched = true; deck.classList.add("mosso"); clearTimeout(tuckAuto); setTuck(!deck.classList.contains("tucked")); });
   deck.addEventListener("pointerenter", () => { touched = true; clearTimeout(tuckAuto); }, { once: true });
-  window.__armTuck = () => { if (!touched && !tuckAuto && innerWidth > 900) tuckAuto = setTimeout(() => { if (!touched && !deck.classList.contains("playing")) setTuck(true); }, 1600); };
+  window.__armTuck = () => { if (false) tuckAuto = setTimeout(() => { if (!touched && !deck.classList.contains("playing")) setTuck(true); }, 1600); };
   snd.addEventListener("click", () => { touched = true; clearTimeout(tuckAuto); music(snd.getAttribute("aria-pressed") !== "true"); });
 
   /* ---------- carta strappata: bordi irregolari generati ---------- */
