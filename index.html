@@ -1943,6 +1943,14 @@ body::after { background-image: url("img/grana-a.png"); background-size: 160px 1
 .bigck { visibility: hidden; } .intro.in .bigck { visibility: visible; }
 /* se il carattere non arriva, le cifre più larghe del font di riserva non vengono tagliate ai lati */
 .bigck .dg { overflow: visible; clip-path: inset(0 -40%); }
+/* ---------- v46: prima schermata su telefono più ariosa, Prenota compare quando si scende ---------- */
+@media (max-width: 900px) {
+  body.hero-top .dock { opacity: 0; translate: 0 130%; pointer-events: none; }
+  .hero .w.first .low { align-items: center; gap: 1.4rem; text-align: center; }
+  .godown { justify-content: center; margin: 0; }
+  .next { justify-self: center; align-self: center; width: min(340px, calc(100vw - 2 * var(--gut))); margin: 0 auto; text-align: left; }
+  .hero .w.first { padding-bottom: calc(2.2rem + env(safe-area-inset-bottom, 0px)) !important; }
+}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -2565,7 +2573,7 @@ const CMS = {
       /* i tracciati del logo sono in decimi di unità, con l'asse y capovolto */
       g.setAttribute("transform", `translate(${(fx - FX * sc).toFixed(2)} ${(fy - FY * sc).toFixed(2)}) scale(${(sc * .1).toFixed(5)} ${(-sc * .1).toFixed(5)}) translate(0 -13380)`);
       svg.style.display = p >= .72 ? "none" : "";
-      pinx.classList.toggle("gone", p > .14); pinx.classList.toggle("fin", p > .6);
+      pinx.classList.toggle("gone", p > .14); document.body.classList.toggle("hero-top", p <= .14 && scrollY < hero.offsetTop + hero.offsetHeight); pinx.classList.toggle("fin", p > .6);
       const f = Math.min(1, Math.max(0, (p - .5) / .26));
       fin.style.opacity = (f * f).toFixed(3); fin.style.transform = `translate3d(0, ${((1 - f) * 70).toFixed(1)}px, 0)`; fin.style.visibility = f > 0 ? "" : "hidden";
       shade.style.opacity = f.toFixed(3);
