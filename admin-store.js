@@ -2,7 +2,7 @@
    In produzione la bozza vive nel database (D1) e "Pubblica" la manda al sito; qui resta nel browser. */
 (function (root) {
   "use strict";
-  const KEY = "blend-bozza-v1", MAX_STORIA = 30;
+  const KEY = "blend-bozza-v2", MAX_STORIA = 30;
   const storia = [];
   const leggi = () => { try { const s = localStorage.getItem(KEY); return s ? JSON.parse(s) : null; } catch (e) { return null; } };
   function salva(dati) {

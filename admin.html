@@ -633,6 +633,137 @@ input[type="range"] { width: 100%; accent-color: var(--sign); height: 28px; }
 .ads > *, .card, .kpi, .wb, .wiz, .form, .mail, .mcol, .split > *, .split2 > * { min-width: 0; }
 pre { max-width: 100%; }
 main { overflow-x: clip; }
+
+/* ---------- v4: magazzino ---------- */
+.mag { display: grid; gap: 1.2rem; }
+.h2 { margin: 0 0 .8rem; display: flex; align-items: baseline; flex-wrap: wrap; gap: .3rem .7rem; font: 800 1.3rem/1 var(--f-sign); text-transform: uppercase; letter-spacing: .02em; }
+.h2 small { font: 400 .8rem/1.3 var(--f-ui); text-transform: none; letter-spacing: 0; color: var(--ash); }
+.mgrid2 { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 1.6rem; align-items: start; }
+.ord { padding: 1.1rem 1.2rem; border-radius: 10px; background: var(--n1); border: 1px solid var(--line); margin-bottom: .9rem; }
+.ord.urg { border-color: rgba(224, 83, 63, .5); background: linear-gradient(180deg, rgba(224, 83, 63, .07), transparent 60%), var(--n1); }
+.oh { display: flex; justify-content: space-between; gap: 1rem; margin-bottom: .6rem; }
+.oh b { display: block; font: 900 1.35rem/1.05 var(--f-sign); text-transform: uppercase; }
+.oh small { color: var(--ash); font-size: .8rem; }
+.ord.urg .oh small { color: #ff9b86; }
+.ot { font: 800 1.1rem/1 var(--f-sign); color: var(--ash); white-space: nowrap; }
+.orr { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "n s" "n f"; gap: .1rem 1rem; align-items: center; padding: .6rem 0; border-top: 1px solid var(--line); }
+.orr > span:first-child { grid-area: n; } .orr .step { grid-area: s; } .orr .fmt { grid-area: f; justify-self: end; color: var(--dim); font-size: .7rem; }
+.orr b { display: block; font-weight: 600; font-size: .92rem; } .orr small { color: var(--ash); font-size: .78rem; }
+.step { display: inline-flex; align-items: center; gap: 0; border: 1px solid var(--line2); border-radius: 8px; overflow: hidden; }
+.step button { all: unset; width: 34px; height: 32px; display: grid; place-items: center; cursor: pointer; font-size: 1.1rem; color: var(--ash); }
+.step button:hover { background: var(--n2); color: var(--bone); }
+.step b { min-width: 28px; text-align: center; font: 800 1.05rem/1 var(--f-sign); }
+.step.big b { min-width: 90px; font-size: 1rem; }
+.oa { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .8rem; }
+.omin { margin: .6rem 0 0; font-size: .8rem; color: var(--warn); }
+.arr { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: .9rem 1rem; border-radius: 10px; background: var(--n1); border: 1px solid var(--line); margin-bottom: .6rem; }
+.arr b { display: block; font-weight: 600; } .arr small { color: var(--ash); font-size: .8rem; }
+.sales { display: grid; gap: 0; max-height: 360px; overflow: hidden; }
+.sale { display: grid; grid-template-columns: 46px minmax(0, 1fr); gap: .2rem .7rem; padding: .6rem 0; border-top: 1px solid var(--line); animation: arriva .5s cubic-bezier(.2, .8, .2, 1); }
+.sale:first-child { border-top: 0; }
+.sale time { color: var(--dim); font-size: .8rem; font-variant-numeric: tabular-nums; }
+.sale b { font-weight: 600; font-size: .9rem; }
+.sale .sc { grid-column: 2; display: flex; flex-wrap: wrap; gap: .3rem; }
+.sale .sc i, .chip0 { font-style: normal; font-size: .7rem; padding: .18rem .45rem; border-radius: 4px; background: rgba(224, 83, 63, .12); color: #ff9b86; }
+.lvl { all: unset; box-sizing: border-box; width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) 90px; gap: 1rem; align-items: center; padding: .55rem 0; border-top: 1px solid var(--line); cursor: pointer; }
+.lvl:first-child { border-top: 0; }
+.lvl b { display: block; font-weight: 600; font-size: .88rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } .lvl small { color: var(--ash); font-size: .76rem; }
+.lvl .bar { height: 6px; border-radius: 3px; background: var(--n3); overflow: hidden; } .lvl .bar i { display: block; height: 100%; border-radius: 3px; }
+.lvl.item2 { padding: .7rem .8rem; border-radius: 8px; border: 1px solid transparent; background: var(--n1); margin-bottom: .35rem; }
+.lvl.item2.on { border-color: var(--sign); }
+.mlist { display: grid; gap: .4rem; align-content: start; position: sticky; top: 140px; max-height: calc(100vh - 160px); overflow: auto; padding-right: 4px; }
+.search { width: 100%; padding: .7rem .9rem; border: 1px solid var(--line2); border-radius: 8px; background: var(--night); outline: none; }
+.search:focus { border-color: var(--sign); }
+.chips.scroll { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding-bottom: .2rem; }
+.chips.scroll button { flex: none; }
+.split.mz { grid-template-columns: 340px minmax(0, 1fr); }
+.big3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.big3 > div { display: grid; gap: .2rem; } .big3 .k { font: 600 .7rem/1.2 var(--f-ui); letter-spacing: .12em; text-transform: uppercase; color: var(--ash); }
+.big3 .v { font: 900 1.9rem/1 var(--f-sign); } .big3 .v small { font: 400 .8rem var(--f-ui); color: var(--ash); } .big3 .v.bad { color: var(--red); }
+.fcb { width: 44px; height: 30px; display: grid; place-items: center; border-radius: 6px; background: var(--n3); font: 800 .8rem/1 var(--f-ui); color: var(--ok); }
+.fcb.hi { color: var(--warn); }
+.rec { display: grid; gap: .5rem; margin-bottom: .6rem; }
+.rc0 { display: grid; grid-template-columns: minmax(0, 1fr) 90px 28px 30px; gap: .5rem; align-items: center; }
+.rc0 select, .rc0 input, .rr select, .rr input { width: 100%; padding: .6rem .7rem; border: 1px solid var(--line2); border-radius: 6px; background: var(--night); }
+.rc0.miss select { border-color: var(--warn); color: var(--warn); }
+.rc0 .u { font-size: .8rem; color: var(--ash); }
+/* arrivo merce */
+.cam { position: relative; display: grid; justify-items: center; gap: .5rem; padding: 2.6rem 1.4rem; border-radius: 16px; border: 2px dashed rgba(252, 198, 80, .45); background: radial-gradient(120% 100% at 50% 0%, rgba(252, 198, 80, .1), transparent 60%), var(--n1); text-align: center; cursor: pointer; transition: transform .2s, border-color .2s; }
+.cam:hover { border-color: var(--sign); } .cam:active { transform: scale(.98); }
+.cam input, .altb input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.cam .ci { width: 74px; height: 74px; display: grid; place-items: center; border-radius: 50%; background: var(--sign); font-size: 2rem; }
+.cam b { font: 900 1.6rem/1.05 var(--f-sign); text-transform: uppercase; } .cam small { color: var(--ash); max-width: 42ch; }
+.alt2 { display: grid; grid-template-columns: repeat(3, 1fr); gap: .7rem; margin-top: .8rem; }
+.altb { all: unset; box-sizing: border-box; position: relative; display: grid; gap: .25rem; padding: 1rem 1.1rem; border-radius: 10px; background: var(--n1); border: 1px solid var(--line2); cursor: pointer; }
+.altb:hover { border-color: var(--ash); } .altb b { font-weight: 700; } .altb small { color: var(--ash); font-size: .8rem; line-height: 1.4; }
+.scan { display: grid; justify-items: center; gap: .6rem; padding: 2rem 1rem; text-align: center; }
+.sc0 { position: relative; width: min(320px, 80vw); aspect-ratio: 3 / 4; border-radius: 10px; overflow: hidden; background: var(--n2); }
+.sc0 img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(.4) brightness(.8); }
+.beam { position: absolute; left: 0; right: 0; height: 60px; background: linear-gradient(transparent, rgba(252, 198, 80, .5), transparent); animation: beam 1.4s ease-in-out infinite alternate; }
+@keyframes beam { from { top: -60px; } to { top: 100%; } }
+.scan b { font: 900 1.6rem/1 var(--f-sign); text-transform: uppercase; } .scan small { color: var(--ash); max-width: 46ch; }
+.rrows { display: grid; gap: .5rem; margin-bottom: .6rem; }
+.rr { display: grid; grid-template-columns: 34px minmax(0, 1fr) 130px 30px; gap: .7rem; align-items: center; padding: .8rem; border-radius: 10px; background: var(--n1); border: 1px solid var(--line); border-left: 4px solid var(--ok); }
+.rr.controlla { border-left-color: var(--warn); } .rr.nuovo { border-left-color: #9cc8f2; }
+.ri { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: var(--n3); font-weight: 800; }
+.rr.ok .ri { color: var(--ok); } .rr.controlla .ri { color: var(--warn); } .rr.nuovo .ri { color: #9cc8f2; }
+.rd { display: grid; gap: .35rem; min-width: 0; } .rd small { color: var(--dim); font-size: .74rem; }
+.rq { display: flex; align-items: center; gap: .4rem; } .rq span { font-size: .8rem; color: var(--ash); width: 22px; }
+.pc { font-size: .74rem; font-weight: 600; } .pc.up { color: var(--red); } .pc.dn { color: var(--ok); }
+.done2 { display: grid; justify-items: center; text-align: center; gap: .6rem; padding: 3rem 1rem; }
+.done2 .big { width: 84px; height: 84px; display: grid; place-items: center; border-radius: 50%; background: var(--ok); color: var(--night); font-size: 2.4rem; font-weight: 900; }
+.done2 h2 { margin: 0; font: 900 2.2rem/1 var(--f-sign); text-transform: uppercase; } .done2 p { max-width: 52ch; color: var(--ash); }
+/* conta */
+.cnt0 { display: grid; gap: .5rem; }
+.cr0 { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: .8rem 1rem; border-radius: 10px; background: var(--n1); border: 1px solid var(--line); }
+.cr0 b { display: block; font-weight: 600; } .cr0 small { color: var(--ash); font-size: .78rem; }
+.cr0 .inp { display: flex; align-items: center; gap: .4rem; }
+.cr0 input { width: 96px; padding: .7rem; border: 1px solid var(--line2); border-radius: 8px; background: var(--night); font: 800 1.2rem/1 var(--f-sign); text-align: right; }
+.cr0 input:focus { border-color: var(--sign); outline: none; }
+.cr0 i { font-style: normal; color: var(--ash); width: 22px; }
+.sumc { display: grid; gap: .3rem; position: sticky; bottom: 1rem; } .sumc small { color: var(--ash); }
+.sumc .btn { justify-self: start; margin-top: .5rem; }
+/* impostazioni */
+.opts { display: grid; grid-template-columns: repeat(3, 1fr); gap: .7rem; }
+.opt { position: relative; display: grid; gap: .3rem; padding: 1rem; border-radius: 10px; border: 1.5px solid var(--line2); background: var(--night); cursor: pointer; }
+.opt.on { border-color: var(--sign); background: rgba(252, 198, 80, .06); }
+.opt input { position: absolute; opacity: 0; } .opt b { font-weight: 700; } .opt small { color: var(--ash); font-size: .8rem; line-height: 1.45; }
+.covs { display: grid; grid-template-columns: repeat(2, 1fr); gap: .8rem 1.4rem; }
+.push { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: .8rem; align-items: start; margin-top: 1.2rem; padding: .9rem 1rem; border-radius: 18px; background: rgba(239, 231, 216, .1); max-width: 420px; }
+.push .pi { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 10px; background: var(--sign); color: var(--night); font: 900 1.2rem/1 var(--f-sign); }
+.push b { font-size: .86rem; } .push p { margin: .1rem 0 0; font-size: .84rem; line-height: 1.35; } .push small { color: var(--ash); font-size: .74rem; }
+.days button { min-width: 48px; text-align: center; }
+/* finestra in panoramica */
+.alertw { grid-column: span 12; display: grid; gap: .5rem; padding: 1.1rem 1.2rem; border-radius: 10px; background: linear-gradient(90deg, rgba(224, 83, 63, .12), rgba(224, 83, 63, .02)); border: 1px solid rgba(224, 83, 63, .4); }
+.alertw .ar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.alertw b { font: 900 1.2rem/1.1 var(--f-sign); text-transform: uppercase; } .alertw small { color: var(--ash); }
+.alertw .k { color: #ff9b86; }
+/* bottone fotocamera sempre a portata */
+.fab { position: fixed; right: 1.4rem; bottom: 1.4rem; z-index: 25; display: inline-flex; align-items: center; gap: .5rem; padding: .95rem 1.2rem; border: 0; background: var(--sign); color: var(--night); font-weight: 800; box-shadow: 0 14px 30px rgba(0, 0, 0, .5); cursor: pointer; --cut: 9px; }
+.fab span { font-size: 1.15rem; }
+@media (max-width: 1100px) { .mgrid2 { grid-template-columns: 1fr; } .opts, .alt2 { grid-template-columns: 1fr; } }
+@media (max-width: 860px) {
+  .split.mz { grid-template-columns: 1fr; }
+  .split.mz.open .mlist { display: none; } .split.mz:not(.open) > :not(.mlist) { display: none; }
+  .mlist { position: static; max-height: none; overflow: visible; }
+  .fab { right: 1rem; bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+  .rr { grid-template-columns: 30px minmax(0, 1fr) 30px; } .rr .rq { grid-column: 2; }
+  .rc0 { grid-template-columns: minmax(0, 1fr) 76px 30px; } .rc0 .u { display: none; }
+  .big3 .v { font-size: 1.5rem; }
+  .covs { grid-template-columns: 1fr; }
+  .cam { padding: 2rem 1rem; }
+  .sumc { bottom: calc(70px + env(safe-area-inset-bottom, 0px)); }
+}
+.alertw { grid-column: 1 / -1; }
+.alertw .ar > span { min-width: 0; flex: 1 1 260px; }
+@media (max-width: 860px) {
+  .alertw .ar { flex-direction: column; align-items: flex-start; gap: .5rem; padding-top: .6rem; border-top: 1px solid rgba(224, 83, 63, .25); }
+  .alertw small { display: block; margin-top: .2rem; }
+  .fab { width: 58px; height: 58px; padding: 0; justify-content: center; border-radius: 50%; clip-path: none; font-size: 0; }
+  .fab span { font-size: 1.5rem; }
+  .mag { padding-bottom: 4rem; }
+}
+@media (max-width: 860px) { .alertw .ar > span { flex: none; } }
 </style>
 </head>
 <body>
@@ -660,6 +791,7 @@ main { overflow-x: clip; }
 <script src="admin-motore.js"></script>
 <script src="admin-media.js"></script>
 <script src="admin-store.js"></script>
+<script src="admin-magazzino.js"></script>
 <script>
 const CMS = {
   characters: {
@@ -708,6 +840,219 @@ const CMS = {
   ]
 };
 const KITCHEN = [{"id": "anti", "titolo": "Antipasti", "frase": "Fassona al coltello, polpo scottato, guancia brasata al Negroamaro.", "prova": "From Piemonte With Love", "nastro": "cosa c'è nel piatto", "foto": "img/blend-foodanddrink-AL85038.webp", "fuoco": "50% 50%", "appunto": "Antipasti · appunto n° 01", "testo": ["From Piemonte With Love: tartare di Fassona tagliata al coltello, spuma di Parmigiano stravecchio, nocciole IGP, chips di topinambur.", "Polpetto: polpo scottato, tortino di patate, polvere di olive di Gaeta.", "Cheek to Cheek: guancia brasata al Negroamaro, patate affumicate.", "Parmigiana Light: melanzane alla scapece, robiola di Roccaverano."], "mano": "si comincia da qui", "parola": "al coltello"}, {"id": "pinsa", "titolo": "Pinsa", "frase": "Settantadue ore di lievitazione. Leggera, croccante, mai uguale a se stessa.", "prova": "Al Contadino Non Far Sapere", "nastro": "il segreto della pinsa", "foto": "img/blend-foodanddrink-AL85228.webp", "fuoco": "50% 55%", "appunto": "Pinsa · appunto n° 07", "testo": ["Impasto lavorato a mano. Lievitazione naturale: settantadue ore, non una di meno.", "Leggera, digeribile, croccante fuori. Le farciture cambiano con le stagioni.", "La più nostra: Al Contadino Non Far Sapere. Fonduta di Pecorino Romano 20 mesi, pere caramellate, pepe nero, guanciale di Cinta Senese."], "mano": "il tempo è l'ingrediente", "parola": "72 ore"}, {"id": "burger", "titolo": "Burger", "frase": "Irish Black Angus, duecento grammi, nessuna scorciatoia.", "prova": "Warehouse", "nastro": "com'è fatto il warehouse", "foto": "img/blend-foodanddrink-AL85121.JPG.webp", "fuoco": "50% 60%", "appunto": "Burger · appunto n° 12", "testo": ["Solo Irish Black Angus, 200 grammi. Bun del forno La Mollica, fatto apposta per noi.", "Warehouse: scamorza affumicata, peperoni grigliati, guanciale sardo Su Sirboni, cipolla croccante.", "Barbecue nostra allo scotch torbato Laphroaig 10 anni, e un goccio di tabasco."], "mano": "", "parola": "200 g"}, {"id": "tagl", "titolo": "Taglieri", "frase": "Un giro d'Italia su una tavola di legno.", "prova": "Da dividere, nella misura che vuoi", "nastro": "da dove arrivano", "foto": "img/blend-foodanddrink-DSC08213.JPG.webp", "fuoco": "50% 60%", "appunto": "Taglieri · appunto n° 03", "testo": ["Un viaggio tra le regioni, da piccoli produttori.", "Pecorini, salame di pecora, lardo al mirto Su Sirboni, Blu di bufala lombardo, Parma 24 mesi, caci e ricotte siciliane.", "Miele, composte di frutta bio, pane Guttiau: il carasau con olio e sale marino."], "mano": "da dividere. sempre.", "parola": "Italia"}, {"id": "dolci", "titolo": "Dolci", "frase": "Due dolci, tutti e due con il cioccolato Amedei.", "prova": "Sesto Peccato", "nastro": "il sesto peccato", "foto": "img/blend-foodanddrink-AL85246.webp", "fuoco": "50% 62%", "appunto": "Dolci · appunto n° 15", "testo": ["Sesto Peccato: mousse di nocciola, crumble di noci, caramello salato, scaglie di fondente 90% Amedei.", "Chiaroscuro: brownie fondente, namelaka al cioccolato bianco e vaniglia, coulis di amarena e lampone, crumble di mandorle e sesamo nero."], "mano": "", "parola": "Amedei"}];
+window.MENU = {
+  "_meta": {
+    "fonte": "asset/menu-pdf/Menu-blend-food-and-drink(.en).pdf, estratto il 2026-10-28",
+    "note": [
+      "Prezzi in euro. Dove c'e' 'glass/bottle' il formato e' calice/bottiglia.",
+      "Le birre non compaiono nel PDF (rotazione continua): vanno gestite direttamente dal CMS.",
+      "Allergeni: il PDF ha solo la legenda UE 1-14, non l'associazione per piatto. Da compilare con il cliente.",
+      "Artwork dei cocktail: Clipper Tattoo (da accreditare/chiedere i file).",
+      "Regola: coperto/consumazione minima 5 euro a persona ai tavoli; conti separati solo con pagamento elettronico."
+    ]
+  },
+  "aperiblend": {
+    "orario": "18:00-20:00",
+    "formula": "Pinsa o tagliere + bevanda",
+    "opzioni": [
+      { "bevanda": { "it": "Birra / vino / basic cocktail", "en": "Beer / wine / basic cocktail" }, "prezzo": 12 },
+      { "bevanda": { "it": "Cocktail dalla nostra lista", "en": "Cocktail from our list" }, "prezzo": 18 }
+    ],
+    "pinse_disponibili": ["Rosmarino e sale Maldon", "Melanzane alla scapece e stracciatella", "Prosciutto di Parma 24 mesi", "Lardo al mirto Su Sirboni", "Cacio&Pepe"]
+  },
+  "food": {
+    "taglieri": [
+      { "id": "tagliere-blend", "nome": "Tagliere Blend - since 2016",
+        "it": "Selezione di salumi e formaggi di alta qualità provenienti da varie regioni d'Italia, accompagnati da miele, confetture di frutta biologiche e pane Guttiau",
+        "en": "A selection of premium cured meats and cheeses from various regions of Italy, served with honey, organic fruit preserves and Guttiau bread",
+        "prezzi": { "S": 14, "M": 24, "L": 42, "XL": 58 } },
+      { "id": "tagliere-radichino", "nome": "Tagliere Radichino",
+        "it": "La nostra selezione dei prodotti più interessanti della Tenuta Il Radichino dei fratelli Pira: discendenti di produttori sardi di salumi e formaggi trasferitisi nel Lazio, portano avanti da oltre 25 anni l'eccellenza biologica di famiglia, tra rispetto e amore per la natura",
+        "en": "Our selection of the finest products from the Pira brothers' Tenuta Il Radichino: descendants of Sardinian cured meat and cheese makers who moved to Lazio, for over 25 years they have carried on their family's organic excellence, with respect and love for nature",
+        "prezzo": 18 }
+    ],
+    "antipasti": [
+      { "id": "from-piemonte-with-love", "nome": "From Piemonte With Love", "prezzo": 15, "firma": true,
+        "it": "Tartare di controfiletto di Fassona Piemontese tagliata al coltello, spuma di Parmigiano Reggiano stravecchio, nocciole piemontesi IGP, chips di topinambur e olio e.v.o. Marietta agricola HQF",
+        "en": "Hand-cut Piedmontese Fassona sirloin tartare, extra-aged Parmigiano Reggiano foam, Piedmont PGI hazelnuts, Jerusalem artichoke chips and Marietta Agricola HQF extra virgin olive oil" },
+      { "id": "parmigiana-light", "nome": "Parmigiana Light", "prezzo": 10,
+        "it": "Melanzane alla scapece come da antica ricetta della nonna, robiola di capra di Roccaverano, coulis di pomodorini freschi, pane in doppia consistenza e olio al basilico",
+        "en": "Aubergines alla scapece from grandma's recipe, Roccaverano goat's robiola, fresh cherry tomato coulis, two-texture bread and basil oil" },
+      { "id": "polpetto", "nome": "Polpetto", "prezzo": 15,
+        "it": "Tentacolo di polpo scottato su tortino di patate, polvere di olive di Gaeta, salsa verde e chips di topinambur",
+        "en": "Seared octopus tentacle on a potato cake, Gaeta olive powder, salsa verde and Jerusalem artichoke chips" },
+      { "id": "cheek-to-cheek", "nome": "Cheek to Cheek", "prezzo": 16,
+        "it": "Guancia di manzo brasata al Negroamaro, crema di patate affumicate e carote baby arrosto",
+        "en": "Beef cheek braised in Negroamaro, smoked potato cream and roasted baby carrots" }
+    ],
+    "pinse": [
+      { "id": "nirvana", "nome": "Nirvana", "prezzo": 16,
+        "it": "Salsiccia di maiale nero pugliese, funghi porcini, patate, robiola di capra di Roccaverano ed erba cipollina",
+        "en": "Apulian black pork sausage, porcini mushrooms, potatoes, Roccaverano goat's robiola and chives" },
+      { "id": "scirocco-di-cetara", "nome": "Scirocco di Cetara", "prezzo": 16,
+        "it": "Salsa di pomodorini del Piennolo soffritti con aglio e peperoncino, alici di Cetara, stracciatella di Bufala e polvere di capperi",
+        "en": "Piennolo cherry tomato sauce sautéed with garlic and chilli, Cetara anchovies, buffalo stracciatella and caper powder" },
+      { "id": "sole-nero", "nome": "Sole Nero", "prezzo": 16,
+        "it": "Melanzane alla scapece, pomodorino Ciliegino Giallo arrosto, scamorza affumicata artigianale della Puglia e aglio nero",
+        "en": "Aubergines alla scapece, roasted yellow Ciliegino tomatoes, artisanal smoked scamorza from Apulia and black garlic" },
+      { "id": "poesia-su-roma", "nome": "Poesia su Roma", "prezzo": 14,
+        "it": "Pomodoro San Marzano dell'Agro Sarnese Nocerino DOP, guanciale di Cinta Senese croccante, Pecorino Romano 20 mesi DOP e pepe nero",
+        "en": "San Marzano dell'Agro Sarnese Nocerino PDO tomato, crispy Cinta Senese guanciale, 20-month aged Pecorino Romano PDO and black pepper" },
+      { "id": "racconto-del-mediterraneo", "nome": "Racconto del Mediterraneo", "prezzo": 14,
+        "it": "Pesto di pistacchi e basilico, stracciatella di Bufala e pomodorini Ciliegino Giallo arrosto",
+        "en": "Pistachio and basil pesto, buffalo stracciatella and roasted yellow Ciliegino tomatoes" },
+      { "id": "al-contadino-non-far-sapere", "nome": "Al Contadino Non Far Sapere…", "prezzo": 15, "firma": true,
+        "it": "Guanciale di Cinta Senese croccante, fonduta di Pecorino Romano 20 mesi DOP, pere caramellate e pepe nero",
+        "en": "Crispy Cinta Senese guanciale, 20-month aged Pecorino Romano PDO fondue, caramelised pears and black pepper" }
+    ],
+    "focacce": [
+      { "nome": { "it": "Rosmarino e sale Maldon", "en": "Rosemary and Maldon salt" }, "prezzo": 6 },
+      { "nome": { "it": "Lardo sardo al mirto Su Sirboni", "en": "Sardinian myrtle lardo Su Sirboni" }, "prezzo": 8 },
+      { "nome": { "it": "Prosciutto di Parma 24 mesi", "en": "Parma ham aged 24 months" }, "prezzo": 10 }
+    ],
+    "burger": [
+      { "id": "warehouse", "nome": "Warehouse", "prezzo": 15,
+        "it": "Hamburger da 200g di Irish Black Angus, guanciale sardo Su Sirboni, scamorza affumicata artigianale, peperoni grigliati, cipolla croccante, salsa barbecue allo scotch torbato Laphroaig 10y e tabasco",
+        "en": "200g Irish Black Angus burger, Sardinian Su Sirboni guanciale, artisanal smoked scamorza, grilled peppers, crispy onion, barbecue sauce with Laphroaig 10y peated scotch and tabasco" },
+      { "id": "kentucky", "nome": "Kentucky", "prezzo": 14,
+        "it": "Hamburger da 200g di Irish Black Angus, guanciale sardo Su Sirboni, English Cheddar, cipolletta di Tropea caramellata, pomodoro cuore di bue e lattuga",
+        "en": "200g Irish Black Angus burger, Sardinian Su Sirboni guanciale, English Cheddar, caramelised Tropea onion, oxheart tomato and lettuce" },
+      { "id": "junky", "nome": "Junky", "prezzo": 15,
+        "it": "Hamburger da 200g di Irish Black Angus, doppio English Cheddar, doppio guanciale sardo Su Sirboni, cipolletta di Tropea caramellata e salsa Blend",
+        "en": "200g Irish Black Angus burger, double English Cheddar, double Sardinian Su Sirboni guanciale, caramelised Tropea onion and Blend sauce" },
+      { "id": "lamb-in-rome", "nome": "Lamb in Rome", "prezzo": 16,
+        "it": "Carré di agnello laziale cotto a bassa temperatura e sfilacciato, carciofi alla romana, Pecorino Romano DOP e salsa aioli",
+        "en": "Slow-cooked pulled rack of Lazio lamb, Roman-style artichokes, Pecorino Romano PDO and aioli" },
+      { "id": "frenchy-duck", "nome": "Frenchy Duck", "prezzo": 16,
+        "it": "Cosciotto di anatra confit, demi-glace alle more, toma di mucca Tenuta Il Radichino e chutney di mele",
+        "en": "Confit duck leg, blackberry demi-glace, Tenuta Il Radichino cow's milk toma and apple chutney" },
+      { "id": "slow-beef", "nome": "Slow Beef", "prezzo": 16,
+        "it": "Reale di manzo scottato e cotto 24 ore a bassa temperatura, glassato con il suo fondo e midollo, coleslaw al lime e Blend's BBQ al Chipotle",
+        "en": "Seared beef chuck, slow-cooked for 24 hours, glazed with its own jus and bone marrow, lime coleslaw and Blend's Chipotle BBQ" },
+      { "id": "prawn-roll", "nome": "Prawn Roll", "prezzo": 16,
+        "it": "Tartare di gambero rosso di Mazara dentro un soffice panino al burro stile lobster-roll con chutney di mango, avocado, panna acida ed erba cipollina",
+        "en": "Mazara red prawn tartare in a soft, buttery lobster-roll style bun with mango chutney, avocado, sour cream and chives" }
+    ],
+    "contorni": [
+      { "nome": "Chips", "prezzo": 6,
+        "it": "Patate di Leonessa in doppia cottura: fritte ad aria ed arrostite in forno, con rosmarino e sale Maldon",
+        "en": "Leonessa potatoes, twice cooked: air-fried and oven-roasted, with rosemary and Maldon salt" },
+      { "nome": "Broccoletti", "prezzo": 5,
+        "it": "Ripassati all'aglio e peperoncino", "en": "Sautéed with garlic and chilli" }
+    ],
+    "dessert": [
+      { "nome": "Sesto Peccato", "prezzo": 9,
+        "it": "Mousse di nocciola, crumble di noci, caramello salato e scaglie di cioccolato fondente 90% Amedei",
+        "en": "Hazelnut mousse, walnut crumble, salted caramel and Amedei 90% dark chocolate shavings" },
+      { "nome": "Chiaroscuro", "prezzo": 10,
+        "it": "Brownie fondente, namelaka al cioccolato bianco Amedei e vaniglia, coulis di amarena e lampone e crumble di mandorle e sesamo nero",
+        "en": "Dark chocolate brownie, Amedei white chocolate and vanilla namelaka, amarena cherry and raspberry coulis, almond and black sesame crumble" }
+    ]
+  },
+  "vini": {
+    "bollicine": [
+      { "produttore": "Bellavigna", "vino": "Prosecco Brut", "gradi": 11, "regione": "Veneto", "calice": 5, "bottiglia": 20 },
+      { "produttore": "Domaine Tissot", "vino": "Crémant du Jura Extra Brut", "gradi": 12, "regione": "Jura (FR)", "bottiglia": 32 },
+      { "produttore": "Bellavista", "vino": "Franciacorta Alma Extra Brut", "gradi": 12.5, "regione": "Lombardia", "bottiglia": 60 }
+    ],
+    "bianchi": [
+      { "produttore": "Mesa", "vino": "Vermentino", "gradi": 13.5, "regione": "Sardegna", "calice": 6, "bottiglia": 24 },
+      { "produttore": "Varvaglione", "vino": "Malvasia Bianca", "gradi": 12.5, "regione": "Puglia", "calice": 6, "bottiglia": 24 },
+      { "produttore": "De Stefani", "vino": "Pinot Grigio Orange (naturale)", "gradi": 12.5, "regione": "Veneto", "bottiglia": 28 },
+      { "produttore": "De Stefani", "vino": "Chardonnay", "gradi": 12.5, "regione": "Veneto", "bottiglia": 26 },
+      { "produttore": "La Colombera", "vino": "Timorasso", "gradi": 14, "regione": "Piemonte", "bottiglia": 42 },
+      { "produttore": "Tenuta Ulisse", "vino": "Pecorino", "gradi": 13, "regione": "Abruzzo", "bottiglia": 30 },
+      { "produttore": "Ronchi di Cialla", "vino": "Ribolla Gialla", "gradi": 12.5, "regione": "Friuli", "bottiglia": 38 },
+      { "produttore": "Colosi", "vino": "Salina Bianco", "gradi": 13, "regione": "Sicilia", "bottiglia": 32 },
+      { "produttore": "Simone Capecci", "vino": "Passerina (biologico)", "gradi": 12.5, "regione": "Marche", "bottiglia": 32 }
+    ],
+    "rose": [
+      { "produttore": "Frescobaldi", "vino": "Alìe Ammiraglia, Toscana IGT", "gradi": 12, "regione": "Toscana", "bottiglia": 38 }
+    ],
+    "rossi": [
+      { "produttore": "S. Osvaldo", "vino": "Merlot", "gradi": 12.5, "regione": "Veneto", "calice": 6, "bottiglia": 24 },
+      { "produttore": "Schola Sarmenti", "vino": "Negroamaro", "gradi": 13.5, "regione": "Puglia", "calice": 6, "bottiglia": 24 },
+      { "produttore": "San Fabiano Calcinaia", "vino": "Chianti (biologico)", "gradi": 13, "regione": "Toscana", "bottiglia": 26 },
+      { "produttore": "Case Paolin", "vino": "Cabernet Sauvignon", "gradi": 12.5, "regione": "Veneto", "bottiglia": 34 },
+      { "produttore": "Tenuta San Giorgio", "vino": "Rosso di Montalcino", "gradi": 14, "regione": "Toscana", "bottiglia": 38 },
+      { "produttore": "Schola Sarmenti", "vino": "Primitivo", "gradi": 13.5, "regione": "Puglia", "bottiglia": 28 },
+      { "produttore": "Cortese", "vino": "Barbera d'Alba", "gradi": 14, "regione": "Piemonte", "bottiglia": 35 }
+    ],
+    "passiti": [
+      { "produttore": "Terre di Zagara", "vino": "Passito di Pantelleria", "gradi": 14.5, "regione": "Sicilia", "calice": 6 }
+    ]
+  },
+  "drink": {
+    "analcolici": [
+      { "nome": "The Cure", "prezzo": 9, "ingredienti": ["Aperitivo Amàrico", "Bitter Giffard", "Amaro Kura Kura", "Tè Lapsang"] },
+      { "nome": "Sound & Color", "prezzo": 9, "ingredienti": ["Purea di mandarino", "Lime", "Honey ginger mix", "Soda"] },
+      { "nome": "Tropic Thunder", "prezzo": 9, "ingredienti": ["Succo di pompelmo", "Sciroppo di frutto della passione", "Succo di limone", "Oleo saccharum di limone"] },
+      { "nome": "Snow White", "prezzo": 9, "ingredienti": ["Purea di pesca bianca", "Sciroppo rosa canina e fava tonka", "Lime", "Soda"] }
+    ],
+    "low_alcohol": [
+      { "nome": "What's Italian Boy", "prezzo": 10, "ingredienti": ["Bitter Fusetti 10%", "Vermouth Carpano", "Topping IPA"] },
+      { "nome": "Sweetheart", "prezzo": 10, "ingredienti": ["Frangelico 8.5%", "Liquore al cacao bianco", "Latte di avena infuso al riso soffiato", "Bitter caffè, liquirizia e vaniglia"] },
+      { "nome": "Kampai", "prezzo": 10, "ingredienti": ["Liquore yuzu 2%", "Cordial cetriolo e aneto", "Limone", "Agave", "Soda"] },
+      { "nome": "Tangerine Berry", "prezzo": 10, "ingredienti": ["Ratafia 6%", "Purea di mandarino", "Timur Berry", "Lime"] }
+    ],
+    "cocktails": [
+      { "nome": "Silent Rose", "base": "vodka", "prezzo": 12, "ingredienti": ["Vodka infusa ai petali di rosa", "Timur Berry", "Lime"],
+        "it": "Elegante, sottile, silenzioso. Come una rosa lasciata sul cuscino senza biglietto",
+        "en": "Elegant, subtle, silent. Like a rose left on the pillow without a note" },
+      { "nome": "Crimson Eyes", "base": "vodka", "prezzo": 12, "ingredienti": ["Vodka", "Cordial fragola, coriandolo e lime", "Labdanum"],
+        "it": "Occhi cremisi, sorriso innocente, modi gentili… intenzioni poco chiare",
+        "en": "Crimson eyes, innocent smile, gentle manners… unclear intentions" },
+      { "nome": "Nanachi", "base": "vodka", "prezzo": 12, "ingredienti": ["Vodka", "Cordial arancia, limone, cannella e anice stellato", "Chambord"],
+        "it": "Morbido, speziato, un po' tenero e un po' strano… un po' Nanachi",
+        "en": "Soft, spicy, a little tender and a little strange… a little Nanachi" },
+      { "nome": "Nebula Smash", "base": "gin", "prezzo": 12, "ingredienti": ["Gin London Dry", "Purple Shiso", "Cordial limone", "Tè nero e bergamotto bitters"],
+        "it": "Praticamente un Basil Smash decollato da Tokyo e perso all'interno di una nebulosa",
+        "en": "Basically a Basil Smash that took off from Tokyo and got lost inside a nebula" },
+      { "nome": "Made in Abyss", "base": "gin", "prezzo": 14, "ingredienti": ["Gin Roku", "Milk punch al lampone", "Palo santo", "Ming River", "Sherry Fino"],
+        "it": "Sembra morbido. Sembra innocuo. Poi inizi a scendere…",
+        "en": "It looks soft. It looks harmless. Then you start to descend…" },
+      { "nome": "Greenhouse Fizz", "base": "gin", "prezzo": 14, "ingredienti": ["Gin The Botanist", "Cordial timo e salvia", "Limone", "Soda cetriolo e basilico"],
+        "it": "Fresco, verde, aromatico. Come entrare in una serra e uscirne storti e contenti",
+        "en": "Fresh, green, aromatic. Like walking into a greenhouse and stumbling out tipsy and happy" },
+      { "nome": "Midnight Amarena", "base": "rum", "prezzo": 14, "ingredienti": ["Rum Abuelo 7y Panama", "Rum Kraken Black Spiced", "Disaronno", "Gelato fiordilatte", "Nettare d'amarena"],
+        "it": "Il lato oscuro dell'amarena. Cremoso, notturno, leggermente vizioso",
+        "en": "The dark side of amarena. Creamy, nocturnal, slightly wicked" },
+      { "nome": "Baby Donkey Kong", "base": "rum", "prezzo": 14, "ingredienti": ["Rum Plantation Coconut", "Rum Plantation 3 Stars", "Shrub di banana caramellata"],
+        "it": "In questa pazza giungla, Baby Donkey Kong vuole solo fare festa con te",
+        "en": "In this crazy jungle, Baby Donkey Kong just wants to party with you" },
+      { "nome": "Holywood", "base": "rum", "prezzo": 14, "ingredienti": ["Rum Pampero Especial", "Bitter Fusetti cacao", "Cordial mango e frutto della passione", "Palo santo"],
+        "it": "Chi lo assaggia dice che è da Oscar. Lui si è montato la testa e ora vuole una stella sulla Walk of Fame di Hollywood",
+        "en": "Those who taste it say it's Oscar-worthy. Now it's got a big head and wants a star on the Hollywood Walk of Fame" },
+      { "nome": "Don Fuego Salgado", "base": "tequila", "prezzo": 14, "ingredienti": ["Tequila Espolòn", "Cordial ananas arrosto", "Lime", "Ancho Reyes Verde", "Chipotle bitters"],
+        "it": "Fumantino, peperino e poco raccomandabile. Don Fuego Salgado saluta sempre tutti quando entra in un locale, poi gli dà fuoco",
+        "en": "Hot-headed, feisty and a little shady. Don Fuego Salgado always greets everyone when he walks into a bar, then sets it on fire" },
+      { "nome": "Fake Mezcal 'n Cola", "base": "mezcal", "prezzo": 14, "ingredienti": ["Mezcal Vida del Maguey", "Cordial tamarindo e lime", "Liquore Quaglia al chinotto", "Five peppers bitters", "Soda"],
+        "it": "Una cola alternativa, con il fumo negli occhi e il pepe dove non te lo aspetti",
+        "en": "An alternative cola, with smoke in its eyes and pepper where you least expect it" },
+      { "nome": "Tuco Salamanca", "base": "mezcal", "prezzo": 14, "ingredienti": ["Mezcal Encantado", "Pickle brine", "Lime", "Agave", "Green Tabasco", "Tintura di habanero"],
+        "it": "Se ti era piaciuto Hector Salamanca, ti presentiamo suo nipote, Tuco. Ti piacerà, è solo un po' fuori controllo",
+        "en": "If you liked Hector Salamanca, meet his nephew, Tuco. You'll like him, he's just a bit out of control" },
+      { "nome": "Ashes and Blood", "base": "mezcal", "prezzo": 14, "ingredienti": ["Mezcal Alipús", "Campari", "Porto", "Vermouth Antica Formula"],
+        "it": "♪ You walk along the edge of danger, and it will change you ♫",
+        "en": "♪ You walk along the edge of danger, and it will change you ♫" },
+      { "nome": "Wasabi Tensei", "base": "whisky", "prezzo": 14, "ingredienti": ["Bourbon Bulleit 10y fat-washed al burro d'arachidi", "Limone", "Sciroppo di zucchero", "Velluto al wasabi"],
+        "it": "Burro d'arachidi e wasabi: due cose che non dovevano incontrarsi, ma che fortunatamente lo hanno fatto",
+        "en": "Peanut butter and wasabi: two things that were never meant to meet, but luckily they did" },
+      { "nome": "Silk Road", "base": "whisky", "prezzo": 14, "ingredienti": ["Irish Whiskey Bushmills Sherry Cask", "Tè Assam", "Miele Quintessenza di limone Mieli Thun", "Zenzero", "Black cardamom bitters", "Toasted oak bitters"],
+        "it": "Un viaggio lungo, un'antica rotta tra tè, spezie e legno tostato. Si parte lenti, si arriva lontano",
+        "en": "A long journey, an ancient route of tea, spices and toasted wood. Set off slow, end up far away" },
+      { "nome": "Smokey Joe", "base": "whisky", "prezzo": 14, "ingredienti": ["Bulleit Rye al Lapsang", "Bitter Fusetti", "Vermouth Cocchi Storico", "Liquore Quaglia al rabarbaro"],
+        "it": "Fumoso, amaro, burbero. Joe non parla molto, se ne sta seduto sulla sua poltrona vicino al camino, a prendere pessime decisioni con molta calma",
+        "en": "Smoky, bitter, gruff. Joe doesn't talk much, he sits in his armchair by the fireplace, making terrible decisions very calmly" }
+    ],
+    "barrel_aged": [
+      { "nome": "Aurora", "contenitore": "Anfora", "prezzo": 15, "ingredienti": ["Mezcal Vida del Maguey", "Liquore al bergamotto", "Vermouth Martini Extra Dry", "Oleo saccharum di limone"] },
+      { "nome": "Eclissi", "contenitore": "Botte di rovere", "prezzo": 15, "ingredienti": ["Elephant Gin Orange & Cocoa", "Bushmills Irish Whiskey", "Bitter Fusetti cacao", "Acquavite di pere Prus Marolo", "Peychaud's bitters"] },
+      { "nome": "Crepuscolo", "contenitore": "Botte di rovere", "prezzo": 15, "ingredienti": ["Mezcal Alipús", "Sherry Pedro Ximénez", "Bitter Fusetti"] }
+    ]
+  }
+}
+;
 </script>
 <script>
 (function () {
@@ -775,21 +1120,21 @@ const KITCHEN = [{"id": "anti", "titolo": "Antipasti", "frase": "Fassona al colt
     home: '<path d="M4 11 12 4l8 7v9h-5v-6H9v6H4z"/>', serate: '<rect x="5" y="3" width="14" height="18" rx="1"/><path d="M8 8h8M8 12h8M8 16h5"/>',
     drink: '<path d="M5 4h14l-7 8zM12 12v8M8 20h8"/>', cucina: '<path d="M7 3v8a3 3 0 0 0 6 0V3M10 3v18M17 21V3c2 2 3 5 3 8h-3"/>',
     rec: '<path d="M4 5h16v11H9l-5 4z"/>', cand: '<path d="M3 6h18v12H3zM3 7l9 6 9-6"/>',
-    mkt: '<path d="M4 10v4h3l6 4V6L7 10zM16 9c1.5 1 1.5 5 0 6M18.5 7c3 2.5 3 7.5 0 10"/>', ads: '<path d="M4 20V10M10 20V4M16 20v-7M21 20H3"/>', more: '<circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/>'
+    mkt: '<path d="M4 10v4h3l6 4V6L7 10zM16 9c1.5 1 1.5 5 0 6M18.5 7c3 2.5 3 7.5 0 10"/>', ads: '<path d="M4 20V10M10 20V4M16 20v-7M21 20H3"/>', mag: '<path d="M3 8l9-5 9 5v8l-9 5-9-5zM3 8l9 5 9-5M12 13v8"/>', more: '<circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/>'
   };
   const SECT = [
     ["panoramica", "Panoramica", I.home, "Come va il sito, cosa c'è da fare"], ["serate", "Serate", I.serate, "Locandine e date: compaiono nella pila e nel biglietto dell'apertura"],
     ["drink", "Drink list", I.drink, "I fascicoli della carta: ordine, testi, profilo di gusto"], ["cucina", "Cucina", I.cucina, "Le cinque portate: foto, frase e appunto"],
-    ["recensioni", "Recensioni", I.rec, "Le prove sulla bacheca e i voti"], ["candidature", "Candidature", I.cand, "Chi vuole lavorare al Blend"],
+    ["recensioni", "Recensioni", I.rec, "Le prove sulla bacheca e i voti"], ["candidature", "Candidature", I.cand, "Chi vuole lavorare al Blend"], ["magazzino", "Magazzino", I.mag, "Scorte, ricette e fornitori: si scala da solo con le vendite"],
     ["marketing", "Marketing", I.mkt, "Post, reel e storie: cosa esce e quando"], ["advertising", "Advertising", I.ads, "La pubblicità che riempie i tavoli, e quanto costa ogni prenotazione"]
   ];
-  const GROUPS = [[null, ["panoramica"]], ["Il sito", ["serate", "drink", "cucina", "recensioni"]], ["Persone", ["candidature"]], ["Crescita", ["marketing", "advertising"]]];
+  const GROUPS = [[null, ["panoramica"]], ["Il sito", ["serate", "drink", "cucina", "recensioni"]], ["Il locale", ["magazzino"]], ["Persone", ["candidature"]], ["Crescita", ["marketing", "advertising"]]];
   const newApps = () => D.apps.filter((a) => a.status === "Nuova").length;
   function drawNav() {
     const cur = route().s, bd = newApps(), S = (id) => SECT.find((x) => x[0] === id);
     const btn = (id) => { const [, t, ic] = S(id); return `<button type="button" data-go="${id}" ${cur === id ? 'aria-current="page"' : ""}><svg viewBox="0 0 24 24">${ic}</svg>${t}${id === "candidature" && bd ? `<span class="bd">${bd}</span>` : ""}</button>`; };
     $("#nav").innerHTML = GROUPS.map(([g, ids]) => `<div class="grp">${g ? `<p class="gl">${g}</p>` : ""}${ids.map(btn).join("")}</div>`).join("");
-    const tabs = [["panoramica", "Home", I.home], ["serate", "Serate", I.serate], ["drink", "Drink", I.drink], ["candidature", "Candidati", I.cand]];
+    const tabs = [["panoramica", "Home", I.home], ["magazzino", "Magazzino", I.mag], ["serate", "Serate", I.serate], ["candidature", "Candidati", I.cand]];
     const inTabs = tabs.some((t) => t[0] === cur);
     $("#tabs").innerHTML = tabs.map(([id, t, ic]) => `<button type="button" data-go="${id}" ${cur === id ? 'aria-current="page"' : ""}><svg viewBox="0 0 24 24">${ic}</svg>${t}${id === "candidature" && bd ? `<span class="bd">${bd}</span>` : ""}</button>`).join("") + `<button type="button" id="more" ${!inTabs ? 'aria-current="page"' : ""}><svg viewBox="0 0 24 24">${I.more}</svg>Altro</button>`;
     $("#sheet .sl").innerHTML = GROUPS.map(([g, ids]) => `<div class="grp">${g ? `<p class="gl">${g}</p>` : ""}${ids.map(btn).join("")}</div>`).join("");
@@ -799,8 +1144,8 @@ const KITCHEN = [{"id": "anti", "titolo": "Antipasti", "frase": "Fassona al colt
   const route = () => { const [s, i] = location.hash.slice(1).split("/"); return { s: SECT.some((x) => x[0] === s) ? s : "panoramica", i: i === undefined ? null : +i }; };
   $("#back").addEventListener("click", () => { location.hash = route().s; });
 
-  const snap = () => ({ D: { shows: D.shows, drinks: D.drinks, kitchen: D.kitchen, reviews: D.reviews, apps: D.apps, scores: D.scores }, MK: MK.posts, camps: ADS.camps, AD: { mese: AD.mese, cpbObiettivo: AD.cpbObiettivo, pilota: AD.pilota, conferma: AD.conferma, attivi: AD.attivi, regole: AD.regole }, dirty });
-  function applica(x) { if (!x) return; Object.assign(D, clone(x.D || {})); if (x.MK) MK.posts = clone(x.MK); if (x.camps) ADS.camps = clone(x.camps); if (x.AD) Object.assign(AD, clone(x.AD)); }
+  const snap = () => ({ D: { shows: D.shows, drinks: D.drinks, kitchen: D.kitchen, reviews: D.reviews, apps: D.apps, scores: D.scores }, MK: MK.posts, camps: ADS.camps, AD: { mese: AD.mese, cpbObiettivo: AD.cpbObiettivo, pilota: AD.pilota, conferma: AD.conferma, attivi: AD.attivi, regole: AD.regole }, MAG: { F: MAG.F, A: MAG.A, P: MAG.P, ordini: MAG.ordini, margine: MAG.margine, coperture: MAG.coperture, ipratico: MAG.ipratico, notif: MAG.notif, lettura: MAG.lettura }, dirty });
+  function applica(x) { if (!x) return; Object.assign(D, clone(x.D || {})); if (x.MK) MK.posts = clone(x.MK); if (x.camps) ADS.camps = clone(x.camps); if (x.AD) Object.assign(AD, clone(x.AD)); if (x.MAG) Object.assign(MAG, clone(x.MAG)); }
   let saveT = 0;
   function salvaBozza() { clearTimeout(saveT); saveT = setTimeout(() => { if (!window.Bozza) return; const x = snap(); Bozza.ricorda(x); if (!Bozza.salva(x)) toast("La bozza è troppo pesante per questo dispositivo: pubblica per non perdere le foto."); $("#undo").disabled = !Bozza.puoAnnullare(); }, 400); }
   function setDirty(n = 1) {
@@ -886,7 +1231,9 @@ const KITCHEN = [{"id": "anti", "titolo": "Antipasti", "frase": "Fassona al colt
   V.panoramica = () => {
     head("panoramica", null);
     const n = D.shows[0], bd = newApps();
-    return `<div class="dash">
+    const ord = window.Magazzino ? Magazzino.riordino(MAG.A, MAG.F, new Date(), MAG.coperture) : [];
+    const alertw = ord.length || MAG.ordini.length ? `<div class="alertw"><span class="k" style="font:600 .7rem/1 var(--f-ui);letter-spacing:.14em;text-transform:uppercase">Da fare oggi</span>${ord.slice(0, 3).map((o) => { const r = o.righe.slice().sort((x, y) => x.giorni - y.giorni)[0]; return `<div class="ar"><span><b>Ordina da ${esc(o.fornitore.nome)}</b><small> · ${o.righe.length} ${o.righe.length === 1 ? "articolo" : "articoli"}: ${esc(r.articolo.nome.toLowerCase())} ${r.giorni < 1 ? "finisce oggi" : r.giorni < 2 ? "finisce domani" : "sta finendo"}</small></span><button class="btn sm cut" data-go="magazzino/oggi">Prepara l'ordine</button></div>`; }).join("")}${MAG.ordini.map((o) => `<div class="ar"><span><b>Arriva ${esc(o.arriva)}: ${esc(o.fornitore)}</b><small> · quando arriva fotografa la bolla</small></span><button class="btn ghost sm cut" data-go="magazzino/arrivi">Arrivo merce</button></div>`).join("")}</div>` : "";
+    return `<div class="dash">${alertw}
       <div class="tile w6"><div class="th2"><span class="k">Prossima serata</span><button class="mini" data-go="serate/new">+ Aggiungi una serata</button></div><div class="nextev"><img src="${esc(n.img)}" alt=""><div><span class="s">${esc(n.tag)}</span><h3>${esc(n.title)}</h3><span class="s">${esc(n.lines[0])} · ${esc(n.time)}</span><div style="margin-top:1rem"><button class="btn sm cut" data-go="serate/0">Modifica la serata</button></div></div></div></div>
       <div class="tile half" style="grid-column:span 3"><span class="k">Candidature nuove</span><span class="v ${bd ? "y" : ""}">${bd}</span><span class="s">${bd ? "da leggere" : "tutto letto"}</span><button class="mini" data-go="candidature">Leggile →</button></div>
       <div class="tile half" style="grid-column:span 3"><span class="k">In programma</span><span class="v">${D.shows.filter((x) => x.on).length}</span><span class="s">serate nella pila</span><button class="mini" data-go="serate">Vedi →</button></div>
@@ -1291,6 +1638,277 @@ const KITCHEN = [{"id": "anti", "titolo": "Antipasti", "frase": "Fassona al colt
       <div class="card" style="margin-top:1.2rem"><h2>Il percorso, ultimi 7 giorni</h2><div class="fun">${fun.map(([e, t, n]) => `<div class="fn"><span><b>${t}</b><code>${e}</code></span><span class="fb"><i style="width:${(n / fun[0][2] * 100).toFixed(1)}%"></i></span><b class="fv2">${n.toLocaleString("it-IT")}</b></div>`).join("")}</div><p class="hint" style="margin-top:.8rem;color:var(--dim)">«Si presenta al tavolo» lo segna la sala dal back office: è il segnale che fa la differenza, perché Meta impara da chi viene davvero.</p></div>
       <div class="card" style="margin-top:1.2rem"><h2>Esempio di evento inviato <small>Prenotazione n° 1042: email, telefono e nome partono in hash SHA-256, mai in chiaro</small></h2><pre id="capi">Calcolo l'hash…</pre></div>`,
       after: async () => { const ev = await M.eventoCapi(pren[0]); const el = $("#capi"); if (el) el.textContent = JSON.stringify({ data: [ev] }, null, 2); } };
+  }
+
+  /* ---------- magazzino: scorte che si scalano da sole con le vendite di iPratico ---------- */
+  const MZ = window.Magazzino;
+  const MAG = (() => {
+    const F = [
+      { id: "carne", nome: "Macelleria", cat: "Carne e salumi", referente: "", tel: "", come: "WhatsApp", consegna: ["mar", "ven"], anticipo: 1, minimo: 150, note: "Ordinare entro le 18 del giorno prima." },
+      { id: "forno", nome: "Forno La Mollica", cat: "Pane e basi", referente: "", tel: "", come: "WhatsApp", consegna: ["lun", "mer", "ven", "sab"], anticipo: 1, minimo: 40, note: "Bun fatti apposta per noi." },
+      { id: "orto", nome: "Ortofrutta", cat: "Verdura e frutta", referente: "", tel: "", come: "Telefono", consegna: ["lun", "mer", "ven"], anticipo: 1, minimo: 60, note: "" },
+      { id: "latte", nome: "Caseificio", cat: "Latticini", referente: "", tel: "", come: "WhatsApp", consegna: ["mar", "gio", "sab"], anticipo: 1, minimo: 80, note: "" },
+      { id: "birra", nome: "Birrificio", cat: "Birra alla spina", referente: "", tel: "", come: "Email", consegna: ["gio"], anticipo: 2, minimo: 200, note: "Fusti da 20 e 30 litri, vuoti a rendere." },
+      { id: "bev", nome: "Distributore bevande", cat: "Spirits, bibite, vini", referente: "", tel: "", come: "Portale", consegna: ["mer"], anticipo: 2, minimo: 300, note: "Ordine dal loro portale entro lunedì." },
+      { id: "secco", nome: "Cash & carry", cat: "Secco, salse, monouso", referente: "", tel: "", come: "Di persona", consegna: ["lun", "gio"], anticipo: 0, minimo: 0, note: "Ci va qualcuno di noi." }
+    ];
+    /* articolo: [id, nome, categoria, unità, lotto (quanto arriva in una confezione), formato, costo della confezione, fornitore] */
+    const A = [
+      ["angus", "Hamburger Irish Black Angus 200 g", "Carne", "pz", 10, "conf. 10 hamburger 200 g", 34, "carne"], ["agnello", "Hamburger di agnello", "Carne", "pz", 10, "conf. 10", 32, "carne"], ["anatra", "Petto d'anatra", "Carne", "g", 1000, "kg", 26, "carne"],
+      ["guanciale", "Guanciale sardo Su Sirboni", "Carne", "g", 1000, "kg", 24, "carne"], ["salsiccia", "Salsiccia di maiale nero", "Carne", "g", 1000, "kg", 18, "carne"], ["fassona", "Controfiletto di Fassona", "Carne", "g", 1000, "kg", 38, "carne"],
+      ["guancia", "Guancia di manzo", "Carne", "g", 1000, "kg", 16, "carne"], ["polpo", "Polpo", "Carne", "g", 1000, "kg", 22, "carne"], ["salumi", "Salumi per taglieri", "Carne", "g", 1000, "kg", 28, "carne"], ["lardo", "Lardo al mirto Su Sirboni", "Carne", "g", 500, "500 g", 14, "carne"], ["crudo", "Prosciutto di Parma 24 mesi", "Carne", "g", 1000, "kg", 30, "carne"],
+      ["bun", "Bun La Mollica", "Pane e basi", "pz", 20, "cassetta 20 bun", 16, "forno"], ["pinsa", "Base pinsa", "Pane e basi", "pz", 30, "cartone 30 basi", 33, "forno"], ["focaccia", "Focaccia", "Pane e basi", "pz", 10, "teglia 10 pz", 12, "forno"], ["guttiau", "Pane Guttiau", "Pane e basi", "g", 500, "500 g", 6, "forno"],
+      ["scamorza", "Scamorza affumicata", "Latticini", "g", 1000, "kg", 14, "latte"], ["robiola", "Robiola di capra di Roccaverano", "Latticini", "g", 1000, "kg", 32, "latte"], ["fiordilatte", "Fior di latte", "Latticini", "g", 1000, "kg", 9, "latte"], ["parmigiano", "Parmigiano Reggiano stravecchio", "Latticini", "g", 1000, "kg", 26, "latte"], ["pecorino", "Pecorino Romano 20 mesi", "Latticini", "g", 1000, "kg", 22, "latte"], ["formaggi", "Formaggi per taglieri", "Latticini", "g", 1000, "kg", 30, "latte"],
+      ["peperoni", "Peperoni", "Verdura", "g", 1000, "kg", 3.5, "orto"], ["cipolla", "Cipolla", "Verdura", "g", 1000, "kg", 1.8, "orto"], ["patate", "Patate", "Verdura", "g", 5000, "sacco 5 kg", 6, "orto"], ["porcini", "Funghi porcini", "Verdura", "g", 1000, "kg", 24, "orto"], ["lattuga", "Lattuga", "Verdura", "g", 1000, "kg", 3, "orto"], ["pomodorini", "Pomodorini", "Verdura", "g", 1000, "kg", 4.5, "orto"], ["melanzane", "Melanzane", "Verdura", "g", 1000, "kg", 2.8, "orto"], ["broccoletti", "Broccoletti", "Verdura", "g", 1000, "kg", 4, "orto"], ["lime", "Lime", "Verdura", "pz", 50, "cassetta 50", 14, "orto"], ["limoni", "Limoni", "Verdura", "pz", 40, "cassetta 40", 9, "orto"],
+      ["ipa", "Birra alla spina IPA", "Birra alla spina", "ml", 20000, "fusto 20 l", 92, "birra"], ["lager", "Birra alla spina Lager", "Birra alla spina", "ml", 30000, "fusto 30 l", 96, "birra"],
+      ["vodka", "Vodka", "Spirits", "ml", 700, "bottiglia 70 cl", 16, "bev"], ["gin", "Gin London Dry", "Spirits", "ml", 700, "bottiglia 70 cl", 18, "bev"], ["rum", "Rum Abuelo 7 anni", "Spirits", "ml", 700, "bottiglia 70 cl", 24, "bev"], ["mezcal", "Mezcal", "Spirits", "ml", 700, "bottiglia 70 cl", 34, "bev"], ["tequila", "Tequila Espolòn", "Spirits", "ml", 700, "bottiglia 70 cl", 26, "bev"], ["whisky", "Whiskey (rye, bourbon, irish)", "Spirits", "ml", 700, "bottiglia 70 cl", 28, "bev"], ["campari", "Campari", "Spirits", "ml", 1000, "bottiglia 1 l", 15, "bev"], ["vermouth", "Vermouth", "Spirits", "ml", 1000, "bottiglia 1 l", 14, "bev"],
+      ["tonica", "Acqua tonica 20 cl", "Bibite", "pz", 24, "cartone 24 × 20 cl", 13, "bev"], ["soda", "Soda", "Bibite", "ml", 1000, "bottiglia 1 l", 1.2, "bev"], ["vinoB", "Vino bianco della casa", "Vini", "ml", 750, "bottiglia 75 cl", 6, "bev"], ["vinoR", "Vino rosso della casa", "Vini", "ml", 750, "bottiglia 75 cl", 6.5, "bev"], ["bolle", "Bollicine", "Vini", "ml", 750, "bottiglia 75 cl", 9, "bev"],
+      ["bbq", "Salsa barbecue al Laphroaig", "Secco e salse", "ml", 1000, "1 l (fatta da noi)", 12, "secco"], ["olio", "Olio evo Marietta", "Secco e salse", "ml", 5000, "latta 5 l", 55, "secco"], ["chips", "Patatine", "Secco e salse", "g", 2500, "busta 2,5 kg", 9, "secco"], ["nocciole", "Nocciole piemontesi IGP", "Secco e salse", "g", 1000, "kg", 22, "secco"], ["miele", "Miele", "Secco e salse", "g", 1000, "kg", 12, "secco"], ["ghiaccio", "Ghiaccio", "Secco e salse", "g", 10000, "sacco 10 kg", 4, "secco"], ["tovaglioli", "Tovaglioli", "Monouso", "pz", 500, "pacco 500", 7, "secco"]
+    ].map(([id, nome, categoria, unita, lotto, formato, costoLotto, fornitore]) => ({ id, nome, categoria, unita, lotto, formato, costoLotto, fornitore, giacenza: 0, minimo: 0, consumoGiorno: 0, alias: [], ordinato: false }));
+    /* bozze di ricetta dalle descrizioni del menu: parole chiave -> articolo e quantità stimata per eccesso */
+    const K = [[/black angus/, "angus", 1], [/agnello/, "agnello", 1], [/anatra/, "anatra", 160], [/guanciale/, "guanciale", 30], [/scamorza/, "scamorza", 40], [/peperoni/, "peperoni", 40], [/cipoll/, "cipolla", 25], [/barbecue|bbq/, "bbq", 25], [/salsiccia/, "salsiccia", 90], [/porcini/, "porcini", 50], [/patat/, "patate", 70], [/robiola/, "robiola", 40], [/fassona|tartare/, "fassona", 130], [/parmigiano/, "parmigiano", 15], [/nocciol/, "nocciole", 10], [/olio/, "olio", 8], [/polp/, "polpo", 160], [/guancia(?!le)/, "guancia", 180], [/melanzan/, "melanzane", 150], [/pomodorini/, "pomodorini", 40], [/pecorino/, "pecorino", 30], [/lattuga|insalata/, "lattuga", 25], [/lardo/, "lardo", 30], [/prosciutto|crudo/, "crudo", 60], [/broccolett/, "broccoletti", 150]];
+    const P = [];
+    const add = (o) => P.push({ ipratico: "", stato: "stimata", ...o });
+    const M = window.MENU || {};
+    const fromText = (txt) => { const t = MZ.norm(txt), r = []; for (const [re, id, q] of K) if (re.test(t) && !r.some((x) => x.articolo === id)) r.push({ articolo: id, qta: q }); return r; };
+    (M.food?.burger || []).forEach((x) => add({ id: x.id || MZ.norm(x.nome).replace(/ /g, "-"), nome: x.nome, sezione: "Burger", prezzo: x.prezzo, vendite: 5, ricetta: [{ articolo: "bun", qta: 1 }, ...fromText(x.it)] }));
+    (M.food?.pinse || []).forEach((x) => add({ id: x.id || MZ.norm(x.nome).replace(/ /g, "-"), nome: x.nome.replace("…", ""), sezione: "Pinse", prezzo: x.prezzo, vendite: 4, ricetta: [{ articolo: "pinsa", qta: 1 }, { articolo: "fiordilatte", qta: 80 }, ...fromText(x.it)] }));
+    (M.food?.antipasti || []).forEach((x) => add({ id: x.id, nome: x.nome, sezione: "Antipasti", prezzo: x.prezzo, vendite: 3, ricetta: fromText(x.it) }));
+    (M.food?.taglieri || []).forEach((x, n) => add({ id: x.id, nome: x.nome, sezione: "Taglieri", prezzo: x.prezzo || (x.prezzi && x.prezzi.M), vendite: 3, ricetta: [{ articolo: "salumi", qta: n ? 90 : 120 }, { articolo: "formaggi", qta: n ? 70 : 100 }, { articolo: "miele", qta: 15 }, { articolo: "guttiau", qta: 60 }] }));
+    (M.food?.contorni || []).forEach((x) => add({ id: x.id || MZ.norm(x.nome), nome: x.nome, sezione: "Contorni", prezzo: x.prezzo, vendite: 6, ricetta: /chips/i.test(x.nome) ? [{ articolo: "chips", qta: 180 }, { articolo: "olio", qta: 5 }] : fromText(x.it || x.nome) }));
+    (M.food?.dessert || []).forEach((x) => add({ id: x.id || MZ.norm(x.nome), nome: x.nome, sezione: "Dolci", prezzo: x.prezzo, vendite: 2, ricetta: [], stato: "da fare" }));
+    const base = { vodka: "vodka", gin: "gin", rum: "rum", mezcal: "mezcal", tequila: "tequila", whisky: "whisky", whiskey: "whisky", bourbon: "whisky", rye: "whisky" };
+    ["analcolici", "low_alcohol", "cocktails", "barrel_aged"].forEach((s) => (M.drink?.[s] || []).forEach((x) => {
+      const b = base[MZ.norm(x.base || "").split(" ")[0]], ing = (x.ingredienti || []).map(MZ.norm), r = [];
+      if (b) r.push({ articolo: b, qta: s === "low_alcohol" ? 25 : 50 });
+      if (ing.some((i) => /lime/.test(i))) r.push({ articolo: "lime", qta: 0.5 });
+      if (ing.some((i) => /limone/.test(i))) r.push({ articolo: "limoni", qta: 0.5 });
+      if (ing.some((i) => /campari|bitter/.test(i))) r.push({ articolo: "campari", qta: 20 });
+      if (ing.some((i) => /vermouth/.test(i))) r.push({ articolo: "vermouth", qta: 20 });
+      if (ing.some((i) => /tonic/.test(i))) r.push({ articolo: "tonica", qta: 1 });
+      if (ing.some((i) => /soda/.test(i))) r.push({ articolo: "soda", qta: 60 });
+      r.push({ articolo: "ghiaccio", qta: 200 });
+      const restano = (x.ingredienti || []).filter((i, k) => !(b && k === 0) && !/lime|limone|campari|vermouth|tonic|soda/i.test(i));
+      add({ id: "drink-" + MZ.norm(x.nome).replace(/ /g, "-"), nome: x.nome, sezione: s === "analcolici" ? "Analcolici" : "Cocktail", prezzo: x.prezzo, vendite: 3, ricetta: [...r, ...restano.map((i) => ({ articolo: "", nome: i, qta: 20 }))], stato: restano.length ? "da completare" : "stimata" });
+    }));
+    [["birra-media", "Birra alla spina 0,4 l", "ipa", 400, 6, 18], ["birra-piccola", "Birra alla spina 0,2 l", "lager", 200, 4, 10], ["calice-bianco", "Calice di bianco", "vinoB", 150, 6, 6], ["calice-rosso", "Calice di rosso", "vinoR", 150, 6, 6], ["calice-bolle", "Calice di bollicine", "bolle", 150, 7, 4]].forEach(([id, nome, art, q, prezzo, v]) => add({ id, nome, sezione: id.startsWith("birra") ? "Birre" : "Vini", prezzo, vendite: v, ricetta: [{ articolo: art, qta: q }] }));
+    P.forEach((p) => { if (p.stato === "stimata" && (!p.ricetta.length || p.ricetta.some((r) => !r.articolo))) p.stato = p.ricetta.length ? "da completare" : "da fare"; });
+    P.slice(0, 2).forEach((p) => (p.stato = "confermata"));
+    P.forEach((p, n) => (p.ipratico = p.stato === "confermata" || n % 3 ? "PLU " + String(100 + n) : ""));
+    /* consumo medio dalle vendite tipiche, e scorte di esempio: alcune basse, così si vede il riordino */
+    for (const p of P) for (const r of p.ricetta) { const a = A.find((x) => x.id === r.articolo); if (a) a.consumoGiorno += r.qta * p.vendite * 1.05; }
+    const giorni = { angus: 0.8, bun: 1.1, ipa: 1.6, lime: 1.2, scamorza: 2, guanciale: 2.4, fiordilatte: 5, gin: 6 };
+    A.forEach((a, n) => { if (!a.consumoGiorno) a.consumoGiorno = a.lotto / 20; a.minimo = Math.ceil(a.consumoGiorno * 1.5 / (a.unita === "pz" ? 1 : 10)) * (a.unita === "pz" ? 1 : 10); a.giacenza = Math.round(a.consumoGiorno * (giorni[a.id] || 3 + (n * 7) % 9)); });
+    return { F, A, P, mov: [], ordini: [], margine: 0.05, coperture: { Carne: 4, "Pane e basi": 3, Verdura: 3, Latticini: 5, "Birra alla spina": 10, Spirits: 21, Bibite: 14, Vini: 14, "Secco e salse": 14, Monouso: 30 },
+      ipratico: { modo: "csv", stato: "da collegare" }, notif: { ordini: true, arrivi: true, sera: true, prezzi: true }, lettura: "xml", conta: {}, arrivo: { fase: "scegli" }, filtro: "", cat: "Tutte" };
+  })();
+  const FMT = (a, q) => MZ.fmtQ(q, a.unita);
+  const giorniTxt = (g) => g === Infinity ? "—" : g < 1 ? "finisce oggi" : g < 2 ? "finisce domani" : `${Math.floor(g)} giorni`;
+  const fornitoreDi = (id) => MAG.F.find((f) => f.id === id) || { nome: "—" };
+  const prossima = (f) => { const d = MZ.prossimaConsegna(f); const g = new Date(); g.setDate(g.getDate() + d); return d === 1 ? "domani" : g.toLocaleDateString("it-IT", { weekday: "long" }); };
+  const MSUB = [["oggi", "Oggi"], ["arrivi", "Arrivo merce"], ["articoli", "Scorte"], ["ricette", "Ricette"], ["fornitori", "Fornitori"], ["conta", "Conta"], ["impostazioni", "Impostazioni"]];
+
+  V.magazzino = () => {
+    const [, sub = "oggi", det] = location.hash.slice(1).split("/"), pg = MSUB.some((x) => x[0] === sub) ? sub : "oggi";
+    head("magazzino", det ? 1 : null);
+    const tabs = `<div class="seg" role="tablist">${MSUB.map(([id, t]) => `<button type="button" role="tab" data-go="magazzino/${id}" aria-selected="${pg === id}">${t}</button>`).join("")}</div>`;
+    const b = ({ oggi: mOggi, arrivi: mArrivi, articoli: mArticoli, ricette: mRicette, fornitori: mFornitori, conta: mConta, impostazioni: mImpost })[pg](det);
+    return { html: `<div class="mag">${tabs}${b.html}</div>${pg !== "arrivi" ? '<button class="fab cut" type="button" data-go="magazzino/arrivi"><span>📷</span>Arrivo merce</button>' : ""}`, after: (r) => b.after && b.after(r) };
+  };
+
+  /* ---------- oggi: cosa ordinare, cosa arriva, cosa si vende ---------- */
+  function mOggi() {
+    const ord = MZ.riordino(MAG.A, MAG.F, new Date(), MAG.coperture), val = MAG.A.reduce((t, a) => t + a.giacenza * a.costoLotto / a.lotto, 0);
+    const daFare = MAG.P.filter((p) => p.stato !== "confermata").length, fc = MAG.P.filter((p) => p.ricetta.length && p.prezzo).map((p) => MZ.costoRicetta(p, MAG.A, MAG.margine).foodCost);
+    const card = (o) => `<div class="ord ${o.urgente ? "urg" : ""}" data-f="${o.fornitore.id}"><div class="oh"><div><b>${esc(o.fornitore.nome)}</b><small>${o.urgente ? "Urgente · " : ""}consegna ${prossima(o.fornitore)} · si ordina ${o.fornitore.come === "Di persona" ? "di persona" : "con " + o.fornitore.come}</small></div><span class="ot">≈ €${Math.round(o.totale)}</span></div>
+      ${o.righe.map((r) => `<div class="orr"><span><b>${esc(r.articolo.nome)}</b><small>restano ${FMT(r.articolo, r.articolo.giacenza)} · ${giorniTxt(r.giorni)}</small></span><span class="step"><button type="button" data-q="-1" data-a="${r.articolo.id}" aria-label="Meno">−</button><b data-n="${r.articolo.id}">${Math.round(r.qta / r.articolo.lotto)}</b><button type="button" data-q="1" data-a="${r.articolo.id}" aria-label="Più">+</button></span><small class="fmt">${esc(r.articolo.formato)}</small></div>`).join("")}
+      ${o.fornitore.minimo && o.totale < o.fornitore.minimo ? `<p class="omin">Ordine minimo €${o.fornitore.minimo}: aggiungi qualcosa o aspetta il prossimo giro.</p>` : ""}
+      <div class="oa">${o.fornitore.come === "WhatsApp" ? '<button class="btn sm cut" type="button" data-wa>Manda su WhatsApp</button>' : o.fornitore.come === "Telefono" ? '<button class="btn sm cut" type="button" data-tel>Chiama</button>' : o.fornitore.come === "Email" ? '<button class="btn sm cut" type="button" data-mail>Manda email</button>' : '<button class="btn sm cut" type="button" data-copy>Copia la lista</button>'}<button class="btn ghost sm cut" type="button" data-fatto>Segna come ordinato</button></div></div>`;
+    return { html: `
+      <div class="kpis"><div class="kpi"><span class="k">Da ordinare</span><span class="v ${ord.length ? "y" : ""}">${ord.reduce((t, o) => t + o.righe.length, 0)}</span><span class="s">articoli da ${ord.length} fornitori</span></div><div class="kpi"><span class="k">Valore in magazzino</span><span class="v">€${Math.round(val).toLocaleString("it-IT")}</span><span class="s">a prezzo d'acquisto</span></div><div class="kpi"><span class="k">Food cost medio</span><span class="v">${fc.length ? Math.round(fc.reduce((a, b) => a + b, 0) / fc.length * 100) : 0}%</span><span class="s">costo ingredienti sul prezzo</span></div><div class="kpi"><span class="k">Ricette da sistemare</span><span class="v">${daFare}</span><span class="s"><button class="mini" data-go="magazzino/ricette">Sistemale →</button></span></div></div>
+      <div class="mgrid2"><div><h2 class="h2">Da ordinare <small>Calcolato su quanto vendi e su quando consegna ogni fornitore</small></h2>${ord.length ? ord.map(card).join("") : '<div class="empty card">Niente da ordinare. Tutto coperto fino alle prossime consegne.</div>'}
+        ${MAG.ordini.length ? `<h2 class="h2" style="margin-top:1.6rem">In arrivo</h2>${MAG.ordini.map((o, n) => `<div class="arr"><span><b>${esc(o.fornitore)}</b><small>${o.righe} articoli · ordinato ${o.quando} · arriva ${o.arriva}</small></span><button class="btn sm cut" type="button" data-arr="${n}">È arrivato</button></div>`).join("")}` : ""}</div>
+        <div><h2 class="h2">Stasera da iPratico <small><span class="live"><i></i>in diretta</span></small></h2><div class="card sales" id="sales"><p class="hint" style="color:var(--dim)">Ogni volta che la cassa batte un prodotto, il magazzino scala gli ingredienti della ricetta.</p></div>
+          <h2 class="h2" style="margin-top:1.6rem">Sta finendo</h2><div class="card">${MAG.A.map((a) => ({ a, s: MZ.stato(a, fornitoreDi(a.fornitore), new Date(), MAG.coperture[a.categoria]) })).sort((x, y) => x.s.giorni - y.s.giorni).slice(0, 7).map(({ a, s }) => `<button class="lvl" type="button" data-go="magazzino/articoli/${a.id}"><span><b>${esc(a.nome)}</b><small>${FMT(a, a.giacenza)} · ${giorniTxt(s.giorni)}</small></span><span class="bar"><i style="width:${Math.max(6, Math.min(1, s.giorni / 10) * 100)}%;background:${s.giorni < 2 ? "var(--red)" : s.giorni < 4 ? "var(--warn)" : "var(--ok)"}"></i></span></button>`).join("")}</div></div></div>`,
+      after: (root) => {
+        const qOf = (id) => +$(`[data-n="${id}"]`, root).textContent;
+        $$("[data-q]", root).forEach((b) => b.addEventListener("click", () => { const n = $(`[data-n="${b.dataset.a}"]`, root); n.textContent = Math.max(0, +n.textContent + +b.dataset.q); }));
+        $$(".ord", root).forEach((c) => {
+          const o = ord.find((x) => x.fornitore.id === c.dataset.f), testo = () => MZ.messaggioOrdine({ ...o, righe: o.righe.map((r) => ({ ...r, qta: qOf(r.articolo.id) * r.articolo.lotto })).filter((r) => r.qta > 0) });
+          const fatto = () => { o.righe.forEach((r) => (MAG.A.find((a) => a.id === r.articolo.id).ordinato = true)); MAG.ordini.push({ fornitore: o.fornitore.nome, id: o.fornitore.id, righe: o.righe.length, quando: "oggi", arriva: prossima(o.fornitore) }); setDirty(1); render(); toast(`Ordine a ${o.fornitore.nome} segnato. Quando arriva, fotografa la bolla.`); };
+          c.addEventListener("click", (e) => {
+            if (e.target.closest("[data-wa]")) { open("https://wa.me/" + (o.fornitore.tel || "").replace(/\D/g, "") + "?text=" + encodeURIComponent(testo()), "_blank"); setTimeout(fatto, 400); }
+            if (e.target.closest("[data-tel]")) { if (o.fornitore.tel) location.href = "tel:" + o.fornitore.tel; else toast("Manca il numero: aggiungilo nella scheda del fornitore."); }
+            if (e.target.closest("[data-mail]")) { location.href = `mailto:?subject=${encodeURIComponent("Ordine Blend")}&body=${encodeURIComponent(testo())}`; setTimeout(fatto, 400); }
+            if (e.target.closest("[data-copy]")) { navigator.clipboard?.writeText(testo()); toast("Lista copiata."); }
+            if (e.target.closest("[data-fatto]")) fatto();
+          });
+        });
+        $$("[data-arr]", root).forEach((b) => b.addEventListener("click", () => { MAG.arrivo = { fase: "scegli", ordine: +b.dataset.arr }; location.hash = "magazzino/arrivi"; }));
+        /* finta cassa: ogni pochi secondi arriva una vendita e si scalano gli ingredienti */
+        const box = $("#sales"), pick = () => { const pool = MAG.P.filter((p) => p.ricetta.some((r) => r.articolo)); return pool[Math.floor(Math.random() * pool.length)]; };
+        let n = 0; feedT = setInterval(() => {
+          if (!$("#sales") || n++ > 20) return clearInterval(feedT);
+          const p = pick(), r = MZ.scarica({ prodotto: p.id, quantita: 1 }, MAG.P, MAG.margine); MZ.applica(MAG.A, r.movimenti); MAG.mov.unshift(...r.movimenti);
+          const t = new Date().toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit" });
+          box.insertAdjacentHTML("afterbegin", `<div class="sale"><time>${t}</time><b>${esc(p.nome)}</b><span class="sc">${r.movimenti.slice(0, 4).map((m) => { const a = MAG.A.find((x) => x.id === m.articolo); return `<i>−${FMT(a, -m.delta)} ${esc(a.nome.split(" ").slice(0, 2).join(" "))}</i>`; }).join("")}</span></div>`);
+          if (box.children.length > 9) box.lastElementChild.remove();
+        }, 3500);
+      } };
+  }
+
+  /* ---------- arrivo merce: foto della bolla, fattura elettronica, o a mano ---------- */
+  const XML_PROVA = `<?xml version="1.0"?><p:FatturaElettronica xmlns:p="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/fatture/v1.2"><FatturaElettronicaHeader><CedentePrestatore><DatiAnagrafici><IdFiscaleIVA><IdCodice>01234567890</IdCodice></IdFiscaleIVA><Anagrafica><Denominazione>Macelleria (esempio)</Denominazione></Anagrafica></DatiAnagrafici></CedentePrestatore></FatturaElettronicaHeader><FatturaElettronicaBody><DatiGenerali><DatiGeneraliDocumento><Data>2026-11-16</Data><Numero>482/A</Numero><ImportoTotaleDocumento>238.40</ImportoTotaleDocumento></DatiGeneraliDocumento></DatiGenerali><DatiBeniServizi><DettaglioLinee><Descrizione>HAMBURGER IRISH ANGUS 200G CONF.10</Descrizione><Quantita>4.00</Quantita><UnitaMisura>CF</UnitaMisura><PrezzoUnitario>35.50</PrezzoUnitario></DettaglioLinee><DettaglioLinee><Descrizione>GUANCIALE SARDO SU SIRBONI</Descrizione><Quantita>2.10</Quantita><UnitaMisura>KG</UnitaMisura><PrezzoUnitario>24.00</PrezzoUnitario></DettaglioLinee><DettaglioLinee><Descrizione>SALSICCIA SUINO NERO</Descrizione><Quantita>3.00</Quantita><UnitaMisura>KG</UnitaMisura><PrezzoUnitario>18.60</PrezzoUnitario></DettaglioLinee><DettaglioLinee><Descrizione>COSTINE DI MAIALE</Descrizione><Quantita>2.00</Quantita><UnitaMisura>KG</UnitaMisura><PrezzoUnitario>11.00</PrezzoUnitario></DettaglioLinee></DatiBeniServizi></FatturaElettronicaBody></p:FatturaElettronica>`;
+  const BOLLA_PROVA = { fornitore: "Macelleria (esempio)", numero: "DDT 1187", data: "16/11/2026", righe: [{ descrizione: "Hamburger Irish Angus 200g conf.10", quantita: 4, unita: "CF", prezzo: 35.5 }, { descrizione: "Guanciale Su Sirboni", quantita: 2.1, unita: "KG", prezzo: 24 }, { descrizione: "Contro filetto fassona", quantita: 1.8, unita: "KG", prezzo: 38 }, { descrizione: "Polpo verace", quantita: 2, unita: "KG", prezzo: 23.9 }] };
+  function mArrivi() {
+    const st = MAG.arrivo;
+    if (st.fase === "scegli") return { html: `<div class="arrh"><h2 class="h2">Arrivo merce <small>${st.ordine !== undefined && MAG.ordini[st.ordine] ? "Ordine di " + esc(MAG.ordini[st.ordine].fornitore) : "Carica quello che è arrivato"}</small></h2>
+      <label class="cam"><input type="file" accept="image/*" capture="environment" id="foto"><span class="ci">📷</span><b>Fotografa la bolla o la fattura</b><small>Anche più pagine. Le leggiamo noi e ti mostriamo cosa carichiamo prima di farlo.</small></label>
+      <div class="alt2"><label class="altb"><input type="file" accept=".xml,.p7m,text/xml" id="xml"><b>Fattura elettronica</b><small>Il file XML dallo SdI o dal commercialista: lettura esatta, gratis.</small></label><button class="altb" type="button" id="prova-xml"><b>Prova con una fattura</b><small>Una fattura XML di esempio, letta davvero.</small></button><button class="altb" type="button" id="mano"><b>Inserisci a mano</b><small>Per le piccole cose.</small></button></div></div>`,
+      after: () => {
+        $("#foto").addEventListener("change", (e) => { const f = e.target.files[0]; if (!f) return; MAG.arrivo = { ...st, fase: "lettura", img: URL.createObjectURL(f) }; render(); setTimeout(() => { MAG.arrivo = { ...MAG.arrivo, fase: "revisione", doc: BOLLA_PROVA, fonte: "foto", righe: MZ.prepareCarico(BOLLA_PROVA, MAG.A) }; render(); }, 2200); });
+        const fromXml = (txt) => { try { const doc = MZ.leggiFatturaPA(txt); MAG.arrivo = { ...st, fase: "revisione", doc, fonte: "xml", righe: MZ.prepareCarico(doc, MAG.A) }; render(); } catch (e) { toast(e.message); } };
+        $("#xml").addEventListener("change", (e) => { const f = e.target.files[0]; if (f) f.text().then(fromXml); });
+        $("#prova-xml").addEventListener("click", () => fromXml(XML_PROVA));
+        $("#mano").addEventListener("click", () => { MAG.arrivo = { ...st, fase: "revisione", doc: { fornitore: "", numero: "", data: "", righe: [] }, fonte: "mano", righe: [{ riga: { descrizione: "", quantita: 1 }, articolo: null, qta: 0, stato: "nuovo", fiducia: 0, varPrezzo: 0 }] }; render(); });
+      } };
+    if (st.fase === "lettura") return { html: `<div class="scan"><div class="sc0">${st.img ? `<img src="${st.img}" alt="">` : ""}<i class="beam"></i></div><b>Leggo la bolla…</b><small>Riconosco righe, quantità e prezzi. In produzione ci pensa un modello leggero (pochi decimi di centesimo a pagina).</small></div>` };
+    if (st.fase === "revisione") {
+      const R = st.righe, ok = R.filter((r) => r.stato === "ok").length;
+      return { html: `<div class="rev"><div class="revh"><div><h2 class="h2">${esc(st.doc.fornitore || "Nuovo arrivo")} <small>${st.doc.numero ? esc(st.doc.numero) + " · " : ""}${esc(st.doc.data || "")} · letta da ${st.fonte === "xml" ? "fattura elettronica" : st.fonte === "foto" ? "foto" : "inserimento a mano"}</small></h2><p class="lead2">${ok} righe riconosciute, ${R.length - ok} da controllare. Tocca una riga per cambiare articolo o quantità.</p></div></div>
+        <div class="rrows">${R.map((r, n) => `<div class="rr ${r.stato}"><span class="ri">${r.stato === "ok" ? "✓" : r.stato === "controlla" ? "?" : "+"}</span><div class="rd"><small>${st.fonte === "mano" ? "" : "Sulla bolla: " + esc(r.riga.descrizione)} ${r.riga.quantita && st.fonte !== "mano" ? "· " + r.riga.quantita + " " + esc(r.riga.unita || "") : ""}</small>
+          <select data-ra="${n}" aria-label="Articolo"><option value="">${r.stato === "nuovo" && st.fonte !== "mano" ? "Articolo nuovo: crealo o scegli" : "Scegli l'articolo"}</option>${MAG.A.map((a) => `<option value="${a.id}" ${r.articolo && r.articolo.id === a.id ? "selected" : ""}>${esc(a.nome)}</option>`).join("")}</select>
+          ${r.varPrezzo && Math.abs(r.varPrezzo) > 0.03 ? `<span class="pc ${r.varPrezzo > 0 ? "up" : "dn"}">${r.varPrezzo > 0 ? "▲" : "▼"} costa il ${Math.abs(Math.round(r.varPrezzo * 100))}% ${r.varPrezzo > 0 ? "in più" : "in meno"} dell'ultima volta</span>` : ""}</div>
+          <div class="rq"><input type="number" step="any" min="0" value="${r.articolo ? +(r.qta / (r.articolo.unita === "pz" ? 1 : 1000)).toFixed(2) : ""}" data-rq="${n}" aria-label="Quantità"><span>${r.articolo ? (r.articolo.unita === "pz" ? "pz" : r.articolo.unita === "g" ? "kg" : "l") : ""}</span></div><button class="x" type="button" data-rx="${n}" aria-label="Togli">✕</button></div>`).join("")}</div>
+        <button class="mini" type="button" id="add-r">+ aggiungi una riga</button>
+        <div class="wf"><button class="btn ghost cut" type="button" id="annulla-a">Annulla</button><button class="btn cut" type="button" id="carica">Carica in magazzino</button></div></div>`,
+        after: (root) => {
+          $$("[data-ra]", root).forEach((s) => s.addEventListener("change", () => { const r = R[+s.dataset.ra]; r.articolo = MAG.A.find((a) => a.id === s.value) || null; r.stato = r.articolo ? "ok" : "nuovo"; if (r.articolo && st.fonte !== "mano") r.qta = MZ.quantitaInterna(r.riga, r.articolo); render(); }));
+          $$("[data-rq]", root).forEach((i) => i.addEventListener("change", () => { const r = R[+i.dataset.rq]; if (r.articolo) r.qta = +i.value * (r.articolo.unita === "pz" ? 1 : 1000); }));
+          $$("[data-rx]", root).forEach((b) => b.addEventListener("click", () => { R.splice(+b.dataset.rx, 1); render(); }));
+          $("#add-r").addEventListener("click", () => { R.push({ riga: { descrizione: "", quantita: 1 }, articolo: null, qta: 0, stato: "nuovo", fiducia: 0, varPrezzo: 0 }); render(); });
+          $("#annulla-a").addEventListener("click", () => { MAG.arrivo = { fase: "scegli" }; render(); });
+          $("#carica").addEventListener("click", () => {
+            const valide = R.filter((r) => r.articolo && r.qta > 0); if (!valide.length) return toast("Nessuna riga da caricare: scegli almeno un articolo.");
+            MAG.mov.unshift(...MZ.caricaMerce(MAG.A, valide));
+            const fid = valide[0].articolo.fornitore; MAG.ordini = MAG.ordini.filter((o) => o.id !== fid && (st.ordine === undefined || MAG.ordini.indexOf(o) !== st.ordine));
+            MAG.arrivo = { fase: "fatto", n: valide.length, saltate: R.length - valide.length }; setDirty(1); render();
+          });
+        } };
+    }
+    return { html: `<div class="done2"><span class="big">✓</span><h2>Magazzino aggiornato</h2><p>${st.n} articoli caricati${st.saltate ? `, ${st.saltate} righe lasciate fuori` : ""}. Gli avvisi di riordino si sono aggiornati e il sistema ricorda come il fornitore scrive i suoi prodotti: la prossima volta li riconosce da solo.</p><div class="oa"><button class="btn cut" type="button" data-go="magazzino/oggi">Torna a Oggi</button><button class="btn ghost cut" type="button" id="altro">Carica un altro arrivo</button></div></div>`,
+      after: () => $("#altro").addEventListener("click", () => { MAG.arrivo = { fase: "scegli" }; render(); }) };
+  }
+
+  /* ---------- scorte ---------- */
+  function mArticoli(det) {
+    const cats = ["Tutte", "Da ordinare", ...new Set(MAG.A.map((a) => a.categoria))];
+    const a = det && MAG.A.find((x) => x.id === det);
+    const list = MAG.A.filter((x) => (MAG.cat === "Tutte" || (MAG.cat === "Da ordinare" ? MZ.stato(x, fornitoreDi(x.fornitore), new Date(), MAG.coperture[x.categoria]).ordina : x.categoria === MAG.cat)) && (!MAG.filtro || MZ.norm(x.nome).includes(MZ.norm(MAG.filtro))));
+    const lista = `<div class="mlist"><input class="search" type="search" placeholder="Cerca un articolo" value="${esc(MAG.filtro)}" id="q"><div class="chips scroll">${cats.map((c) => `<button type="button" data-cat="${c}" aria-pressed="${MAG.cat === c}">${c}</button>`).join("")}</div>
+      ${list.map((x) => { const s = MZ.stato(x, fornitoreDi(x.fornitore), new Date(), MAG.coperture[x.categoria]); return `<button class="lvl item2 ${a && a.id === x.id ? "on" : ""}" type="button" data-go="magazzino/articoli/${x.id}"><span><b>${esc(x.nome)}</b><small>${FMT(x, x.giacenza)} · ${giorniTxt(s.giorni)}${x.ordinato ? " · ordinato" : ""}</small></span><span class="bar"><i style="width:${Math.max(6, Math.min(1, s.giorni / 10) * 100)}%;background:${s.giorni < 2 ? "var(--red)" : s.giorni < 4 ? "var(--warn)" : "var(--ok)"}"></i></span></button>`; }).join("") || '<p class="empty">Nessun articolo.</p>'}
+      <button class="add" type="button" id="nuovo-a">+ Nuovo articolo</button></div>`;
+    const usi = a ? MAG.P.filter((p) => p.ricetta.some((r) => r.articolo === a.id)) : [];
+    const scheda = a ? `<div class="form" id="form"><div class="card"><h2>${esc(a.nome)} <small>${esc(a.categoria)}</small></h2>
+      <div class="big3"><div><span class="k">In magazzino</span><span class="v">${FMT(a, a.giacenza)}</span></div><div><span class="k">Consumo medio</span><span class="v">${FMT(a, a.consumoGiorno)}<small>/giorno</small></span></div><div><span class="k">Dura</span><span class="v">${giorniTxt(MZ.stato(a, fornitoreDi(a.fornitore), new Date(), MAG.coperture[a.categoria]).giorni)}</span></div></div>
+      <div class="row" style="margin-top:1rem"><div class="f"><label><span>Nome</span></label><input type="text" value="${esc(a.nome)}" data-k="nome"></div><div class="f"><label><span>Come lo contiamo</span></label><select data-k="unita"><option value="pz" ${a.unita === "pz" ? "selected" : ""}>A pezzi o porzioni</option><option value="g" ${a.unita === "g" ? "selected" : ""}>A peso (grammi)</option><option value="ml" ${a.unita === "ml" ? "selected" : ""}>A volume (millilitri)</option></select></div></div></div>
+      <div class="card"><h2>Quando riordinare <small>Il sistema avvisa quando non basta fino alla consegna dopo</small></h2><div class="row three"><div class="f"><label><span>Scorta minima</span></label><input type="number" value="${a.unita === "pz" ? a.minimo : a.minimo / 1000}" data-k="minimo" step="any"><span class="hint">${a.unita === "pz" ? "pezzi" : a.unita === "g" ? "kg" : "litri"}: sotto, avviso sempre</span></div><div class="f"><label><span>Arriva in</span></label><input type="text" value="${esc(a.formato)}" data-k="formato"><span class="hint">una confezione = ${FMT(a, a.lotto)}</span></div><div class="f"><label><span>Costo della confezione</span></label><input type="number" value="${a.costoLotto}" data-k="costoLotto" step=".01"><span class="hint">si aggiorna da solo con le fatture</span></div></div>
+        <div class="row" style="margin-top:1rem"><div class="f"><label><span>Fornitore</span></label><select data-k="fornitore">${MAG.F.map((f) => `<option value="${f.id}" ${f.id === a.fornitore ? "selected" : ""}>${esc(f.nome)}</option>`).join("")}</select></div><div class="f"><label><span>Rettifica la giacenza</span></label><span class="step big"><button type="button" data-g="-1">−</button><b>${FMT(a, a.giacenza)}</b><button type="button" data-g="1">+</button></span><span class="hint">± una confezione. Per contare tutto c'è «Conta».</span></div></div></div>
+      <div class="card"><h2>Dove si usa <small>${usi.length} prodotti del menu</small></h2><div class="chips">${usi.map((p) => `<button type="button" data-go="magazzino/ricette/${p.id}">${esc(p.nome)} · ${FMT(a, p.ricetta.find((r) => r.articolo === a.id).qta)}</button>`).join("") || '<span class="hint">Ancora in nessuna ricetta.</span>'}</div>
+        ${a.alias.length ? `<p class="hint" style="margin-top:.8rem;color:var(--dim)">Sulle fatture lo riconosciamo anche come: ${a.alias.map(esc).join(" · ")}</p>` : ""}</div></div>` : `<div class="empty card">Scegli un articolo per vedere quanto ne resta, quando riordinarlo e in quali ricette va.</div>`;
+    return { html: `<div class="split mz ${det ? "open" : ""}">${lista}${scheda}</div>`, after: (root) => {
+      $("#q", root).addEventListener("input", (e) => { MAG.filtro = e.target.value; clearTimeout(mArticoli.t); mArticoli.t = setTimeout(() => { render(); const q = $("#q"); q.focus(); q.setSelectionRange(q.value.length, q.value.length); }, 200); });
+      $$("[data-cat]", root).forEach((b) => b.addEventListener("click", () => { MAG.cat = b.dataset.cat; render(); }));
+      $("#nuovo-a", root).addEventListener("click", () => { const id = "art" + Date.now(); MAG.A.unshift({ id, nome: "Nuovo articolo", categoria: "Secco e salse", unita: "pz", lotto: 1, formato: "pezzo", costoLotto: 0, fornitore: MAG.F[0].id, giacenza: 0, minimo: 0, consumoGiorno: 0, alias: [] }); setDirty(1); location.hash = "magazzino/articoli/" + id; });
+      if (!a) return;
+      $("#form").addEventListener("change", (e) => { const k = e.target.dataset.k; if (!k) return; let v = e.target.value; if (k === "minimo") v = +v * (a.unita === "pz" ? 1 : 1000); if (k === "costoLotto") v = +v; a[k] = v; setDirty(1); render(); });
+      $$("[data-g]", root).forEach((b) => b.addEventListener("click", () => { const d = +b.dataset.g * a.lotto; a.giacenza = Math.max(0, a.giacenza + d); MAG.mov.unshift({ tipo: "rettifica", articolo: a.id, delta: d, rif: "a mano", quando: Date.now() }); setDirty(1); render(); }));
+    } };
+  }
+
+  /* ---------- ricette: cosa esce dal magazzino per ogni prodotto battuto in cassa ---------- */
+  function mRicette(det) {
+    const p = det && MAG.P.find((x) => x.id === det), sez = [...new Set(MAG.P.map((x) => x.sezione))];
+    const badge = (x) => `<span class="st ${x.stato === "confermata" ? "on" : x.stato === "stimata" ? "" : "new"}">${x.stato}</span>`;
+    const lista = `<div class="mlist"><div class="note"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg><span>Le ricette sono state preparate dal menu, con dosi stimate per eccesso. Controllale una volta con la cucina e il bancone: poi il magazzino si regola da solo.</span></div>
+      ${sez.map((s) => `<p class="gl" style="padding:0;margin-top:.8rem">${s}</p>${MAG.P.filter((x) => x.sezione === s).map((x) => { const c = MZ.costoRicetta(x, MAG.A, MAG.margine); return `<button class="item ${p && p.id === x.id ? "" : ""}" type="button" data-go="magazzino/ricette/${x.id}" ${p && p.id === x.id ? 'aria-current="true"' : ""}><span class="fcb ${c.foodCost > .35 ? "hi" : ""}">${x.ricetta.length ? Math.round(c.foodCost * 100) + "%" : "—"}</span><span><b>${esc(x.nome)}</b><small>${x.ricetta.length} ingredienti${x.ipratico ? " · " + esc(x.ipratico) : " · senza codice cassa"}</small></span>${badge(x)}</button>`; }).join("")}`).join("")}</div>`;
+    if (!p) return { html: `<div class="split mz">${lista}<div class="empty card">Scegli un prodotto per vedere cosa scala dal magazzino quando viene battuto in cassa, e quanto costa farlo.</div></div>` };
+    const c = MZ.costoRicetta(p, MAG.A, MAG.margine);
+    const unitLbl = (a) => a ? (a.unita === "pz" ? "pz" : a.unita) : "";
+    const form = `<div class="form" id="form"><div class="card"><h2>${esc(p.nome)} <small>${esc(p.sezione)} · €${p.prezzo || "—"}</small></h2>
+      <div class="big3"><div><span class="k">Costo ingredienti</span><span class="v">€${c.costo.toFixed(2).replace(".", ",")}</span></div><div><span class="k">Food cost</span><span class="v ${c.foodCost > .35 ? "bad" : ""}">${Math.round(c.foodCost * 100)}%</span></div><div><span class="k">Margine</span><span class="v">€${((p.prezzo || 0) - c.costo).toFixed(2).replace(".", ",")}</span></div></div>
+      ${c.manca ? `<p class="hint" style="color:var(--warn);margin-top:.6rem">${c.manca} ingredienti senza articolo o senza costo: il calcolo è incompleto.</p>` : ""}</div>
+      <div class="card"><h2>Ricetta <small>Per una porzione. Il magazzino aggiunge il ${Math.round(MAG.margine * 100)}% per gli sprechi</small></h2><div class="rec">${p.ricetta.map((r, n) => { const a = MAG.A.find((x) => x.id === r.articolo); return `<div class="rc0 ${a ? "" : "miss"}"><select data-ra="${n}" aria-label="Ingrediente"><option value="">${r.nome ? "Da collegare: " + esc(r.nome) : "Scegli l'ingrediente"}</option>${MAG.A.map((x) => `<option value="${x.id}" ${x.id === r.articolo ? "selected" : ""}>${esc(x.nome)}</option>`).join("")}</select><input type="number" step="any" min="0" value="${r.qta}" data-rq="${n}" aria-label="Quantità"><span class="u">${unitLbl(a)}</span><button class="x" type="button" data-rx="${n}" aria-label="Togli">✕</button></div>`; }).join("")}</div><button class="mini" type="button" id="add-i">+ aggiungi un ingrediente</button></div>
+      <div class="card"><h2>Cassa</h2><div class="row"><div class="f"><label><span>Codice su iPratico</span></label><input type="text" value="${esc(p.ipratico)}" data-k="ipratico" placeholder="es. PLU 112"><span class="hint">Serve per riconoscere la vendita. Lo prendiamo in automatico quando colleghiamo iPratico.</span></div><div class="f"><label><span>Stato</span></label><div class="chips" id="stato">${["stimata", "confermata"].map((s) => `<button type="button" aria-pressed="${p.stato === s}">${s}</button>`).join("")}</div><span class="hint">«Confermata» quando la cucina o il bancone l'hanno controllata.</span></div></div></div>
+      <div class="foot"><button class="btn ghost cut" type="button" id="prova">Prova: vendine uno</button><span class="saved">Le modifiche restano in bozza finché non premi Pubblica</span></div><div id="esito"></div></div>`;
+    return { html: `<div class="split mz open">${lista}${form}</div>`, after: (root) => {
+      $$("[data-ra]", root).forEach((s) => s.addEventListener("change", () => { p.ricetta[+s.dataset.ra].articolo = s.value; setDirty(1); render(); }));
+      $$("[data-rq]", root).forEach((i) => i.addEventListener("change", () => { p.ricetta[+i.dataset.rq].qta = +i.value; setDirty(1); render(); }));
+      $$("[data-rx]", root).forEach((b) => b.addEventListener("click", () => { p.ricetta.splice(+b.dataset.rx, 1); setDirty(1); render(); }));
+      $("#add-i").addEventListener("click", () => { p.ricetta.push({ articolo: "", qta: 0 }); render(); });
+      $("[data-k=ipratico]", root).addEventListener("change", (e) => { p.ipratico = e.target.value; setDirty(1); });
+      $("#stato").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) { p.stato = b.textContent; setDirty(1); render(); } });
+      $("#prova").addEventListener("click", () => { const r = MZ.scarica({ prodotto: p.id, quantita: 1 }, MAG.P, MAG.margine); $("#esito").innerHTML = `<div class="card"><h2>Se la cassa batte un ${esc(p.nome)}</h2><div class="chips">${r.movimenti.map((m) => { const a = MAG.A.find((x) => x.id === m.articolo); return `<span class="chip0">−${FMT(a, -m.delta)} ${esc(a.nome)}</span>`; }).join("") || '<span class="hint">Niente: la ricetta è vuota.</span>'}</div><p class="hint" style="margin-top:.6rem;color:var(--dim)">Solo una prova: il magazzino non è stato toccato.</p></div>`; });
+    } };
+  }
+
+  /* ---------- fornitori ---------- */
+  function mFornitori(det) {
+    const f = det && MAG.F.find((x) => x.id === det);
+    const lista = `<div class="mlist">${MAG.F.map((x) => `<button class="item" type="button" data-go="magazzino/fornitori/${x.id}" ${f && f.id === x.id ? 'aria-current="true"' : ""}><span class="num" style="color:var(--bone)">${esc(x.nome[0])}</span><span><b>${esc(x.nome)}</b><small>${esc(x.cat)} · consegna ${x.consegna.join(", ")}</small></span><span class="st">${esc(x.come)}</span></button>`).join("")}<button class="add" type="button" id="nuovo-f">+ Nuovo fornitore</button></div>`;
+    if (!f) return { html: `<div class="split mz">${lista}<div class="empty card">Scegli un fornitore: contatti, giorni di consegna, come si ordina e cosa ci porta.</div></div>`, after: (r) => $("#nuovo-f", r).addEventListener("click", nuovoF) };
+    const art = MAG.A.filter((a) => a.fornitore === f.id);
+    const form = `<div class="form" id="form"><div class="card"><h2>${esc(f.nome)}</h2><div class="row"><div class="f"><label><span>Nome</span></label><input type="text" value="${esc(f.nome)}" data-k="nome"></div><div class="f"><label><span>Referente</span></label><input type="text" value="${esc(f.referente)}" data-k="referente" placeholder="es. Marco"></div></div>
+      <div class="row" style="margin-top:1rem"><div class="f"><label><span>Telefono o WhatsApp</span></label><input type="text" value="${esc(f.tel)}" data-k="tel" placeholder="+39 …"></div><div class="f"><label><span>Come si ordina</span></label><select data-k="come">${["WhatsApp", "Telefono", "Email", "Portale", "Di persona"].map((c) => `<option ${c === f.come ? "selected" : ""}>${c}</option>`).join("")}</select></div></div></div>
+      <div class="card"><h2>Consegne <small>Il riordino si calcola su questi giorni</small></h2><div class="chips days" id="days">${["lun", "mar", "mer", "gio", "ven", "sab", "dom"].map((d) => `<button type="button" aria-pressed="${f.consegna.includes(d)}">${d}</button>`).join("")}</div>
+        <div class="row" style="margin-top:1rem"><div class="f"><label><span>Ordinare con quanti giorni di anticipo</span></label><input type="number" min="0" value="${f.anticipo}" data-k="anticipo"></div><div class="f"><label><span>Ordine minimo (€)</span></label><input type="number" min="0" value="${f.minimo}" data-k="minimo"></div></div>
+        <div class="f" style="margin-top:1rem"><label><span>Note</span></label><textarea rows="2" data-k="note">${esc(f.note)}</textarea></div></div>
+      <div class="card"><h2>Cosa ci porta <small>${art.length} articoli</small></h2><div class="chips">${art.map((a) => `<button type="button" data-go="magazzino/articoli/${a.id}">${esc(a.nome)}</button>`).join("")}</div></div></div>`;
+    return { html: `<div class="split mz open">${lista}${form}</div>`, after: (root) => {
+      $("#nuovo-f", root).addEventListener("click", nuovoF);
+      $("#form").addEventListener("change", (e) => { const k = e.target.dataset.k; if (!k) return; f[k] = ["anticipo", "minimo"].includes(k) ? +e.target.value : e.target.value; setDirty(1); if (k === "nome") render(); });
+      $("#days").addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; const d = b.textContent; f.consegna = f.consegna.includes(d) ? f.consegna.filter((x) => x !== d) : [...f.consegna, d]; setDirty(1); render(); });
+    } };
+  }
+  function nuovoF() { const id = "f" + Date.now(); MAG.F.push({ id, nome: "Nuovo fornitore", cat: "", referente: "", tel: "", come: "WhatsApp", consegna: [], anticipo: 1, minimo: 0, note: "" }); setDirty(1); location.hash = "magazzino/fornitori/" + id; }
+
+  /* ---------- conta: una categoria alla volta, col telefono in mano ---------- */
+  function mConta() {
+    const cats = [...new Set(MAG.A.map((a) => a.categoria))], cat = MAG.contaCat || cats[0], diff = MZ.differenze(MAG.A, MAG.conta);
+    return { html: `<p class="lead2">Conta quello che c'è davvero, una categoria alla volta. Alla fine vedi la differenza con quello che il sistema si aspettava: se è grande, porzioni più abbondanti o sprechi da guardare.</p>
+      <div class="chips scroll">${cats.map((c) => `<button type="button" data-cc="${c}" aria-pressed="${c === cat}">${c}${MAG.A.filter((a) => a.categoria === c).every((a) => MAG.conta[a.id] !== undefined && MAG.conta[a.id] !== "") ? " ✓" : ""}</button>`).join("")}</div>
+      <div class="cnt0">${MAG.A.filter((a) => a.categoria === cat).map((a) => `<div class="cr0"><span><b>${esc(a.nome)}</b><small>il sistema dice ${FMT(a, a.giacenza)}</small></span><span class="inp"><input type="number" inputmode="decimal" step="any" min="0" value="${MAG.conta[a.id] !== undefined && MAG.conta[a.id] !== "" ? (a.unita === "pz" ? MAG.conta[a.id] : MAG.conta[a.id] / 1000) : ""}" data-c="${a.id}" placeholder="—" aria-label="Contati"><i>${a.unita === "pz" ? "pz" : a.unita === "g" ? "kg" : "l"}</i></span></div>`).join("")}</div>
+      <div class="card sumc"><div><b>${diff.length}</b> differenze · valore <b>${diff.reduce((t, d) => t + d.euro, 0) >= 0 ? "+" : ""}€${Math.round(diff.reduce((t, d) => t + d.euro, 0))}</b></div>${diff.slice(0, 5).map((d) => `<small>${esc(d.articolo.nome)}: ${d.diff > 0 ? "+" : ""}${FMT(d.articolo, d.diff)} (${Math.round(d.perc * 100)}%)</small>`).join("")}<button class="btn cut" type="button" id="applica" ${diff.length ? "" : "disabled"}>Applica la conta</button></div>`,
+      after: (root) => {
+        $$("[data-cc]", root).forEach((b) => b.addEventListener("click", () => { MAG.contaCat = b.dataset.cc; render(); }));
+        $$("[data-c]", root).forEach((i) => i.addEventListener("change", () => { const a = MAG.A.find((x) => x.id === i.dataset.c); MAG.conta[a.id] = i.value === "" ? "" : +i.value * (a.unita === "pz" ? 1 : 1000); render(); }));
+        $("#applica", root).addEventListener("click", () => { for (const d of diff) { d.articolo.giacenza = d.reale; MAG.mov.unshift({ tipo: "rettifica", articolo: d.articolo.id, delta: d.diff, rif: "conta", quando: Date.now() }); } MAG.conta = {}; setDirty(1); render(); toast(`Conta applicata: ${diff.length} giacenze corrette.`); });
+      } };
+  }
+
+  /* ---------- impostazioni: iPratico, regole, notifiche, lettura fatture ---------- */
+  function mImpost() {
+    const cats = Object.keys(MAG.coperture);
+    return { html: `<div class="card"><h2>Collegamento con iPratico <small>Stato: ${MAG.ipratico.stato}</small></h2><div class="opts">
+        ${[["api", "Collegamento diretto", "Ogni scontrino arriva al back office in tempo reale. Serve l'accesso alle API di iPratico per i partner: lo chiediamo noi."], ["csv", "Import del venduto", "Ogni notte il back office legge il report del venduto per articolo esportato da iPratico. Funziona subito, il magazzino si aggiorna una volta al giorno."], ["manuale", "Carica il file a mano", "Per provare: esporta il venduto da iPratico e trascinalo qui."]].map(([k, t, d]) => `<label class="opt ${MAG.ipratico.modo === k ? "on" : ""}"><input type="radio" name="ip" value="${k}" ${MAG.ipratico.modo === k ? "checked" : ""}><b>${t}</b><small>${d}</small></label>`).join("")}</div>
+        <label class="altb" style="margin-top:1rem"><input type="file" accept=".csv,text/csv" id="csv"><b>Carica il venduto (CSV)</b><small>Abbiniamo i prodotti col codice cassa e scaliamo gli ingredienti.</small></label><div id="csv-out"></div></div>
+      <div class="card"><h2>Per eccesso <small>Quanto aggiungere a ogni ricetta per sprechi e porzioni abbondanti</small></h2><div class="simv"><span id="mv">${Math.round(MAG.margine * 100)}%</span></div><input type="range" min="0" max="20" step="1" value="${Math.round(MAG.margine * 100)}" id="marg"></div>
+      <div class="card"><h2>Regole di riordino <small>Quanti giorni deve coprire ogni ordine, dopo la consegna</small></h2><div class="covs">${cats.map((c) => `<div class="f"><label><span>${c}</span><span class="cnt">${MAG.coperture[c]} giorni</span></label><input type="range" min="1" max="30" value="${MAG.coperture[c]}" data-cov="${c}"></div>`).join("")}</div><p class="hint" style="color:var(--dim);margin-top:.6rem">La birra si ordina a fusti e la carne fresca va consumata presto: per questo coprono periodi diversi. Le quantità si arrotondano sempre alla confezione del fornitore.</p></div>
+      <div class="card"><h2>Notifiche sul telefono</h2><div class="rules">${[["ordini", "Quando qualcosa è da ordinare", "«Ordina dalla Macelleria: gli hamburger finiscono domani.»"], ["arrivi", "Quando arriva una consegna", "«Oggi arriva l'Ortofrutta: fotografa la bolla.»"], ["sera", "Riepilogo a fine serata", "«Stasera 142 prodotti, food cost 27%, 3 articoli da ordinare.»"], ["prezzi", "Quando un fornitore alza i prezzi", "«Il guanciale costa l'8% in più dell'ultima volta.»"]].map(([k, t, ex]) => `<label class="sw"><span><b>${t}</b><small>${ex}</small></span><input type="checkbox" data-nt="${k}" ${MAG.notif[k] ? "checked" : ""}></label>`).join("")}</div>
+        <div class="push"><span class="pi">B</span><div><b>Blend · Magazzino</b><p>Ordina dalla Macelleria: gli hamburger finiscono domani. Tocca per mandare l'ordine.</p></div><small>ora</small></div></div>
+      <div class="card"><h2>Lettura di bolle e fatture</h2><div class="opts">${[["xml", "Fattura elettronica prima di tutto", "Il file XML dallo SdI è esatto e gratuito. La foto serve per la bolla, quando la merce arriva."], ["foto", "Foto con un modello leggero", "Legge anche bolle scritte male o storte. Costa meno di un decimo di centesimo a pagina."], ["telefono", "Lettura sul telefono", "Gratis e senza internet, ma sbaglia con tabelle, timbri e foto storte."]].map(([k, t, d]) => `<label class="opt ${MAG.lettura === k ? "on" : ""}"><input type="radio" name="lt" value="${k}" ${MAG.lettura === k ? "checked" : ""}><b>${t}</b><small>${d}</small></label>`).join("")}</div></div>`,
+      after: (root) => {
+        $$("input[name=ip]", root).forEach((r) => r.addEventListener("change", () => { MAG.ipratico.modo = r.value; setDirty(1); render(); }));
+        $$("input[name=lt]", root).forEach((r) => r.addEventListener("change", () => { MAG.lettura = r.value; setDirty(1); render(); }));
+        $("#marg").addEventListener("input", (e) => { MAG.margine = +e.target.value / 100; $("#mv").textContent = e.target.value + "%"; setDirty(1); });
+        $$("[data-cov]", root).forEach((r) => r.addEventListener("input", () => { MAG.coperture[r.dataset.cov] = +r.value; r.previousElementSibling.lastElementChild.textContent = r.value + " giorni"; setDirty(1); }));
+        $$("[data-nt]", root).forEach((c) => c.addEventListener("change", () => { MAG.notif[c.dataset.nt] = c.checked; setDirty(1); }));
+        $("#csv").addEventListener("change", async (e) => {
+          const f = e.target.files[0]; if (!f) return; const v = MZ.leggiCsvVendite(await f.text()); let ok = 0; const ign = [];
+          for (const r of v) { const p = MAG.P.find((x) => (r.codice && x.ipratico === r.codice) || MZ.norm(x.nome) === MZ.norm(r.nome)); if (!p) { ign.push(r.nome || r.codice); continue; } const s = MZ.scarica({ prodotto: p.id, quantita: r.quantita }, MAG.P, MAG.margine); MZ.applica(MAG.A, s.movimenti); ok += r.quantita; }
+          $("#csv-out").innerHTML = `<p class="hint" style="margin-top:.8rem">${ok} prodotti scalati.${ign.length ? ` Non riconosciuti: ${ign.slice(0, 6).map(esc).join(", ")}${ign.length > 6 ? "…" : ""} (aggiungi il codice cassa nella ricetta).` : ""}</p>`; setDirty(1);
+        });
+      } };
   }
 
   /* ---------- disegno ---------- */
