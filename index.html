@@ -1887,6 +1887,31 @@ body:has(.intro.out) #clk { opacity: 1; transition: opacity .25s ease .05s; }
   #aperiblend .duo p.body { grid-column: 3; grid-row: 1; padding-top: clamp(6.6rem, 7.6vw, 8.6rem); max-width: 34ch; }
 }
 .bigck .dg { width: .486em; text-align: center; } .bigck .rl i { text-align: center; } .bigck .cl { width: .278em; margin: 0; text-align: center; }
+/* ---------- v42: Lavora con noi, la X sempre su fondo scuro e mai sopra il foglio; foglio orizzontale su tablet ---------- */
+.job .jx { top: 18px; right: 18px; z-index: 8; display: inline-flex; align-items: center; gap: .35rem; padding: .5rem .8rem .45rem; border-radius: 4px; background: var(--night-2); color: var(--bone); box-shadow: 0 4px 14px rgba(0, 0, 0, .45); font-size: 1.15rem; }
+.job .jx:hover { color: var(--sign); }
+@media (min-width: 861px) { .jpaper { margin-top: 64px; } }
+.jside .roles { padding-top: 2.4rem; }
+@media (min-width: 561px) and (max-width: 860px) {
+  .jpaper > .pbg { background-image: url("img/vera/pila-fogli.webp"); }
+  .jpaper .jgrid { grid-template-columns: 1fr 1fr; gap: 1rem 1.4rem; }
+  .jpaper { padding: 3.2rem 3.4rem 3.4rem 2.6rem; }
+}
+@media (max-width: 560px) { .jpaper { padding: 3rem 2.8rem 3.2rem 1.8rem; } .jpaper .fld input, .jpaper .fld textarea { font-size: .95rem; } }
+.jside .jlead { margin-bottom: 2.2rem; }
+.jside .roles { padding-top: 0; }
+.jside .roles legend { margin-bottom: .8rem; }
+/* ---------- v43: lingua IT / EN ---------- */
+.lang { display: inline-flex; gap: 2px; padding: 2px; border-radius: 6px; border: 1px solid var(--line); }
+.lang button { all: unset; cursor: pointer; padding: .3rem .55rem; border-radius: 4px; font: 700 .72rem/1 var(--f-body); letter-spacing: .12em; color: var(--ash); transition: background .2s, color .2s; }
+.lang button[aria-pressed="true"] { background: var(--sign); color: var(--night); }
+.lang button:not([aria-pressed="true"]):hover { color: var(--bone); }
+.lang button:focus-visible { outline: 2px solid var(--sign); outline-offset: 2px; }
+.lang-note { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); z-index: 120; translate: -50% 20px; opacity: 0; padding: .8rem 1.1rem; border-radius: 4px; background: var(--bone); color: var(--night); font: 600 .88rem/1.3 var(--f-body); max-width: calc(100vw - 32px); text-align: center; transition: opacity .3s, translate .4s cubic-bezier(.2, .8, .2, 1); pointer-events: none; }
+.lang-note.on { opacity: 1; translate: -50% 0; }
+/* ---------- v44: ritocchi responsive ---------- */
+@media (min-width: 901px) { .hero .w.fin .kick { font-size: clamp(3.2rem, 7.4vw, 9rem); white-space: nowrap; } }
+@media (min-width: 901px) and (max-width: 1100px) { .film2 { grid-row: 1 / 4 !important; align-self: start !important; margin-top: 1rem !important; } .sera .pile { margin-top: 1.5rem; } }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -1958,7 +1983,7 @@ body:has(.intro.out) #clk { opacity: 1; transition: opacity .25s ease .05s; }
       <li><a class="row" href="#carta"><span class="tm">22:30</span><span class="nm sign" data-t="Drink list">Drink list</span><span class="note">sedici sospettati</span></a></li>
       <li><a class="row" href="#dove"><span class="tm">02:00</span><span class="nm sign" data-t="Dove siamo">Dove siamo</span><span class="note">segui la mappa</span></a></li>
     </ol>
-    <div class="base"><span>Via di Mezzocammino 141, Roma</span><span>Tutte le sere dalle 18 alle 2</span><button type="button" class="lk" data-job>Lavora con noi</button><a href="https://www.instagram.com/blendfoodanddrink/" target="_blank" rel="noopener">Instagram</a></div>
+    <div class="base"><div class="lang" role="group" aria-label="Lingua"><button type="button" data-lang="it" aria-pressed="true">IT</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div><span>Via di Mezzocammino 141, Roma</span><span>Tutte le sere dalle 18 alle 2</span><button type="button" class="lk" data-job>Lavora con noi</button><a href="https://www.instagram.com/blendfoodanddrink/" target="_blank" rel="noopener">Instagram</a></div>
   </div>
 </div>
 <div class="deck" id="deck">
@@ -2267,6 +2292,7 @@ body:has(.intro.out) #clk { opacity: 1; transition: opacity .25s ease .05s; }
         <a href="https://www.facebook.com/BlendFoodAndDrink/" target="_blank" rel="noopener">Facebook</a>
         <a href="https://www.tripadvisor.it/Restaurant_Review-g187791-d13412509-Reviews-Blend_Food_Drink-Rome_Lazio.html" target="_blank" rel="noopener">Tripadvisor</a>
         <button type="button" class="lk" data-legal>Note legali e crediti</button>
+        <div class="lang" role="group" aria-label="Lingua"><button type="button" data-lang="it" aria-pressed="true">IT</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
       </nav>
     </div>
   </div>
@@ -2547,6 +2573,40 @@ const CMS = {
     let sx = 0, sy = 0, down = false;
     el.addEventListener("pointerdown", (e) => { down = true; sx = e.clientX; sy = e.clientY; });
     addEventListener("pointerup", (e) => { if (!down) return; down = false; const dx = e.clientX - sx, dy = e.clientY - sy; if (Math.abs(dx) > 30 && Math.abs(dx) > Math.abs(dy)) next(dx); else if (Math.abs(dx) < 6 && Math.abs(dy) < 6 && el.contains(e.target)) next(1); });
+  })();
+
+
+  /* ---------- lingua: italiano / inglese. Le frasi principali sono già tradotte; il resto arriva con la versione inglese completa ---------- */
+  (function lingua() {
+    const EN = {
+      "Il locale": "The place", "Aperiblend": "Aperiblend", "La cucina": "The kitchen", "Le serate": "Nights", "Drink list": "Drink list", "Dove siamo": "Find us",
+      "luce bassa, vinile sul piatto": "low light, a record spinning", "dalle 18 alle 20, tutti i giorni": "6 to 8 pm, every day", "72 ore di lievitazione": "72-hour dough",
+      "mercoledì, jazz dal vivo": "Wednesdays, live jazz", "sedici sospettati": "sixteen suspects", "segui la mappa": "follow the map",
+      "Via di Mezzocammino 141, Roma": "Via di Mezzocammino 141, Rome", "Tutte le sere dalle 18 alle 2": "Every night, 6 pm to 2 am", "Lavora con noi": "Work with us",
+      "Mescoliamo bene.": "We mix well.", "Cocktail, cucina e jazz dal vivo. A Mezzocammino, tutte le sere dalle 18 alle 2.": "Cocktails, food and live jazz. In Mezzocammino, every night from 6 pm to 2 am.",
+      "Scopri il menu": "See the menu", "Prenota": "Book", "Prenota un tavolo": "Book a table", "Tutto il menu": "Full menu", "Menu completo": "Full menu", "Apri in Google Maps": "Open in Google Maps",
+      "Scendi. È aperto.": "Scroll down. We're open.", "Prossima serata": "Next night", "Il primo giro.": "The first round.",
+      "Lo trovi": "You'll find it", "se sai dove cercarlo.": "if you know where to look.", "Pochi piatti.": "A few dishes.", "Fatti sul serio.": "Done properly.",
+      "Jazz,": "Jazz,", "vinili": "vinyl", "e altre buone scuse": "and other good excuses", "per fare tardi.": "to stay out late.",
+      "Cambia ogni stagione.": "It changes every season.", "Il carattere resta.": "The character stays.", "Il giorno dopo,": "The day after,", "ne parlano così.": "this is what they say.",
+      "Note legali e crediti": "Legal notes and credits", "la prossima": "next", "Cercasi gente di notte.": "Night people wanted.", "Manda la candidatura": "Send your application",
+      "Antipasti": "Starters", "Pinsa": "Pinsa", "Taglieri": "Boards", "Dolci": "Desserts"
+    };
+    const orig = new WeakMap(), skip = /^(SCRIPT|STYLE|TEXTAREA|INPUT|SVG|PATH)$/;
+    function walk(root, fn) { const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: (n) => n.parentElement && !skip.test(n.parentElement.tagName) && n.nodeValue.trim() ? 1 : 2 }); let n; while ((n = w.nextNode())) fn(n); }
+    function applica(l) {
+      document.documentElement.lang = l;
+      walk(document.body, (n) => { const t = n.nodeValue.trim(); if (l === "en") { if (EN[t] && !orig.has(n)) { orig.set(n, n.nodeValue); n.nodeValue = n.nodeValue.replace(t, EN[t]); } } else if (orig.has(n)) { n.nodeValue = orig.get(n); orig.delete(n); } });
+      const LBL = { "Apertura": "Opening", "Il locale": "The place", "Aperiblend": "Aperiblend", "Cucina": "Kitchen", "Le serate": "Nights", "Drink list": "Drink list", "Dicono di noi": "Reviews", "Chiusura": "Closing" };
+      $$("[data-label]").forEach((e) => { e.dataset.labelIt = e.dataset.labelIt || e.dataset.label; e.dataset.label = l === "en" ? (LBL[e.dataset.labelIt] || e.dataset.labelIt) : e.dataset.labelIt; });
+      dispatchEvent(new Event("scroll"));
+      $$(".ov .nm[data-t]").forEach((e) => { e.dataset.it = e.dataset.it || e.dataset.t; e.dataset.t = l === "en" ? (EN[e.dataset.it] || e.dataset.it) : e.dataset.it; });
+      $$("[data-lang]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.lang === l));
+      try { localStorage.setItem("blend-lingua", l); } catch (e) {}
+    }
+    document.addEventListener("click", (e) => { const b = e.target.closest("[data-lang]"); if (!b) return; applica(b.dataset.lang); if (b.dataset.lang === "en" && !applica.avvisato) { applica.avvisato = true; const t = document.createElement("div"); t.className = "lang-note"; t.textContent = "English version coming soon: the main pages are already translated."; document.body.appendChild(t); setTimeout(() => t.classList.add("on"), 20); setTimeout(() => { t.classList.remove("on"); setTimeout(() => t.remove(), 400); }, 3600); } });
+    let l0 = "it"; try { l0 = localStorage.getItem("blend-lingua") || "it"; } catch (e) {}
+    if (l0 === "en") addEventListener("load", () => applica("en"));
   })();
 
   /* ---------- prossima serata: hero e sezione serate ---------- */
