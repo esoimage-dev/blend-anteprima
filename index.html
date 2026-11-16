@@ -1912,6 +1912,33 @@ body:has(.intro.out) #clk { opacity: 1; transition: opacity .25s ease .05s; }
 /* ---------- v44: ritocchi responsive ---------- */
 @media (min-width: 901px) { .hero .w.fin .kick { font-size: clamp(3.2rem, 7.4vw, 9rem); white-space: nowrap; } }
 @media (min-width: 901px) and (max-width: 1100px) { .film2 { grid-row: 1 / 4 !important; align-self: start !important; margin-top: 1rem !important; } .sera .pile { margin-top: 1.5rem; } }
+/* ---------- v45: biglietto illuminato al passaggio, pila che gira bene, nastri messi come veri ---------- */
+/* biglietto: respira (rotate/translate) e al passaggio si alza (transform): proprietà diverse, quindi non si annullano e non scattano */
+.next { top: auto; transform: translate3d(0, 0, 0) !important; transition: transform .6s cubic-bezier(.2, .8, .2, 1) !important; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .6)) drop-shadow(0 18px 22px rgba(0, 0, 0, .55)) !important; --lx: 70%; --ly: 30%; }
+.next:hover, .next:focus-visible { top: auto; transform: translate3d(0, -9px, 0) scale(1.025) !important; animation-play-state: running; }
+.next .glow { position: absolute; inset: -38px -46px; z-index: -2; pointer-events: none; background: radial-gradient(closest-side, rgba(252, 198, 80, .42), rgba(252, 198, 80, .14) 55%, transparent); opacity: 0; transition: opacity .6s ease; }
+.next .beam { position: absolute; inset: 0; z-index: 1; pointer-events: none; mix-blend-mode: overlay; background: radial-gradient(circle 160px at var(--lx) var(--ly), rgba(255, 240, 200, .9), rgba(255, 220, 150, .3) 45%, transparent 75%); opacity: 0; transition: opacity .5s ease;
+  -webkit-mask: radial-gradient(circle 8px at 104px 0, #0000 97%, #000), radial-gradient(circle 8px at 104px 100%, #0000 97%, #000), radial-gradient(circle 9px at 0 50%, #0000 97%, #000), radial-gradient(circle 9px at 100% 50%, #0000 97%, #000); -webkit-mask-composite: source-in; mask: radial-gradient(circle 8px at 104px 0, #0000 97%, #000), radial-gradient(circle 8px at 104px 100%, #0000 97%, #000), radial-gradient(circle 9px at 0 50%, #0000 97%, #000), radial-gradient(circle 9px at 100% 50%, #0000 97%, #000); mask-composite: intersect; }
+.next:hover .glow, .next:focus-visible .glow { opacity: 1; }
+.next:hover .beam, .next:focus-visible .beam { opacity: 1; }
+.next .no { transition: opacity .4s; } .next:hover .no { opacity: 1; }
+@media (hover: none) { .next .glow, .next .beam { display: none; } }
+/* pila: niente transizioni CSS sulla carta che vola (la muove l'animazione), le altre scorrono morbide */
+.pile .card { transition: transform .6s cubic-bezier(.16, 1, .3, 1), opacity .4s; will-change: transform; }
+.pile .card::after { transition: opacity .6s; }
+/* nastri: uno per locandina, messo come lo metterebbe una persona. Diagonale su un angolo, dritto al centro, due pezzi agli angoli */
+.pile .card .tp { top: auto; left: auto; right: auto; width: 30%; translate: none; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .3)); opacity: .96; }
+.pile .card:nth-child(6n + 1) .tp { top: -11px; left: 50%; translate: -50% 0; rotate: -3deg; width: 34%; }
+.pile .card:nth-child(6n + 2) .tp { top: -6px; left: -10%; rotate: -38deg; width: 30%; }
+.pile .card:nth-child(6n + 3) .tp { top: -6px; right: -10%; rotate: 36deg; width: 30%; }
+.pile .card:nth-child(6n + 4) .tp { top: -12px; left: 18%; rotate: 4deg; width: 28%; }
+.pile .card:nth-child(6n + 5) .tp { top: -5px; left: -9%; rotate: -42deg; width: 27%; }
+.pile .card:nth-child(6n) .tp { top: -10px; right: 14%; rotate: -5deg; width: 30%; }
+/* fluidità (stesso aspetto): grana in PNG già pronta su un livello suo, ombre delle prove solo sulla carta */
+body::after { background-image: url("img/grana-a.png"); background-size: 160px 160px; transform: translateZ(0); }
+.pz, .pz:hover { filter: none; }
+.pz > .bg { filter: drop-shadow(0 1.5px 1.5px rgba(0, 0, 0, .55)) drop-shadow(0 16px 22px rgba(0, 0, 0, .5)); }
+.pz:hover > .bg { filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .5)) drop-shadow(0 24px 30px rgba(0, 0, 0, .55)); }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -2510,8 +2537,7 @@ const CMS = {
 
   /* il biglietto segue appena il cursore, come carta sollevata da un dito */
   if (fine && !reduce) { const nx = $("#next");
-    nx.addEventListener("pointermove", (e) => { const r = nx.getBoundingClientRect(); nx.style.setProperty("--tx", ((e.clientX - r.left) / r.width - .5).toFixed(3)); nx.style.setProperty("--ty", ((e.clientY - r.top) / r.height - .5).toFixed(3)); });
-    nx.addEventListener("pointerleave", () => { nx.style.setProperty("--tx", 0); nx.style.setProperty("--ty", 0); }); }
+    nx.addEventListener("pointermove", (e) => { const r = nx.getBoundingClientRect(); nx.style.setProperty("--lx", ((e.clientX - r.left) / r.width * 100).toFixed(1) + "%"); nx.style.setProperty("--ly", ((e.clientY - r.top) / r.height * 100).toFixed(1) + "%"); }); }
 
   /* ---------- hero: il logo è una finestra sul locale. Scorrendo ci si entra dentro ---------- */
   (function heroWin() {
@@ -2562,9 +2588,18 @@ const CMS = {
       body.innerHTML = `<span class="tg">${esc(x.tag)}</span><h3>${esc(x.title)}</h3>${x.lines.map((l) => `<p class="ln">${esc(l)}</p>`).join("")}<p class="tm">${esc(x.time)}</p>`;
       body.classList.remove("in"); void body.offsetWidth; body.classList.add("in"); }
     function next(dir) {
-      if (busy) return; busy = true; const c = cards[top];
-      c.style.setProperty("--fx", dir < 0 ? -1 : 1); c.classList.add("out");
-      setTimeout(() => { top = (top + 1) % n; lay(); slip(); c.classList.add("under"); c.classList.remove("out"); setTimeout(() => { c.classList.remove("under"); busy = false; }, reduce ? 0 : 520); }, reduce ? 0 : 360);
+      if (busy) return; busy = true; const c = cards[top], fx = dir < 0 ? -1 : 1;
+      if (reduce || !c.animate) { top = (top + 1) % n; lay(); slip(); busy = false; return; }
+      const da = getComputedStyle(c).transform;
+      /* 1. si stacca e vola di lato con un arco, ruotando come un foglio lanciato */
+      c.style.zIndex = n + 1;
+      c.animate([{ transform: da }, { transform: `translate(${fx * 62}%, -14%) rotate(${fx * 9}deg)`, offset: .55 }, { transform: `translate(${fx * 104}%, 4%) rotate(${fx * 15}deg)` }], { duration: 420, easing: "cubic-bezier(.45, 0, .55, 1)", fill: "forwards" }).finished.then(() => {
+        /* 2. finisce in fondo alla pila e rientra scivolando dietro le altre */
+        top = (top + 1) % n; lay(); slip();
+        const a = getComputedStyle(c).transform;
+        c.getAnimations().forEach((x) => x.cancel());
+        c.animate([{ transform: `translate(${fx * 104}%, 4%) rotate(${fx * 15}deg)` }, { transform: a }], { duration: 560, easing: "cubic-bezier(.16, 1, .3, 1)" }).finished.then(() => { busy = false; });
+      });
     }
     lay(); slip();
     $("#pile-next").addEventListener("click", () => next(1));
@@ -2611,7 +2646,7 @@ const CMS = {
 
   /* ---------- prossima serata: hero e sezione serate ---------- */
   const N = CMS.next;
-  $("#next").innerHTML = `<span class="tk" aria-hidden="true"></span><span class="stub"><img src="${N.img}" alt=""></span><span class="body"><span class="lb">Prossima serata</span><b>${esc(N.title)}</b><span class="wh">${esc(N.when)} · ${esc(N.sets[0].replace("Primo set ", "dalle "))}</span></span><span class="no" aria-hidden="true">N° 0141</span>`;
+  $("#next").innerHTML = `<span class="glow" aria-hidden="true"></span><span class="tk" aria-hidden="true"></span><span class="beam" aria-hidden="true"></span><span class="stub"><img src="${N.img}" alt=""></span><span class="body"><span class="lb">Prossima serata</span><b>${esc(N.title)}</b><span class="wh">${esc(N.when)} · ${esc(N.sets[0].replace("Primo set ", "dalle "))}</span></span><span class="no" aria-hidden="true">N° 0141</span>`;
 
   /* ---------- la carta ---------- */
   const chips = $("#chips"), list = $("#drinks"), gImg = $("#g-img");
