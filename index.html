@@ -2046,6 +2046,10 @@ html { -webkit-tap-highlight-color: transparent; }
   .stampa { font-size: 1.2rem; }
   .slip .nx { font-size: 1.15rem; }
 }
+/* cambio disco più rapido e pulito: il vecchio scivola via e sfuma, il nuovo entra e si posa */
+body.past .deck.swap-out .tt .disc, .deck.swap-out .disc { translate: -60% 0; opacity: 0; transition: translate .6s cubic-bezier(.6, 0, .85, .35), opacity .35s ease .25s !important; }
+body.past .deck.swap-prep .tt .disc, .deck.swap-prep .disc { translate: -60% 0; opacity: 0; transition: none !important; }
+body.past .deck.swap-in .tt .disc, .deck.swap-in .disc { translate: 0 0; opacity: 1; transition: translate .65s cubic-bezier(.15, .75, .25, 1), opacity .25s ease !important; }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -2958,9 +2962,9 @@ const CMS = {
       deck.classList.replace("swap-out", "swap-prep"); discImg.src = tr.img; void deck.offsetWidth;
       swapT = setTimeout(() => {
         deck.classList.replace("swap-prep", "swap-in"); $("#snd-t").textContent = tr.t; showNext();
-        swapT = setTimeout(() => { deck.classList.remove("swap-in"); land(); }, 1050);
-      }, 900);
-    }, 1200);
+        swapT = setTimeout(() => { deck.classList.remove("swap-in"); land(); }, 700);
+      }, 80);
+    }, 720);
   }
   aud.addEventListener("ended", nextTrack);
   $("#snd-n").addEventListener("click", nextTrack);
