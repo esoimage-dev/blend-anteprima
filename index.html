@@ -1987,6 +1987,22 @@ body::after { background-image: url("img/grana-a.png"); background-size: 160px 1
 /* niente alone al tocco sui telefoni (tap highlight) */
 html { -webkit-tap-highlight-color: transparent; }
 * { -webkit-tap-highlight-color: transparent; }
+/* ---------- v50: Lavora con noi. Si capisce che i ruoli si scelgono; niente zoom dei telefoni sui campi; foglio più largo su telefono ---------- */
+.req { color: #d6362b; font-weight: 700; }
+.jside .roles legend { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+.tapme { font: 700 1.05rem/1 var(--f-hand); letter-spacing: 0; text-transform: none; color: #d6362b; opacity: .9; }
+.jside .roles label.hint .ring path { stroke-dashoffset: 0; transition-duration: .45s; }
+.jside .roles label.hint { color: var(--bone); }
+.jpaper .fld span .req { font-size: .9em; }
+@media (max-width: 860px) {
+  /* sotto i 16 px i telefoni ingrandiscono la pagina quando tocchi un campo, e il foglio sembra rotto */
+  .jpaper .fld input, .jpaper .fld textarea { font-size: 16px !important; }
+  .jpaper .jgrid { grid-template-columns: 1fr !important; }
+  /* foglio più largo: esce un filo dallo schermo, meno stirato in verticale */
+  .job { overflow-x: hidden; }
+  .jpaper { margin: -6px -24px 14px -20px; padding: 3.2rem 3.6rem 3.4rem 2.9rem !important; rotate: -.8deg; }
+  .jpaper > .pbg { inset: -8px -6px -10px -6px; }
+}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -2382,13 +2398,13 @@ html { -webkit-tap-highlight-color: transparent; }
         <p class="jno">Lavora con noi</p>
         <h2 id="job-h" tabindex="-1" autofocus>Cercasi gente di&nbsp;notte.</h2>
         <p class="jlead">Bancone, sala o cucina. Cerchiamo chi regge un sabato pieno e a fine serata ha ancora voglia di ridere.</p>
-        <fieldset class="roles"><legend>Dove ti vedi</legend><label><input type="radio" name="ruolo" value="Bancone" required><span>Bancone</span><svg class="ring" viewBox="0 0 120 60" aria-hidden="true"><path pathLength="1" d="M66 6 C98 4 116 16 114 31 C112 47 88 56 58 55 C28 54 6 45 6 30 C6 15 30 6 62 7 C80 8 96 12 104 18"/></svg></label><label><input type="radio" name="ruolo" value="Sala"><span>Sala</span><svg class="ring" viewBox="0 0 120 60" aria-hidden="true"><path pathLength="1" d="M66 6 C98 4 116 16 114 31 C112 47 88 56 58 55 C28 54 6 45 6 30 C6 15 30 6 62 7 C80 8 96 12 104 18"/></svg></label><label><input type="radio" name="ruolo" value="Cucina"><span>Cucina</span><svg class="ring" viewBox="0 0 120 60" aria-hidden="true"><path pathLength="1" d="M66 6 C98 4 116 16 114 31 C112 47 88 56 58 55 C28 54 6 45 6 30 C6 15 30 6 62 7 C80 8 96 12 104 18"/></svg></label><label><input type="radio" name="ruolo" value="Altro"><span>Altro</span><svg class="ring" viewBox="0 0 120 60" aria-hidden="true"><path pathLength="1" d="M66 6 C98 4 116 16 114 31 C112 47 88 56 58 55 C28 54 6 45 6 30 C6 15 30 6 62 7 C80 8 96 12 104 18"/></svg></label></fieldset>
+        <fieldset class="roles"><legend>Dove ti vedi <b class="req" aria-hidden="true">*</b><span class="tapme">tocca per scegliere</span></legend><label><input type="radio" name="ruolo" value="Bancone" required><span>Bancone</span><svg class="ring" viewBox="0 0 120 60" aria-hidden="true"><path pathLength="1" d="M66 6 C98 4 116 16 114 31 C112 47 88 56 58 55 C28 54 6 45 6 30 C6 15 30 6 62 7 C80 8 96 12 104 18"/></svg></label><label><input type="radio" name="ruolo" value="Sala"><span>Sala</span><svg class="ring" viewBox="0 0 120 60" aria-hidden="true"><path pathLength="1" d="M66 6 C98 4 116 16 114 31 C112 47 88 56 58 55 C28 54 6 45 6 30 C6 15 30 6 62 7 C80 8 96 12 104 18"/></svg></label><label><input type="radio" name="ruolo" value="Cucina"><span>Cucina</span><svg class="ring" viewBox="0 0 120 60" aria-hidden="true"><path pathLength="1" d="M66 6 C98 4 116 16 114 31 C112 47 88 56 58 55 C28 54 6 45 6 30 C6 15 30 6 62 7 C80 8 96 12 104 18"/></svg></label><label><input type="radio" name="ruolo" value="Altro"><span>Altro</span><svg class="ring" viewBox="0 0 120 60" aria-hidden="true"><path pathLength="1" d="M66 6 C98 4 116 16 114 31 C112 47 88 56 58 55 C28 54 6 45 6 30 C6 15 30 6 62 7 C80 8 96 12 104 18"/></svg></label></fieldset>
       </div>
       <div class="jpaper">
         <span class="pbg" aria-hidden="true"></span>
         <div class="jgrid">
-          <label class="fld"><span>Nome e cognome</span><input name="nome" autocomplete="name" required></label>
-          <label class="fld"><span>Email</span><input name="email" type="email" autocomplete="email" required></label>
+          <label class="fld"><span>Nome e cognome <b class="req" aria-hidden="true">*</b></span><input name="nome" autocomplete="name" required></label>
+          <label class="fld"><span>Email <b class="req" aria-hidden="true">*</b></span><input name="email" type="email" autocomplete="email" required></label>
           <label class="fld"><span>Telefono</span><input name="tel" type="tel" autocomplete="tel"></label>
           <label class="fld"><span>Quando ci sei</span><input name="disp" placeholder="weekend, sere, da subito"></label>
         </div>
@@ -3072,7 +3088,12 @@ const CMS = {
   /* ---------- lavora con noi: il foglio si apre, il curriculum si allega ---------- */
   const job = $("#job"), jf = $("#job-f"), jerr = $("#job-err"), cvIn = $("#cv-in"), cvL = $("#cv"), cvN = $("#cv-n");
   /* data-lenis-prevent: dentro il foglio scorre la rotella nativa, la pagina sotto resta ferma */
-  const openJob = () => { if (nav.classList.contains("open")) toggleNav(false); if (job.showModal) job.showModal(); else job.setAttribute("open", ""); };
+  /* i ruoli sono cliccabili: all'apertura il cerchio a matita passa su due voci e sparisce, così si capisce */
+  const hintRoles = () => {
+    const ls = $$("#job .roles label"); if (reduce || !ls.length || $("#job .roles input:checked")) return;
+    [[0, 700], [3, 1500]].forEach(([i, t]) => { setTimeout(() => ls[i].classList.add("hint"), t); setTimeout(() => ls[i].classList.remove("hint"), t + 900); });
+  };
+  const openJob = () => { if (nav.classList.contains("open")) toggleNav(false); if (job.showModal) job.showModal(); else job.setAttribute("open", ""); hintRoles(); };
   const closeJob = () => { if (job.close) job.close(); else job.removeAttribute("open"); };
   $$("[data-job]").forEach((b) => b.addEventListener("click", openJob));
   $("#job-x").addEventListener("click", closeJob);
@@ -3094,7 +3115,7 @@ const CMS = {
     e.preventDefault();
     const fd = new FormData(jf);
     const miss = !fd.get("nome") ? "Manca il nome." : !/^\S+@\S+\.\S+$/.test(fd.get("email") || "") ? "Controlla l'email." : !fd.get("ruolo") ? "Scegli per quale posto ti candidi." : !fd.get("privacy") ? "Serve il consenso privacy per leggere la candidatura." : "";
-    if (miss) { jerr.textContent = miss; return; }
+    if (miss) { jerr.textContent = miss; if (!fd.get("ruolo")) { $("#job .roles").scrollIntoView({ behavior: "smooth", block: "center" }); setTimeout(hintRoles, 400); } return; }
     /* in produzione: POST a una Worker Cloudflare che invia con Resend e salva nel back office */
     $("#job-thx").textContent = `Grazie, ${String(fd.get("nome")).split(" ")[0]}.`;
     jf.hidden = true; $("#job-done").hidden = false;
