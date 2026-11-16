@@ -1984,6 +1984,9 @@ body::after { background-image: url("img/grana-a.png"); background-size: 160px 1
   .ov .rows a.row { padding: .09em 0 !important; }
   .ov .base { gap: 1.2rem !important; padding-top: 1rem; padding-bottom: calc(.4rem + env(safe-area-inset-bottom, 0px)); }
 }
+/* niente alone al tocco sui telefoni (tap highlight) */
+html { -webkit-tap-highlight-color: transparent; }
+* { -webkit-tap-highlight-color: transparent; }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
