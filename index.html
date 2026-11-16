@@ -2571,6 +2571,8 @@ const CMS = {
   const fine = matchMedia("(pointer: fine)").matches;
   const G = window.gsap, ST = window.ScrollTrigger;
   let lenis = null;
+  /* scorrimento verso un punto: con Lenis su desktop, nativo e morbido sul telefono */
+  const vaiA = (el, off = 0, dur = .8) => { if (!el) return; if (lenis) lenis.scrollTo(el, { offset: off, duration: dur, easing: (t) => 1 - Math.pow(1 - t, 3) }); else scrollTo({ top: el.getBoundingClientRect().top + scrollY + off, behavior: reduce ? "auto" : "smooth" }); };
 
   /* ---------- orologio dell'header: quattro rulli da contatore, gira solo la cifra che cambia ---------- */
   const clkBox = $("#clk"), clkL = $("#clk-l");
@@ -2708,9 +2710,19 @@ const CMS = {
       s0 = lw / LW; x0 = (W - lw) / 2; y0 = top + (room - lw * LH / LW) / 2;
       s1 = Math.max(H, W * .2) * 1.5 / BAR; last = -1; onScroll();
     }
+    let cur = -1, tgt = 0, loop = 0;
+    const step = () => {
+      loop = 0;
+      const d = tgt - cur;
+      cur = Math.abs(d) < .0006 ? tgt : cur + d * .2;
+      draw(+cur.toFixed(4));
+      if (cur !== tgt) loop = requestAnimationFrame(step);
+    };
     function onScroll() {
       if (reduce) return draw(0);
-      const span = span0; draw(span > 0 ? Math.min(1, Math.max(0, (scrollY - heroTop) / span)) : 0);
+      tgt = span0 > 0 ? Math.min(1, Math.max(0, (scrollY - heroTop) / span0)) : 0;
+      if (cur < 0) { cur = tgt; draw(tgt); return; }
+      if (!loop) loop = requestAnimationFrame(step);
     }
     let raf = 0; addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; onScroll(); }); }, { passive: true });
     let lw0 = 0; addEventListener("resize", () => { if (innerWidth !== lw0 || fine) { lw0 = innerWidth; size(); } });
@@ -3066,7 +3078,7 @@ const CMS = {
     };
     const go = (i) => {
       /* su telefono, cambiando portata con un appunto aperto: si chiude e si torna alle voci, così la nuova portata si vede intera */
-      if (innerWidth <= 900 && $(".page-wrap.open", kit)) { closeNotes(); const top = $("#top"); if (lenis) lenis.scrollTo($(".kit-tabs", kit), { offset: -((top ? top.offsetHeight : 72) + 8), duration: .7 }); }
+      if (innerWidth <= 900 && $(".page-wrap.open", kit)) { closeNotes(); const top = $("#top"); vaiA($(".kit-tabs", kit), -((top ? top.offsetHeight : 72) + 8), .7); }
       track.scrollTo({ left: Math.max(0, Math.min(kps.length - 1, i)) * step, behavior: reduce ? "auto" : "smooth" });
     };
     const used = () => kit.classList.add("used");
@@ -3095,11 +3107,11 @@ const CMS = {
       if (i !== cur) { go(i); return; }
       closeNotes(); if (open) { w.classList.add("open"); b.setAttribute("aria-expanded", "true"); }
       /* su telefono l'appunto si apre sotto: la pagina scende quel tanto che basta per leggerlo; richiudendo risale al nome della portata */
-      if (innerWidth <= 900 && lenis) {
+      if (innerWidth <= 900) {
         /* aprendo: il nastro sale sotto l'header e l'appunto si legge sotto; chiudendo: torna tutta la portata, dalle voci al nastro */
         const top = $("#top"), hh = top ? top.offsetHeight : 72;
-        if (open) setTimeout(() => lenis.scrollTo(b, { offset: -(hh + 14), duration: .9, easing: (t) => 1 - Math.pow(1 - t, 3) }), 80);
-        else setTimeout(() => lenis.scrollTo($(".kit-tabs", kit) || kit, { offset: -(hh + 8), duration: .8, easing: (t) => 1 - Math.pow(1 - t, 3) }), 60);
+        if (open) setTimeout(() => vaiA(b, -(hh + 14), .9), 80);
+        else setTimeout(() => vaiA($(".kit-tabs", kit) || kit, -(hh + 8)), 60);
       }
     }));
     /* quando un appunto si apre o si chiude sotto, le scene più in basso ricalcolano dove stanno */
@@ -3255,8 +3267,8 @@ const CMS = {
 
 
   /* ---------- scroll morbido e regia delle scene ---------- */
-  if (!reduce && window.Lenis) {
-    if (ST) ST.config({ ignoreMobileResize: true });
+  if (ST) ST.config({ ignoreMobileResize: true });
+  if (!reduce && window.Lenis && fine) {
     lenis = new Lenis({ lerp: 0.09, smoothWheel: true });
     window.__lenis = lenis;
     if (G && ST) { lenis.on("scroll", ST.update); G.ticker.add((t) => lenis.raf(t * 1000)); G.ticker.lagSmoothing(0); }
