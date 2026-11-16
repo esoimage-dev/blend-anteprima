@@ -1939,6 +1939,10 @@ body::after { background-image: url("img/grana-a.png"); background-size: 160px 1
 .pz, .pz:hover { filter: none; }
 .pz > .bg { filter: drop-shadow(0 1.5px 1.5px rgba(0, 0, 0, .55)) drop-shadow(0 16px 22px rgba(0, 0, 0, .5)); }
 .pz:hover > .bg { filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .5)) drop-shadow(0 24px 30px rgba(0, 0, 0, .55)); }
+/* l'orologio dell'intro resta invisibile finché il suo carattere non è pronto */
+.bigck { visibility: hidden; } .intro.in .bigck { visibility: visible; }
+/* se il carattere non arriva, le cifre più larghe del font di riserva non vengono tagliate ai lati */
+.bigck .dg { overflow: visible; clip-path: inset(0 -40%); }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -2510,21 +2514,27 @@ const CMS = {
     const big = $("#bigck");
     $$(".dg", big).forEach((d) => { d.innerHTML = `<span class="rl"><i>${d.dataset.a}</i><i>${d.dataset.b}</i></span>`; });
     const typed = $("#intro-t"), txt = typed.dataset.text;
-    requestAnimationFrame(() => intro.classList.add("in"));
-    setTimeout(() => { let ti = 0; const tt = setInterval(() => { typed.textContent = txt.slice(0, ++ti); if (ti >= txt.length) clearInterval(tt); }, 28); }, 350);
-    setTimeout(() => intro.classList.add("roll"), 900);
-    /* il grande orologio si rimpicciolisce e si posa esattamente sull'orologio dell'header */
-    setTimeout(() => {
-      const a = big.getBoundingClientRect(), hd = $$("#clk .dg").map((d) => d.getBoundingClientRect()), bd = $$(".dg", big).map((d) => d.getBoundingClientRect());
-      if (hd.length === 4 && hd[0].width && getComputedStyle($("#top .clock")).visibility !== "hidden") {
-        /* prima e ultima cifra del grande orologio esattamente sopra quelle dell'header */
-        const k = (hd[3].right - hd[0].left) / (bd[3].right - bd[0].left);
-        const hcy = hd[0].top + hd[0].height / 2, bcy = bd[0].top + (bd[0].height / 1.16) / 2;
-        big.style.transform = `translate3d(${(hd[0].left - (a.left + k * (bd[0].left - a.left))).toFixed(2)}px, ${(hcy - (a.top + k * (bcy - a.top))).toFixed(2)}px, 0) scale(${k.toFixed(5)})`;
-      } else { big.style.transform = "translate3d(0, -36px, 0)"; big.style.opacity = "0"; }
-      intro.classList.add("fly"); hero.classList.add("on"); playHero();
-    }, 1750);
-    setTimeout(endIntro, 2450);
+    /* il grande orologio parte solo quando il suo carattere è caricato: niente lampo con un font diverso e tagliato */
+    let partito = false;
+    const parti = () => { if (partito) return; partito = true;
+      requestAnimationFrame(() => intro.classList.add("in"));
+      setTimeout(() => { let ti = 0; const tt = setInterval(() => { typed.textContent = txt.slice(0, ++ti); if (ti >= txt.length) clearInterval(tt); }, 28); }, 350);
+      setTimeout(() => intro.classList.add("roll"), 900);
+      /* il grande orologio si rimpicciolisce e si posa esattamente sull'orologio dell'header */
+      setTimeout(() => {
+        const a = big.getBoundingClientRect(), hd = $$("#clk .dg").map((d) => d.getBoundingClientRect()), bd = $$(".dg", big).map((d) => d.getBoundingClientRect());
+        if (hd.length === 4 && hd[0].width && getComputedStyle($("#top .clock")).visibility !== "hidden") {
+          /* prima e ultima cifra del grande orologio esattamente sopra quelle dell'header */
+          const k = (hd[3].right - hd[0].left) / (bd[3].right - bd[0].left);
+          const hcy = hd[0].top + hd[0].height / 2, bcy = bd[0].top + (bd[0].height / 1.16) / 2;
+          big.style.transform = `translate3d(${(hd[0].left - (a.left + k * (bd[0].left - a.left))).toFixed(2)}px, ${(hcy - (a.top + k * (bcy - a.top))).toFixed(2)}px, 0) scale(${k.toFixed(5)})`;
+        } else { big.style.transform = "translate3d(0, -36px, 0)"; big.style.opacity = "0"; }
+        intro.classList.add("fly"); hero.classList.add("on"); playHero();
+      }, 1750);
+      setTimeout(endIntro, 2450);
+    };
+    const fonte = document.fonts && document.fonts.load ? document.fonts.load('800 120px "Big Shoulders Display"') : Promise.resolve();
+    fonte.then(() => requestAnimationFrame(parti), parti); setTimeout(parti, 1500);
   }
 
   /* ---------- l'hero risponde al cursore ---------- */
