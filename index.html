@@ -2050,6 +2050,27 @@ html { -webkit-tap-highlight-color: transparent; }
 body.past .deck.swap-out .tt .disc, .deck.swap-out .disc { translate: -60% 0; opacity: 0; transition: translate .6s cubic-bezier(.6, 0, .85, .35), opacity .35s ease .25s !important; }
 body.past .deck.swap-prep .tt .disc, .deck.swap-prep .disc { translate: -60% 0; opacity: 0; transition: none !important; }
 body.past .deck.swap-in .tt .disc, .deck.swap-in .disc { translate: 0 0; opacity: 1; transition: translate .65s cubic-bezier(.15, .75, .25, 1), opacity .25s ease !important; }
+/* ---------- v52: hero su telefono senza rimbalzi; Prenota che viaggia dalla hero all'angolo ---------- */
+@media (max-width: 900px) {
+  .hero { height: calc(var(--hv, 100svh) * 2) !important; }
+  .hero .pinx { height: var(--hv, 100svh) !important; }
+  .fin-btns { display: flex; align-items: center; gap: .7rem; flex-wrap: wrap; }
+  .pren-slot { display: inline-block; width: 104px; height: 44px; }
+  /* nella hero: nero con il bordo, come "Scopri il menu"; scendendo torna giallo */
+  body.pren-hero .dock { opacity: 1 !important; translate: none !important; pointer-events: auto !important; transition: none !important; }
+  .dock .btn { transition: background-color .35s ease, color .35s ease, box-shadow .35s ease, border-color .35s ease, padding .25s; will-change: transform; }
+  body.pren-ghost .dock .btn { background: rgba(239, 231, 216, .45); color: var(--bone); box-shadow: none; }
+  .dock .btn::before { content: ""; position: absolute; inset: 1px; z-index: -1; background: var(--night); clip-path: polygon(var(--cut) 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, var(--cut) 100%, 0 calc(100% - var(--cut)), 0 var(--cut)); opacity: 0; transition: opacity .35s ease; }
+  body.pren-ghost .dock .btn::before { opacity: 1; }
+  .dock .btn { isolation: isolate; }
+  body.pren-ghost .dock .btn::after { opacity: 0; }
+}
+@media (min-width: 901px) { .pren-slot { display: none; } }
+@media (max-width: 900px) {
+  /* nella hero ha la stessa misura di "Scopri il menu"; nell'angolo torna compatto */
+  .pren-slot { width: 112px; height: 50px; }
+  body.pren-ghost .dock .btn { min-height: 50px; padding: 0 1.55rem; font-size: .95rem; }
+}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -2160,7 +2181,7 @@ body.past .deck.swap-in .tt .disc, .deck.swap-in .disc { translate: 0 0; opacity
         <p class="kick voice">Mescoliamo bene.</p>
         <div class="side">
           <p class="sub">Cocktail, cucina e jazz dal vivo. A Mezzocammino, tutte le sere dalle 18 alle&nbsp;2.</p>
-          <a class="btn ghost cut" href="https://blendfoodanddrink.it/doc/Menu-blend-food-and-drink.pdf" target="_blank" rel="noopener"><span class="r">Scopri il menu</span></a>
+          <div class="fin-btns"><a class="btn ghost cut" href="https://blendfoodanddrink.it/doc/Menu-blend-food-and-drink.pdf" target="_blank" rel="noopener"><span class="r">Scopri il menu</span></a><span class="pren-slot" aria-hidden="true"></span></div>
         </div>
       </div>
     </div>
@@ -2487,7 +2508,7 @@ body.past .deck.swap-in .tt .disc, .deck.swap-in .disc { translate: 0 0; opacity
 
 <nav class="dock" aria-label="Azioni rapide">
   <a class="btn ghost cut" href="https://blendfoodanddrink.it/doc/Menu-blend-food-and-drink.pdf" target="_blank" rel="noopener"><span class="r">Il menu</span></a>
-  <a class="btn cut" href="https://blendfoodanddrink.plateform.app/reserve" target="_blank" rel="noopener"><span class="r">Prenota</span></a>
+  <a class="btn cut" id="dock-pren" href="https://blendfoodanddrink.plateform.app/reserve" target="_blank" rel="noopener"><span class="r">Prenota</span></a>
 </nav>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -2663,7 +2684,7 @@ const CMS = {
     /* un solo tracciato: tutto lo schermo scuro, bucato dalle lettere (evenodd). Niente maschere, costa poco */
     $(".cover", svg).setAttribute("d", "M-9e6 -9e6H9e6V9e6H-9e6Z " + d); $(".edge", svg).setAttribute("d", d);
     const LW = 2160, LH = 1338, FX = 1120, FY = 1249, BAR = 80;      /* si entra dalla barra lunga della L */
-    let W = 0, H = 0, s0 = 1, x0 = 0, y0 = 0, s1 = 1, last = -1;
+    let W = 0, H = 0, s0 = 1, x0 = 0, y0 = 0, s1 = 1, last = -1, span0 = 0, heroTop = 0;
     const ease = (t) => t * t * (3 - 2 * t);
     function draw(p) {
       if (p === last) return; last = p;
@@ -2679,7 +2700,9 @@ const CMS = {
       edge.style.opacity = Math.max(0, .9 - p * 4).toFixed(3); edge.style.display = p > .24 ? "none" : "";
     }
     function size() {
-      W = pinx.clientWidth; H = pinx.clientHeight;
+      /* sui telefoni l'altezza della hero si fissa in pixel alla prima misura: quando la barra degli indirizzi sparisce non cambia niente */
+      if (!fine) { const v = Math.round(innerHeight); document.documentElement.style.setProperty("--hv", v + "px"); }
+      W = pinx.clientWidth; H = pinx.clientHeight; heroTop = hero.offsetTop; span0 = hero.offsetHeight - H;
       const top = W < 700 ? 110 : 96, bottom = H - (W < 700 ? 200 : 205), room = Math.max(140, bottom - top);
       const lw = Math.min(W * (W < 700 ? .86 : .74), 1300, room * LW / LH);
       s0 = lw / LW; x0 = (W - lw) / 2; y0 = top + (room - lw * LH / LW) / 2;
@@ -2687,7 +2710,7 @@ const CMS = {
     }
     function onScroll() {
       if (reduce) return draw(0);
-      const span = hero.offsetHeight - H; draw(span > 0 ? Math.min(1, Math.max(0, (scrollY - hero.offsetTop) / span)) : 0);
+      const span = span0; draw(span > 0 ? Math.min(1, Math.max(0, (scrollY - heroTop) / span)) : 0);
     }
     let raf = 0; addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; onScroll(); }); }, { passive: true });
     let lw0 = 0; addEventListener("resize", () => { if (innerWidth !== lw0 || fine) { lw0 = innerWidth; size(); } });
@@ -2759,6 +2782,33 @@ const CMS = {
     document.addEventListener("click", (e) => { const b = e.target.closest("[data-lang]"); if (!b) return; applica(b.dataset.lang); if (b.dataset.lang === "en" && !applica.avvisato) { applica.avvisato = true; const t = document.createElement("div"); t.className = "lang-note"; t.textContent = "English version coming soon: the main pages are already translated."; document.body.appendChild(t); setTimeout(() => t.classList.add("on"), 20); setTimeout(() => { t.classList.remove("on"); setTimeout(() => t.remove(), 400); }, 3600); } });
     let l0 = "it"; try { l0 = localStorage.getItem("blend-lingua") || "it"; } catch (e) {}
     if (l0 === "en") addEventListener("load", () => applica("en"));
+  })();
+
+
+  /* ---------- Prenota su telefono: nasce nero accanto a "Scopri il menu", poi scivola nell'angolo e diventa giallo ---------- */
+  (function prenotaViaggia() {
+    const btn = $("#dock-pren"), slot = $(".pren-slot"), fin = $("#hero-fin"); if (!btn || !slot) return;
+    let raf = 0;
+    const lerp = (a, b, t) => a + (b - a) * t, ez = (t) => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    function upd() {
+      raf = 0;
+      if (innerWidth > 900) { btn.style.transform = ""; document.body.classList.remove("pren-hero"); return; }
+      const f = +(fin.style.opacity || 0), heroEnd = hero.offsetTop + hero.offsetHeight;
+      /* da quando la hero inizia ad andare via fino a quando è sparita per metà: il viaggio */
+      const t = Math.min(1, Math.max(0, (scrollY - (heroEnd - innerHeight)) / (innerHeight * .45)));
+      const inHero = f > .02 && t < 1;
+      document.body.classList.toggle("pren-hero", inHero);
+      document.body.classList.toggle("pren-ghost", inHero && t < .5);
+      if (!inHero) { btn.style.transform = ""; btn.style.opacity = ""; return; }
+      const a = btn.getBoundingClientRect(), dx0 = parseFloat(btn.dataset.dx || 0), dy0 = parseFloat(btn.dataset.dy || 0);
+      const baseX = a.left - dx0, baseY = a.top - dy0, sr = slot.getBoundingClientRect();
+      const k = ez(t), dx = lerp(sr.left - baseX, 0, k), dy = lerp(sr.top - baseY, 0, k);
+      btn.dataset.dx = dx; btn.dataset.dy = dy;
+      btn.style.transform = `translate3d(${dx.toFixed(1)}px, ${dy.toFixed(1)}px, 0)`;
+      btn.style.opacity = t > 0 ? 1 : Math.min(1, f * 1.2).toFixed(3);
+    }
+    const ask = () => { if (!raf) raf = requestAnimationFrame(upd); };
+    addEventListener("scroll", ask, { passive: true }); addEventListener("resize", ask); ask();
   })();
 
   /* ---------- prossima serata: hero e sezione serate ---------- */
@@ -3206,6 +3256,7 @@ const CMS = {
 
   /* ---------- scroll morbido e regia delle scene ---------- */
   if (!reduce && window.Lenis) {
+    if (ST) ST.config({ ignoreMobileResize: true });
     lenis = new Lenis({ lerp: 0.09, smoothWheel: true });
     window.__lenis = lenis;
     if (G && ST) { lenis.on("scroll", ST.update); G.ticker.add((t) => lenis.raf(t * 1000)); G.ticker.lagSmoothing(0); }
