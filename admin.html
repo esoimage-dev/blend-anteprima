@@ -2020,6 +2020,31 @@ details.tech > summary { cursor: pointer; font-weight: 650; min-height: 44px; di
 :root[data-theme="dark"] .sgm2 button[aria-selected="true"] { background: var(--n3); }
 .toast { width: max-content; max-width: min(560px, calc(100vw - 2rem)); } .toast.act button { flex: none; }
 @media (max-width: 860px) { .toast { bottom: calc(140px + env(safe-area-inset-bottom, 0px)); } }
+
+/* ---------- v7: Segnala colorato (verde acqua, diverso dal giallo di Arrivo merce); tasti Claude col gradiente ---------- */
+:root { --seg1: #2bb59c; --seg2: #13808a; --ai1: #7a5cff; --ai2: #c255e8; --ai3: #ff7d6b; }
+.fab.fab2, .btn.segx { background: linear-gradient(135deg, var(--seg1), var(--seg2)); color: #fff; border: 0; box-shadow: 0 10px 26px rgba(19, 128, 138, .35); }
+.fab.fab2:hover, .btn.segx:hover { background: linear-gradient(135deg, #33c4aa, #168f9a); color: #fff; }
+.fab.fab2 .i, .btn.segx .i { color: #fff; }
+.tgh .segm { color: var(--seg2); font-weight: 700; } :root[data-theme="dark"] .tgh .segm { color: var(--seg1); }
+.aib, .chips .aib, .aig, .btn.aig, .mini.aig { position: relative; background: linear-gradient(120deg, var(--ai1), var(--ai2) 55%, var(--ai3)); background-size: 160% 100%; background-position: 0 0; border: 0; color: #fff; font-weight: 650; box-shadow: 0 6px 18px rgba(122, 92, 255, .28); transition: background-position .35s, transform .1s, box-shadow .2s; }
+.aib:hover, .chips .aib:hover, .aig:hover, .btn.aig:hover, .mini.aig:hover { background: linear-gradient(120deg, var(--ai1), var(--ai2) 55%, var(--ai3)); background-size: 160% 100%; background-position: 100% 0; color: #fff; box-shadow: 0 8px 22px rgba(194, 85, 232, .34); }
+.aib .i, .aig .i { color: #fff; }
+.mini.aig { display: inline-flex; align-items: center; gap: .35rem; padding: .45rem .8rem; border-radius: 18px; text-decoration: none; }
+.btn.aig { padding: 0 1rem; }
+.aib[disabled], .aib.busy { opacity: .7; }
+.aisw input:checked { background: linear-gradient(120deg, var(--ai1), var(--ai2)); } .aisw input:checked::after { background: #fff; }
+/* v7: tablet. Voti della candidatura nella colonna di destra, grandi; in verticale le righe da fare tengono il tasto accanto */
+@media (min-width: 861px) and (pointer: coarse) {
+  .pdecide { grid-column: 2; justify-self: stretch; bottom: 1rem; padding: .4rem; gap: .35rem; }
+  .pdecide .pd { flex: 1; justify-content: center; min-height: 54px; font-size: 1rem; }
+  .fabs { gap: .6rem; } .fabs .fab { height: 56px; padding: 0 1.4rem 0 1.15rem; font-size: 1rem; }
+}
+@media (min-width: 600px) and (max-width: 860px) {
+  .tk { grid-template-columns: auto minmax(0, 1fr) auto; } .tk .btn { grid-column: auto; justify-self: end; }
+  .view { padding-left: 1.5rem; padding-right: 1.5rem; }
+}
+@media (min-width: 861px) and (max-width: 1100px) and (pointer: coarse) { .pdecide .pd { flex-direction: column; gap: .2rem; padding: 0 .2rem; min-width: 0; font-size: .82rem; } }
 </style>
 </head>
 <body>
@@ -2481,7 +2506,7 @@ window.MENU = {
       ${C.toni ? `<div class="chips ait">${C.toni.map((t, n) => `<button type="button" data-tono="${t}" aria-pressed="${!n}">${t}</button>`).join("")}</div>` : ""}
       ${C.opzioni ? `<div class="aio">${C.opzioni.map(([k, t]) => `<button type="button" class="aiop" data-opz="${k}" aria-pressed="${opz[k]}">${sv(I.check)}${t}</button>`).join("")}</div>` : ""}
       <div class="aiout" aria-live="polite"></div>
-      <div class="aif"><button class="mini" type="button" data-again>${sv(I.refresh)}Altre proposte</button>${C.sonnet ? `<label class="aisw"><input type="checkbox" data-cur><span>Più curato <small>Sonnet: più lento, costa di più</small></span></label>` : ""}</div>`;
+      <div class="aif"><button class="mini aig" type="button" data-again>${sv(I.refresh)}Altre proposte</button>${C.sonnet ? `<label class="aisw"><input type="checkbox" data-cur><span>Più curato <small>Sonnet: più lento, costa di più</small></span></label>` : ""}</div>`;
     const run = async () => {
       $(".aiout", p).innerHTML = `<div class="ail"><i></i><i></i><i></i></div>`;
       try {
@@ -3534,7 +3559,7 @@ window.MENU = {
     if (st.fonte === "mano") return "";
     const senza = { xml: "Letta senza AI: la fattura elettronica è già un file di dati.", pdf: "Letta dal testo del PDF, senza AI.", email: "Letta dal testo dell'allegato, senza AI." }[st.fonte];
     const n = st.pagine || 1, due = !st.curato && st.fonte === "foto" && window.AI ? AI.serveSecondoPasso(R, st.doc) : { serve: false };
-    return `<p class="via">${sv(senza ? I.check : I.sparkle)}<span>${senza || `Letta da Claude ${st.curato ? "Sonnet · " + n + " " + (n === 1 ? "pagina" : "pagine") + " · qualche centesimo" : "Haiku · " + n + " " + (n === 1 ? "pagina" : "pagine") + " · meno di un centesimo"}`}</span></p>${due.serve ? `<div class="via2"><span><b>${due.motivo}</b><small>Sonnet legge meglio bolle storte o scritte a mano. Costa qualche centesimo.</small></span><button class="btn ghost sm" type="button" id="rileggi">${sv(I.sparkle)}Rileggi con Sonnet</button></div>` : ""}`;
+    return `<p class="via">${sv(senza ? I.check : I.sparkle)}<span>${senza || `Letta da Claude ${st.curato ? "Sonnet · " + n + " " + (n === 1 ? "pagina" : "pagine") + " · qualche centesimo" : "Haiku · " + n + " " + (n === 1 ? "pagina" : "pagine") + " · meno di un centesimo"}`}</span></p>${due.serve ? `<div class="via2"><span><b>${due.motivo}</b><small>Sonnet legge meglio bolle storte o scritte a mano. Costa qualche centesimo.</small></span><button class="btn ghost sm aig" type="button" id="rileggi">${sv(I.sparkle)}Rileggi con Sonnet</button></div>` : ""}`;
   }
   function mArrivi() {
     const st = MAG.arrivo;
@@ -3614,7 +3639,7 @@ window.MENU = {
           <div class="ast ${st.k}"><span class="sd ${st.k}"></span><b>${st.t}</b>${a.ordinato ? "<small>già ordinato</small>" : ""}</div>
           <div class="agauge"><i class="${st.k}" style="width:${pct}%"></i><span class="amin" style="left:${pmin}%" title="Scorta minima"></span></div>
           <div class="anums"><div><small>In magazzino</small><b>${FMT(a, a.giacenza)}</b></div><div><small>Se ne usa al giorno</small><b>${FMT(a, a.consumoGiorno)}</b></div><div><small>Prossima consegna</small><b>${esc(consegna)}</b></div></div>
-          <div class="aact"><span class="step big"><button type="button" data-g="-1" aria-label="Togli una confezione">−</button><b>${FMT(a, a.giacenza)}</b><button type="button" data-g="1" aria-label="Aggiungi una confezione">+</button></span><small>± una confezione (${esc(a.formato)})</small><button class="btn ghost" type="button" data-segnala1>${sv(IC_SEG)}Segnala</button>${st.s.ordina && !a.ordinato ? `<button class="btn" type="button" data-go="magazzino/oggi">Ordina ora</button>` : ""}</div></div>
+          <div class="aact"><span class="step big"><button type="button" data-g="-1" aria-label="Togli una confezione">−</button><b>${FMT(a, a.giacenza)}</b><button type="button" data-g="1" aria-label="Aggiungi una confezione">+</button></span><small>± una confezione (${esc(a.formato)})</small><button class="btn segx" type="button" data-segnala1>${sv(IC_SEG)}Segnala</button>${st.s.ordina && !a.ordinato ? `<button class="btn" type="button" data-go="magazzino/oggi">Ordina ora</button>` : ""}</div></div>
         <div class="card"><h2>Quando riordinare <small>Avvisa quando non basta fino alla consegna dopo</small></h2><div class="row three">
           <div class="f"><label><span>Scorta minima</span></label><div class="inu"><input type="number" min="0" value="${a.minimo}" data-k="minimo" step="${a.unita === "pz" ? 1 : 50}"><i>${UN(a)}</i></div><span class="hint">Sotto questa quantità avvisa sempre</span></div>
           <div class="f"><label><span>Scorta massima</span></label><div class="inu"><input type="number" min="0" value="${a.massimo || ""}" placeholder="nessun limite" data-k="massimo" step="${a.unita === "pz" ? 1 : 50}"><i>${UN(a)}</i></div><span class="hint">Quanto ci sta in frigo o in magazzino: non ordina oltre</span></div>
