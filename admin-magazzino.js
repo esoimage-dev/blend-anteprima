@@ -35,7 +35,11 @@
     if (sotto || finisce) {
       const serve = Math.max(a.minimo * 1.5, a.consumoGiorno * (attesa + copertura)) - a.giacenza; /* copre fino a «copertura» giorni dopo l'arrivo */
       qta = Math.max(a.lotto, Math.ceil(serve / a.lotto) * a.lotto);
+      /* tetto: non si ordina oltre quello che ci sta (resta almeno una confezione se serve davvero) */
+      if (a.massimo > 0) qta = Math.max(a.giacenza < a.massimo ? a.lotto : 0, Math.floor((a.massimo - a.giacenza) / a.lotto) * a.lotto);
     }
+    /* "riordina comunque": quando lo decide una persona vale più dei calcoli */
+    if (a.forza && !qta) qta = Math.max(a.lotto, Math.ceil((a.consumoGiorno * (prossimaConsegna(f, oggi) + copertura) - a.giacenza) / a.lotto) * a.lotto);
     return { giorni, attesa, sotto, finisce, ordina: qta > 0, qta, livello: a.minimo ? Math.min(1, a.giacenza / (a.minimo * 3)) : 1 };
   }
   function riordino(articoli, fornitori, oggi = new Date(), coperture = {}) {

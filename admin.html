@@ -1345,7 +1345,7 @@ details.fold > summary .live { font-size: .78rem; font-weight: 600; }
   .chero .ht b { font-size: 1.1rem; }
   .ctabs { margin: 0 -1rem; padding: 2px 1rem; } .ctools { grid-template-columns: 1fr; } .croles { margin: 0 -1rem; padding: 0 1rem; }
   .carow { grid-template-columns: auto minmax(0, 1fr) auto; } .carow .dsp { display: none; }
-  .prof { grid-template-columns: 1fr; padding-bottom: 6rem; } .ptop .bk { display: none; } .ptop { justify-content: flex-end; } .ptop:not(:has(.pnav)) { display: none; }
+  .prof { grid-template-columns: 1fr; padding-bottom: 6rem; } .ptop .bk { display: none; } .ptop { justify-content: flex-end; } .prof .ptop:not(:has(.pnav)) { display: none; }
   .pcv { position: static; } .pscroll { height: auto; min-height: 0; max-height: 72vh; padding: .8rem; }
   .pdecide { position: fixed; left: .6rem; right: .6rem; bottom: calc(70px + env(safe-area-inset-bottom, 0px)); justify-content: space-between; gap: .25rem; }
   .pd { flex: 1; justify-content: center; flex-direction: column; gap: .2rem; min-height: 54px; padding: 0 .2rem; font-size: .76rem; }
@@ -1809,6 +1809,184 @@ pre { white-space: pre-wrap; overflow-wrap: anywhere; }
 details.tech > summary { cursor: pointer; font-weight: 650; min-height: 44px; display: flex; align-items: center; }
 
 .pa .ab .btn { min-width: 52px; } @media (max-width: 860px) { .mkm .x { width: 40px; height: 40px; } }
+
+.adsec { margin: 1.4rem 0 -.2rem; font-size: 1.2rem; }
+
+/* ---------- v5: editor dei contenuti a passi ---------- */
+.mked .ptop { gap: .5rem; } .sp0 { flex: 1; }
+.tb.rosso { color: var(--red-t); } .tb.rosso:hover { background: var(--red-bg); border-color: color-mix(in srgb, var(--red) 40%, transparent); }
+.mkprog { display: flex; align-items: center; gap: 1rem; padding: .2rem .2rem .6rem; color: var(--ash); font-size: .88rem; } .mkprog b { color: var(--bone); }
+.mkprog i { flex: 1; height: 6px; border-radius: 3px; background: var(--n3); overflow: hidden; } .mkprog i b { display: block; height: 100%; border-radius: 3px; background: var(--sign); transition: width .35s; }
+.mks2 > h2 { display: flex; align-items: center; gap: .7rem; }
+.mks2 > h2 > span:last-child { display: grid; gap: .15rem; } .mks2 > h2 small { font-size: .82rem; color: var(--ash); font-weight: 400; }
+.sn { width: 28px; height: 28px; flex: none; display: grid; place-items: center; border-radius: 50%; background: var(--n3); color: var(--ash); font: 700 .85rem/1 var(--f-ui); transition: background .2s, color .2s; }
+.mks2.ok .sn { background: var(--ok); color: #10200f; } .sn .i { width: 16px; height: 16px; stroke-width: 2.6; }
+.mkch2 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem; }
+.chb { all: unset; box-sizing: border-box; position: relative; display: flex; align-items: center; gap: .6rem; min-height: 54px; padding: 0 1rem; border-radius: var(--r2); background: var(--n2); border: 1.5px solid var(--line); font: 650 .95rem/1 var(--f-ui); cursor: pointer; transition: border-color .15s, background .15s; }
+.chb .i { width: 22px; height: 22px; } .chb .ck { margin-left: auto; width: 18px; height: 18px; opacity: 0; color: var(--sign-t); stroke-width: 2.6; transition: opacity .15s; }
+.chb:hover { border-color: var(--line2); } .chb[aria-pressed="true"] { border-color: var(--sign); background: color-mix(in srgb, var(--sign) 10%, var(--n2)); } .chb[aria-pressed="true"] .ck { opacity: 1; }
+.chb[disabled] { opacity: .4; cursor: not-allowed; } .chb:focus-visible { outline: 2px solid var(--sign); outline-offset: 2px; }
+.mkm .mv { position: absolute; left: .25rem; right: .25rem; bottom: .25rem; display: flex; justify-content: space-between; } .mkm .mv button { all: unset; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; background: rgba(0, 0, 0, .6); color: #fff; cursor: pointer; } .mkm .mv button:only-child:last-child { margin-left: auto; } .mkm .mv .i { width: 16px; height: 16px; }
+.mkm .mv button:hover { background: var(--sign); color: #14110c; }
+.cov0 { position: absolute; left: .35rem; top: 1.7rem; padding: .15rem .35rem; border-radius: 5px; background: var(--sign); color: #14110c; font: 700 .62rem/1 var(--f-ui); }
+.mkadd2 { width: 132px; } .mkadd2 span { padding: 0 .4rem; }
+.mkaud { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: .3rem .8rem; align-items: center; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+.ai0 { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 12px; background: var(--n3); color: var(--sign-t); grid-row: span 2; } .ai0 .i { width: 20px; height: 20px; }
+.mka1 b { display: block; font-weight: 650; } .mka1 small { color: var(--ash); font-size: .82rem; line-height: 1.4; }
+.mkin { width: 100%; box-sizing: border-box; min-height: 44px; padding: 0 .85rem; border-radius: var(--r1); background: var(--night); border: 1px solid var(--line2); color: var(--bone); font: 400 .95rem/1 var(--f-ui); } .mkin:focus { outline: none; border-color: var(--sign); }
+.mkaud .mkin { grid-column: 2; }
+.mkopt summary { list-style: none; cursor: pointer; display: flex; align-items: baseline; gap: .7rem; min-height: 28px; font: 650 1.02rem/1.3 var(--f-ui); } .mkopt summary::-webkit-details-marker { display: none; }
+.mkopt summary small { color: var(--ash); font-weight: 400; font-size: .84rem; flex: 1; } .mkopt summary::after { content: "+"; color: var(--dim); font-size: 1.2rem; } .mkopt[open] summary::after { content: "−"; }
+.mkopts { display: grid; gap: .6rem; margin-top: 1rem; } .mktt { display: grid; gap: .6rem; padding-top: .6rem; border-top: 1px solid var(--line); }
+.sw.sm2 { min-height: 0; padding: .7rem .9rem; } .sw.sm2 small { display: block; margin-top: .15rem; }
+.btn.big { min-height: 52px; padding: 0 1.4rem !important; font-size: 1rem; } .btn.big .i { width: 19px; height: 19px; }
+.mkact { justify-content: flex-end; }
+.btn.rosso { background: var(--red); color: #fff; } .btn.rosso:not([disabled]):hover { background: color-mix(in srgb, var(--red) 85%, #fff); box-shadow: 0 0 0 3px color-mix(in srgb, var(--red) 30%, transparent); }
+.cfm { position: fixed; inset: 0; z-index: 110; display: grid; place-items: center; padding: 1rem; background: rgba(6, 5, 4, .6); animation: aiin .15s both; }
+.cfmp { width: min(400px, 100%); display: grid; gap: .6rem; padding: 1.3rem; border-radius: var(--r3); background: var(--n1); border: 1px solid var(--line2); box-shadow: var(--sh); }
+.cfmp b { font: 750 1.15rem/1.25 var(--f-ui); } .cfmp p { margin: 0 0 .6rem; color: var(--ash); } .cfma { display: flex; justify-content: flex-end; gap: .5rem; }
+.toast.act { display: flex; align-items: center; gap: 1rem; pointer-events: auto; } .toast.act button { all: unset; padding: .35rem .7rem; border-radius: 8px; background: var(--sign); color: var(--on-sign); font: 700 .84rem/1 var(--f-ui); cursor: pointer; }
+.pop.pnc { width: 340px; } .ncp { display: grid; gap: .45rem; } .ncp > b { font: 700 1rem/1.2 var(--f-ui); margin: .1rem .2rem .3rem; }
+.ncf { all: unset; box-sizing: border-box; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: .8rem; align-items: center; padding: .7rem .8rem; border-radius: var(--r2); background: var(--n2); border: 1px solid var(--line); cursor: pointer; transition: border-color .15s, background .15s; }
+.ncf:hover, .ncf:focus-visible { border-color: var(--sign); background: color-mix(in srgb, var(--sign) 8%, var(--n2)); } .ncf .fi { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px; background: var(--n3); } .ncf .fi .i { width: 26px; height: 26px; }
+.ncf b { display: block; font: 700 1rem/1.2 var(--f-ui); } .ncf small { color: var(--ash); font-size: .82rem; } .ncf .ch { color: var(--dim); }
+/* tasto "Nuovo contenuto" più evidente */
+.mkbar .mknew { min-height: 52px; padding: 0 1.4rem 0 1.1rem !important; font-size: 1rem; box-shadow: 0 10px 24px color-mix(in srgb, var(--sign) 30%, transparent); } .mkbar .mknew .i { width: 21px; height: 21px; stroke-width: 2.3; }
+@media (max-width: 860px) {
+  .mkbar .mknew { display: none; }
+  .mked .ptop .tb span { display: none; } .mked .ptop .tb { min-width: 44px; justify-content: center; padding: 0; }
+  .mkch2 { grid-template-columns: 1fr; } .chb { min-height: 50px; }
+  .mkadd2 { width: calc((100% - 1.2rem) / 3); }
+  .mkfoot { position: sticky; bottom: calc(66px + env(safe-area-inset-bottom, 0px)); z-index: 5; box-shadow: 0 -10px 24px var(--shadow); }
+  .btn.big { width: 100%; }
+  .mkaud { grid-template-columns: auto minmax(0, 1fr); } .mkaud .mkin { grid-column: 1 / -1; }
+  .pop.pnc { width: auto; }
+}
+
+@media (min-width: 861px) { .mkw + .fab { display: none; } }
+
+.mkpv { display: none; }
+@media (max-width: 860px) { .view:has(.mked) .fab.pvj { display: none; } .mkpv { display: inline-flex; } .mkact { flex-wrap: nowrap; } .mkact .btn.big { flex: 1; width: auto; } }
+
+/* ---------- v5: scorte leggere e scheda prodotto ---------- */
+.afl { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; } .afl .sgm { flex: none; } .afl .acat { flex: 1; min-width: 180px; width: auto; min-height: 48px; }
+.afl .acat .cic.xs { width: 22px; height: 22px; }
+.cnt0 { font-style: normal; min-width: 18px; padding: .12rem .35rem; margin-left: .1rem; border-radius: 9px; background: var(--red); color: #fff; font: 700 .68rem/1.3 var(--f-ui); text-align: center; }
+.alist { display: grid; gap: .35rem; }
+.agh { display: flex; align-items: center; gap: .5rem; margin: .8rem 0 .2rem; color: var(--ash); font: 650 .8rem/1 var(--f-ui); letter-spacing: .02em; } .agh:first-child { margin-top: .2rem; } .agh em { font-style: normal; color: var(--dim); font-weight: 500; }
+.lvl.art { grid-template-columns: minmax(0, 1fr) 80px; margin-bottom: 0; }
+.sd { display: inline-block; width: 8px; height: 8px; margin-right: .4rem; border-radius: 50%; vertical-align: 1px; } .sd.r { background: var(--red); } .sd.y { background: var(--warn); } .sd.g { background: var(--ok); }
+.lvl .bar i.r { background: var(--red); } .lvl .bar i.y { background: var(--warn); } .lvl .bar i.g { background: var(--ok); }
+.ncf.c0 { grid-template-columns: auto minmax(0, 1fr) auto; padding: .55rem .7rem; } .ncf.c0 > .i:first-child { width: 34px; height: 34px; padding: 7px; box-sizing: border-box; border-radius: 10px; background: var(--n3); } .ck0 { color: var(--sign-t); stroke-width: 2.6; }
+.pop.pnc .ncp { max-height: min(70vh, 560px); overflow: auto; }
+.ahead { display: grid; gap: 1rem; }
+.ah1 { display: flex; align-items: center; gap: .9rem; } .ah1 h2 { margin: 0; font: 750 1.35rem/1.2 var(--f-ui); } .ah1 p { margin: .2rem 0 0; color: var(--ash); } .ah1 .cic { width: 52px; height: 52px; border-radius: 15px; } .ah1 .cic svg { width: 30px; height: 30px; }
+.ast { display: flex; align-items: center; gap: .3rem; padding: .7rem .9rem; border-radius: var(--r2); font: 700 1.05rem/1.2 var(--f-ui); }
+.ast.r { background: var(--red-bg); color: var(--red-t); } .ast.y { background: color-mix(in srgb, var(--warn) 16%, var(--n2)); color: var(--warn); } .ast.g { background: color-mix(in srgb, var(--ok) 14%, var(--n2)); color: var(--ok); }
+.ast small { margin-left: auto; font: 600 .78rem/1 var(--f-ui); color: var(--ash); }
+.agauge { position: relative; height: 10px; border-radius: 5px; background: var(--n3); } .agauge i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 5px; transition: width .4s; } .agauge i.r { background: var(--red); } .agauge i.y { background: var(--warn); } .agauge i.g { background: var(--ok); }
+.amin { position: absolute; top: -4px; bottom: -4px; width: 2px; background: var(--bone); border-radius: 1px; opacity: .6; }
+.anums { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .6rem; } .anums small { display: block; color: var(--ash); font-size: .78rem; margin-bottom: .2rem; } .anums b { font: 750 1.25rem/1.1 var(--f-ui); }
+.aact { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem; padding-top: .9rem; border-top: 1px solid var(--line); } .aact small { color: var(--ash); font-size: .82rem; flex: 1; min-width: 140px; }
+.aact .step b { min-width: 90px; font: 700 1rem/1 var(--f-ui); } .aact .step button { width: 44px; height: 44px; }
+.inu { position: relative; } .inu input { width: 100%; padding-right: 3rem !important; box-sizing: border-box; } .inu i { position: absolute; right: .85rem; top: 50%; translate: 0 -50%; font-style: normal; color: var(--ash); font-size: .9rem; pointer-events: none; }
+.ause { display: grid; gap: .4rem; }
+.ausi { all: unset; box-sizing: border-box; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .1rem .6rem; align-items: center; padding: .7rem .9rem; border-radius: 12px; background: var(--n2); border: 1px solid var(--line); cursor: pointer; transition: border-color .15s; }
+.ausi:hover { border-color: var(--line2); } .ausi b { font-weight: 650; } .ausi small { grid-column: 1; color: var(--ash); font-size: .82rem; } .ausi .ch { grid-row: span 2; grid-column: 2; color: var(--dim); }
+.add .i { width: 17px; height: 17px; }
+@media (max-width: 860px) { .anums b { font-size: 1.05rem; } .afl .sgm { width: 100%; } .afl .sgm button { flex: 1; } .afl .acat { width: 100%; } }
+
+/* ---------- v5: food cost leggibile, fornitori ---------- */
+.fcb.k-g { background: color-mix(in srgb, var(--ok) 18%, var(--n2)); color: var(--ok); } .fcb.k-y { background: color-mix(in srgb, var(--warn) 18%, var(--n2)); color: var(--warn); } .fcb.k-r { background: var(--red-bg); color: var(--red-t); }
+.fc0 { display: grid; gap: .9rem; }
+.fcv { display: flex; align-items: baseline; gap: .7rem; } .fcv small { color: var(--ash); } .fcv b { font: 900 2.6rem/1 var(--f-sign); } .fcv span { font-weight: 650; }
+.fc0.g .fcv b, .fc0.g .fcv span { color: var(--ok); } .fc0.y .fcv b, .fc0.y .fcv span { color: var(--warn); } .fc0.r .fcv b, .fc0.r .fcv span { color: var(--red-t); }
+.fcbar { position: relative; height: 10px; margin-bottom: 1.2rem; border-radius: 5px; background: var(--n3); } .fcbar i { position: absolute; inset: 0 auto 0 0; border-radius: 5px; }
+.fc0.g .fcbar i { background: var(--ok); } .fc0.y .fcbar i { background: var(--warn); } .fc0.r .fcbar i { background: var(--red); }
+.fcbar .ob { position: absolute; top: -4px; bottom: -4px; width: 2px; background: var(--bone); } .fcbar .ob em { position: absolute; top: 18px; left: 50%; translate: -50% 0; font-style: normal; font-size: .72rem; color: var(--ash); white-space: nowrap; }
+.fcs { display: flex; gap: .5rem; align-items: flex-start; margin: 0; padding: .7rem .9rem; border-radius: var(--r2); background: var(--n2); font-size: .9rem; line-height: 1.45; } .fcs .i { width: 18px; height: 18px; color: var(--sign-t); flex: none; margin-top: .1rem; }
+.fcw { display: grid; gap: .45rem; margin-top: 1.1rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+.fcr { display: grid; grid-template-columns: minmax(0, 1fr) 40% auto; gap: .7rem; align-items: center; font-size: .88rem; } .fcr i { height: 8px; border-radius: 4px; background: var(--n3); overflow: hidden; } .fcr i b { display: block; height: 100%; background: var(--sign); border-radius: 4px; } .fcr em { font-style: normal; color: var(--ash); font-variant-numeric: tabular-nums; }
+
+.warn0 { color: var(--warn); } .aact .btn .i { width: 18px; height: 18px; }
+
+/* ---------- v5: Segnala ---------- */
+.segb { all: unset; box-sizing: border-box; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 1rem; align-items: center; padding: 1.1rem 1.2rem; border-radius: var(--r3); background: linear-gradient(120deg, color-mix(in srgb, var(--red) 18%, var(--n1)), var(--n1) 70%); border: 1px solid color-mix(in srgb, var(--red) 40%, var(--line)); cursor: pointer; transition: border-color .15s, transform .12s; }
+.segb:hover { border-color: var(--red); transform: translateY(-1px); } .segb:active { transform: scale(.99); } .segb:focus-visible { outline: 2px solid var(--sign); outline-offset: 3px; }
+.segb .si0 { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 16px; background: var(--red); color: #fff; } .segb .si0 .i { width: 26px; height: 26px; stroke-width: 2.2; }
+.segb b { display: block; font: 750 1.2rem/1.2 var(--f-ui); } .segb small { display: block; margin-top: .2rem; color: var(--ash); font-size: .88rem; } .segb .go { pointer-events: none; }
+.segl { display: grid; gap: .4rem; } .segl .agh { margin-top: 0; }
+.segr { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: .7rem; align-items: center; padding: .55rem .8rem; border-radius: 12px; background: var(--n1); border: 1px solid var(--line); font-size: .88rem; } .segr small { color: var(--ash); }
+.sgx { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 1rem; background: rgba(6, 5, 4, .6); animation: aiin .15s both; }
+.sgp { width: min(620px, 100%); max-height: min(88vh, 820px); overflow: auto; display: grid; gap: .9rem; align-content: start; padding: 1.2rem; border-radius: var(--r3); background: var(--n1); border: 1px solid var(--line2); box-shadow: var(--sh); }
+.sgh { display: flex; align-items: center; gap: .5rem; } .sgh b { flex: 1; font: 750 1.25rem/1.2 var(--f-ui); } .sgs { margin: -.4rem 0 0; color: var(--ash); }
+.sgl { display: grid; gap: .3rem; } .sgg { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: .4rem; }
+.sgi { all: unset; box-sizing: border-box; display: grid; gap: .15rem; min-height: 56px; padding: .6rem .8rem; border-radius: 12px; background: var(--n2); border: 1px solid var(--line); cursor: pointer; transition: border-color .15s; } .sgi:hover, .sgi:focus-visible { border-color: var(--sign); } .sgi b { font-weight: 650; font-size: .9rem; line-height: 1.25; } .sgi small { color: var(--ash); font-size: .78rem; }
+.sga { display: flex; align-items: center; gap: .8rem; padding: .8rem; border-radius: var(--r2); background: var(--n2); } .sga b { display: block; font: 700 1.05rem/1.2 var(--f-ui); } .sga small { color: var(--ash); }
+.sgo { display: grid; gap: .5rem; }
+.sgc { all: unset; box-sizing: border-box; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: .9rem; align-items: center; min-height: 66px; padding: .7rem .9rem; border-radius: var(--r2); background: var(--n2); border: 1.5px solid var(--line); cursor: pointer; transition: border-color .15s, background .15s; }
+.sgc .fi { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px; background: var(--n3); } .sgc .fi .i { width: 24px; height: 24px; }
+.sgc b { display: block; font: 700 1rem/1.2 var(--f-ui); } .sgc small { color: var(--ash); font-size: .84rem; }
+.sgc:hover { border-color: var(--line2); } .sgc.on { border-color: var(--sign); background: color-mix(in srgb, var(--sign) 10%, var(--n2)); } .sgc.on .fi { background: var(--sign); color: var(--on-sign); }
+.sgq { display: grid; gap: 1rem; } .sgq .step b { min-width: 150px; font: 700 1rem/1 var(--f-ui); } .sgq .step button { width: 48px; height: 48px; }
+.sgf { display: grid; gap: .6rem; padding-top: .9rem; border-top: 1px solid var(--line); } .sgf p { margin: 0; color: var(--ash); } .sgf .btn { width: 100%; }
+.forza0 { display: inline-block; margin-left: .35rem; padding: .1rem .4rem; border-radius: 5px; background: var(--sign); color: var(--on-sign); font: 700 .66rem/1.3 var(--f-ui); vertical-align: 1px; }
+@media (max-width: 860px) { .sgx { padding: 0; place-items: end stretch; } .sgp { width: auto; max-height: 92vh; border-radius: 22px 22px 0 0; padding-bottom: calc(1.2rem + env(safe-area-inset-bottom, 0px)); } .sgg { grid-template-columns: 1fr 1fr; } .segb { grid-template-columns: auto minmax(0, 1fr); } .segb .go { display: none; } }
+
+.tgh .segm { margin-left: auto; color: var(--red-t); display: inline-flex; align-items: center; gap: .3rem; } .tgh .segm .i { width: 15px; height: 15px; } .tgh .segm + .mini { margin-left: .8rem; }
+
+/* ---------- v5: tablet orizzontale col dito (iPad e simili alla cassa) ----------
+   Barra laterale a icone con la scritta sotto, tutto toccabile con il dito (44-48 px),
+   niente che compare solo al passaggio del mouse. */
+@media (min-width: 861px) and (pointer: coarse) {
+  :root { --side: 104px; }
+  body { font-size: 16px; }
+  .side { padding: 1rem .55rem; gap: .8rem; align-items: stretch; }
+  .brand { justify-content: center; padding: 0; } .brand img { width: 56px; } .brand span { display: none; }
+  .nav { gap: .2rem; } .nav .grp { padding-top: .5rem; margin-top: .3rem; } .nav .gl { display: none; }
+  .nav button { position: relative; flex-direction: column; justify-content: center; gap: .3rem; min-height: 64px; padding: .5rem .2rem; border-radius: 14px; font-size: .74rem; font-weight: 600; line-height: 1.15; text-align: center; }
+  .nav button svg { width: 24px; height: 24px; }
+  .nav button .bd { position: absolute; top: 6px; right: 14px; margin: 0; min-width: 19px; height: 19px; font-size: .66rem; }
+  .side .who { flex-direction: column; justify-content: center; padding: .6rem 0 0; gap: .3rem; } .side .who > div { display: none; }
+  .bar { padding-left: 1.4rem; padding-right: 1.2rem; } .bar h1 { font-size: 2rem; }
+  .view { padding: 1.3rem 1.4rem 2rem; }
+  /* bersagli per il dito */
+  .btn { min-height: 48px; } .btn.sm { min-height: 44px; padding: 0 1rem !important; font-size: .9rem; }
+  .chips button, .seg button, .sgm button, .ctabs button, .rlb { min-height: 46px; }
+  .mini, .danger { min-height: 44px; display: inline-flex; align-items: center; }
+  .x, .hbtn, .bar .bell { width: 46px; height: 46px; }
+  .f input[type="text"], .f input[type="number"], .f input[type="url"], .f select, .search, .mkin, .pickb, .csearch { min-height: 50px; font-size: 1rem; }
+  .f textarea { font-size: 1rem; }
+  .step button, .orr .step button { width: 48px; height: 46px; }
+  .sw input { width: 50px; height: 30px; } .sw input::after { width: 24px; height: 24px; } .sw input:checked::after { transform: translateX(20px); }
+  .item, .carow, .lvl.item2, .mkc, .wki, .tk, .ausi { min-height: 56px; }
+  .tb, .aib { min-height: 44px; }
+  .dd { font-size: 1.05rem; } .pcol button { min-height: 46px; } .chipq { min-height: 42px; }
+  .emog button { height: 50px; font-size: 1.6rem; }
+  .ngo { min-height: 42px; padding: 0 .6rem 0 .9rem; }
+  /* niente cose nascoste dietro al passaggio del mouse */
+  .mkadd { opacity: 1; } .mkm .mv button { width: 36px; height: 36px; }
+  .scard .sturn { opacity: 1; }
+  /* elenchi affiancati: un po' più di spazio al dettaglio */
+  .split.mz { grid-template-columns: 320px minmax(0, 1fr); }
+  .mkcal { gap: .4rem; } .mkday { padding: .45rem; }
+  /* mazzo candidature: scritte ai lati e carta alta come su computer */
+  .dkh { display: flex; } .dkc { width: clamp(400px, calc((100dvh - 236px) / 1.414), 560px); }
+  .dka i { width: 72px; height: 72px; } .dka.forse i, .dka.top i { width: 58px; height: 58px; }
+}
+@media (min-width: 861px) and (max-width: 1100px) and (pointer: coarse) {
+  .home { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); column-gap: 1.4rem; }
+  .split { grid-template-columns: 280px minmax(0, 1fr); } .split .prev { grid-column: 2; position: static; }
+  .split.mz { grid-template-columns: 290px minmax(0, 1fr); }
+  .mked { grid-template-columns: minmax(0, 1fr) 280px; } .mked .phone { width: 250px; }
+  .prof { grid-template-columns: minmax(0, 1fr) 340px; }
+  .mkcal { grid-template-columns: repeat(7, minmax(0, 1fr)); } .mkb small { flex-wrap: wrap; } .mkt em { font-size: .58rem; }
+}
+
+/* v5: editor marketing su telefono, la scelta del formato non esce dallo schermo */
+.mked .form { grid-template-columns: minmax(0, 1fr); } .mkfmt > .mkf { min-width: 0; } .mkf small { overflow-wrap: anywhere; }
+.mkfoot { grid-template-columns: minmax(0, 1fr); } .mkact .btn.big { min-width: 0; white-space: normal; text-align: center; line-height: 1.2; }
+@media (max-width: 860px) { .mkact:has(.mkdone) { flex-wrap: wrap; } .mkact .mkdone { order: -1; flex: 1 0 100%; } .mkact:has(.mkdone) .btn { flex: 1 1 0; min-width: 0; white-space: normal; line-height: 1.2; } }
 </style>
 </head>
 <body>
@@ -2288,6 +2466,7 @@ window.MENU = {
     p.addEventListener("change", (e) => { if (e.target.matches("[data-cur]")) { curato = e.target.checked; run(); } });
     host.appendChild(p); run();
   }
+  document.addEventListener("click", (e) => { if (e.target.closest("[data-segg]")) apriSegnala(); });
   document.addEventListener("click", (e) => { const b = e.target.closest("[data-ai]"); if (b) apriAI(b, b.dataset.ai); });
 
   function field(label, val, lim, opt = {}) {
@@ -2372,9 +2551,9 @@ window.MENU = {
     const task = (x) => `<div class="tk ${x.urg ? "urg" : ""}">${x.cat ? catIc(x.cat, "tki0") : `<span class="tki">${sv(x.ic)}</span>`}<span class="tkt"><b>${esc(x.t)}</b><small>${esc(x.s)}</small></span><button class="btn sm" type="button" data-go="${x.go}">${x.b}</button></div>`;
     return `<div class="home">
       <section class="todo"><div class="sh"><h2>Da fare oggi</h2>${T.length > 4 ? `<button class="mini" type="button" data-ntf>Altre ${T.length - 4}</button>` : ""}</div>
-        ${top.length ? (() => { const o = top.filter((x) => x.grp === "ord"), r = top.filter((x) => x.grp !== "ord"); return r.map(task).join("") + (o.length ? `<div class="tgrp"><p class="tgh">${sv(I.mag)}<span>Ordini del magazzino</span><button class="mini" type="button" data-go="magazzino/oggi">Vedi tutti</button></p>${o.map(task).join("")}</div>` : ""); })() : `<div class="allok">${sv(I.check)}<b>Tutto a posto</b><small>Niente da ordinare, niente da leggere.</small></div>`}</section>
+        ${top.length ? (() => { const o = top.filter((x) => x.grp === "ord"), r = top.filter((x) => x.grp !== "ord"); return r.map(task).join("") + (o.length ? `<div class="tgrp"><p class="tgh">${sv(I.mag)}<span>Ordini del magazzino</span><button class="mini segm" type="button" data-segg>${sv(IC_SEG)}Segnala</button><button class="mini" type="button" data-go="magazzino/oggi">Vedi tutti</button></p>${o.map(task).join("")}</div>` : ""); })() : `<div class="allok">${sv(I.check)}<b>Tutto a posto</b><small>Niente da ordinare, niente da leggere.</small></div>`}</section>
       <section class="nums">${(() => { const mx = Math.max(...ADS.days.map((d) => d[0])), ordF = Magazzino.riordino(MAG.A, MAG.F, new Date(), MAG.coperture), tv = daValutare();
-        return `<button type="button" class="num0" data-go="advertising/analytics"><span class="nv">${ADS.today.book}</span><span class="nl">tavoli prenotati dalla pubblicità stasera</span><span class="ngf bars0">${ADS.days.map((d, k) => `<i style="height:${Math.round(d[0] / mx * 100)}%" class="${k === 5 ? "on" : ""}"></i>`).join("")}</span></button>
+        return `<button type="button" class="num0" data-go="advertising"><span class="nv">${ADS.today.book}</span><span class="nl">tavoli prenotati dalla pubblicità stasera</span><span class="ngf bars0">${ADS.days.map((d, k) => `<i style="height:${Math.round(d[0] / mx * 100)}%" class="${k === 5 ? "on" : ""}"></i>`).join("")}</span></button>
         <button type="button" class="num0" data-go="magazzino/oggi"><span class="nv ${ordF.length ? "warn" : ""}">${ordF.length}</span><span class="nl">${ordF.length === 1 ? "fornitore da chiamare oggi" : "fornitori da chiamare oggi"}</span><span class="ngf">${ordF.slice(0, 5).map((o) => catIc(o.fornitore.cat, "xs")).join("")}</span></button>
         <button type="button" class="num0" data-go="candidature"><span class="nv">${tv.length}</span><span class="nl">${tv.length === 1 ? "candidatura da valutare" : "candidature da valutare"}</span><span class="ngf">${tv.slice(0, 5).map((a) => ava(a.role, "xs")).join("")}</span></button>`; })()}</section>
 
@@ -2770,14 +2949,15 @@ window.MENU = {
     return { html: `<div class="mkw">
       <div class="mkbar"><div class="mknav"><button class="hbtn" type="button" data-w="-1" aria-label="Settimana prima">${sv(I.back)}</button><button class="btn ghost sm" type="button" data-w="0" ${mkW ? "" : "disabled"}>Oggi</button><button class="hbtn" type="button" data-w="1" aria-label="Settimana dopo">${sv(I.chev)}</button><b>${range}</b></div>
         <div class="sgm mkv" role="tablist">${[["settimana", "Settimana", IC_CAL], ["profilo", "Profilo", '<rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/>']].map(([k, t, ic]) => `<button type="button" role="tab" data-vista="${k}" aria-selected="${mkVista === k}">${sv(ic)}${t}</button>`).join("")}</div>
-        <button class="btn" type="button" data-go="marketing/new">${sv(I.plus)}Nuovo contenuto</button></div>
+        <button class="btn mknew" type="button" data-nuovoc>${sv(I.plus)}Nuovo contenuto</button></div>
       ${mkVista === "settimana" ? week + `<p class="mkhint">${sv('<path d="M8 6h.01M8 12h.01M8 18h.01M16 6h.01M16 12h.01M16 18h.01"/>')}${matchMedia("(hover: none)").matches ? "Tieni premuto un contenuto e trascinalo su un altro giorno." : "Trascina un contenuto su un altro giorno per spostarlo."}</p>` : prof}
-      ${idee}</div>`,
+      ${idee}</div><button class="fab" type="button" data-nuovoc>${sv(I.plus)}<span>Nuovo contenuto</span></button>`,
       after: (root) => {
         root.addEventListener("click", (e) => {
           const w = e.target.closest("[data-w]"); if (w) { mkW = +w.dataset.w ? mkW + +w.dataset.w : 0; render(); return; }
           const v = e.target.closest("[data-vista]"); if (v) { mkVista = v.dataset.vista; render(); return; }
-          const nu = e.target.closest("[data-nuovo]"); if (nu) { P.push({ id: Date.now(), date: nu.dataset.nuovo, time: "18:00", type: "post", ch: ["Instagram"], title: "", link: "", cap: "", media: [] }); setDirty(1); location.hash = "marketing/" + (P.length - 1); return; }
+          const nu = e.target.closest("[data-nuovo]"); if (nu) return nuovoContenuto(nu, nu.dataset.nuovo);
+          const nc = e.target.closest("[data-nuovoc]"); if (nc) return nuovoContenuto(nc, mkW ? isoD(piu(L0, mkW * 7)) : OGGI);
           const id = e.target.closest("[data-idea]"); if (id) { const x = I0[+id.dataset.idea]; P.push({ id: Date.now(), time: "18:00", ch: ["Instagram"], ...clone(x) }); delete P[P.length - 1].why; setDirty(1); location.hash = "marketing/" + (P.length - 1); toast(`Aggiunta ${dayLong(x.date)}. Controlla e programma.`); }
         });
         if (mkVista === "settimana") trascina(root);
@@ -2816,28 +2996,56 @@ window.MENU = {
   }
 
   /* ---------- un contenuto: formato, dove, foto e video, testo, quando ---------- */
+  /* conferma nostra (niente finestre del browser) e messaggio con "Annulla" */
+  function conferma(titolo, testo, siTxt, onSi) {
+    const ov = document.createElement("div"); ov.className = "cfm"; ov.innerHTML = `<div class="cfmp" role="alertdialog" aria-label="${esc(titolo)}"><b>${esc(titolo)}</b><p>${esc(testo)}</p><div class="cfma"><button class="btn ghost" type="button" data-no>Annulla</button><button class="btn rosso" type="button" data-si>${esc(siTxt)}</button></div></div>`;
+    const chiudi = () => { ov.remove(); removeEventListener("keydown", kh); }, kh = (e) => { if (e.key === "Escape") chiudi(); };
+    ov.addEventListener("click", (e) => { if (e.target === ov || e.target.closest("[data-no]")) return chiudi(); if (e.target.closest("[data-si]")) { chiudi(); onSi(); } });
+    addEventListener("keydown", kh); document.body.appendChild(ov); setTimeout(() => $("[data-si]", ov).focus(), 30);
+  }
+  function toastA(t, label, fn) { const el = $("#toast"); el.innerHTML = `<span>${esc(t)}</span><button type="button">${esc(label)}</button>`; el.classList.add("on", "act"); $("button", el).onclick = () => { el.classList.remove("on", "act"); fn(); }; clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove("on", "act"), 6000); }
+  /* "Nuovo contenuto": prima si sceglie il formato */
+  function nuovoContenuto(btn, data) {
+    apriPop(btn, `<div class="ncp"><b>Cosa vuoi pubblicare?</b>${Object.entries(FORM).map(([k, f]) => `<button type="button" class="ncf" data-nf="${k}"><span class="fi">${sv(f.ic)}</span><span><b>${f.n}</b><small>${f.d}</small></span>${sv(I.chev, "ch")}</button>`).join("")}</div>`, (p) => {
+      p.classList.add("pnc"); p.addEventListener("click", (e) => { const b = e.target.closest("[data-nf]"); if (!b) return; e.stopPropagation(); chiudiPop(); const t = b.dataset.nf;
+        MK.posts.push({ id: Date.now(), date: data || OGGI, time: "18:00", type: t, ch: ["Instagram"], title: "", link: "", cap: "", media: [], opz: { luogo: true, feed: true, commenti: "tutti", duetti: true, stitch: true } }); setDirty(1); location.hash = "marketing/" + (MK.posts.length - 1); });
+    });
+  }
+  const IC_AUDIO = '<path d="M9 18V6l11-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/>', IC_PIN = '<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/>', IC_DUP = '<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/>', IC_DEL = '<path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/>';
   function editor(m, k) {
-    head("marketing", 1); $("#title").textContent = mob() ? (m.title || "Nuovo contenuto") : "Contenuto";
-    const st = stato(m), mn = manca(m), isV = m.type === "reel", acc = m.type === "post" ? "image/*" : isV ? "video/*" : "image/*,video/*";
-    const tile = (x, n) => `<div class="mkm">${x.kind === "video" ? `<video src="${esc(x.src)}" muted playsinline ${m.cover ? `poster="${esc(m.cover)}"` : ""}></video><span class="vb">${sv('<path d="M8 5v14l11-7z" fill="currentColor"/>')}</span>` : `<img src="${esc(x.src)}" alt="">`}${m.type === "post" && m.media.length > 1 ? `<span class="nb0">${n + 1}</span>` : ""}<button class="x" type="button" data-rm="${n}" aria-label="Togli">${sv(I.x)}</button></div>`;
-    const maxM = m.type === "post" ? 10 : 1;
-    const azione = m.pub ? `<span class="mkdone">${sv(I.check)}Pubblicato ${dayLong(m.date)}</span>` : m.prog ? `<button class="btn ghost" type="button" data-unprog>Annulla la programmazione</button><span class="mkdone p">${sv(I.check)}Esce ${dayLong(m.date)} alle ${esc(m.time)}</span>` : `<button class="btn" type="button" data-prog ${mn.length ? "disabled" : ""}>Programma per ${dayLbl(m.date).toLowerCase()} alle ${esc(m.time)}</button>`;
+    head("marketing", 1); $("#title").textContent = mob() ? (m.title || "Nuovo " + FORM[m.type].n.toLowerCase()) : FORM[m.type].n;
+    m.opz = Object.assign({ luogo: true, feed: true, commenti: "tutti", duetti: true, stitch: true, primo: false }, m.opz || {});
+    const st = stato(m), mn = manca(m), isV = m.type === "reel", isS = m.type === "storia", acc = m.type === "post" ? "image/*" : isV ? "video/*" : "image/*,video/*";
+    const maxM = m.type === "post" ? 10 : 1, tt = m.ch.includes("TikTok"), ig = m.ch.includes("Instagram");
+    const fatto = { 1: true, 2: m.ch.length > 0, 3: m.media.length > 0 && (!isV || m.media.some((x) => x.kind === "video")), 4: isS || !!(m.cap || "").trim(), 5: !!m.date };
+    const nf = Object.values(fatto).filter(Boolean).length;
+    const sec = (n, titolo, sotto, corpo, extra = "") => `<section class="card mks2 ${fatto[n] ? "ok" : ""}" ${extra}><h2><span class="sn">${fatto[n] ? sv(I.check) : n}</span><span>${titolo}${sotto ? `<small>${sotto}</small>` : ""}</span></h2>${corpo}</section>`;
+    const tile = (x, n) => `<div class="mkm">${x.kind === "video" ? `<video src="${esc(x.src)}" muted playsinline ${m.cover ? `poster="${esc(m.cover)}"` : ""}></video><span class="vb">${sv('<path d="M8 5v14l11-7z" fill="currentColor"/>')}</span>` : `<img src="${esc(x.src)}" alt="">`}${m.type === "post" && m.media.length > 1 ? `<span class="nb0">${n + 1}</span>${n === 0 ? '<span class="cov0">Copertina</span>' : ""}<span class="mv">${n ? `<button type="button" data-mv="${n}" data-d="-1" aria-label="Sposta prima">${sv(I.back)}</button>` : ""}${n < m.media.length - 1 ? `<button type="button" data-mv="${n}" data-d="1" aria-label="Sposta dopo">${sv(I.chev)}</button>` : ""}</span>` : ""}<button class="x" type="button" data-rm="${n}" aria-label="Togli">${sv(I.x)}</button></div>`;
+    const sw = (key, t, sub, on) => `<label class="sw sm2"><span><b>${t}</b>${sub ? `<small>${sub}</small>` : ""}</span><input type="checkbox" data-opz2="${key}" ${on ? "checked" : ""}></label>`;
+    const azione = m.pub ? `<span class="mkdone">${sv(I.check)}Pubblicato ${dayLong(m.date)}</span>` : m.prog ? `<span class="mkdone p">${sv(I.check)}Esce ${dayLong(m.date)} alle ${esc(m.time)}</span><button class="btn ghost" type="button" data-unprog>Togli dalla programmazione</button>` : `<button class="btn big" type="button" data-prog ${mn.length ? "disabled" : ""}>${sv(IC_CAL)}Programma per ${dayLbl(m.date).toLowerCase()} alle ${esc(m.time)}</button>`;
     const html = `<div class="mked">
-      <div class="ptop"><button class="bk" type="button" data-go="marketing">${sv(I.back)}<span>Calendario</span></button><span class="mkstate s-${SK[st]}">${st}</span></div>
+      <div class="ptop"><button class="bk" type="button" data-go="marketing">${sv(I.back)}<span>Calendario</span></button><span class="mkstate s-${SK[st]}">${st}</span><span class="sp0"></span><button class="tb" type="button" data-dup>${sv(IC_DUP)}<span>Duplica</span></button><button class="tb rosso" type="button" data-del>${sv(IC_DEL)}<span>Elimina</span></button></div>
       <div class="form" id="form">
-        <section class="card"><h2>Cosa pubblichi</h2><div class="mkfmt">${Object.entries(FORM).map(([key, f]) => `<button type="button" class="mkf ${m.type === key ? "on" : ""}" data-fmt="${key}"><span class="fi">${sv(f.ic)}</span><b>${f.n}</b><small>${f.d}</small></button>`).join("")}</div>
-          <div class="f" style="margin-top:1rem"><label><span>Dove</span></label><div class="chips mkch">${CANALI.map((c) => { const no = c === "TikTok" && m.type !== "reel"; return `<button type="button" data-ch="${c}" aria-pressed="${m.ch.includes(c)}" ${no ? "disabled" : ""}>${sv(chIc[c])}${c}</button>`; }).join("")}</div><span class="hint">${m.type === "reel" ? "Lo stesso video può uscire anche su TikTok." : "Su TikTok vanno solo i video: scegli Reel."}</span></div>
-          <div style="margin-top:1rem">${field("Titolo per il calendario", m.title, [0, 60, "Lo vedi solo tu."], { k: "title", ph: "Es. Blend in Jazz, il backstage" })}</div></section>
-        <section class="card"><h2>${isV ? "Il video" : m.type === "storia" ? "Foto o video" : "Le foto"} <small>${m.type === "post" ? "Una o più foto (fino a 10, diventa un carosello). Verticali 4:5." : isV ? "Verticale 9:16, fino a 90 secondi. Poi scegli la copertina." : "Verticale 9:16. Se è un video, fino a 60 secondi."}</small></h2>
-          <div class="mkmedia">${m.media.map(tile).join("")}${m.media.length < maxM ? `<label class="mkadd2"><input type="file" accept="${acc}" ${m.type === "post" ? "multiple" : ""} data-up>${sv(I.plus)}<span>${m.media.length ? "Aggiungi" : isV ? "Carica il video" : "Carica"}</span></label><button type="button" class="mkadd2" data-lib>${sv('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/>')}<span>Dal sito</span></button>` : ""}</div>
-          ${isV ? `<div class="mkcov"><span class="mkm sm">${m.cover ? `<img src="${esc(m.cover)}" alt="">` : sv(FORM.post.ic)}</span><span><b>Copertina</b><small>È l'immagine che si vede nel profilo prima che parta il video.</small></span><label class="btn ghost sm"><input type="file" accept="image/*" data-cov hidden>${m.cover ? "Cambia" : "Scegli"}</label></div>` : ""}</section>
-        ${m.type === "storia" ? `<section class="card"><h2>Testo e link</h2><p class="hint" style="margin:0 0 .8rem">Le storie non hanno testo sotto: se serve, scrivilo dentro la foto o il video. Puoi aggiungere un tasto che porta al sito.</p><div class="chips" data-lk>${[["", "Nessun link"], ["prenota", "Prenota un tavolo"], ["menu", "Guarda il menu"]].map(([v, t]) => `<button type="button" data-lkv="${v}" aria-pressed="${(m.lk || "") === v}">${t}</button>`).join("")}</div></section>`
-          : `<section class="card"><h2>Il testo</h2>${field("Didascalia", m.cap, [0, 2200, "Le prime 125 battute si leggono senza toccare «altro»: lì va la cosa importante."], { k: "cap", area: true, rows: 5, ph: "Scrivi qui, oppure fallo scrivere a Claude" })}
-            <div class="mktools"><button class="aib" type="button" data-ai="didascalia">${sv(I.sparkle)}<span>Scrivi con Claude</span></button><button class="tb" type="button" data-emo aria-expanded="false">😊<span>Emoji</span></button><button class="tb" type="button" data-ins="hashtag">#<span>I nostri hashtag</span></button><button class="tb" type="button" data-ins="indirizzo">${sv('<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/>')}<span>Indirizzo</span></button><button class="mini" type="button" data-go="impostazioni/stile">Modifica</button></div></section>`}
-        <section class="card"><h2>Quando</h2><div class="row"><div class="f"><label><span>Giorno</span></label>${pickBtn("d", m.date, "date")}</div><div class="f"><label><span>Ora</span></label>${pickBtn("t", m.time, "time")}</div></div>
-          <p class="mkbest">${sv(I.bolt)}<span>Chi vi segue è più attivo tra le 18 e le 20.</span>${m.time !== "18:30" ? '<button class="mini" type="button" data-ora="18:30">Usa 18:30</button>' : ""}</p></section>
-        <div class="mkfoot">${mn.length && !m.prog && !m.pub ? `<p class="mkmiss">${sv(I.help)}Per programmarlo manca ${mn.join(", ")}.</p>` : ""}<div class="mkact"><button class="danger" type="button" data-del>Elimina</button>${azione}</div>
-          ${!m.pub ? `<p class="mknote">${m.ch.filter((c) => c !== "TikTok").length ? `Esce da solo su ${m.ch.filter((c) => c !== "TikTok").join(" e ")} quando colleghiamo Meta.` : ""}${m.ch.includes("TikTok") ? " Su TikTok arriva nelle bozze dell'app: lo pubblichi tu con un tocco." : ""}</p>` : ""}</div>
+        <div class="mkprog"><span><b>${nf} di 5</b> passaggi pronti</span><i><b style="width:${nf / 5 * 100}%"></b></i></div>
+        ${sec(1, "Formato", "", `<div class="mkfmt">${Object.entries(FORM).map(([key, f]) => `<button type="button" class="mkf ${m.type === key ? "on" : ""}" data-fmt="${key}"><span class="fi">${sv(f.ic)}</span><b>${f.n}</b><small>${f.d}</small></button>`).join("")}</div>
+          <div style="margin-top:1rem">${field("Titolo per il calendario", m.title, [0, 60, "Lo vedi solo tu."], { k: "title", ph: "Es. Blend in Jazz, il backstage" })}</div>`)}
+        ${sec(2, "Dove esce", m.type === "reel" ? "Lo stesso video può uscire anche su TikTok" : "TikTok accetta solo video: scegli Reel per usarlo", `<div class="mkch2">${CANALI.map((c) => { const no = c === "TikTok" && m.type !== "reel"; return `<button type="button" class="chb" data-ch="${c}" aria-pressed="${m.ch.includes(c)}" ${no ? "disabled" : ""}>${sv(chIc[c])}<span>${c}</span>${sv(I.check, "ck")}</button>`; }).join("")}</div>`)}
+        ${sec(3, isV ? "Il video" : isS ? "Foto o video" : "Foto", m.type === "post" ? "Una foto, o fino a 10 per un carosello. Verticali 4:5; la prima è la copertina" : isV ? "Verticale 9:16, fino a 90 secondi" : "Verticale 9:16; i video fino a 60 secondi", `<div class="mkmedia">${m.media.map(tile).join("")}${m.media.length < maxM ? `<label class="mkadd2"><input type="file" accept="${acc}" ${m.type === "post" ? "multiple" : ""} data-up>${sv(I.plus)}<span>${m.media.length ? (m.type === "post" ? "Aggiungi foto al carosello" : "Cambia") : isV ? "Carica il video" : m.type === "post" ? "Carica le foto" : "Carica"}</span></label>` : ""}</div>
+          ${isV ? `<div class="mkcov"><span class="mkm sm">${m.cover ? `<img src="${esc(m.cover)}" alt="">` : sv(FORM.post.ic)}</span><span><b>Copertina</b><small>L'immagine che si vede nel profilo prima che parta il video.</small></span><label class="btn ghost sm"><input type="file" accept="image/*" data-cov hidden>${m.cover ? "Cambia" : "Scegli"}</label></div>` : ""}
+          <div class="mkaud"><span class="ai0">${sv(IC_AUDIO)}</span><span class="mka1"><b>Audio</b><small>${m.audio ? "La canzone si mette nell'app al momento di pubblicare: ti arriva un promemoria con il titolo." : "Audio originale del video, oppure scegli una canzone."}</small></span><input type="text" class="mkin" placeholder="Canzone e artista (facoltativo)" value="${esc(m.audio || "")}" data-k2="audio" aria-label="Canzone"></div>`)}
+        ${isS ? sec(4, "Link nella storia", "Le storie non hanno testo sotto: scrivilo dentro la foto o il video", `<div class="chips" data-lk>${[["", "Nessun link"], ["prenota", "Prenota un tavolo"], ["menu", "Guarda il menu"]].map(([v, t]) => `<button type="button" data-lkv="${v}" aria-pressed="${(m.lk || "") === v}">${t}</button>`).join("")}</div>`)
+          : sec(4, "Testo", "Le prime 125 battute si leggono senza toccare «altro»", `${field("Didascalia", m.cap, [0, 2200, ""], { k: "cap", area: true, rows: 6, ph: "Scrivi qui, oppure fallo scrivere a Claude" })}
+            <div class="mktools"><button class="aib" type="button" data-ai="didascalia">${sv(I.sparkle)}<span>Scrivi con Claude</span></button><button class="tb" type="button" data-emo aria-expanded="false">😊<span>Emoji</span></button><button class="tb" type="button" data-ins="hashtag">#<span>I nostri hashtag</span></button><button class="tb" type="button" data-ins="indirizzo">${sv(IC_PIN)}<span>Indirizzo</span></button><button class="mini" type="button" data-go="impostazioni/stile">Stile dei testi</button></div>`)}
+        ${sec(5, "Quando", "", `<div class="row"><div class="f"><label><span>Giorno</span></label>${pickBtn("d", m.date, "date")}</div><div class="f"><label><span>Ora</span></label>${pickBtn("t", m.time, "time")}</div></div>
+          <p class="mkbest">${sv(I.bolt)}<span>Chi vi segue è più attivo tra le 18 e le 20.</span>${m.time !== "18:30" ? '<button class="mini" type="button" data-ora="18:30">Usa 18:30</button>' : ""}</p>`)}
+        <details class="card mkopt"><summary><span>Altre opzioni</span><small>${[ig && m.opz.luogo && "luogo", m.collab && "collaboratore", tt && "TikTok", m.opz.primo && "primo commento"].filter(Boolean).join(" · ") || "luogo, collaboratori, commenti"}</small></summary>
+          <div class="mkopts">${ig ? sw("luogo", "Tagga il luogo", "Blend Food & Drink, Via di Mezzocammino 141", m.opz.luogo) : ""}
+            ${ig && !isS ? `<div class="f"><label><span>Collaboratore</span></label><input type="text" class="mkin" placeholder="@account (es. il gruppo della serata)" value="${esc(m.collab || "")}" data-k2="collab"><span class="hint">Il post compare anche sul suo profilo, se accetta.</span></div>` : ""}
+            ${ig && isV ? sw("feed", "Mostra anche nella griglia del profilo", "Altrimenti resta solo nella sezione Reel", m.opz.feed) : ""}
+            ${!isS ? sw("primo", "Hashtag nel primo commento", "Il testo resta pulito, gli hashtag vanno in un commento", m.opz.primo) : ""}
+            ${tt ? `<div class="mktt"><p class="gl" style="padding:0">TikTok</p><div class="f"><label><span>Chi può commentare</span></label><div class="chips">${[["tutti", "Tutti"], ["amici", "Amici"], ["nessuno", "Nessuno"]].map(([v, t]) => `<button type="button" data-com="${v}" aria-pressed="${m.opz.commenti === v}">${t}</button>`).join("")}</div></div>${sw("duetti", "Duetti", "Altri possono rispondere affiancando il loro video", m.opz.duetti)}${sw("stitch", "Stitch", "Altri possono usare un pezzo del vostro video", m.opz.stitch)}</div>` : ""}</div></details>
+        <div class="mkfoot">${mn.length && !m.prog && !m.pub ? `<p class="mkmiss">${sv(I.help)}Per programmarlo manca ${mn.join(", ")}.</p>` : ""}<div class="mkact"><button class="tb mkpv" type="button" data-pv0>${sv(I.eye)}<span>Anteprima</span></button>${azione}</div>
+          ${!m.pub ? `<p class="mknote">${m.ch.filter((c) => c !== "TikTok").length ? `Esce da solo su ${m.ch.filter((c) => c !== "TikTok").join(" e ")} quando colleghiamo Meta.` : ""}${tt ? " Su TikTok arriva nelle bozze dell'app: lo pubblichi tu con un tocco." : ""}${m.audio ? " Ti ricordiamo di aggiungere la canzone." : ""}</p>` : ""}</div>
       </div>
       <div class="prev"><div class="ph"><span>Anteprima</span><span>${FORM[m.type].n} · ${esc(m.ch.join(", ") || "nessun canale")}</span></div><div class="stage" id="stage">${phone(m)}</div></div>
     </div>`;
@@ -2847,36 +3055,29 @@ window.MENU = {
       const draw = () => { $("#stage").innerHTML = phone(m); };
       const cambia = (fn, full = true) => { fn(); setDirty(1); if (full) render(); else draw(); };
       wire($("#form"), (e) => { const kk = e.target.dataset.k; if (kk === "cap" || kk === "title") { m[kk] = e.target.value; draw(); } });
-      $("#form").addEventListener("change", (e) => { const kk = e.target.dataset.k; if (kk === "date" || kk === "time") { if (e.target.value) cambia(() => (m[kk] = e.target.value)); } if (kk === "cap" || kk === "title") { setDirty(1); if (kk === "title" || !m.cap !== !e.target.value) render(); } });
+      $("#form").addEventListener("change", (e) => { const kk = e.target.dataset.k, k2 = e.target.dataset.k2; if (kk === "cap" || kk === "title") { setDirty(1); if (kk === "title" || !m.cap !== !e.target.value) render(); } if (k2) cambia(() => (m[k2] = e.target.value.trim()), k2 === "audio"); if (e.target.dataset.opz2) cambia(() => (m.opz[e.target.dataset.opz2] = e.target.checked), false); });
       root.addEventListener("click", (e) => {
         const f = e.target.closest("[data-fmt]"); if (f && f.dataset.fmt !== m.type) return cambia(() => { m.type = f.dataset.fmt; if (m.type !== "reel") m.ch = m.ch.filter((c) => c !== "TikTok"); if (m.type === "reel") { const im = m.media.find((x) => x.kind === "img"); if (im && !m.cover) m.cover = im.src; m.media = m.media.filter((x) => x.kind === "video").slice(0, 1); } if (m.type === "post") { m.media = m.media.filter((x) => x.kind === "img"); if (!m.media.length && m.cover) m.media = [{ src: m.cover, kind: "img" }]; } if (m.type === "storia") m.media = m.media.slice(0, 1); if (!m.ch.length) m.ch = ["Instagram"]; });
         const c = e.target.closest("[data-ch]"); if (c && !c.disabled) return cambia(() => { m.ch = m.ch.includes(c.dataset.ch) ? m.ch.filter((x) => x !== c.dataset.ch) : [...m.ch, c.dataset.ch]; });
         const r = e.target.closest("[data-rm]"); if (r) return cambia(() => m.media.splice(+r.dataset.rm, 1));
+        const mv = e.target.closest("[data-mv]"); if (mv) { const a = +mv.dataset.mv, b = a + +mv.dataset.d; return cambia(() => { [m.media[a], m.media[b]] = [m.media[b], m.media[a]]; }); }
         const l = e.target.closest("[data-lkv]"); if (l) return cambia(() => (m.lk = l.dataset.lkv));
+        const cm = e.target.closest("[data-com]"); if (cm) return cambia(() => (m.opz.commenti = cm.dataset.com));
         const o = e.target.closest("[data-ora]"); if (o) return cambia(() => (m.time = o.dataset.ora));
-        if (e.target.closest("[data-lib]")) return libreria(m, () => { setDirty(1); render(); });
-        const pk = e.target.closest("[data-pick]"); if (pk) { const k0 = pk.dataset.key; return pk.dataset.pick === "d" ? pickData(pk, m.date, (v) => cambia(() => (m.date = v))) : pickOra(pk, m.time, (v) => cambia(() => (m.time = v))); }
+        const pk = e.target.closest("[data-pick]"); if (pk) return pk.dataset.pick === "d" ? pickData(pk, m.date, (v) => cambia(() => (m.date = v))) : pickOra(pk, m.time, (v) => cambia(() => (m.time = v)));
         const ins = e.target.closest("[data-ins]"); if (ins) { const ta = $("[data-k=cap]", root), t = (SET.stile[ins.dataset.ins] || "").trim(); if (!t) return toast("Impostalo prima in Impostazioni, Stile dei testi."); if (ta.value.includes(t)) return toast("È già nel testo."); inserisci(ta, (ta.value && !/\s$/.test(ta.value) ? "\n\n" : "") + t); return; }
         const em = e.target.closest("[data-emo]"); if (em) return emojiPanel(em, $("[data-k=cap]", root));
         if (e.target.closest("[data-prog]")) { m.prog = true; setDirty(1); render(); toast(`Programmato: esce ${dayLong(m.date)} alle ${m.time}.`); }
         if (e.target.closest("[data-unprog]")) { m.prog = false; setDirty(1); render(); toast("Tolto dalla programmazione: resta nel calendario come bozza."); }
-        if (e.target.closest("[data-del]") && confirm("Eliminare questo contenuto?")) { MK.posts.splice(k, 1); setDirty(1); location.hash = "marketing"; }
+        if (e.target.closest("[data-pv0]")) return $(".prev", root).scrollIntoView({ behavior: "smooth", block: "start" });
+        if (e.target.closest("[data-dup]")) { const d = clone(m); d.id = Date.now(); d.prog = false; d.pub = false; d.title = (m.title || FORM[m.type].n) + " (copia)"; MK.posts.push(d); setDirty(1); location.hash = "marketing/" + (MK.posts.length - 1); toast("Copia creata: cambia giorno e testo."); }
+        if (e.target.closest("[data-del]")) conferma("Eliminare questo contenuto?", m.prog ? "È programmato: non uscirà più." : "Lo togli dal calendario.", "Elimina", () => { const tolto = MK.posts.splice(k, 1)[0]; setDirty(1); location.hash = "marketing"; setTimeout(() => toastA("Contenuto eliminato.", "Annulla", () => { MK.posts.splice(k, 0, tolto); setDirty(1); location.hash = "marketing/" + k; }), 60); });
       });
       root.addEventListener("change", (e) => {
-        if (e.target.matches("[data-up]")) { const fs = [...e.target.files].slice(0, maxM - m.media.length); cambia(() => fs.forEach((x) => m.media.push({ src: URL.createObjectURL(x), kind: /^video/.test(x.type) ? "video" : "img" }))); }
+        if (e.target.matches("[data-up]")) { const fs = [...e.target.files].slice(0, maxM - (m.type === "post" ? m.media.length : 0)); cambia(() => { if (m.type !== "post") m.media = []; fs.forEach((x) => m.media.push({ src: URL.createObjectURL(x), kind: /^video/.test(x.type) ? "video" : "img" })); }); }
         if (e.target.matches("[data-cov]") && e.target.files[0]) cambia(() => (m.cover = URL.createObjectURL(e.target.files[0])));
       });
     } };
-  }
-  /* foto e video già nel sito: si sceglie senza caricare niente */
-  function libreria(m, done) {
-    const imgs = [...new Set([...D.shows.map((x) => x.img), ...D.drinks.map(dfoto), ...D.kitchen.map((x) => x.img || x.foto).filter(Boolean), "img/blend-foodanddrink-AL85139.webp", "img/blend-foodanddrink-AL85227.webp", "img/blend-foodanddrink-DSC08308.webp", "img/blend-foodanddrink-AL85241.webp"])].filter(Boolean).map((src) => ({ src, kind: "img" }));
-    const vids = ["pour", "shake", "bar", "coupe", "food", "dj"].map((v) => ({ src: `video/${v}.mp4`, kind: "video" }));
-    const ok = m.type === "post" ? imgs : m.type === "reel" ? vids : [...vids, ...imgs];
-    const ov = document.createElement("div"); ov.className = "lib"; ov.innerHTML = `<div class="libp" role="dialog" aria-label="Foto e video del sito"><div class="nh"><b>Dal sito</b><button class="x" type="button" data-lx aria-label="Chiudi">${sv(I.x)}</button></div><div class="libg">${ok.map((x, n) => `<button type="button" data-li="${n}">${x.kind === "video" ? `<video src="${esc(x.src)}" muted playsinline preload="metadata"></video><span class="vb">${sv('<path d="M8 5v14l11-7z" fill="currentColor"/>')}</span>` : `<img src="${esc(x.src)}" alt="" loading="lazy">`}</button>`).join("")}</div></div>`;
-    const chiudi = () => { ov.remove(); removeEventListener("keydown", kh); }, kh = (e) => { if (e.key === "Escape") chiudi(); };
-    ov.addEventListener("click", (e) => { if (e.target === ov || e.target.closest("[data-lx]")) return chiudi(); const b = e.target.closest("[data-li]"); if (!b) return; const x = ok[+b.dataset.li]; if (m.type === "post") { if (m.media.length < 10) m.media.push(x); } else m.media = [x]; chiudi(); done(); });
-    addEventListener("keydown", kh); document.body.appendChild(ov);
   }
   function emojiPanel(btn, ta) {
     const old = $(".emop"); if (old) { old.remove(); btn.setAttribute("aria-expanded", "false"); return; }
@@ -2903,12 +3104,12 @@ window.MENU = {
     annunci: [{ nome: "Reel · Aperiblend 18-20", spesa: 61, pren: 22, budget: 15, frequenza: 2.1 }, { nome: "Ricerca · pinsa Mezzocammino", spesa: 10, pren: 0, budget: 6, frequenza: 1.2 }, { nome: "Storie · Blend in Jazz", spesa: 31, pren: 7, budget: 8, frequenza: 3.9 }],
     serate: [{ titolo: D.shows[0].title, giorniMancanti: 2, riempimento: 0.34 }]
   });
-  const ASUB = [["campagne", "Campagne"], ["analytics", "Analytics"], ["pilota", "Pilota"], ["dettagli", "Pubblici"]];
+  const ASUB = [["campagne", "Campagne"], ["pilota", "Pilota"], ["dettagli", "Pubblici"]];
   function distrib(r, tot) { return `<div class="dist">${r.filter((x) => x.euro).map((x) => `<i style="flex:${x.euro};background:${PCOL[x.id]}" title="${x.nome}: ${euro(x.euro, 0)}"></i>`).join("")}</div><div class="dleg">${r.map((x) => `<span><i style="background:${PCOL[x.id]}"></i>${x.nome}<b>${euro(x.euro, 0)}</b><small>${x.pren ? euro(x.cpb) + " a tavolo" : "-"}</small></span>`).join("")}</div>`; }
 
   V.advertising = () => {
     head("advertising", null);
-    let sub = (location.hash.split("/")[1] || "campagne"); if (sub === "pubblici" || sub === "segnale") sub = "dettagli"; if (sub === "andamento") sub = "campagne";
+    let sub = (location.hash.split("/")[1] || "campagne"); if (sub === "pubblici" || sub === "segnale") sub = "dettagli"; if (sub === "andamento" || sub === "analytics") sub = "campagne";
     const pg = sub === "nuova" || ASUB.some((x) => x[0] === sub) ? sub : "campagne";
     if (pg === "nuova") $("#title").textContent = "Nuova campagna";
     const top = pg === "nuova" ? flowHead("Nuova campagna", "advertising", "Advertising") : `<div class="seg" role="tablist">${ASUB.map(([id, t]) => `<button type="button" role="tab" data-go="advertising/${id}" aria-selected="${pg === id}">${t}</button>`).join("")}</div>`;
@@ -2922,24 +3123,26 @@ window.MENU = {
     const T = ADS.today, mul = per === "Stasera" ? 1 : per === "7 giorni" ? 4.1 : 17.3, f = (n) => Math.round(n * mul);
     const pv = M.previsione(AD.mese), az = M.pilota(statoPilota()), mxS = Math.max(...ADS.days.map((d) => d[1]));
     const bars = ADS.days.map(([b, sp], k) => `<div class="bc"><span class="bb" style="height:${(sp / mxS * 100).toFixed(0)}%"><i style="height:${Math.min(100, b / sp * 240).toFixed(0)}%"></i></span><small>${["L", "M", "M", "G", "V", "S", "D"][k]}</small></div>`).join("");
-    return { html: `${vista === "analytics" ? `      <div class="adtop"><div class="chips">${["Stasera", "7 giorni", "30 giorni"].map((x) => `<button type="button" data-per="${x}" aria-pressed="${per === x}">${x}</button>`).join("")}</div><span class="live"><i></i>In diretta</span></div>
+    return { html: `      <div class="sim card"><div class="simh"><div><p class="gl" style="padding:0">Quanto vuoi spendere al mese</p><div class="simv"><span id="mese">${euro(AD.mese, 0)}</span><small>${euro(AD.mese / 30, 0)} al giorno</small></div></div><span class="live"><i></i>Pilota ${AD.pilota ? "acceso" : "spento"}</span></div>
+        <input type="range" min="150" max="3000" step="50" value="${AD.mese}" id="mese-r" aria-label="Budget al mese">
+        <div class="simk" id="simk"></div>
+        
+        <p class="gl" style="padding:0;margin-top:1.2rem">Dove vanno i soldi oggi</p><div id="simd">${distrib(pv.righe)}</div></div>
+      <div class="adgrid two"><div class="card"><h2>Il pilota <small>${az.filter((a) => !a.auto).length ? "Ti chiede una conferma" : "Tutto sotto controllo"}</small></h2><div class="acts">${az.map((a, n) => a.auto ? "" : `<div class="pa ask" data-a="${n}"><span class="ai">${sv({ pausa: I.pause, aumenta: I.up, riduci: I.down, creativita: I.refresh, spinta: I.bolt }[a.tipo])}</span><div><b>${esc(a.su)}</b><p>${esc(a.perche)}</p></div><span class="ab"><button class="btn sm" type="button" data-ok>Sì</button><button class="btn ghost sm" type="button" data-no>No</button></span></div>`).join("") || '<p class="hint" style="margin:0">Niente da decidere. Se serve, ti scrive una notifica.</p>'}</div>
+          ${az.some((a) => a.auto) ? `<details class="fold done0"><summary><span>Fatto da solo oggi · ${az.filter((a) => a.auto).length}</span></summary><div class="acts">${az.map((a, n) => !a.auto ? "" : `<div class="pa auto" data-a="${n}"><span class="ai">${sv({ pausa: I.pause, aumenta: I.up, riduci: I.down, creativita: I.refresh, spinta: I.bolt }[a.tipo])}</span><div><b>${esc(a.su)}</b><p>${esc(a.perche)}</p></div><button class="mini" type="button" data-undo>Annulla</button></div>`).join("")}</div></details>` : ""}</div></div>
+      <div class="card"><h2>Campagne attive <small>${ADS.camps.filter((c) => c.on).length} accese · accendi, spegni, cambia il budget</small></h2><div class="camps">
+        <div class="cr chd"><span>Campagna</span><span>Budget/giorno</span><span>Spesa</span><span>Tavoli</span><span>€ a tavolo</span><span>Andamento</span></div>
+        ${ADS.camps.map((c, k) => `<div class="cr ${c.on ? "" : "off"}"><span class="cn"><label class="sw0"><input type="checkbox" data-on="${k}" ${c.on ? "checked" : ""} aria-label="Attiva"></label><span><b>${esc(c.n)}</b><small class="src ${c.ch === "Meta" ? "m" : "g"}">${c.ch}</small></span></span><span class="cb">€ <input type="number" min="0" value="${c.bud}" data-bud="${k}" aria-label="Budget al giorno"></span><span data-l="Spesa">${euro(f(c.spend), 0)}</span><span data-l="Tavoli">${f(c.book)}</span><span data-l="€ a tavolo">${c.book ? euro(c.spend / c.book) : "-"}</span><span>${spark(c.trend)}</span></div>`).join("")}
+      </div><button class="add" type="button" data-go="advertising/nuova" style="margin-top:1rem">+ Nuova campagna</button></div>
+      <h2 class="h2 adsec">Andamento</h2>
+      <div class="adtop"><div class="chips">${["Stasera", "7 giorni", "30 giorni"].map((x) => `<button type="button" data-per="${x}" aria-pressed="${per === x}">${x}</button>`).join("")}</div><span class="live"><i></i>In diretta</span></div>
       <div class="kpis">
         <div class="kpi"><span class="k">Tavoli dalla pubblicità</span><span class="v y" id="kbook">${f(T.book)}</span><span class="s">su ${f(61)} prenotazioni</span></div>
         <div class="kpi"><span class="k">Spesa</span><span class="v">${euro(f(41), 0)}</span><span class="s">Meta</span></div>
         <div class="kpi"><span class="k">Costo a tavolo</span><span class="v">€${T.cpb}</span><span class="s"><b class="up">−63%</b> da quando c'è il motore</span></div>
       </div>
 <div class="adgrid"><div class="card"><h2>Stasera, in diretta <small>Ogni tavolo con la sua provenienza</small></h2><div class="feed" id="feed">${ADS.feed.slice(0, 4).map(([t, w, src, c]) => `<div class="fr"><time>${t}</time><b>${esc(w)}</b><span class="src ${c}">${esc(src)}</span></div>`).join("")}</div>
-          <h2 style="margin-top:1.4rem">Ultimi sette giorni <small><i class="lg sp"></i> spesa · <i class="lg lgb"></i> tavoli</small></h2><div class="bars">${bars}</div></div>
-        <div class="card"><h2>Dove vanno i soldi oggi <small>Divisi tra i pubblici dal motore</small></h2><div id="simd">${distrib(pv.righe)}</div></div></div>` : `      <div class="sim card"><div class="simh"><div><p class="gl" style="padding:0">Quanto vuoi spendere al mese</p><div class="simv"><span id="mese">${euro(AD.mese, 0)}</span><small>${euro(AD.mese / 30, 0)} al giorno</small></div></div><span class="live"><i></i>Pilota ${AD.pilota ? "acceso" : "spento"}</span></div>
-        <input type="range" min="150" max="3000" step="50" value="${AD.mese}" id="mese-r" aria-label="Budget al mese">
-        <div class="simk" id="simk"></div>
-        </div>
-      <div class="adgrid two"><div class="card"><h2>Il pilota <small>${az.filter((a) => !a.auto).length ? "Ti chiede una conferma" : "Tutto sotto controllo"}</small></h2><div class="acts">${az.map((a, n) => a.auto ? "" : `<div class="pa ask" data-a="${n}"><span class="ai">${sv({ pausa: I.pause, aumenta: I.up, riduci: I.down, creativita: I.refresh, spinta: I.bolt }[a.tipo])}</span><div><b>${esc(a.su)}</b><p>${esc(a.perche)}</p></div><span class="ab"><button class="btn sm" type="button" data-ok>Sì</button><button class="btn ghost sm" type="button" data-no>No</button></span></div>`).join("") || '<p class="hint" style="margin:0">Niente da decidere. Se serve, ti scrive una notifica.</p>'}</div>
-          ${az.some((a) => a.auto) ? `<details class="fold done0"><summary><span>Fatto da solo oggi · ${az.filter((a) => a.auto).length}</span></summary><div class="acts">${az.map((a, n) => !a.auto ? "" : `<div class="pa auto" data-a="${n}"><span class="ai">${sv({ pausa: I.pause, aumenta: I.up, riduci: I.down, creativita: I.refresh, spinta: I.bolt }[a.tipo])}</span><div><b>${esc(a.su)}</b><p>${esc(a.perche)}</p></div><button class="mini" type="button" data-undo>Annulla</button></div>`).join("")}</div></details>` : ""}</div></div>
-      <div class="card"><h2>Campagne attive <small>${ADS.camps.filter((c) => c.on).length} accese · accendi, spegni, cambia il budget</small></h2><div class="camps">
-        <div class="cr chd"><span>Campagna</span><span>Budget/giorno</span><span>Spesa</span><span>Tavoli</span><span>€ a tavolo</span><span>Andamento</span></div>
-        ${ADS.camps.map((c, k) => `<div class="cr ${c.on ? "" : "off"}"><span class="cn"><label class="sw0"><input type="checkbox" data-on="${k}" ${c.on ? "checked" : ""} aria-label="Attiva"></label><span><b>${esc(c.n)}</b><small class="src ${c.ch === "Meta" ? "m" : "g"}">${c.ch}</small></span></span><span class="cb">€ <input type="number" min="0" value="${c.bud}" data-bud="${k}" aria-label="Budget al giorno"></span><span data-l="Spesa">${euro(f(c.spend), 0)}</span><span data-l="Tavoli">${f(c.book)}</span><span data-l="€ a tavolo">${c.book ? euro(c.spend / c.book) : "-"}</span><span>${spark(c.trend)}</span></div>`).join("")}
-      </div><button class="add" type="button" data-go="advertising/nuova" style="margin-top:1rem">+ Nuova campagna</button></div>`}`,
+          </div><div class="card"><h2>Ultimi sette giorni <small><i class="lg sp"></i> spesa · <i class="lg lgb"></i> tavoli</small></h2><div class="bars">${bars}</div></div></div></div>`,
       after: (root) => {
         const sim = () => { const p = M.previsione(AD.mese); if (!$("#mese")) { const d = $("#simd"); if (d) d.innerHTML = distrib(p.righe); return; } $("#mese").textContent = euro(AD.mese, 0); $("#mese").nextElementSibling.textContent = euro(AD.mese / 30, 0) + " al giorno";
           $("#simk").innerHTML = `<div><span class="v y">${p.prenMese}</span><small>tavoli previsti al mese</small></div><div><span class="v">${euro(p.cpb)}</span><small>a tavolo</small></div><div><span class="v up">−${Math.round(p.risparmio * 100)}%</span><small>rispetto a una sponsorizzata normale</small></div>`;
@@ -3133,25 +3336,76 @@ window.MENU = {
   };
 
   /* ---------- oggi: cosa ordinare, cosa arriva, cosa si vende ---------- */
+  /* ---------- Segnala: quando la persona sa meglio del sistema ----------
+     Finito, buttato (andato a male, rotto, regalato, portato via, non battuto in cassa) o "riordina comunque".
+     Aggiorna la giacenza, finisce negli ordini, manda una notifica. Il motivo è facoltativo. */
+  const IC_SEG = '<path d="M12 3l9.5 16.5h-19z"/><path d="M12 10v4.5M12 17.5h.01"/>';
+  const MOTIVI = ["Andato a male", "Rotto o caduto", "Regalato", "Portato via", "Non battuto in cassa", "Altro"];
+  function apriSegnala(pre) {
+    let a = pre ? MAG.A.find((x) => x.id === pre) : null, cosa = "", conf = 1, motivo = "", q = "";
+    const ov = document.createElement("div"); ov.className = "sgx"; document.body.appendChild(ov);
+    const chiudi = () => { ov.remove(); removeEventListener("keydown", kh); }, kh = (e) => { if (e.key === "Escape") chiudi(); };
+    addEventListener("keydown", kh);
+    const draw = () => {
+      if (!a) { const qq = MZ.norm(q), L = MAG.A.filter((x) => !qq || MZ.norm(x.nome + " " + x.categoria).includes(qq)), cats = [...new Set(L.map((x) => x.categoria))];
+        ov.innerHTML = `<div class="sgp" role="dialog" aria-label="Segnala un prodotto"><div class="sgh"><b>Cosa è successo?</b><button class="x" type="button" data-x aria-label="Chiudi">${sv(I.x)}</button></div><p class="sgs">Scegli il prodotto</p>
+          <label class="csearch">${sv('<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>')}<input type="search" id="sgq" placeholder="Cerca: hamburger, IPA, lime…" value="${esc(q)}" autocomplete="off"></label>
+          <div class="sgl">${cats.map((c) => `<p class="agh">${catIc(c, "xs")}<span>${esc(c)}</span></p><div class="sgg">${L.filter((x) => x.categoria === c).map((x) => `<button type="button" class="sgi" data-a="${x.id}"><b>${esc(x.nome)}</b><small>${FMT(x, x.giacenza)}</small></button>`).join("")}</div>`).join("") || '<p class="empty">Nessun prodotto con questo nome.</p>'}</div></div>`;
+        const i = $("#sgq", ov); i.focus(); i.setSelectionRange(i.value.length, i.value.length); i.oninput = () => { q = i.value; draw(); };
+        return; }
+      const st = statoArt(a), passo = a.unita === "pz" ? 1 : a.lotto >= 1000 ? 100 : Math.max(10, a.lotto / 10), qt = Math.min(a.giacenza, conf * passo), dopo = cosa === "finito" ? 0 : cosa === "buttato" ? Math.max(0, a.giacenza - qt) : a.giacenza;
+      ov.innerHTML = `<div class="sgp" role="dialog" aria-label="Segnala ${esc(a.nome)}"><div class="sgh">${pre ? "" : `<button class="hbtn" type="button" data-back aria-label="Cambia prodotto">${sv(I.back)}</button>`}<b>Cosa è successo?</b><button class="x" type="button" data-x aria-label="Chiudi">${sv(I.x)}</button></div>
+        <div class="sga">${catIc(a.categoria)}<span><b>${esc(a.nome)}</b><small>Ne risultano ${FMT(a, a.giacenza)} · ${st.t.toLowerCase()}</small></span></div>
+        <div class="sgo">${[["finito", "È finito", "Non ce n'è più: lo azzero e va negli ordini", '<circle cx="12" cy="12" r="8.5"/><path d="M8 12h8"/>'], ["buttato", "Buttato o andato via", "Andato a male, rotto, regalato, portato via…", '<path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/>'], ["forza", "Riordina comunque", "Va ordinato, anche se il sistema dice che basta", '<path d="M20 11a8 8 0 0 0-14.5-4M4 4v4h4M4 13a8 8 0 0 0 14.5 4M20 20v-4h-4"/>']].map(([k, t, d, ic]) => `<button type="button" class="sgc ${cosa === k ? "on" : ""}" data-c="${k}"><span class="fi">${sv(ic)}</span><span><b>${t}</b><small>${d}</small></span></button>`).join("")}</div>
+        ${cosa === "buttato" ? `<div class="sgq"><div class="f"><label><span>Quanto</span></label><span class="step big"><button type="button" data-q="-1" aria-label="Meno">−</button><b>${FMT(a, qt)}</b><button type="button" data-q="1" aria-label="Più" ${qt >= a.giacenza ? "disabled" : ""}>+</button></span><span class="hint">Ne restano ${FMT(a, dopo)} su ${FMT(a, a.giacenza)}.</span></div>
+          <div class="f"><label><span>Perché <small>facoltativo</small></span></label><div class="chips">${MOTIVI.map((m) => `<button type="button" data-m="${m}" aria-pressed="${motivo === m}">${m}</button>`).join("")}</div></div></div>` : ""}
+        ${cosa ? `<div class="sgf"><p>${cosa === "forza" ? "Lo trovi in «Da ordinare» con la quantità per arrivare alla consegna dopo." : `Dopo: ${FMT(a, dopo)}. ${dopo < (a.minimo || 1) || cosa === "finito" ? "Va negli ordini e ti arriva una notifica." : "Le scorte si aggiornano."}`}</p><button class="btn big" type="button" data-ok>${cosa === "finito" ? "Segna come finito" : cosa === "buttato" ? "Togli dalle scorte" : "Aggiungi agli ordini"}</button></div>` : ""}</div>`;
+    };
+    ov.addEventListener("click", (e) => {
+      if (e.target === ov || e.target.closest("[data-x]")) return chiudi();
+      if (e.target.closest("[data-back]")) { a = null; cosa = ""; return draw(); }
+      const ia = e.target.closest("[data-a]"); if (ia) { a = MAG.A.find((x) => x.id === ia.dataset.a); return draw(); }
+      const c = e.target.closest("[data-c]"); if (c) { cosa = c.dataset.c; conf = 1; return draw(); }
+      const qq = e.target.closest("[data-q]"); if (qq) { conf = Math.max(1, conf + +qq.dataset.q); return draw(); }
+      const m = e.target.closest("[data-m]"); if (m) { motivo = motivo === m.dataset.m ? "" : m.dataset.m; return draw(); }
+      if (e.target.closest("[data-ok]")) {
+        const prima = { giacenza: a.giacenza, forza: a.forza, ordinato: a.ordinato }, x = a;
+        if (cosa === "finito") x.giacenza = 0; const passo = x.unita === "pz" ? 1 : x.lotto >= 1000 ? 100 : Math.max(10, x.lotto / 10), qt = Math.min(prima.giacenza, conf * passo); if (cosa === "buttato") x.giacenza = Math.max(0, x.giacenza - qt); if (cosa === "forza" || cosa === "finito") x.forza = true; x.ordinato = false;
+        const rec = { id: Date.now(), art: x.id, cosa, motivo, qta: cosa === "buttato" ? qt : cosa === "finito" ? prima.giacenza : 0, quando: new Date().toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit" }) };
+        (MAG.segnalati = MAG.segnalati || []).unshift(rec);
+        MAG.mov.unshift({ tipo: cosa === "buttato" ? "scarto" : cosa === "finito" ? "finito" : "riordina", articolo: x.id, delta: x.giacenza - prima.giacenza, rif: motivo || "segnalato a mano", quando: Date.now() });
+        const daOrd = statoArt(x).s.ordina;
+        if (daOrd) { NT.unshift({ id: rec.id, cat: "magazzino", urg: true, quando: "adesso", gruppo: "Adesso", fc: catK(x.categoria), titolo: `Da riordinare: ${x.nome}`, testo: cosa === "finito" ? "Segnato come finito" : cosa === "buttato" ? `Tolto ${FMT(x, rec.qta)}${motivo ? " · " + motivo.toLowerCase() : ""}` : "Chiesto da te", azioni: [["Ordina", "magazzino/oggi"]] }); drawBadge(); }
+        setDirty(1); chiudi(); render();
+        toastA(cosa === "forza" ? `${x.nome}: aggiunto agli ordini.` : `${x.nome}: ${cosa === "finito" ? "segnato come finito" : "scorte aggiornate"}${daOrd ? ", va ordinato" : ""}.`, "Annulla", () => { Object.assign(x, prima); MAG.segnalati = MAG.segnalati.filter((r) => r.id !== rec.id); const k = NT.findIndex((n) => n.id === rec.id); if (k >= 0) NT.splice(k, 1); drawBadge(); setDirty(1); render(); });
+      }
+    });
+    draw();
+  }
+
   function mOggi() {
     const ord = MZ.riordino(MAG.A, MAG.F, new Date(), MAG.coperture), val = MAG.A.reduce((t, a) => t + a.giacenza * a.costoLotto / a.lotto, 0);
     const daFare = MAG.P.filter((p) => p.stato !== "confermata").length, fc = MAG.P.filter((p) => p.ricetta.length && p.prezzo).map((p) => MZ.costoRicetta(p, MAG.A, MAG.margine).foodCost);
     const card = (o) => `<div class="ord ${o.urgente ? "urg" : ""}" data-f="${o.fornitore.id}"><div class="oh">${catIc(o.fornitore.cat)}<div><b>${esc(o.fornitore.nome)}</b><small>${o.urgente ? "Urgente · " : ""}consegna ${prossima(o.fornitore)} · si ordina ${o.fornitore.come === "Di persona" ? "di persona" : "con " + o.fornitore.come}</small></div><span class="ot">≈ €${Math.round(o.totale)}</span></div>
-      ${o.righe.map((r) => `<div class="orr"><span><b>${esc(r.articolo.nome)}</b><small>restano ${FMT(r.articolo, r.articolo.giacenza)} · ${giorniTxt(r.giorni)}</small></span><span class="step"><button type="button" data-q="-1" data-a="${r.articolo.id}" aria-label="Meno">−</button><b data-n="${r.articolo.id}">${Math.round(r.qta / r.articolo.lotto)}</b><button type="button" data-q="1" data-a="${r.articolo.id}" aria-label="Più">+</button></span><small class="fmt">${esc(r.articolo.formato)}</small></div>`).join("")}
+      ${o.righe.map((r) => `<div class="orr"><span><b>${esc(r.articolo.nome)}</b><small>restano ${FMT(r.articolo, r.articolo.giacenza)} · ${giorniTxt(r.giorni)}${r.articolo.forza ? '<span class="forza0">chiesto da te</span>' : ""}</small></span><span class="step"><button type="button" data-q="-1" data-a="${r.articolo.id}" aria-label="Meno">−</button><b data-n="${r.articolo.id}">${Math.round(r.qta / r.articolo.lotto)}</b><button type="button" data-q="1" data-a="${r.articolo.id}" aria-label="Più">+</button></span><small class="fmt">${esc(r.articolo.formato)}</small></div>`).join("")}
       ${o.fornitore.minimo && o.totale < o.fornitore.minimo ? `<p class="omin">Ordine minimo €${o.fornitore.minimo}: aggiungi qualcosa o aspetta il prossimo giro.</p>` : ""}
       <div class="oa">${o.fornitore.come === "WhatsApp" ? '<button class="btn sm cut" type="button" data-wa>Manda su WhatsApp</button>' : o.fornitore.come === "Telefono" ? '<button class="btn sm cut" type="button" data-tel>Chiama</button>' : o.fornitore.come === "Email" ? '<button class="btn sm cut" type="button" data-mail>Manda email</button>' : '<button class="btn sm cut" type="button" data-copy>Copia la lista</button>'}<button class="btn ghost sm cut" type="button" data-fatto>Segna come ordinato</button></div></div>`;
+    const segn = (MAG.segnalati || []).slice(0, 3);
     return { html: `
+      <button type="button" class="segb" data-segnala><span class="si0">${sv(IC_SEG)}</span><span><b>Segnala un prodotto</b><small>Finito, andato a male, regalato, non battuto in cassa, o da riordinare comunque</small></span><span class="btn go">Segnala</span></button>
+      ${segn.length ? `<div class="segl"><p class="agh">${sv(I.check)}<span>Segnalato oggi</span></p>${segn.map((r) => { const x = MAG.A.find((y) => y.id === r.art); return x ? `<div class="segr">${catIc(x.categoria, "xs")}<span><b>${esc(x.nome)}</b> <small>· ${r.cosa === "finito" ? "finito" : r.cosa === "buttato" ? "tolto " + FMT(x, r.qta) + (r.motivo ? ", " + r.motivo.toLowerCase() : "") : "da riordinare"}</small></span><small>${r.quando}</small></div>` : ""; }).join("")}</div>` : ""}
       <div class="kpis"><div class="kpi"><span class="k">Da ordinare</span><span class="v ${ord.length ? "y" : ""}">${ord.reduce((t, o) => t + o.righe.length, 0)}</span><span class="s">articoli da ${ord.length} fornitori</span></div><div class="kpi"><span class="k">Valore in magazzino</span><span class="v">€${Math.round(val).toLocaleString("it-IT")}</span><span class="s">a prezzo d'acquisto</span></div><div class="kpi"><span class="k">Food cost medio</span><span class="v">${fc.length ? Math.round(fc.reduce((a, b) => a + b, 0) / fc.length * 100) : 0}%</span><span class="s">costo ingredienti sul prezzo</span></div><div class="kpi"><span class="k">Ricette da sistemare</span><span class="v">${daFare}</span><span class="s"><button class="mini" data-go="magazzino/ricette">Sistemale →</button></span></div></div>
       <div class="mgrid2"><div><h2 class="h2">Da ordinare <small>Calcolato su quanto vendi e su quando consegna ogni fornitore</small></h2>${ord.length ? ord.map(card).join("") : '<div class="empty card">Niente da ordinare. Tutto coperto fino alle prossime consegne.</div>'}
         ${MAG.ordini.length ? `<h2 class="h2" style="margin-top:1.6rem">In arrivo</h2>${MAG.ordini.map((o, n) => `<div class="arr"><span><b>${esc(o.fornitore)}</b><small>${o.righe} articoli · ordinato ${o.quando} · arriva ${o.arriva}</small></span><button class="btn sm cut" type="button" data-arr="${n}">È arrivato</button></div>`).join("")}` : ""}</div>
         <div><details class="fold" ${mob() ? "" : "open"}><summary><span>Stasera da iPratico</span><span class="live"><i></i>in diretta</span></summary><div class="card sales" id="sales"><p class="hint" style="color:var(--dim)">Ogni volta che la cassa batte un prodotto, il magazzino scala gli ingredienti della ricetta.</p></div></details>
           <h2 class="h2" style="margin-top:1.6rem">Sta finendo</h2><div class="card">${MAG.A.map((a) => ({ a, s: MZ.stato(a, fornitoreDi(a.fornitore), new Date(), MAG.coperture[a.categoria]) })).sort((x, y) => x.s.giorni - y.s.giorni).slice(0, 7).map(({ a, s }) => `<button class="lvl lvi" type="button" data-go="magazzino/articoli/${a.id}">${catIc(a.categoria, "sm")}<span><b>${esc(a.nome)}</b><small>${FMT(a, a.giacenza)} · ${giorniTxt(s.giorni)}</small></span><span class="bar"><i style="width:${Math.max(6, Math.min(1, s.giorni / 10) * 100)}%;background:${s.giorni < 2 ? "var(--red)" : s.giorni < 4 ? "var(--warn)" : "var(--ok)"}"></i></span></button>`).join("")}</div></div></div>`,
       after: (root) => {
+        $("[data-segnala]", root).addEventListener("click", () => apriSegnala());
         const qOf = (id) => +$(`[data-n="${id}"]`, root).textContent;
         $$("[data-q]", root).forEach((b) => b.addEventListener("click", () => { const n = $(`[data-n="${b.dataset.a}"]`, root); n.textContent = Math.max(0, +n.textContent + +b.dataset.q); }));
         $$(".ord", root).forEach((c) => {
           const o = ord.find((x) => x.fornitore.id === c.dataset.f), testo = () => MZ.messaggioOrdine({ ...o, righe: o.righe.map((r) => ({ ...r, qta: qOf(r.articolo.id) * r.articolo.lotto })).filter((r) => r.qta > 0) });
-          const fatto = () => { o.righe.forEach((r) => (MAG.A.find((a) => a.id === r.articolo.id).ordinato = true)); MAG.ordini.push({ fornitore: o.fornitore.nome, id: o.fornitore.id, righe: o.righe.length, quando: "oggi", arriva: prossima(o.fornitore) }); setDirty(1); render(); toast(`Ordine a ${o.fornitore.nome} segnato. Quando arriva, fotografa la bolla.`); };
+          const fatto = () => { o.righe.forEach((r) => { const x = MAG.A.find((a) => a.id === r.articolo.id); x.ordinato = true; x.forza = false; }); MAG.ordini.push({ fornitore: o.fornitore.nome, id: o.fornitore.id, righe: o.righe.length, quando: "oggi", arriva: prossima(o.fornitore) }); setDirty(1); render(); toast(`Ordine a ${o.fornitore.nome} segnato. Quando arriva, fotografa la bolla.`); };
           c.addEventListener("click", (e) => {
             if (e.target.closest("[data-wa]")) { open("https://wa.me/" + (o.fornitore.tel || "").replace(/\D/g, "") + "?text=" + encodeURIComponent(testo()), "_blank"); setTimeout(fatto, 400); }
             if (e.target.closest("[data-tel]")) { if (o.fornitore.tel) location.href = "tel:" + o.fornitore.tel; else toast("Manca il numero: aggiungilo nella scheda del fornitore."); }
@@ -3280,42 +3534,79 @@ window.MENU = {
   }
 
   /* ---------- scorte ---------- */
+  /* stato di un articolo detto a parole, con un colore */
+  const statoArt = (a) => { const f = fornitoreDi(a.fornitore), s = MZ.stato(a, f, new Date(), MAG.coperture[a.categoria]);
+    const k = a.giacenza <= 0 || s.giorni < 1 ? "r" : s.ordina ? "y" : "g";
+    const t = a.giacenza <= 0 ? "Finito" : s.giorni < 1 ? "Finisce oggi" : s.giorni < 2 ? "Finisce domani" : s.ordina ? (s.sotto ? "Sotto la scorta minima" : `Basta ${Math.floor(s.giorni)} giorni, non arriva alla consegna`) : s.giorni === Infinity ? "Non si consuma" : `Basta per ${Math.floor(s.giorni)} giorni`;
+    return { s, k, t, f }; };
+  const UN = (a) => a.unita === "pz" ? "pz" : a.unita;
   function mArticoli(det) {
-    const cats = ["Tutte", "Da ordinare", ...new Set(MAG.A.map((a) => a.categoria))];
-    const a = det && MAG.A.find((x) => x.id === det);
-    const list = MAG.A.filter((x) => (MAG.cat === "Tutte" || (MAG.cat === "Da ordinare" ? MZ.stato(x, fornitoreDi(x.fornitore), new Date(), MAG.coperture[x.categoria]).ordina : x.categoria === MAG.cat)) && (!MAG.filtro || MZ.norm(x.nome).includes(MZ.norm(MAG.filtro))));
-    const lista = `<div class="mlist"><div class="qrow"><label class="csearch">${sv('<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>')}<input type="search" placeholder="Cerca un articolo" value="${esc(MAG.filtro)}" id="q" aria-label="Cerca un articolo"></label><button class="btn ghost" type="button" data-go="magazzino/conta">${sv('<path d="M9 5h10M9 12h10M9 19h10M4.5 5l.8.8L6.8 4.3M4.5 12l.8.8 1.5-1.5M4.5 19l.8.8 1.5-1.5"/>')}Conta</button></div><div class="chips scroll mkcats">${cats.map((c) => `<button type="button" data-cat="${c}" aria-pressed="${MAG.cat === c}">${c === "Tutte" || c === "Da ordinare" ? "" : catIc(c, "xs")}${c}</button>`).join("")}</div>
-      ${list.map((x) => { const s = MZ.stato(x, fornitoreDi(x.fornitore), new Date(), MAG.coperture[x.categoria]); return `<button class="lvl item2 ${a && a.id === x.id ? "on" : ""}" type="button" data-go="magazzino/articoli/${x.id}">${catIc(x.categoria, "sm")}<span><b>${esc(x.nome)}</b><small>${FMT(x, x.giacenza)} · ${giorniTxt(s.giorni)}${x.ordinato ? " · ordinato" : ""}</small></span><span class="bar"><i style="width:${Math.max(6, Math.min(1, s.giorni / 10) * 100)}%;background:${s.giorni < 2 ? "var(--red)" : s.giorni < 4 ? "var(--warn)" : "var(--ok)"}"></i></span></button>`; }).join("") || '<p class="empty">Nessun articolo.</p>'}
-      <button class="add" type="button" id="nuovo-a">+ Nuovo articolo</button></div>`;
-    const usi = a ? MAG.P.filter((p) => p.ricetta.some((r) => r.articolo === a.id)) : [];
-    const scheda = a ? `<div class="form" id="form"><div class="card"><h2>${esc(a.nome)} <small>${esc(a.categoria)}</small></h2>
-      <div class="big3"><div><span class="k">In magazzino</span><span class="v">${FMT(a, a.giacenza)}</span></div><div><span class="k">Consumo medio</span><span class="v">${FMT(a, a.consumoGiorno)}<small>/giorno</small></span></div><div><span class="k">Dura</span><span class="v">${giorniTxt(MZ.stato(a, fornitoreDi(a.fornitore), new Date(), MAG.coperture[a.categoria]).giorni)}</span></div></div>
-      <div class="row" style="margin-top:1rem"><div class="f"><label><span>Nome</span></label><input type="text" value="${esc(a.nome)}" data-k="nome"></div><div class="f"><label><span>Come lo contiamo</span></label><select data-k="unita"><option value="pz" ${a.unita === "pz" ? "selected" : ""}>A pezzi o porzioni</option><option value="g" ${a.unita === "g" ? "selected" : ""}>A peso (grammi)</option><option value="ml" ${a.unita === "ml" ? "selected" : ""}>A volume (millilitri)</option></select></div></div></div>
-      <div class="card"><h2>Quando riordinare <small>Il sistema avvisa quando non basta fino alla consegna dopo</small></h2><div class="row three"><div class="f"><label><span>Scorta minima</span></label><input type="number" value="${a.unita === "pz" ? a.minimo : a.minimo / 1000}" data-k="minimo" step="any"><span class="hint">${a.unita === "pz" ? "pezzi" : a.unita === "g" ? "kg" : "litri"}: sotto, avviso sempre</span></div><div class="f"><label><span>Arriva in</span></label><input type="text" value="${esc(a.formato)}" data-k="formato"><span class="hint">una confezione = ${FMT(a, a.lotto)}</span></div><div class="f"><label><span>Costo della confezione</span></label><input type="number" value="${a.costoLotto}" data-k="costoLotto" step=".01"><span class="hint">si aggiorna da solo con le fatture</span></div></div>
-        <div class="row" style="margin-top:1rem"><div class="f"><label><span>Fornitore</span></label><select data-k="fornitore">${MAG.F.map((f) => `<option value="${f.id}" ${f.id === a.fornitore ? "selected" : ""}>${esc(f.nome)}</option>`).join("")}</select></div><div class="f"><label><span>Rettifica la giacenza</span></label><span class="step big"><button type="button" data-g="-1">−</button><b>${FMT(a, a.giacenza)}</b><button type="button" data-g="1">+</button></span><span class="hint">± una confezione. Per contare tutto: <button class="mini" type="button" data-go="magazzino/conta">Conta il magazzino</button></span></div></div></div>
-      <div class="card"><h2>Dove si usa <small>${usi.length} prodotti del menu</small></h2><div class="chips">${usi.map((p) => `<button type="button" data-go="magazzino/ricette/${p.id}">${esc(p.nome)} · ${FMT(a, p.ricetta.find((r) => r.articolo === a.id).qta)}</button>`).join("") || '<span class="hint">Ancora in nessuna ricetta.</span>'}</div>
-        ${a.alias.length ? `<p class="hint" style="margin-top:.8rem;color:var(--dim)">Sulle fatture lo riconosciamo anche come: ${a.alias.map(esc).join(" · ")}</p>` : ""}</div></div>` : `<div class="empty card">Scegli un articolo per vedere quanto ne resta, quando riordinarlo e in quali ricette va.</div>`;
+    const cats = [...new Set(MAG.A.map((a) => a.categoria))], a = det && MAG.A.find((x) => x.id === det);
+    if (MAG.cat === undefined || (MAG.cat !== "Tutte" && MAG.cat !== "Da ordinare" && !cats.includes(MAG.cat))) MAG.cat = "Tutte";
+    const daOrd = MAG.A.filter((x) => statoArt(x).s.ordina);
+    const q = MZ.norm(MAG.filtro || ""), cat = MAG.catSel || "";
+    let list = MAG.A.filter((x) => (MAG.cat !== "Da ordinare" || statoArt(x).s.ordina) && (!cat || x.categoria === cat) && (!q || MZ.norm(x.nome + " " + x.categoria).includes(q)));
+    if (MAG.cat === "Da ordinare") list = list.sort((x, y) => statoArt(x).s.giorni - statoArt(y).s.giorni);
+    const riga = (x) => { const st = statoArt(x); return `<button class="lvl item2 art ${a && a.id === x.id ? "on" : ""}" type="button" data-go="magazzino/articoli/${x.id}"><span><b>${esc(x.nome)}</b><small><em class="sd ${st.k}"></em>${FMT(x, x.giacenza)} · ${st.t.toLowerCase()}${x.ordinato ? " · già ordinato" : ""}</small></span><span class="bar"><i style="width:${Math.max(6, Math.min(1, st.s.giorni / 10) * 100)}%" class="${st.k}"></i></span></button>`; };
+    const gruppi = MAG.cat === "Da ordinare" || q ? list.map(riga).join("") : [...new Set(list.map((x) => x.categoria))].map((c) => `<p class="agh">${catIc(c, "xs")}<span>${esc(c)}</span><em>${list.filter((x) => x.categoria === c).length}</em></p>${list.filter((x) => x.categoria === c).map(riga).join("")}`).join("");
+    const lista = `<div class="mlist"><div class="qrow"><label class="csearch">${sv('<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>')}<input type="search" placeholder="Cerca un articolo" value="${esc(MAG.filtro || "")}" id="q" aria-label="Cerca un articolo"></label><button class="btn ghost" type="button" data-go="magazzino/conta">${sv('<path d="M9 5h10M9 12h10M9 19h10M4.5 5l.8.8L6.8 4.3M4.5 12l.8.8 1.5-1.5M4.5 19l.8.8 1.5-1.5"/>')}Conta</button></div>
+      <div class="afl"><div class="sgm"><button type="button" data-cat="Tutte" aria-selected="${MAG.cat === "Tutte"}">Tutte</button><button type="button" data-cat="Da ordinare" aria-selected="${MAG.cat === "Da ordinare"}">Da ordinare${daOrd.length ? `<em class="cnt0">${daOrd.length}</em>` : ""}</button></div>
+        <button type="button" class="pickb acat" data-catp>${cat ? catIc(cat, "xs") : sv('<path d="M4 6h16M7 12h10M10 18h4"/>')}<span>${cat ? esc(cat) : "Tutte le categorie"}</span>${sv(IC_GIU, "dn")}</button></div>
+      <div class="alist">${gruppi || '<p class="empty">Nessun articolo.</p>'}</div>
+      <button class="add" type="button" id="nuovo-a">${sv(I.plus)}Nuovo articolo</button></div>`;
+    let scheda = `<div class="empty card">Scegli un articolo per vedere quanto ne resta, quando riordinarlo e in quali ricette va.</div>`;
+    if (a) {
+      const st = statoArt(a), usi = MAG.P.filter((p) => p.ricetta.some((r) => r.articolo === a.id)), consegna = st.f && st.f.consegna ? prossima(st.f) : "-";
+      const pct = Math.max(3, Math.min(100, a.giacenza / Math.max(a.minimo * 3, a.lotto, 1) * 100)), pmin = Math.min(100, a.minimo / Math.max(a.minimo * 3, a.lotto, 1) * 100);
+      scheda = `<div class="form" id="form">
+        <div class="card ahead">
+          <div class="ah1">${catIc(a.categoria)}<div><h2>${esc(a.nome)}</h2><p>${esc(a.categoria)} · da <button class="mini" type="button" data-go="magazzino/fornitori/${a.fornitore}">${esc(st.f.nome)}</button></p></div></div>
+          <div class="ast ${st.k}"><span class="sd ${st.k}"></span><b>${st.t}</b>${a.ordinato ? "<small>già ordinato</small>" : ""}</div>
+          <div class="agauge"><i class="${st.k}" style="width:${pct}%"></i><span class="amin" style="left:${pmin}%" title="Scorta minima"></span></div>
+          <div class="anums"><div><small>In magazzino</small><b>${FMT(a, a.giacenza)}</b></div><div><small>Se ne usa al giorno</small><b>${FMT(a, a.consumoGiorno)}</b></div><div><small>Prossima consegna</small><b>${esc(consegna)}</b></div></div>
+          <div class="aact"><span class="step big"><button type="button" data-g="-1" aria-label="Togli una confezione">−</button><b>${FMT(a, a.giacenza)}</b><button type="button" data-g="1" aria-label="Aggiungi una confezione">+</button></span><small>± una confezione (${esc(a.formato)})</small><button class="btn ghost" type="button" data-segnala1>${sv(IC_SEG)}Segnala</button>${st.s.ordina && !a.ordinato ? `<button class="btn" type="button" data-go="magazzino/oggi">Ordina ora</button>` : ""}</div></div>
+        <div class="card"><h2>Quando riordinare <small>Avvisa quando non basta fino alla consegna dopo</small></h2><div class="row three">
+          <div class="f"><label><span>Scorta minima</span></label><div class="inu"><input type="number" min="0" value="${a.minimo}" data-k="minimo" step="${a.unita === "pz" ? 1 : 50}"><i>${UN(a)}</i></div><span class="hint">Sotto questa quantità avvisa sempre</span></div>
+          <div class="f"><label><span>Scorta massima</span></label><div class="inu"><input type="number" min="0" value="${a.massimo || ""}" placeholder="nessun limite" data-k="massimo" step="${a.unita === "pz" ? 1 : 50}"><i>${UN(a)}</i></div><span class="hint">Quanto ci sta in frigo o in magazzino: non ordina oltre</span></div>
+        </div><div class="row three" style="margin-top:1rem">
+          <div class="f"><label><span>Arriva in</span></label><input type="text" value="${esc(a.formato)}" data-k="formato"><span class="hint">Una confezione = ${FMT(a, a.lotto)}</span></div>
+          <div class="f"><label><span>Costo della confezione</span></label><div class="inu"><input type="number" min="0" value="${a.costoLotto}" data-k="costoLotto" step=".01"><i>€</i></div><span class="hint">Si aggiorna da solo con le fatture</span></div></div>
+          <div class="row" style="margin-top:1rem"><div class="f"><label><span>Fornitore</span></label><select data-k="fornitore">${MAG.F.map((f) => `<option value="${f.id}" ${f.id === a.fornitore ? "selected" : ""}>${esc(f.nome)}</option>`).join("")}</select></div>
+          <div class="f"><label><span>Come lo contiamo</span></label><select data-k="unita"><option value="pz" ${a.unita === "pz" ? "selected" : ""}>A pezzi o porzioni</option><option value="g" ${a.unita === "g" ? "selected" : ""}>A peso (grammi)</option><option value="ml" ${a.unita === "ml" ? "selected" : ""}>A volume (millilitri)</option></select></div></div></div>
+        <div class="card"><h2>Dove si usa <small>${usi.length ? usi.length + (usi.length === 1 ? " prodotto del menu" : " prodotti del menu") : "In nessuna ricetta"}</small></h2>${usi.length ? `<div class="ause">${usi.map((p) => { const r = p.ricetta.find((x) => x.articolo === a.id), c = r.qta * a.costoLotto / a.lotto; return `<button type="button" class="ausi" data-go="magazzino/ricette/${p.id}"><b>${esc(p.nome)}</b><small>${FMT(a, r.qta)} a porzione · €${c.toFixed(2).replace(".", ",")}</small>${sv(I.chev, "ch")}</button>`; }).join("")}</div>` : '<p class="hint" style="margin:0">Collegalo a una ricetta per scalarlo da solo quando si vende.</p>'}
+          <div class="f" style="margin-top:1rem"><label><span>Nome</span></label><input type="text" value="${esc(a.nome)}" data-k="nome"></div>
+          ${a.alias.length ? `<p class="hint" style="margin-top:.8rem;color:var(--dim)">Sulle fatture lo riconosciamo anche come: ${a.alias.map(esc).join(" · ")}</p>` : ""}</div></div>`;
+    }
     return { html: `<div class="split mz ${det ? "open" : ""}">${lista}${scheda}</div>`, after: (root) => {
       $("#q", root).addEventListener("input", (e) => { MAG.filtro = e.target.value; clearTimeout(mArticoli.t); mArticoli.t = setTimeout(() => { render(); const q = $("#q"); q.focus(); q.setSelectionRange(q.value.length, q.value.length); }, 200); });
       $$("[data-cat]", root).forEach((b) => b.addEventListener("click", () => { MAG.cat = b.dataset.cat; render(); }));
-      $("#nuovo-a", root).addEventListener("click", () => { const id = "art" + Date.now(); MAG.A.unshift({ id, nome: "Nuovo articolo", categoria: "Secco e salse", unita: "pz", lotto: 1, formato: "pezzo", costoLotto: 0, fornitore: MAG.F[0].id, giacenza: 0, minimo: 0, consumoGiorno: 0, alias: [] }); setDirty(1); location.hash = "magazzino/articoli/" + id; });
+      $("[data-catp]", root).addEventListener("click", (e) => { const b = e.currentTarget; apriPop(b, `<div class="ncp"><b>Categoria</b><button type="button" class="ncf c0" data-cs="">${sv('<path d="M4 6h16M7 12h10M10 18h4"/>')}<span><b>Tutte le categorie</b></span>${!cat ? sv(I.check, "ck0") : ""}</button>${cats.map((c) => `<button type="button" class="ncf c0" data-cs="${esc(c)}">${catIc(c, "sm")}<span><b>${esc(c)}</b><small>${MAG.A.filter((x) => x.categoria === c).length} articoli</small></span>${cat === c ? sv(I.check, "ck0") : ""}</button>`).join("")}</div>`, (p) => { p.classList.add("pnc"); p.addEventListener("click", (ev) => { const c = ev.target.closest("[data-cs]"); if (!c) return; ev.stopPropagation(); MAG.catSel = c.dataset.cs; chiudiPop(); render(); }); }); });
+      $("#nuovo-a", root).addEventListener("click", () => { const id = "art" + Date.now(); MAG.A.unshift({ id, nome: "Nuovo articolo", categoria: cat || "Secco e salse", unita: "pz", lotto: 1, formato: "pezzo", costoLotto: 0, fornitore: MAG.F[0].id, giacenza: 0, minimo: 0, consumoGiorno: 0, alias: [] }); setDirty(1); location.hash = "magazzino/articoli/" + id; });
       if (!a) return;
-      $("#form").addEventListener("change", (e) => { const k = e.target.dataset.k; if (!k) return; let v = e.target.value; if (k === "minimo") v = +v * (a.unita === "pz" ? 1 : 1000); if (k === "costoLotto") v = +v; a[k] = v; setDirty(1); render(); });
+      $("#form").addEventListener("change", (e) => { const k = e.target.dataset.k; if (!k) return; let v = e.target.value; if (k === "minimo" || k === "costoLotto" || k === "massimo") v = Math.max(0, +v || 0); a[k] = v; setDirty(1); render(); });
+      $("[data-segnala1]", root)?.addEventListener("click", () => apriSegnala(a.id));
       $$("[data-g]", root).forEach((b) => b.addEventListener("click", () => { const d = +b.dataset.g * a.lotto; a.giacenza = Math.max(0, a.giacenza + d); MAG.mov.unshift({ tipo: "rettifica", articolo: a.id, delta: d, rif: "a mano", quando: Date.now() }); setDirty(1); render(); }));
     } };
   }
 
   /* ---------- ricette: cosa esce dal magazzino per ogni prodotto battuto in cassa ---------- */
+  /* food cost: verde fino all'obiettivo, giallo fino a 5 punti sopra, rosso oltre */
+  const fcK = (fc) => fc <= (MAG.obiettivo || .3) ? "g" : fc <= (MAG.obiettivo || .3) + .05 ? "y" : "r";
   function mRicette(det) {
     const p = det && MAG.P.find((x) => x.id === det), sez = [...new Set(MAG.P.map((x) => x.sezione))];
     const badge = (x) => `<span class="st ${x.stato === "confermata" ? "on" : x.stato === "stimata" ? "" : "new"}">${x.stato}</span>`;
     const lista = `<div class="mlist"><div class="note"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg><span>Le ricette sono state preparate dal menu, con dosi stimate per eccesso. Controllale una volta con la cucina e il bancone: poi il magazzino si regola da solo.</span></div>
-      ${sez.map((s) => `<p class="gl" style="padding:0;margin-top:.8rem">${s}</p>${MAG.P.filter((x) => x.sezione === s).map((x) => { const c = MZ.costoRicetta(x, MAG.A, MAG.margine); return `<button class="item ${p && p.id === x.id ? "" : ""}" type="button" data-go="magazzino/ricette/${x.id}" ${p && p.id === x.id ? 'aria-current="true"' : ""}><span class="fcb ${c.foodCost > .35 ? "hi" : ""}">${x.ricetta.length ? Math.round(c.foodCost * 100) + "%" : "-"}</span><span><b>${esc(x.nome)}</b><small>${x.ricetta.length} ingredienti${x.ipratico ? " · " + esc(x.ipratico) : " · senza codice cassa"}</small></span>${badge(x)}</button>`; }).join("")}`).join("")}</div>`;
+      ${sez.map((s) => `<p class="gl" style="padding:0;margin-top:.8rem">${s}</p>${MAG.P.filter((x) => x.sezione === s).map((x) => { const c = MZ.costoRicetta(x, MAG.A, MAG.margine); return `<button class="item ${p && p.id === x.id ? "" : ""}" type="button" data-go="magazzino/ricette/${x.id}" ${p && p.id === x.id ? 'aria-current="true"' : ""}><span class="fcb ${x.ricetta.length && x.prezzo ? "k-" + fcK(c.foodCost) : ""}">${x.ricetta.length && x.prezzo ? Math.round(c.foodCost * 100) + "%" : "-"}</span><span><b>${esc(x.nome)}</b><small>${x.ricetta.length} ingredienti${x.ipratico ? " · " + esc(x.ipratico) : " · senza codice cassa"}</small></span>${badge(x)}</button>`; }).join("")}`).join("")}</div>`;
     if (!p) return { html: `<div class="split mz">${lista}<div class="empty card">Scegli un prodotto per vedere cosa scala dal magazzino quando viene battuto in cassa, e quanto costa farlo.</div></div>` };
     const c = MZ.costoRicetta(p, MAG.A, MAG.margine);
     const unitLbl = (a) => a ? (a.unita === "pz" ? "pz" : a.unita) : "";
     const form = `<div class="form" id="form"><div class="card"><h2>${esc(p.nome)} <small>${esc(p.sezione)} · €${p.prezzo || "-"}</small></h2>
-      <div class="big3"><div><span class="k">Costo ingredienti</span><span class="v">€${c.costo.toFixed(2).replace(".", ",")}</span></div><div><span class="k">Food cost</span><span class="v ${c.foodCost > .35 ? "bad" : ""}">${Math.round(c.foodCost * 100)}%</span></div><div><span class="k">Margine</span><span class="v">€${((p.prezzo || 0) - c.costo).toFixed(2).replace(".", ",")}</span></div></div>
+      ${(() => { const ob = MAG.obiettivo || .3, k = fcK(c.foodCost), cons = c.costo / ob, righe = p.ricetta.map((r) => { const a = MAG.A.find((x) => x.id === r.articolo); return a && a.costoLotto ? { a, r, eur: r.qta * (1 + MAG.margine) * a.costoLotto / a.lotto } : null; }).filter(Boolean).sort((x, y) => y.eur - x.eur);
+        return `<div class="fc0 ${k}"><div class="fcv"><small>Food cost</small><b>${p.prezzo ? Math.round(c.foodCost * 100) + "%" : "-"}</b><span>${!p.prezzo ? "Manca il prezzo" : k === "g" ? "Dentro l'obiettivo" : k === "y" ? "Poco sopra l'obiettivo" : "Troppo alto"}</span></div>
+          <div class="fcbar"><i style="width:${Math.min(100, c.foodCost / .6 * 100)}%"></i><span class="ob" style="left:${ob / .6 * 100}%"><em>obiettivo ${Math.round(ob * 100)}%</em></span></div>
+          <div class="anums"><div><small>Costo ingredienti</small><b>€${c.costo.toFixed(2).replace(".", ",")}</b></div><div><small>Prezzo in menu</small><b>${p.prezzo ? "€" + p.prezzo : "-"}</b></div><div><small>Ti resta</small><b>€${((p.prezzo || 0) - c.costo).toFixed(2).replace(".", ",")}</b></div></div>
+          ${p.prezzo && k !== "g" ? `<p class="fcs">${sv(I.bolt)}<span>Per stare al ${Math.round(ob * 100)}% il prezzo dovrebbe essere <b>€${(Math.ceil(cons * 2) / 2).toFixed(2).replace(".", ",")}</b>, oppure riduci ${righe[0] ? esc(righe[0].a.nome.toLowerCase()) : "l'ingrediente più caro"}.</span></p>` : ""}</div>
+          ${righe.length ? `<div class="fcw"><p class="gl" style="padding:0">Dove va il costo</p>${righe.slice(0, 6).map((x) => `<div class="fcr"><span>${esc(x.a.nome)}</span><i><b style="width:${(x.eur / c.costo * 100).toFixed(0)}%"></b></i><em>€${x.eur.toFixed(2).replace(".", ",")}</em></div>`).join("")}</div>` : ""}`; })()}
       ${c.manca ? `<p class="hint" style="color:var(--warn);margin-top:.6rem">${c.manca} ingredienti senza articolo o senza costo: il calcolo è incompleto.</p>` : ""}</div>
       <div class="card"><h2>Ricetta <small>Per una porzione. Il magazzino aggiunge il ${Math.round(MAG.margine * 100)}% per gli sprechi</small></h2><div class="rec">${p.ricetta.map((r, n) => { const a = MAG.A.find((x) => x.id === r.articolo); return `<div class="rc0 ${a ? "" : "miss"}"><select data-ra="${n}" aria-label="Ingrediente"><option value="">${r.nome ? "Da collegare: " + esc(r.nome) : "Scegli l'ingrediente"}</option>${MAG.A.map((x) => `<option value="${x.id}" ${x.id === r.articolo ? "selected" : ""}>${esc(x.nome)}</option>`).join("")}</select><input type="number" step="any" min="0" value="${r.qta}" data-rq="${n}" aria-label="Quantità"><span class="u">${unitLbl(a)}</span><button class="x" type="button" data-rx="${n}" aria-label="Togli">${sv(I.x)}</button></div>`; }).join("")}</div><button class="mini" type="button" id="add-i">+ aggiungi un ingrediente</button></div>
       <div class="card"><h2>Cassa</h2><div class="row"><div class="f"><label><span>Codice su iPratico</span></label><input type="text" value="${esc(p.ipratico)}" data-k="ipratico" placeholder="es. PLU 112"><span class="hint">Serve per riconoscere la vendita. Lo prendiamo in automatico quando colleghiamo iPratico.</span></div><div class="f"><label><span>Stato</span></label><div class="chips" id="stato">${["stimata", "confermata"].map((s) => `<button type="button" aria-pressed="${p.stato === s}">${s}</button>`).join("")}</div><span class="hint">«Confermata» quando la cucina o il bancone l'hanno controllata.</span></div></div></div>
@@ -3337,7 +3628,12 @@ window.MENU = {
     const lista = `<div class="mlist">${MAG.F.map((x) => `<button class="item" type="button" data-go="magazzino/fornitori/${x.id}" ${f && f.id === x.id ? 'aria-current="true"' : ""}>${catIc(x.cat)}<span><b>${esc(x.nome)}</b><small>${esc(x.cat)} · consegna ${x.consegna.join(", ")}</small></span><span class="st">${esc(x.come)}</span></button>`).join("")}<button class="add" type="button" id="nuovo-f">+ Nuovo fornitore</button></div>`;
     if (!f) return { html: `<div class="split mz">${lista}<div class="empty card">Scegli un fornitore: contatti, giorni di consegna, come si ordina e cosa ci porta.</div></div>`, after: (r) => $("#nuovo-f", r).addEventListener("click", nuovoF) };
     const art = MAG.A.filter((a) => a.fornitore === f.id);
-    const form = `<div class="form" id="form"><div class="card"><h2>${esc(f.nome)}</h2><div class="row"><div class="f"><label><span>Nome</span></label><input type="text" value="${esc(f.nome)}" data-k="nome"></div><div class="f"><label><span>Referente</span></label><input type="text" value="${esc(f.referente)}" data-k="referente" placeholder="es. Marco"></div></div>
+    const fsum = (() => { const d = MZ.prossimaConsegna(f), g = new Date(); g.setDate(g.getDate() + d); const o = new Date(g); o.setDate(o.getDate() - (f.anticipo || 1)); const gg = (x) => ["domenica", "lunedì", "martedì", "mercoledì", "giovedì", "venerdì", "sabato"][x.getDay()];
+      const art0 = MAG.A.filter((a) => a.fornitore === f.id), mancano = art0.filter((a) => statoArt(a).s.ordina), tel = (f.tel || "").replace(/[^\d+]/g, "");
+      return `<div class="card ahead"><div class="ah1">${catIc(f.cat)}<div><h2>${esc(f.nome)}</h2><p>${esc(f.cat)} · si ordina ${f.come === "Di persona" ? "di persona" : "con " + esc(f.come)}</p></div></div>
+        <div class="anums"><div><small>Prossima consegna</small><b>${d === 1 ? "domani" : gg(g)}</b></div><div><small>Ordina entro</small><b>${f.anticipo === 0 ? "il giorno stesso" : (o.toDateString() === new Date().toDateString() ? "oggi" : gg(o)) + " alle 18"}</b></div><div><small>Da ordinare ora</small><b class="${mancano.length ? "warn0" : ""}">${mancano.length ? mancano.length + (mancano.length === 1 ? " articolo" : " articoli") : "niente"}</b></div></div>
+        <div class="aact">${tel ? `<a class="btn ghost" href="tel:${esc(tel)}">${sv('<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/>')}Chiama</a><a class="btn ghost" href="https://wa.me/${esc(tel.replace(/^\+/, ""))}" target="_blank" rel="noopener">${sv('<path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z"/>')}WhatsApp</a>` : '<small>Aggiungi il numero qui sotto per chiamarlo o scrivergli con un tocco.</small>'}${mancano.length ? `<button class="btn" type="button" data-go="magazzino/oggi">Prepara l'ordine</button>` : ""}</div></div>`; })();
+    const form = `<div class="form" id="form">${fsum}<div class="card"><h2>Contatti</h2><div class="row"><div class="f"><label><span>Nome</span></label><input type="text" value="${esc(f.nome)}" data-k="nome"></div><div class="f"><label><span>Referente</span></label><input type="text" value="${esc(f.referente)}" data-k="referente" placeholder="es. Marco"></div></div>
       <div class="row" style="margin-top:1rem"><div class="f"><label><span>Telefono o WhatsApp</span></label><input type="text" value="${esc(f.tel)}" data-k="tel" placeholder="+39 …"></div><div class="f"><label><span>Come si ordina</span></label><select data-k="come">${["WhatsApp", "Telefono", "Email", "Portale", "Di persona"].map((c) => `<option ${c === f.come ? "selected" : ""}>${c}</option>`).join("")}</select></div></div></div>
       <div class="card"><h2>Consegne <small>Il riordino si calcola su questi giorni</small></h2><div class="chips days" id="days">${["lun", "mar", "mer", "gio", "ven", "sab", "dom"].map((d) => `<button type="button" aria-pressed="${f.consegna.includes(d)}">${d}</button>`).join("")}</div>
         <div class="row" style="margin-top:1rem"><div class="f"><label><span>Ordinare con quanti giorni di anticipo</span></label><input type="number" min="0" value="${f.anticipo}" data-k="anticipo"></div><div class="f"><label><span>Ordine minimo (€)</span></label><input type="number" min="0" value="${f.minimo}" data-k="minimo"></div></div>
@@ -3371,6 +3667,7 @@ window.MENU = {
     return { html: `<div class="card"><h2>Collegamento con iPratico <small>Stato: ${MAG.ipratico.stato}</small></h2><div class="opts">
         ${[["stampante", "Stampante virtuale", "In iPratico si aggiunge una stampante comande in più: invece di stampare, manda al back office ogni comanda. In tempo reale, senza chiedere niente a iPratico."], ["api", "Collegamento diretto", "Ogni scontrino arriva al back office in tempo reale. Serve l'accesso alle API di iPratico: lo chiediamo noi."], ["csv", "Import del venduto", "Ogni notte il back office legge il report del venduto per articolo esportato da iPratico. Funziona subito, il magazzino si aggiorna una volta al giorno."], ["manuale", "Carica il file a mano", "Per provare: esporta il venduto da iPratico e trascinalo qui."]].map(([k, t, d]) => `<label class="opt ${MAG.ipratico.modo === k ? "on" : ""}"><input type="radio" name="ip" value="${k}" ${MAG.ipratico.modo === k ? "checked" : ""}><b>${t}</b><small>${d}</small></label>`).join("")}</div>
         <label class="altb" style="margin-top:1rem"><input type="file" accept=".csv,text/csv" id="csv"><b>Carica il venduto (CSV)</b><small>Abbiniamo i prodotti col codice cassa e scaliamo gli ingredienti.</small></label><div id="csv-out"></div></div>
+      <div class="card"><h2>Obiettivo di food cost <small>Sotto questa soglia la ricetta è verde, poco sopra gialla, oltre rossa</small></h2><div class="simv"><span id="obv">${Math.round((MAG.obiettivo || .3) * 100)}%</span></div><input type="range" min="15" max="45" step="1" value="${Math.round((MAG.obiettivo || .3) * 100)}" id="obr"></div>
       <div class="card"><h2>Per eccesso <small>Quanto aggiungere a ogni ricetta per sprechi e porzioni abbondanti</small></h2><div class="simv"><span id="mv">${Math.round(MAG.margine * 100)}%</span></div><input type="range" min="0" max="20" step="1" value="${Math.round(MAG.margine * 100)}" id="marg"></div>
       <div class="card"><h2>Regole di riordino <small>Quanti giorni deve coprire ogni ordine, dopo la consegna</small></h2><div class="covs">${cats.map((c) => `<div class="f"><label><span>${c}</span><span class="cnt">${MAG.coperture[c]} giorni</span></label><input type="range" min="1" max="30" value="${MAG.coperture[c]}" data-cov="${c}"></div>`).join("")}</div><p class="hint" style="color:var(--dim);margin-top:.6rem">La birra si ordina a fusti e la carne fresca va consumata presto: per questo coprono periodi diversi. Le quantità si arrotondano sempre alla confezione del fornitore.</p></div>
       <div class="card"><h2>Notifiche sul telefono <small><button class="mini" type="button" data-go="impostazioni/notifiche">Scegli quali ricevere</button></small></h2><div class="rules" hidden>${[["ordini", "Quando qualcosa è da ordinare", "«Ordina dalla Macelleria: gli hamburger finiscono domani.»"], ["arrivi", "Quando arriva una consegna", "«Oggi arriva l'Ortofrutta: fotografa la bolla.»"], ["sera", "Riepilogo a fine serata", "«Stasera 142 prodotti, food cost 27%, 3 articoli da ordinare.»"], ["prezzi", "Quando un fornitore alza i prezzi", "«Il guanciale costa l'8% in più dell'ultima volta.»"]].map(([k, t, ex]) => `<label class="sw"><span><b>${t}</b><small>${ex}</small></span><input type="checkbox" data-nt="${k}" ${MAG.notif[k] ? "checked" : ""}></label>`).join("")}</div>
@@ -3384,6 +3681,7 @@ window.MENU = {
       after: (root) => {
         $$("input[name=ip]", root).forEach((r) => r.addEventListener("change", () => { MAG.ipratico.modo = r.value; setDirty(1); render(); }));
         $("[data-sa]", root)?.addEventListener("change", (e) => { MAG.sonnetAuto = e.target.checked; setDirty(1); });
+        $("#obr").addEventListener("input", (e) => { MAG.obiettivo = +e.target.value / 100; $("#obv").textContent = e.target.value + "%"; setDirty(1); });
         $("#marg").addEventListener("input", (e) => { MAG.margine = +e.target.value / 100; $("#mv").textContent = e.target.value + "%"; setDirty(1); });
         $$("[data-cov]", root).forEach((r) => r.addEventListener("input", () => { MAG.coperture[r.dataset.cov] = +r.value; r.previousElementSibling.lastElementChild.textContent = r.value + " giorni"; setDirty(1); }));
         $$("[data-nt]", root).forEach((c) => c.addEventListener("change", () => { MAG.notif[c.dataset.nt] = c.checked; setDirty(1); }));
