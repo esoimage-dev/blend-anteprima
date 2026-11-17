@@ -10,7 +10,8 @@
   };
   /* i compiti: dove serve davvero. sonnet:true = l'interfaccia mostra l'interruttore "Più curato" */
   const COMPITI = {
-    didascalia: { nome: "Didascalia per i social", varianti: 3, max: 2200, sonnet: true, toni: ["Diretto", "Ironico", "Elegante"] },
+    didascalia: { nome: "Didascalia per i social", varianti: 3, max: 2200, sonnet: true, toni: ["Diretto", "Ironico", "Elegante"],
+      opzioni: [["emoji", "Con emoji", true], ["hashtag", "Con i nostri hashtag", false], ["indirizzo", "Con l'indirizzo", false], ["corta", "Più corta", false], ["inglese", "In inglese", false]] },
     accorcia: { nome: "Accorcia", varianti: 1, max: 125 },
     hashtag: { nome: "Hashtag", varianti: 1, max: 2200 },
     annuncio: { nome: "Testo dell'annuncio", varianti: 3, max: 125 },
@@ -60,7 +61,15 @@
       const base = { Diretto: [`${t}. ${q}${l}Prenota il tavolo dal link in bio.`, `${q}${t}. ${l}I tavoli vicino al bancone finiscono per primi.`, `${t}: ${l}${q}Ti aspettiamo in Via di Mezzocammino 141.`],
         Ironico: [`${t}. ${l}Il divano di casa può aspettare. ${q}`, `Piano per la serata: ${t}. Piano B: non serve. ${q}`, `${q}${t}. ${l}Poi non dire che non lo sapevi.`],
         Elegante: [`${t}. ${l}${q}Luci basse, bicchieri pieni.`, `${q}${l}${t}, dal tramonto a notte fonda.`, `Una sera come si deve: ${t}. ${q}`] };
-      return (base[d.tono] || base.Diretto).map((x) => x.replace(/\s+/g, " ").trim());
+      const en = { Diretto: [`${t}. Book your table, link in bio.`, `${t}: cocktails, food and live music in Rome south.`, `Tonight at Blend: ${t}. Via di Mezzocammino 141.`], Ironico: [`${t}. Your sofa can wait.`, `Plan for tonight: ${t}. Plan B: not needed.`, `${t}. Don't say we didn't tell you.`], Elegante: [`${t}. Low lights, full glasses.`, `${t}, from sunset to late night.`, `An evening done right: ${t}.`] };
+      const o = d.opzioni || {}, st = d.stile || {}, emo = [...(st.emoji || "")].filter((c) => c.trim());
+      return ((o.inglese ? en : base)[d.tono] || (o.inglese ? en : base).Diretto).map((x, n) => {
+        let y = x.replace(/\s+/g, " ").trim(); if (o.corta) y = y.split(/(?<=[.!?])\s/)[0];
+        if (o.emoji && emo.length) y = emo[n % emo.length] + " " + y;
+        if (o.indirizzo && st.indirizzo) y += "\n\n" + st.indirizzo.trim();
+        if (o.hashtag && st.hashtag) y += "\n\n" + st.hashtag.trim();
+        return y;
+      });
     },
     accorcia: (d) => [taglia((d.testo || "").split(/(?<=[.!?])\s/)[0] || d.testo || "", 125)],
     hashtag: (d) => [((d.testo || "").replace(/\s*#\S+/g, "").trim() + "\n\n#blendfoodanddrink #mezzocammino #romasud #cocktailbar" + (/jazz/i.test(d.testo + d.titolo) ? " #jazzroma" : /aperi/i.test(d.testo + d.titolo) ? " #aperitivoroma" : " #roma")).trim()],

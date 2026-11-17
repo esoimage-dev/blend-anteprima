@@ -460,7 +460,7 @@ kbd { display: inline-block; min-width: 1.4em; padding: .05rem .3rem; border-rad
 .bb { position: relative; align-self: end; width: 100%; max-width: 34px; border-radius: 3px 3px 0 0; background: var(--n3); display: flex; align-items: flex-end; }
 .bb i { display: block; width: 100%; max-height: 100%; border-radius: 3px 3px 0 0; background: var(--sign); }
 .bc small { font-size: .72rem; color: var(--dim); }
-.lg { display: inline-block; width: 9px; height: 9px; border-radius: 2px; vertical-align: -1px; margin-left: .4rem; } .lg.sp { background: var(--n3); } .lg.bk { background: var(--sign); }
+.lg { display: inline-block; width: 9px; height: 9px; border-radius: 2px; vertical-align: -1px; margin-left: .4rem; } .lg.sp { background: var(--n3); } .lg.lgb { background: var(--sign); }
 .tip { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 1rem; align-items: center; padding: 1rem 1.2rem; border-radius: 6px; background: linear-gradient(90deg, rgba(252, 198, 80, .12), rgba(252, 198, 80, .03)); border: 1px solid rgba(252, 198, 80, .3); }
 .tip .ti { font: 800 1rem/1 var(--f-sign); text-transform: uppercase; color: var(--sign-t); }
 .tip p { margin: 0; font-size: .92rem; }
@@ -1220,6 +1220,396 @@ details.fold > summary .live { font-size: .78rem; font-weight: 600; }
   .vie li { grid-template-columns: 30px minmax(0, 1fr); } .vie .stt { grid-column: 2; grid-row: auto; justify-self: start; margin-top: .3rem; }
   .via2 .btn { width: 100%; box-sizing: border-box; }
 }
+
+/* ---------- v3: candidature (archivio, scheda, mazzo) ---------- */
+.ava { width: 42px; height: 42px; flex: none; display: grid; place-items: center; border-radius: 13px; background: var(--n3); color: var(--bone); }
+.ava svg { width: 24px; height: 24px; }
+.ava-bar { color: #f2b544; background: color-mix(in srgb, #f2b544 16%, var(--n2)); } .ava-sala { color: #7fb2e5; background: color-mix(in srgb, #7fb2e5 16%, var(--n2)); }
+.ava-cucina { color: #e88a6a; background: color-mix(in srgb, #e88a6a 16%, var(--n2)); } .ava-altro { color: var(--ash); }
+:root[data-theme="light"] .ava-bar { color: #a66d00; } :root[data-theme="light"] .ava-sala { color: #2f6aa6; } :root[data-theme="light"] .ava-cucina { color: #b2492a; }
+.ava.lg { width: 56px; height: 56px; border-radius: 16px; } .ava.lg svg { width: 32px; height: 32px; }
+.ava.xl { width: 72px; height: 72px; border-radius: 20px; } .ava.xl svg { width: 42px; height: 42px; }
+.vp { display: inline-flex; align-items: center; gap: .3rem; padding: .3rem .6rem .3rem .45rem; border-radius: 99px; font: 650 .78rem/1 var(--f-ui); white-space: nowrap; }
+.vp .i { width: 14px; height: 14px; stroke-width: 2.4; }
+.vp.top { background: var(--sign); color: var(--on-sign); } .vp.buono { background: color-mix(in srgb, var(--ok) 20%, transparent); color: var(--ok); }
+.vp.forse { background: color-mix(in srgb, var(--warn) 18%, transparent); color: var(--warn); } .vp.no { background: var(--red-bg); color: var(--red-t); }
+:root[data-theme="light"] .vp.buono { color: #2c7a2a; } :root[data-theme="light"] .vp.forse { color: #9a5a00; }
+.fl { display: inline-block; padding: .2rem .45rem; border-radius: 6px; background: var(--n3); color: var(--ash); font: 650 .7rem/1.1 var(--f-ui); }
+.fl.new { background: var(--sign); color: var(--on-sign); } .fl.mute { background: none; border: 1px solid var(--line2); }
+.cand { display: grid; gap: 1rem; max-width: 1080px; }
+.chero { all: unset; box-sizing: border-box; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 1.4rem; padding: 1.1rem 1.3rem 1.1rem 1.1rem; border-radius: var(--r3); background: radial-gradient(140% 120% at 0% 0%, color-mix(in srgb, var(--sign) 18%, transparent), transparent 60%), var(--n1); border: 1px solid color-mix(in srgb, var(--sign) 35%, var(--line)); cursor: pointer; transition: border-color .2s, transform .15s; }
+.chero:hover { border-color: var(--sign); } .chero:hover .go { filter: brightness(1.08); } .chero:hover .fmini.m0 { rotate: -12deg; translate: -8px 0; } .chero:hover .fmini.m2 { rotate: 12deg; translate: 8px 0; }
+.chero:active { transform: scale(.99); } .chero:focus-visible { outline: 2px solid var(--sign); outline-offset: 3px; }
+.chero.quiet { cursor: default; background: var(--n1); border-color: var(--line); grid-template-columns: auto minmax(0, 1fr); }
+.chero .ht b { display: block; font: 750 1.25rem/1.25 var(--f-ui); letter-spacing: -.01em; } .chero .ht small { display: block; margin-top: .2rem; color: var(--ash); font-size: .9rem; }
+.chero .hi { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 16px; background: var(--n3); } .chero .hi.ok { background: color-mix(in srgb, var(--ok) 22%, transparent); color: var(--ok); }
+.chero .go { pointer-events: none; min-height: 48px; padding: 0 1.3rem !important; font-size: 1rem; }
+.fan { position: relative; width: 104px; height: 82px; }
+.fmini { position: absolute; top: 4px; left: 30px; width: 46px; height: 64px; border-radius: 5px; overflow: hidden; background: #fbfaf7; box-shadow: 0 6px 16px rgba(0, 0, 0, .35); transition: rotate .3s, translate .3s; display: grid; place-items: center; }
+.fmini .ppage { width: 100%; box-shadow: none; } .fmini .ava { width: 100%; height: 100%; border-radius: 0; }
+.fmini.m0 { rotate: -9deg; translate: -4px 4px; } .fmini.m1 { rotate: 0deg; } .fmini.m2 { rotate: 9deg; translate: 4px 4px; }
+.cbar { display: grid; gap: .7rem; }
+.ctabs { display: flex; gap: .35rem; overflow-x: auto; scrollbar-width: none; padding: 2px; }
+.ctabs::-webkit-scrollbar { display: none; }
+.ctabs button { all: unset; box-sizing: border-box; flex: none; display: inline-flex; align-items: center; gap: .45rem; min-height: 44px; padding: 0 .95rem; border-radius: 12px; background: var(--n1); border: 1px solid var(--line); color: var(--ash); font: 600 .9rem/1 var(--f-ui); cursor: pointer; transition: background .15s, color .15s, border-color .15s; }
+.ctabs button:hover { color: var(--bone); border-color: var(--line2); background: var(--n2); }
+.ctabs button:focus-visible { outline: 2px solid var(--sign); outline-offset: 2px; }
+.ctabs button .i { width: 16px; height: 16px; stroke-width: 2.3; }
+.ctabs .t-4 .i { color: var(--sign-t); } .ctabs .t-3 .i { color: var(--ok); } .ctabs .t-2 .i { color: var(--warn); } .ctabs .t-1 .i { color: var(--red-t); }
+.ctabs em { font-style: normal; min-width: 22px; padding: .2rem .4rem; border-radius: 99px; background: var(--n3); color: var(--bone); font-size: .76rem; text-align: center; }
+.ctabs button[aria-selected="true"] { background: var(--bone); border-color: var(--bone); color: var(--night); }
+.ctabs button[aria-selected="true"] .i { color: currentColor; } .ctabs button[aria-selected="true"] em { background: rgba(0, 0, 0, .14); color: inherit; }
+.ctools { display: grid; grid-template-columns: minmax(220px, 320px) minmax(0, 1fr); gap: .7rem; align-items: center; }
+.csearch { display: flex; align-items: center; gap: .5rem; min-height: 44px; padding: 0 .8rem; border-radius: var(--r1); background: var(--n1); border: 1px solid var(--line2); color: var(--ash); }
+.csearch:focus-within { border-color: var(--sign); } .csearch input { all: unset; flex: 1; min-width: 0; color: var(--bone); font: 400 .95rem/1 var(--f-ui); } .csearch .i { width: 18px; height: 18px; }
+.croles { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; } .croles::-webkit-scrollbar { display: none; }
+.croles button { flex: none; display: inline-flex; align-items: center; gap: .4rem; } .croles em { font-style: normal; font-size: .76rem; opacity: .65; } .croles button[disabled] { opacity: .4; cursor: default; }
+.clist2 { display: grid; gap: .45rem; }
+.carow { all: unset; box-sizing: border-box; display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, .8fr) auto; gap: 1rem; align-items: center; padding: .75rem 1rem .75rem .8rem; border-radius: var(--r2); background: var(--n1); border: 1px solid var(--line); cursor: pointer; transition: border-color .15s, background .15s, transform .1s; }
+.carow:hover { border-color: var(--line2); background: var(--n2); } .carow:hover .ch { color: var(--bone); translate: 3px 0; }
+.carow:active { transform: scale(.99); } .carow:focus-visible { outline: 2px solid var(--sign); outline-offset: 2px; }
+.carow .cwho b { display: block; font-weight: 650; font-size: 1rem; } .carow .cwho small { display: block; color: var(--ash); font-size: .84rem; margin-top: .1rem; }
+.carow .fls { display: flex; gap: .3rem; flex-wrap: wrap; margin-top: .35rem; }
+.carow .dsp { color: var(--ash); font-size: .86rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.carow .end { display: flex; align-items: center; gap: .6rem; } .carow .ch { color: var(--dim); transition: translate .15s, color .15s; }
+.carow.v1 { opacity: .72; } .carow.v1:hover { opacity: 1; }
+/* scheda */
+.prof { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(340px, .85fr); grid-template-rows: auto 1fr; gap: 1rem 1.6rem; align-items: start; max-width: 1320px; padding-bottom: 1rem; }
+.ptop { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.pnav { display: flex; align-items: center; gap: .3rem; color: var(--ash); font-size: .88rem; } .pnav .hbtn[disabled] { opacity: .3; cursor: default; }
+.pcv { position: sticky; top: 84px; border-radius: var(--r2); overflow: hidden; border: 1px solid var(--line); background: var(--n1); }
+.pcvbar { display: flex; align-items: center; gap: .6rem; padding: .5rem .6rem .5rem .8rem; border-bottom: 1px solid var(--line); }
+.pcvbar .ic { width: 30px; height: 36px; display: grid; place-items: center; border-radius: 4px; background: var(--red-bg); color: var(--red-t); font: 800 .6rem/1 var(--f-ui); flex: none; }
+.pcvbar b { font-weight: 600; font-size: .9rem; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } .pcvbar small { color: var(--ash); font-size: .78rem; white-space: nowrap; } .pcvbar .sp { flex: 1; }
+.pscroll { height: calc(100vh - 250px); min-height: 460px; overflow: auto; padding: 1.4rem; background: #2a2622; }
+.ppages { display: grid; gap: 1.2rem; width: calc(100% * var(--z)); margin: 0 auto; transition: width .2s; }
+.ppages .ppage { width: 100%; }
+.nocv { display: grid; justify-items: center; align-content: center; gap: .5rem; min-height: 100%; padding: 2rem 1.4rem; text-align: center; color: #f1ece4; }
+.nocv b { font: 700 1.15rem/1.2 var(--f-ui); } .nocv small { color: rgba(241, 236, 228, .65); }
+.nocv blockquote { margin: .8rem 0 0; max-width: 40ch; font-size: .95rem; line-height: 1.5; color: rgba(241, 236, 228, .88); }
+.pside { display: grid; gap: .9rem; }
+.phero { display: flex; align-items: center; gap: 1rem; } .phero h2 { margin: 0; font: 800 1.6rem/1.1 var(--f-ui); letter-spacing: -.02em; } .phero p { margin: .25rem 0 .35rem; color: var(--ash); }
+.pquick { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: .5rem; }
+.pq { display: grid; justify-items: center; gap: .3rem; padding: .75rem .5rem; border-radius: var(--r2); background: var(--n1); border: 1px solid var(--line); color: var(--bone); text-decoration: none; font: 600 .84rem/1 var(--f-ui); transition: border-color .15s, background .15s; }
+.pq:hover { border-color: var(--sign); background: var(--n2); } .pq .i { width: 22px; height: 22px; color: var(--sign-t); }
+.psec { padding: 1rem 1.05rem; border-radius: var(--r2); background: var(--n1); border: 1px solid var(--line); }
+.psec h4 { display: flex; align-items: baseline; gap: .5rem; margin: 0 0 .7rem; font: 650 .95rem/1.2 var(--f-ui); } .psec h4 small { color: var(--ash); font-weight: 400; font-size: .8rem; }
+.saved0 { margin-left: auto; color: var(--ok); font-size: .78rem; font-weight: 600; }
+.psec blockquote { margin: 0; padding-left: .8rem; border-left: 3px solid var(--sign); font-size: .95rem; line-height: 1.5; }
+.pdisp { display: flex; align-items: center; gap: .45rem; margin: .8rem 0 0; color: var(--ash); font-size: .88rem; } .pdisp .i { width: 17px; height: 17px; }
+.psec textarea { width: 100%; box-sizing: border-box; min-height: 84px; padding: .75rem .85rem; border-radius: var(--r1); background: var(--night); border: 1px solid var(--line2); color: var(--bone); font: 400 .95rem/1.45 var(--f-ui); resize: vertical; }
+.psec textarea:focus { outline: none; border-color: var(--sign); }
+.psec .compose .foot { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: .6rem; } .psec .compose .hint { font-size: .78rem; color: var(--dim); }
+.psec .tpl { margin-bottom: .6rem; }
+.pdet summary { cursor: pointer; font: 650 .95rem/1.2 var(--f-ui); list-style: none; display: flex; justify-content: space-between; } .pdet summary::-webkit-details-marker { display: none; }
+.pdet summary::after { content: "+"; color: var(--dim); } .pdet[open] summary::after { content: "−"; }
+.pdet dl { display: grid; gap: .5rem; margin: .8rem 0 1rem; } .pdet dl div { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: .5rem; font-size: .9rem; } .pdet dt { color: var(--ash); } .pdet dd { margin: 0; overflow-wrap: anywhere; }
+.pdecide { grid-column: 1 / -1; grid-row: 3; justify-self: center; position: sticky; bottom: 1.2rem; z-index: 26; display: flex; gap: .5rem; padding: .45rem; border-radius: 20px; background: var(--bar); border: 1px solid var(--line2); box-shadow: var(--sh); }
+.pd { all: unset; box-sizing: border-box; display: inline-flex; align-items: center; gap: .45rem; min-height: 48px; padding: 0 1.1rem; border-radius: 14px; color: var(--bone); font: 650 .95rem/1 var(--f-ui); cursor: pointer; transition: background .15s, color .15s, transform .1s; }
+.pd i { display: grid; place-items: center; } .pd .i { width: 20px; height: 20px; stroke-width: 2.3; }
+.pd.no i { color: var(--red-t); } .pd.forse i { color: var(--warn); } .pd.buono i { color: var(--ok); } .pd.top i { color: var(--sign-t); }
+.pd:hover { background: var(--n3); } .pd:active { transform: scale(.96); } .pd:focus-visible { outline: 2px solid var(--sign); outline-offset: 1px; }
+.pd.no[aria-pressed="true"] { background: var(--red-bg); color: var(--red-t); } .pd.forse[aria-pressed="true"] { background: color-mix(in srgb, var(--warn) 22%, transparent); }
+.pd.buono[aria-pressed="true"] { background: color-mix(in srgb, var(--ok) 24%, transparent); } .pd.top[aria-pressed="true"] { background: var(--sign); color: var(--on-sign); } .pd.top[aria-pressed="true"] i { color: inherit; }
+/* mazzo */
+.sbox { width: min(480px, 100%); }
+.stop { grid-template-columns: auto minmax(0, 1fr) auto; row-gap: .6rem; }
+.stop .stt0 { text-align: center; color: #fff; } .stop .stt0 b { display: block; font: 700 1rem/1.1 var(--f-ui); } .stop .stt0 span { font-size: .8rem; color: rgba(255, 255, 255, .6); }
+.stop .sprog { grid-column: 1 / -1; }
+.scard { display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: 0; padding: 0; overflow: hidden; background: #2a2622; border: 0; }
+.spaper { position: relative; overflow: hidden; padding: 14px 14px 0; display: grid; align-content: start; }
+.spaper .ppage { width: 100%; box-shadow: 0 6px 18px rgba(0, 0, 0, .35); pointer-events: none; }
+.spaper .nocv { padding-top: 3rem; }
+.sbars { position: absolute; left: 22px; right: 22px; top: 6px; display: flex; gap: 4px; } .sbars i { flex: 1; height: 3px; border-radius: 2px; background: rgba(255, 255, 255, .3); } .sbars i.on { background: #fff; }
+.sturn { position: absolute; top: 45%; width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; background: rgba(0, 0, 0, .45); color: #fff; opacity: 0; transition: opacity .2s; pointer-events: none; } .sturn.l { left: 8px; } .sturn.r { right: 8px; }
+.scard:hover .sturn { opacity: 1; }
+.scard.bump { animation: bump .3s; } @keyframes bump { 30% { translate: 6px 0; } 60% { translate: -4px 0; } }
+.sid { all: unset; box-sizing: border-box; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: .8rem; align-items: center; padding: .85rem 1rem; background: var(--n1); border-top: 1px solid var(--line); cursor: pointer; }
+.sid b { display: block; font: 700 1.05rem/1.2 var(--f-ui); color: var(--bone); } .sid small { display: block; color: var(--ash); font-size: .84rem; } .sid .chips0 { display: none; } .sid .ch { color: var(--dim); } .sid:hover .ch { color: var(--bone); }
+.scard[data-hint="forse"] .stamp2, .scard.out.forse .stamp2 { opacity: 1; color: var(--warn); } .scard[data-hint="forse"] .stamp2::before { content: "Forse"; }
+.scard.out.forse { transform: translateY(120%) rotate(4deg); }
+.srate { grid-template-columns: repeat(4, 1fr); }
+.srate button { border-radius: 50%; width: 64px; height: 64px; min-height: 0; justify-self: center; padding: 0; background: var(--n1); border: 1px solid var(--line2); }
+.srate button span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.srate button i .i { width: 26px; height: 26px; }
+.srate .top, .srate .buono { width: 72px; height: 72px; } .srate .forse { width: 56px; height: 56px; align-self: center; }
+.srate button:hover { transform: scale(1.06); } .srate .no:hover { border-color: var(--red); } .srate .buono:hover { border-color: var(--ok); } .srate .top:hover { border-color: var(--sign); } .srate .forse:hover { border-color: var(--warn); }
+.srate button { position: relative; }
+@media (min-width: 861px) {
+  .sbox { width: min(980px, 100%); grid-template-columns: minmax(0, 480px) 300px; justify-content: center; }
+  .srate { grid-template-columns: repeat(4, auto); justify-content: start; gap: .7rem; align-items: center; }
+  .srate button { display: grid; grid-template-columns: none; width: 64px; padding: 0; } .srate kbd { display: none; }
+}
+@media (max-width: 860px) {
+  .chero { grid-template-columns: auto minmax(0, 1fr); gap: 1rem; padding: 1rem; } .chero .go { grid-column: 1 / -1; width: 100%; } .fan { width: 84px; height: 72px; } .fmini { left: 20px; width: 40px; height: 56px; }
+  .chero .ht b { font-size: 1.1rem; }
+  .ctabs { margin: 0 -1rem; padding: 2px 1rem; } .ctools { grid-template-columns: 1fr; } .croles { margin: 0 -1rem; padding: 0 1rem; }
+  .carow { grid-template-columns: auto minmax(0, 1fr) auto; } .carow .dsp { display: none; }
+  .prof { grid-template-columns: 1fr; padding-bottom: 6rem; } .ptop .bk { display: none; } .ptop { justify-content: flex-end; } .ptop:not(:has(.pnav)) { display: none; }
+  .pcv { position: static; } .pscroll { height: auto; min-height: 0; max-height: 72vh; padding: .8rem; }
+  .pdecide { position: fixed; left: .6rem; right: .6rem; bottom: calc(70px + env(safe-area-inset-bottom, 0px)); justify-content: space-between; gap: .25rem; }
+  .pd { flex: 1; justify-content: center; flex-direction: column; gap: .2rem; min-height: 54px; padding: 0 .2rem; font-size: .76rem; }
+  .sbox { height: 100%; grid-template-rows: auto minmax(0, 1fr) auto; }
+  .srate { gap: .4rem; } .srate button { width: 58px; height: 58px; } .srate .top, .srate .buono { width: 64px; height: 64px; } .srate .forse { width: 50px; height: 50px; }
+}
+
+/* v3: ritocchi candidature */
+.carow .cwho { display: block; min-width: 0; } .carow .cwho b, .carow .cwho small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.srate button, .srate .top, .srate .buono, .srate .forse { all: unset; box-sizing: border-box; display: grid; justify-items: center; gap: .4rem; width: auto; height: auto; cursor: pointer; color: rgba(255, 255, 255, .78); font: 600 .78rem/1 var(--f-ui); }
+.srate button span { position: static; width: auto; height: auto; overflow: visible; clip: auto; }
+.srate button i { width: 62px; height: 62px; display: grid; place-items: center; border-radius: 50%; background: var(--n1); border: 1px solid var(--line2); box-shadow: 0 6px 18px rgba(0, 0, 0, .3); transition: transform .12s, border-color .15s, background .15s; }
+.srate .buono i, .srate .top i { width: 70px; height: 70px; } .srate .forse i { width: 54px; height: 54px; }
+.srate button:hover { transform: none; } .srate button:hover i { transform: scale(1.07); } .srate button:active i { transform: scale(.94); }
+.srate .no:hover i { border-color: var(--red); } .srate .buono:hover i { border-color: var(--ok); } .srate .top:hover i { border-color: var(--sign); } .srate .forse:hover i { border-color: var(--warn); }
+.srate button:focus-visible i { outline: 2px solid var(--sign); outline-offset: 2px; }
+.srate { align-items: end; justify-items: center; }
+@media (min-width: 861px) { .srate { grid-template-columns: repeat(4, auto); justify-content: start; gap: 1rem; } .sside { padding-top: .2rem; } }
+@media (max-width: 860px) { .smi, :root[data-theme="light"] .smi { background: var(--night) !important; } .smi .stop { color: var(--bone); } .smi .stop .stt0 { color: var(--bone); } .smi .stop .stt0 span { color: var(--ash); } .smi .hbtn { color: var(--bone); background: var(--n2); } .srate button, .srate .top, .srate .buono, .srate .forse, .srate .no { color: var(--ash); } .srate { grid-template-columns: repeat(4, 1fr); } .sprog { background: var(--n3); } }
+
+/* ---------- v3: intestazione, menu, Pubblica solo per il sito, Home più piena ---------- */
+.thb .sun { display: none; } :root[data-theme="light"] .thb .sun { display: block; } :root[data-theme="light"] .thb .moon { display: none; }
+.bar .act { display: flex; align-items: center; gap: .3rem; }
+.hbtn { width: 42px; height: 42px; transition: background .15s, color .15s; } .hbtn:hover { background: var(--n3); color: var(--bone); } .hbtn:focus-visible { outline: 2px solid var(--sign); outline-offset: 1px; }
+.bar .bell { transition: background .15s; } .bar .bell:hover { background: var(--n3); }
+.pubz { display: flex; align-items: center; gap: .6rem; margin-left: .5rem; padding-left: .8rem; border-left: 1px solid var(--line); }
+.pubz[hidden] { display: none !important; }
+.pubz .pill { font-size: .8rem; color: var(--ash); } .pubz .pill i { background: var(--ok); } .pubz .pill.dirty { color: var(--sign-t); } .pubz .pill.dirty i { background: var(--sign); }
+#pub[disabled] { background: var(--n3); color: var(--ash); opacity: 1; }
+#pub:not([disabled]):hover { filter: none; background: color-mix(in srgb, var(--sign) 82%, #fff); box-shadow: 0 0 0 4px color-mix(in srgb, var(--sign) 30%, transparent); }
+.undo[hidden] { display: none !important; }
+.side .who { display: flex; } .side .who a { display: inline-flex; gap: .25rem; }
+/* chiaro un po' meno abbagliante: fondo più caldo, schede bianche che staccano */
+:root[data-theme="light"] { --dim: #6b6255; --night: #ece5d9; --n2: #efe8dc; --n3: #e0d7c6; --line: rgba(45, 33, 16, .12); --line2: rgba(45, 33, 16, .22); --bar: rgba(236, 229, 217, .95); --tabs: rgba(250, 247, 241, .98); }
+/* Home: più grande su desktop */
+.wk .wki { all: unset; box-sizing: border-box; width: 100%; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: .9rem; align-items: center; padding: .6rem .9rem .6rem .6rem; margin-bottom: .45rem; border-radius: var(--r2); background: var(--n1); border: 1px solid var(--line); cursor: pointer; transition: border-color .15s, background .15s; }
+.wk .wki:hover { border-color: var(--line2); background: var(--n2); } .wk .wki:hover .ch { color: var(--bone); }
+.wkt { width: 44px; height: 54px; border-radius: 8px; overflow: hidden; display: grid; place-items: center; background: var(--n3); font: 800 1rem/1 var(--f-ui); color: var(--ash); } .wkt img { width: 100%; height: 100%; object-fit: cover; }
+.wki b { display: block; font-weight: 650; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } .wki small { display: block; color: var(--ash); font-size: .84rem; }
+.tk { transition: border-color .15s; } .tk:hover { border-color: var(--line2); }
+.num0, .nx0 { transition: border-color .15s, background .15s, transform .1s; } .num0:hover, .nx0:hover { background: var(--n2); }
+@media (min-width: 861px) {
+  .home { max-width: 1180px; column-gap: 2.4rem; row-gap: 2rem; }
+  .home .sh h2 { font-size: 1.2rem; }
+  .home .tk { padding: 1.15rem 1.2rem; gap: 1.1rem; } .home .tki { width: 48px; height: 48px; border-radius: 14px; } .home .tkt b { font-size: 1.05rem; } .home .tkt small { font-size: .9rem; }
+  .home .num0 { padding: 1.3rem 1.2rem; } .home .nv { font-size: 3.4rem; } .home .nl { font-size: .9rem; }
+  .home .nx0 { padding: 1rem 1.2rem 1rem 1rem; } .home .nx0 img { width: 84px; height: 112px; border-radius: 10px; } .home .nx0 b { font-size: 1.2rem; }
+  .home .wk, .home .logd, .home .sitel { grid-column: 2; }
+}
+@media (max-width: 860px) {
+  .bar .act { gap: 0; } .hbtn, .bar .bell { width: 42px; height: 42px; }
+  .pubz { margin-left: .2rem; padding-left: 0; border: 0; } .pubz .pill { display: none; }
+  #pub { min-height: 40px; padding: 0 .8rem !important; font-size: .82rem; }
+  .bar .act .btn { margin-left: .2rem; }
+}
+
+@media (min-width: 861px) {
+  .home { grid-template-rows: auto auto auto auto 1fr; align-items: start; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); grid-template-areas: "nums nums" "todo nexts" "todo wk" "todo logd" "todo sitel"; }
+  .home .nums { grid-area: nums; grid-template-columns: repeat(3, 1fr); } .home .todo { grid-area: todo; grid-row: auto; } .home .nexts { grid-area: nexts; } .home .wk { grid-area: wk; } .home .logd { grid-area: logd; } .home .sitel { grid-area: sitel; }
+  .home .num0 { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; column-gap: 1rem; padding: 1.2rem 1.4rem; } .home .nl { font-size: .95rem; }
+}
+
+/* ---------- v3: marketing ---------- */
+.mkw { display: grid; gap: 1.1rem; max-width: 1320px; }
+.mkbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .7rem 1rem; }
+.mknav { display: flex; align-items: center; gap: .3rem; } .mknav b { margin-left: .6rem; font: 750 1.25rem/1.2 var(--f-ui); letter-spacing: -.01em; }
+.mknav .btn[disabled] { opacity: .45; }
+.mkv { margin: 0; } .mkv button { min-width: 0; }
+.mkcal { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: .5rem; }
+.mkday { display: flex; flex-direction: column; gap: .45rem; min-height: 260px; padding: .55rem; border-radius: var(--r2); background: var(--n1); border: 1px solid var(--line); transition: background .15s, border-color .15s, box-shadow .15s; }
+.mkday.oggi { border-color: color-mix(in srgb, var(--sign) 55%, var(--line)); }
+.mkday.passato { background: color-mix(in srgb, var(--n1) 60%, transparent); } .mkday.passato .mkdh span { color: var(--dim); }
+.mkday.over { background: color-mix(in srgb, var(--sign) 12%, var(--n1)); border-color: var(--sign); box-shadow: inset 0 0 0 1px var(--sign); }
+.mkdh { display: flex; align-items: center; justify-content: space-between; margin: 0 0 .1rem; padding: .1rem .2rem; font: 650 .88rem/1 var(--f-ui); } .mkdh em { font-style: normal; font-size: .72rem; padding: .2rem .45rem; border-radius: 99px; background: var(--sign); color: var(--on-sign); }
+.mkc { all: unset; box-sizing: border-box; display: grid; gap: .45rem; padding: .4rem; border-radius: 12px; background: var(--n2); border: 1px solid var(--line); cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; transition: border-color .15s, transform .12s, box-shadow .15s; }
+.mkc:hover { border-color: var(--line2); transform: translateY(-1px); box-shadow: 0 6px 16px var(--shadow); } .mkc:focus-visible { outline: 2px solid var(--sign); outline-offset: 2px; }
+.mkc.lift { opacity: .35; } .mkc.ghost { position: fixed; z-index: 120; pointer-events: none; opacity: .95; rotate: -2deg; box-shadow: 0 18px 40px rgba(0, 0, 0, .45); border-color: var(--sign); }
+body.dragging, body.dragging * { cursor: grabbing !important; user-select: none; }
+.mkt { position: relative; display: grid; place-items: center; aspect-ratio: 4 / 5; border-radius: 8px; overflow: hidden; background: var(--n3); color: var(--ash); }
+.mkt.reel, .mkt.storia { aspect-ratio: 4 / 5; } .mkt img { width: 100%; height: 100%; object-fit: cover; } .mkt .i { width: 28px; height: 28px; opacity: .7; }
+.mkt em { position: absolute; left: .3rem; top: .3rem; padding: .18rem .4rem; border-radius: 6px; background: rgba(0, 0, 0, .62); color: #fff; font: 700 .64rem/1 var(--f-ui); font-style: normal; letter-spacing: .02em; }
+.mkb { display: grid; gap: .2rem; padding: 0 .15rem .1rem; } .mkb b { font-size: .84rem; font-weight: 650; line-height: 1.25; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.mkb small { display: flex; align-items: center; gap: .25rem; color: var(--ash); font-size: .76rem; }
+.chn { display: inline-grid; place-items: center; } .chn .i { width: 14px; height: 14px; }
+.mks { justify-self: start; display: inline-flex; align-items: center; gap: .3rem; font: 650 .7rem/1 var(--f-ui); color: var(--ash); } .mks::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.s-b .mks { color: var(--warn); } .s-r .mks { color: var(--sign-t); } .s-p .mks { color: #7fb2e5; } .s-u .mks { color: var(--ok); }
+:root[data-theme="light"] .s-p .mks { color: #2f6aa6; }
+.mkadd { all: unset; box-sizing: border-box; display: flex; align-items: center; justify-content: center; gap: .3rem; min-height: 38px; margin-top: auto; border-radius: 10px; border: 1px dashed var(--line2); color: var(--dim); font: 600 .78rem/1 var(--f-ui); cursor: pointer; opacity: .55; transition: opacity .15s, color .15s, border-color .15s; }
+.mkday:hover .mkadd, .mkadd:focus-visible { opacity: 1; } .mkadd:hover { color: var(--sign-t); border-color: var(--sign); } .mkadd .i { width: 15px; height: 15px; }
+.mkhint { display: flex; align-items: center; gap: .4rem; margin: -.4rem 0 0; color: var(--dim); font-size: .8rem; } .mkhint .i { width: 15px; height: 15px; }
+/* anteprima del profilo */
+.mkprof { max-width: 560px; padding: 1.1rem; border-radius: var(--r3); background: var(--n1); border: 1px solid var(--line); }
+.mkph { display: flex; align-items: center; gap: .8rem; margin-bottom: 1rem; } .mkph b { display: block; font-weight: 700; } .mkph small { color: var(--ash); font-size: .82rem; }
+.pav.big { width: 54px; height: 54px; font-size: 1.4rem; }
+.mkst { display: flex; gap: .8rem; overflow-x: auto; padding-bottom: .9rem; margin-bottom: .8rem; border-bottom: 1px solid var(--line); scrollbar-width: none; }
+.mksti { all: unset; display: grid; justify-items: center; gap: .3rem; cursor: pointer; } .mksti small { font-size: .74rem; color: var(--ash); }
+.mksti .r { width: 62px; height: 62px; border-radius: 50%; padding: 3px; background: var(--n3); overflow: hidden; } .mksti .r.on { background: conic-gradient(var(--sign), #e0533f, var(--sign)); }
+.mksti .r img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 2px solid var(--n1); box-sizing: border-box; }
+.mkgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+.mkg { all: unset; position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--n3); cursor: pointer; }
+.mkg img { width: 100%; height: 100%; object-fit: cover; transition: transform .25s, filter .2s; } .mkg:hover img { transform: scale(1.04); filter: brightness(1.08); }
+.mkg .e { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: .4rem; padding: .6rem; text-align: center; color: var(--ash); font-size: .74rem; }
+.mkg .gt { position: absolute; right: .35rem; top: .35rem; color: #fff; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .6)); } .mkg .gt .i { width: 18px; height: 18px; }
+.mkg .gd { position: absolute; left: .3rem; right: .3rem; bottom: .3rem; display: flex; align-items: center; gap: .25rem; padding: .25rem .4rem; border-radius: 6px; background: rgba(0, 0, 0, .66); color: #fff; font: 650 .68rem/1.1 var(--f-ui); } .mkg .gd .i { width: 12px; height: 12px; color: var(--sign); }
+.mkg.s-b::after { content: ""; position: absolute; inset: 0; border: 2px dashed rgba(255, 255, 255, .5); }
+/* idee */
+.mkideas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .6rem; } .mkideas .sh { grid-column: 1 / -1; align-items: baseline; } .mkideas .sh small { color: var(--ash); font-size: .84rem; }
+.mki { display: grid; grid-template-columns: 64px minmax(0, 1fr); grid-template-rows: auto auto; gap: .6rem .8rem; align-items: start; padding: .8rem; border-radius: var(--r2); background: var(--n1); border: 1px dashed var(--line2); transition: border-color .15s; }
+.mki:hover { border-color: var(--sign); } .mki .mkt { grid-row: span 2; }
+.mkib b { display: block; font-weight: 650; font-size: .92rem; line-height: 1.3; } .mkib small { display: flex; align-items: center; gap: .3rem; margin-top: .25rem; color: var(--ash); font-size: .8rem; } .mkib small .i { width: 14px; height: 14px; }
+.mkib .why { display: block; color: var(--dim); font-size: .78rem; line-height: 1.4; } .mki .btn { justify-self: start; }
+/* editor */
+.mked { display: grid; grid-template-columns: minmax(0, 1fr) 320px; grid-template-rows: auto 1fr; gap: 1rem 1.8rem; align-items: start; max-width: 1100px; }
+.mked .ptop { grid-column: 1 / -1; }
+.mkstate { display: inline-flex; align-items: center; gap: .4rem; padding: .4rem .75rem; border-radius: 99px; background: var(--n2); font: 650 .82rem/1 var(--f-ui); } .mkstate::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.mkstate.s-b { color: var(--warn); } .mkstate.s-r { color: var(--sign-t); } .mkstate.s-p { color: #7fb2e5; } .mkstate.s-u { color: var(--ok); }
+.mkfmt { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .6rem; }
+.mkf { all: unset; box-sizing: border-box; display: grid; gap: .3rem; align-content: start; padding: .9rem; border-radius: var(--r2); background: var(--n2); border: 1.5px solid var(--line); cursor: pointer; transition: border-color .15s, background .15s, transform .1s; }
+.mkf:hover { border-color: var(--line2); background: var(--n3); } .mkf:active { transform: scale(.98); } .mkf:focus-visible { outline: 2px solid var(--sign); outline-offset: 2px; }
+.mkf.on { border-color: var(--sign); background: color-mix(in srgb, var(--sign) 10%, var(--n2)); }
+.mkf .fi { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 12px; background: var(--n3); color: var(--bone); margin-bottom: .3rem; } .mkf.on .fi { background: var(--sign); color: var(--on-sign); } .mkf .fi .i { width: 26px; height: 26px; }
+.mkf b { font: 700 1rem/1.2 var(--f-ui); } .mkf small { color: var(--ash); font-size: .8rem; line-height: 1.35; }
+.mkch button { display: inline-flex; align-items: center; gap: .4rem; } .mkch .i { width: 17px; height: 17px; } .mkch button[disabled] { opacity: .4; cursor: not-allowed; }
+.mkmedia { display: flex; flex-wrap: wrap; gap: .6rem; }
+.mkm { position: relative; width: 108px; aspect-ratio: 4 / 5; border-radius: 10px; overflow: hidden; background: var(--n3); display: grid; place-items: center; color: var(--ash); }
+.mkm img, .mkm video { width: 100%; height: 100%; object-fit: cover; } .mkm .x { position: absolute; right: .25rem; top: .25rem; width: 30px; height: 30px; background: rgba(0, 0, 0, .6); color: #fff; } .mkm .x:hover { background: var(--red); color: #fff; }
+.mkm .vb, .libg .vb { position: absolute; left: .4rem; bottom: .4rem; color: #fff; filter: drop-shadow(0 1px 2px #000); } .mkm .vb .i, .libg .vb .i { width: 18px; height: 18px; }
+.mkm .nb0 { position: absolute; left: .35rem; top: .35rem; min-width: 20px; height: 20px; display: grid; place-items: center; border-radius: 10px; background: rgba(0, 0, 0, .65); color: #fff; font: 700 .72rem/1 var(--f-ui); }
+.mkm.sm { width: 52px; } .mkm.sm .i { width: 22px; height: 22px; }
+.mkadd2 { all: unset; box-sizing: border-box; position: relative; width: 108px; aspect-ratio: 4 / 5; display: grid; place-content: center; justify-items: center; gap: .35rem; border-radius: 10px; border: 1.5px dashed var(--line2); color: var(--ash); font: 600 .82rem/1.2 var(--f-ui); text-align: center; cursor: pointer; transition: border-color .15s, color .15s, background .15s; }
+.mkadd2:hover { border-color: var(--sign); color: var(--sign-t); background: color-mix(in srgb, var(--sign) 7%, transparent); } .mkadd2 input { position: absolute; inset: 0; opacity: 0; cursor: pointer; font-size: 0; } .mkadd2 .i { width: 22px; height: 22px; }
+.mkcov { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: .8rem; align-items: center; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+.mkcov b { display: block; font-weight: 650; } .mkcov small { color: var(--ash); font-size: .82rem; } .mkcov label { cursor: pointer; }
+.mktools { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; margin-top: .7rem; }
+.tb { all: unset; box-sizing: border-box; display: inline-flex; align-items: center; gap: .35rem; min-height: 36px; padding: 0 .75rem; border-radius: 18px; background: var(--n2); border: 1px solid var(--line); color: var(--bone); font: 600 .84rem/1 var(--f-ui); cursor: pointer; transition: background .15s, border-color .15s; }
+.tb:hover { background: var(--n3); border-color: var(--line2); } .tb[aria-expanded="true"] { border-color: var(--sign); } .tb .i { width: 16px; height: 16px; }
+.emop { margin-top: .5rem; padding: .6rem; border-radius: var(--r2); background: var(--n2); border: 1px solid var(--line2); box-shadow: var(--sh); animation: aiin .18s ease-out both; }
+.emot { display: flex; gap: .25rem; overflow-x: auto; scrollbar-width: none; margin-bottom: .5rem; }
+.emot button { all: unset; flex: none; padding: .4rem .65rem; border-radius: 8px; font: 600 .8rem/1 var(--f-ui); color: var(--ash); cursor: pointer; } .emot button:hover { background: var(--n3); color: var(--bone); } .emot button[aria-pressed="true"] { background: var(--bone); color: var(--night); }
+.emog { display: grid; grid-template-columns: repeat(auto-fill, minmax(42px, 1fr)); gap: .2rem; }
+.emog button { all: unset; display: grid; place-items: center; height: 42px; border-radius: 10px; font-size: 1.45rem; cursor: pointer; transition: background .1s, transform .1s; } .emog button:hover { background: var(--n3); transform: scale(1.12); }
+.mkbest { display: flex; align-items: center; flex-wrap: wrap; gap: .4rem .6rem; margin: .9rem 0 0; color: var(--ash); font-size: .86rem; } .mkbest .i { width: 16px; height: 16px; color: var(--sign-t); }
+.mkfoot { display: grid; gap: .6rem; padding: 1rem 1.1rem; border-radius: var(--r2); background: var(--n1); border: 1px solid var(--line); }
+.mkmiss { display: flex; align-items: center; gap: .45rem; margin: 0; color: var(--warn); font-size: .88rem; font-weight: 600; } .mkmiss .i { width: 17px; height: 17px; flex: none; }
+.mkact { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .6rem; }
+.mkdone { display: inline-flex; align-items: center; gap: .4rem; color: var(--ok); font-weight: 650; } .mkdone.p { color: #7fb2e5; } .mkdone .i { width: 18px; height: 18px; }
+:root[data-theme="light"] .mkdone.p, :root[data-theme="light"] .mkstate.s-p { color: #2f6aa6; }
+.mknote { margin: 0; color: var(--dim); font-size: .8rem; line-height: 1.45; }
+.mked .prev .ph { display: flex; justify-content: space-between; gap: .5rem; } .mked .prev .ph span:last-child { letter-spacing: 0; text-transform: none; font-weight: 500; }
+.phone video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.phone .car { position: absolute; right: .5rem; top: .5rem; padding: .2rem .45rem; border-radius: 10px; background: rgba(0, 0, 0, .6); color: #fff; font: 600 .7rem/1 var(--f-ui); }
+.phone .dots { position: absolute; left: 0; right: 0; bottom: .5rem; display: flex; justify-content: center; gap: 4px; } .phone .dots i { width: 6px; height: 6px; border-radius: 50%; background: rgba(255, 255, 255, .5); } .phone .dots i.on { background: #fff; }
+.phone .play .i { width: 34px; height: 34px; color: #fff; }
+.phone.story { padding: .5rem; } .phone.story .phm { position: relative; border-radius: 16px; overflow: hidden; }
+.stbar { position: absolute; left: .6rem; right: .6rem; top: .55rem; height: 3px; border-radius: 2px; background: rgba(255, 255, 255, .35); } .stbar i { display: block; width: 40%; height: 100%; background: #fff; border-radius: 2px; }
+.sttop { position: absolute; left: .6rem; top: 1.1rem; display: flex; align-items: center; gap: .45rem; color: #fff; font-size: .78rem; } .sttop .dim { opacity: .7; }
+.stlink { position: absolute; left: 50%; bottom: 14%; translate: -50% 0; display: inline-flex; align-items: center; gap: .35rem; padding: .55rem .9rem; border-radius: 10px; background: #fff; color: #111; font: 700 .8rem/1 var(--f-ui); white-space: nowrap; } .stlink .i { width: 15px; height: 15px; }
+/* libreria */
+.lib { position: fixed; inset: 0; z-index: 85; display: grid; place-items: center; padding: 1rem; background: rgba(6, 5, 4, .7); }
+.libp { width: min(760px, 100%); max-height: min(80vh, 760px); display: grid; grid-template-rows: auto minmax(0, 1fr); gap: .8rem; padding: 1rem; border-radius: var(--r3); background: var(--n1); border: 1px solid var(--line2); box-shadow: var(--sh); }
+.libp .nh { display: flex; align-items: center; justify-content: space-between; } .libp .nh b { font: 700 1.1rem/1 var(--f-ui); }
+.libg { overflow: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: .5rem; }
+.libg button { all: unset; position: relative; aspect-ratio: 4 / 5; border-radius: 10px; overflow: hidden; background: var(--n3); cursor: pointer; outline: 2px solid transparent; transition: outline-color .15s, transform .1s; }
+.libg button:hover { outline-color: var(--sign); } .libg button:active { transform: scale(.97); } .libg img, .libg video { width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 1100px) { .mkcal { grid-template-columns: repeat(4, minmax(0, 1fr)); } .mkideas { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 860px) {
+  .mkbar { gap: .6rem; } .mknav { width: 100%; } .mknav b { font-size: 1.05rem; margin-left: auto; } .mkv { flex: 1; } .mkbar > .btn { flex: 1; min-height: 44px; }
+  .mkcal { grid-template-columns: 1fr; gap: .45rem; }
+  .mkday { min-height: 0; display: grid; grid-template-columns: 52px minmax(0, 1fr); column-gap: .6rem; row-gap: 0; align-items: start; padding: .55rem .55rem .1rem; } .mkday > .mkc, .mkday > .mkadd { margin-bottom: .45rem; }
+  .mkdh { grid-row: span 99; flex-direction: column; align-items: flex-start; gap: .3rem; padding-top: .3rem; } .mkdh span { font-size: .95rem; }
+  .mkc { grid-template-columns: 56px minmax(0, 1fr); align-items: center; } .mkt { width: 56px; } .mkt em { font-size: .58rem; }
+  .mkadd { opacity: 1; min-height: 40px; margin-top: 0; justify-content: flex-start; padding: 0 .7rem; }
+  .mkday:not(:has(.mkc)) .mkadd { border-style: dashed; }
+  .mkideas { grid-template-columns: 1fr; }
+  .mked { grid-template-columns: 1fr; } .mked .ptop .bk { display: none; } .mked .ptop { justify-content: flex-end; }
+  .mkfmt { grid-template-columns: 1fr; } .mkf { grid-template-columns: auto minmax(0, 1fr); column-gap: .8rem; align-items: center; } .mkf .fi { grid-row: span 2; margin: 0; }
+  .mkm, .mkadd2 { width: calc((100% - 1.2rem) / 3); }
+  .mkact .btn { flex: 1; min-height: 48px; } .mkfoot { margin-bottom: 1rem; }
+  .libp { max-height: 86vh; } .libg { grid-template-columns: repeat(3, 1fr); }
+}
+
+.aio { display: flex; flex-wrap: wrap; gap: .35rem; }
+.aiop { all: unset; box-sizing: border-box; display: inline-flex; align-items: center; gap: .35rem; min-height: 34px; padding: 0 .7rem; border-radius: 17px; border: 1px solid var(--line2); color: var(--ash); font: 600 .8rem/1 var(--f-ui); cursor: pointer; transition: background .15s, color .15s, border-color .15s; }
+.aiop .i { width: 14px; height: 14px; stroke-width: 2.4; opacity: 0; width: 0; transition: opacity .15s; } .aiop:hover { border-color: var(--ash); color: var(--bone); }
+.aiop[aria-pressed="true"] { background: color-mix(in srgb, var(--sign) 16%, transparent); border-color: color-mix(in srgb, var(--sign) 60%, transparent); color: var(--bone); } .aiop[aria-pressed="true"] .i { opacity: 1; width: 14px; color: var(--sign-t); }
+@media (max-width: 860px) { .aiop { min-height: 40px; } }
+
+/* ---------- v3: mazzo a pagina piena, fatti in breve, zoom ---------- */
+.scard { background: #fbfaf7; }
+.spaper { padding: 0; background: #fbfaf7; align-content: start; }
+.spaper .ppage { box-shadow: none; }
+.spaper .nocv { min-height: 100%; background: #2a2622; }
+.sbars { top: 8px; left: 12px; right: 12px; } .sbars i { background: rgba(0, 0, 0, .14); } .sbars i.on { background: #1d1812; }
+.spaper::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 48px; background: linear-gradient(transparent, rgba(0, 0, 0, .08)); pointer-events: none; }
+.sid { grid-template-columns: auto minmax(0, 1fr) auto; row-gap: .55rem; }
+.sfacts { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: .3rem; }
+.sfacts em { font-style: normal; padding: .3rem .55rem; border-radius: 8px; background: var(--n3); color: var(--bone); font: 600 .78rem/1.1 var(--f-ui); }
+.carow .dsp { display: grid; gap: .1rem; color: var(--bone); font-size: .86rem; } .carow .dsp small { color: var(--ash); font-size: .8rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ptiles { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
+.pt { padding: .75rem .85rem; border-radius: var(--r2); background: var(--n1); border: 1px solid var(--line); }
+.pt small { display: block; color: var(--ash); font-size: .76rem; margin-bottom: .2rem; } .pt b { display: block; font-weight: 650; font-size: .95rem; line-height: 1.3; }
+.pt.g { border-color: color-mix(in srgb, var(--ok) 45%, var(--line)); } .pt.g b { color: var(--ok); } .pt.y b { color: var(--sign-t); }
+.pscroll { touch-action: pan-x pan-y; }
+@media (max-width: 860px) {
+  .sbox { gap: .6rem; } .sstage { min-height: 0; }
+  .sid { padding: .7rem .85rem; } .sid b { font-size: 1rem; } .sfacts em { font-size: .74rem; padding: .25rem .5rem; }
+  .pscroll { max-height: none; height: 78vh; padding: .5rem; }
+}
+
+.carow .cwho .cf { display: none; }
+.scard.done { background: var(--n1); }
+@media (max-width: 860px) { .carow .dsp { display: none !important; } .carow .cwho .cf { display: block; color: var(--bone); opacity: .85; } }
+
+.pdecide { background: var(--n1); }
+.chips .aib { display: inline-flex; align-items: center; gap: .4rem; padding: 0 .85rem 0 .7rem; border: 1px solid color-mix(in srgb, var(--sign-t) 45%, transparent); background: none; color: var(--sign-t); font-weight: 600; }
+.chips .aib .i { width: 17px; height: 17px; }
+
+/* ---------- v3: advertising più leggero, obiettivi disegnati ---------- */
+.goal .gi { width: 64px; height: 64px; border-radius: 18px; margin-bottom: .4rem; } .goal .gi svg { width: 38px; height: 38px; }
+.goal:hover .gi { transform: rotate(-4deg) scale(1.04); } .goal .gi { transition: transform .2s, background .15s, color .15s; }
+.done0 { margin-top: .9rem; } .done0 summary { font-size: .92rem; color: var(--ash); }
+.ads .kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.ads .sim { margin-top: .2rem; }
+@media (max-width: 860px) { .ads .kpis { grid-template-columns: 1fr 1fr; } .ads .kpis .kpi:first-child { grid-column: 1 / -1; } }
+
+.sbars { top: 0; left: 6px; right: 6px; gap: 2px; z-index: 2; }
+.sbars button { all: unset; flex: 1; padding: 8px 3px 10px; cursor: pointer; } .sbars button i { display: block; height: 3px; border-radius: 2px; background: rgba(0, 0, 0, .16); transition: background .2s; }
+.sbars button.on i { background: #1d1812; } .sbars button:hover i { background: rgba(0, 0, 0, .4); }
+.sturn { display: none !important; }
+
+.adgrid { align-items: start; }
+
+.orr .step { justify-self: end; } .orr .step button { width: 40px; height: 36px; } .orr .step b { min-width: 34px; font: 700 1rem/1 var(--f-ui); }
+.orr .fmt { font-size: .74rem; } .step button:active { background: var(--n3); }
+
+/* ---------- v3: stati al passaggio del mouse chiari e coerenti (solo con mouse) ---------- */
+@media (hover: hover) {
+  .btn:not([disabled]):hover { filter: none; background: color-mix(in srgb, var(--sign) 84%, #fff); box-shadow: 0 0 0 3px color-mix(in srgb, var(--sign) 28%, transparent); transform: translateY(-1px); }
+  .btn.ghost:not([disabled]):hover { filter: none; background: color-mix(in srgb, var(--bone) 16%, var(--n2)); color: var(--bone); box-shadow: 0 0 0 1px var(--line2); }
+  .btn:not([disabled]):active { transform: translateY(0) scale(.98); }
+  .item { transition: background .15s, border-color .15s, transform .12s; }
+  .item:hover { background: var(--n2); border-color: var(--line2); transform: translateX(2px); }
+  .item[aria-current="true"]:hover { transform: none; }
+  .chips button:not([disabled]):not([aria-pressed="true"]):hover { border-color: var(--ash); color: var(--bone); background: var(--n2); }
+  .chips button { transition: background .15s, border-color .15s, color .15s; }
+  .seg button:not([aria-selected="true"]):hover { background: var(--n3); color: var(--bone); }
+  .nav button:not([aria-current="page"]):hover, .nav a:hover { background: var(--n2); color: var(--bone); }
+  .mini:hover { text-decoration: underline; text-underline-offset: 3px; filter: none; }
+  .danger:hover { opacity: 1; text-decoration: underline; text-underline-offset: 3px; }
+  .add:hover { border-color: var(--sign); color: var(--sign-t); background: color-mix(in srgb, var(--sign) 6%, transparent); }
+  .drop:hover { border-color: var(--sign); }
+  .hubc:hover .hi, .nx0:hover .ch, .hubc:hover .ch { color: var(--sign-t); }
+  .x:hover { background: var(--n3); color: var(--bone); }
+}
+.item:focus-visible, .chips button:focus-visible, .seg button:focus-visible, .btn:focus-visible, .add:focus-visible { outline: 2px solid var(--sign); outline-offset: 2px; }
+
+@media (max-width: 860px) {
+  .pdecide { justify-self: stretch; width: auto; }
+  .tb { min-height: 42px; } .pdet summary, .psec summary { min-height: 44px; align-items: center; } .mkm .x { width: 36px; height: 36px; }
+}
+
+/* l'ingresso delle pagine non lascia trasformazioni: gli elementi fissi dentro restano fissi davvero */
+@media (max-width: 860px) { .view.enter > * { animation-fill-mode: backwards !important; } }
+@media (max-width: 860px) { .pcvbar { gap: .4rem; padding: .4rem .5rem; } .pcvbar small { display: none; } .pcvbar .hbtn { display: none; } .pcvbar b { flex: 1; } }
 </style>
 </head>
 <body>
@@ -1227,13 +1617,13 @@ details.fold > summary .live { font-size: .78rem; font-weight: 600; }
   <aside class="side">
     <a class="brand" href="#panoramica"><img src="img/blend-logo.svg" alt="Blend"><span>Back<br>office</span></a>
     <nav class="nav" id="nav"></nav>
-    <div class="who"><span class="av">A</span><div style="flex:1;min-width:0"><b>Alberto</b><a href="index.html" target="_blank" rel="noopener">Vedi il sito ↗</a></div><button class="theme" type="button" data-theme-toggle aria-label="Cambia tema: chiaro o scuro"><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button></div>
+    <div class="who"><span class="av">A</span><div style="flex:1;min-width:0"><b>Alberto</b><a href="index.html" target="_blank" rel="noopener">Apri il sito</a></div></div>
   </aside>
   <main>
     <header class="bar">
       <button class="back" id="back" type="button" aria-label="Indietro" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
       <div><h1 id="title">Panoramica</h1><div class="sub" id="sub"></div></div>
-      <div class="act"><button class="theme" type="button" data-theme-toggle aria-label="Cambia tema: chiaro o scuro"><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button><button class="bell" type="button" data-ntf aria-label="Notifiche" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9a6 6 0 1 1 12 0c0 6 2.5 7.5 2.5 7.5h-17S6 15 6 9zM10 20a2 2 0 0 0 4 0"/></svg><span class="nb" id="nb"></span></button><button class="hbtn gearb" type="button" data-go="impostazioni" aria-label="Impostazioni"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9M19 7h1M4 17h1M11 17h9"/><circle cx="16" cy="7" r="2.6"/><circle cx="8" cy="17" r="2.6"/></svg></button><button class="x undo" id="undo" type="button" aria-label="Annulla l'ultima modifica" title="Annulla" disabled>↶</button><span class="pill" id="state"><i></i><span>Tutto pubblicato</span></span><button class="btn cut" id="pub" type="button">Pubblica</button></div>
+      <div class="act"><button class="hbtn thb" type="button" data-theme-toggle aria-label="Tema chiaro o scuro" title="Tema chiaro o scuro"><svg class="i moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg><svg class="i sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button><button class="bell" type="button" data-ntf aria-label="Notifiche" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9a6 6 0 1 1 12 0c0 6 2.5 7.5 2.5 7.5h-17S6 15 6 9zM10 20a2 2 0 0 0 4 0"/></svg><span class="nb" id="nb"></span></button><button class="hbtn gearb" type="button" data-go="impostazioni" aria-label="Impostazioni"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9M19 7h1M4 17h1M11 17h9"/><circle cx="16" cy="7" r="2.6"/><circle cx="8" cy="17" r="2.6"/></svg></button><span class="pubz" id="pubz" hidden><span class="pill" id="state"><i></i><span>Sito aggiornato</span></span><button class="btn" id="pub" type="button">Pubblica sul sito</button></span><button class="x undo" id="undo" type="button" hidden disabled></button></div>
     </header>
     <p class="proto"><b>Prototipo di design.</b> Puoi provare tutto: niente viene salvato né pubblicato. L'accesso riservato arriva con il passaggio a Cloudflare.</p>
     <div class="view" id="view"></div>
@@ -1524,11 +1914,14 @@ window.MENU = {
     drinks: clone(CMS.drinks), kitchen: clone(KITCHEN), reviews: clone(CMS.reviews),
     scores: { trip: "4,7", tripN: "307", google: "4,4", googleN: "292" },
     apps: [
-      { id: 1, voto: 0, exp: [["2022 · oggi", "Barista, Mezcaleria Ostiense, Roma"], ["2020 · 2022", "Barback, Hotel Locarno, Roma"]], name: "Giulia Ferri", role: "Bancone", when: "Oggi, 11:42", email: "giulia.ferri@example.com", tel: "333 120 4471", disp: "Sere e weekend, da subito", msg: "Lavoro da tre anni in un cocktail bar a Ostiense, sono abituata ai sabati pieni. Mi piacerebbe crescere sulla parte di miscelazione.", cv: "CV_Giulia_Ferri.pdf", size: "212 KB", status: "Nuova", replies: [], notes: "" },
-      { id: 2, voto: 0, exp: [["2021 · oggi", "Aiuto cuoco, Pinseria Romana, Monteverde"], ["2019 · 2021", "Commis, Trattoria Da Enzo"]], name: "Marco De Santis", role: "Cucina", when: "Ieri, 19:05", email: "marco.ds@example.com", tel: "349 880 1123", disp: "Dal mese prossimo", msg: "Aiuto cuoco, esperienza con impasti a lunga lievitazione. Cerco un posto dove fare sul serio.", cv: "Marco_DeSantis_cv.pdf", size: "180 KB", status: "Nuova", replies: [], notes: "" },
-      { id: 3, voto: 0, exp: [], name: "Sara Liguori", role: "Sala", when: "Lun 9 nov", email: "sara.liguori@example.com", tel: "", disp: "Weekend", msg: "Studio all'università, cerco qualcosa per il fine settimana. Ho fatto due stagioni in un lido a Fregene.", cv: "", size: "", status: "Nuova", replies: [], notes: "" },
-      { id: 4, voto: 3, exp: [["2023 · oggi", "Barback, Drink Kong, Roma"]], name: "Luca Proietti", role: "Bancone", when: "Ven 6 nov", email: "luca.p@example.com", tel: "320 554 0098", disp: "Tutte le sere", msg: "Barback da un anno, voglio passare dietro al bancone.", cv: "LucaProietti.pdf", size: "96 KB", status: "Colloquio", replies: [{ when: "Sab 7 nov", text: "Ciao Luca, grazie. Passi martedì alle 17 per due chiacchiere? Alberto" }], notes: "Simpatico al telefono. Martedì 17:00." },
-      { id: 5, voto: 1, exp: [["2021 · oggi", "Grafica freelance"]], name: "Elena Russo", role: "Altro", when: "Mar 3 nov", email: "elena.russo@example.com", tel: "", disp: "Da gennaio", msg: "Grafica e social, se vi serve una mano con le locandine.", cv: "portfolio_elena.pdf", size: "2,1 MB", status: "Archiviata", replies: [], notes: "" }
+      { id: 1, voto: 0, exp: [["2022 · oggi", "Barista, Mezcaleria Ostiense, Roma"], ["2020 · 2022", "Barback, Hotel Locarno, Roma"]], name: "Giulia Ferri", anni: 3, inglese: "Buono", zona: "Spinaceto, 4 km", role: "Bancone", when: "Oggi, 11:42", email: "giulia.ferri@example.com", tel: "333 120 4471", disp: "Sere e weekend, da subito", msg: "Lavoro da tre anni in un cocktail bar a Ostiense, sono abituata ai sabati pieni. Mi piacerebbe crescere sulla parte di miscelazione.", cv: "CV_Giulia_Ferri.pdf", size: "212 KB", status: "Nuova", replies: [], notes: "", pag2: { form: [["2019", "Corso AIBES barman, Roma"], ["2018", "Diploma alberghiero, Ostia"]], lingue: "Inglese buono, spagnolo base", altro: "Patente B, automunita. Abito a Spinaceto." } },
+      { id: 2, voto: 0, exp: [["2021 · oggi", "Aiuto cuoco, Pinseria Romana, Monteverde"], ["2019 · 2021", "Commis, Trattoria Da Enzo"]], name: "Marco De Santis", anni: 5, inglese: "Base", zona: "Monteverde, 14 km", role: "Cucina", when: "Ieri, 19:05", email: "marco.ds@example.com", tel: "349 880 1123", disp: "Dal mese prossimo", msg: "Aiuto cuoco, esperienza con impasti a lunga lievitazione. Cerco un posto dove fare sul serio.", cv: "Marco_DeSantis_cv.pdf", size: "180 KB", status: "Nuova", replies: [], notes: "" },
+      { id: 3, voto: 0, exp: [], name: "Sara Liguori", anni: 1, inglese: "Fluente", zona: "Eur, 6 km", role: "Sala", when: "Lun 9 nov", email: "sara.liguori@example.com", tel: "", disp: "Weekend", msg: "Studio all'università, cerco qualcosa per il fine settimana. Ho fatto due stagioni in un lido a Fregene.", cv: "", size: "", status: "Nuova", replies: [], notes: "" },
+      { id: 4, voto: 3, exp: [["2023 · oggi", "Barback, Drink Kong, Roma"]], name: "Luca Proietti", anni: 1, inglese: "Buono", zona: "Torrino, 3 km", role: "Bancone", when: "Ven 6 nov", email: "luca.p@example.com", tel: "320 554 0098", disp: "Tutte le sere", msg: "Barback da un anno, voglio passare dietro al bancone.", cv: "LucaProietti.pdf", size: "96 KB", status: "Colloquio", replies: [{ when: "Sab 7 nov", text: "Ciao Luca, grazie. Passi martedì alle 17 per due chiacchiere? Alberto" }], notes: "Simpatico al telefono. Martedì 17:00." },
+      { id: 6, voto: 4, exp: [["2020 · oggi", "Chef de rang, Ristorante La Pergola"], ["2017 · 2020", "Cameriere, Trattoria Monti"]], name: "Davide Orsini", anni: 6, inglese: "Fluente", zona: "Eur, 6 km", role: "Sala", when: "Gio 5 nov", email: "d.orsini@example.com", tel: "338 410 2290", disp: "Tutte le sere tranne il lunedì", msg: "Sei anni di sala, gli ultimi tre in fine dining. Cerco un posto più vicino a casa, abito all'Eur.", cv: "Davide_Orsini_CV.pdf", size: "240 KB", status: "Letta", replies: [], notes: "Da chiamare per la serata jazz.", pag2: { form: [["2016", "Diploma alberghiero, Roma"]], lingue: "Inglese fluente, francese buono", altro: "Corso sommelier AIS primo livello." } },
+      { id: 7, voto: 0, exp: [["2024 · oggi", "Pizzaiolo, Pinsa & Co, Torrino"]], name: "Kevin Mendoza", anni: 2, inglese: "Madrelingua", zona: "Torrino, 3 km", role: "Cucina", when: "Mer 4 nov", email: "kevin.m@example.com", tel: "351 220 7781", disp: "Weekend e due sere in settimana", msg: "Faccio pinse da due anni, conosco il forno elettrico. Disponibile anche per la preparazione.", cv: "Kevin_Mendoza.pdf", size: "120 KB", status: "Nuova", replies: [], notes: "" },
+      { id: 8, voto: 2, exp: [], name: "Chiara Bianchi", anni: 0, inglese: "Buono", zona: "Mezzocammino, 1 km", role: "Bancone", when: "Dom 1 nov", email: "chiara.b@example.com", tel: "347 900 1188", disp: "Venerdì e sabato", msg: "Ho fatto il corso da barman l'anno scorso, mi manca esperienza vera ma imparo in fretta.", cv: "CV_Chiara_Bianchi.pdf", size: "88 KB", status: "Letta", replies: [], notes: "" },
+      { id: 5, voto: 1, exp: [["2021 · oggi", "Grafica freelance"]], name: "Elena Russo", anni: 4, inglese: "Buono", zona: "Ostiense, 12 km", role: "Altro", when: "Mar 3 nov", email: "elena.russo@example.com", tel: "", disp: "Da gennaio", msg: "Grafica e social, se vi serve una mano con le locandine.", cv: "portfolio_elena.pdf", size: "2,1 MB", status: "Archiviata", replies: [], notes: "" }
     ],
     log: [["Ieri", "Aggiunta la serata «Sunside Trio» di aprile"], ["Lun", "Cambiata la foto dei taglieri"], ["5 nov", "Drink list d'autunno: 16 cocktail"]]
   };
@@ -1545,13 +1938,32 @@ window.MENU = {
       { n: "Ricerca · pinsa Mezzocammino", ch: "Google", on: false, bud: 6, spend: 10, book: 0, trend: [1, 0, 0, 1, 0, 0, 0] }
     ]
   };
+  /* ---------- marketing: calendario a settimane, contenuti guidati per formato ----------
+     Lo stato non si sceglie: Bozza finché manca qualcosa, Pronto quando c'è tutto, Programmato quando premi Programma,
+     Pubblicato quando è uscito (con Meta collegata lo fa da solo). */
+  const FORM = {
+    post: { n: "Post", d: "Foto singola o carosello, verticale 4:5", ic: '<rect x="4" y="3" width="16" height="18" rx="2" opacity=".22" fill="currentColor" stroke="none"/><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M4 16l4.5-4.5 3.5 3.5 2.5-2.5L20 18"/><circle cx="15.5" cy="8" r="1.6"/>' },
+    reel: { n: "Reel", d: "Video verticale 9:16, fino a 90 secondi", ic: '<rect x="6" y="2" width="12" height="20" rx="2.5" opacity=".22" fill="currentColor" stroke="none"/><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M10.5 9.2v5.6l4.4-2.8z" fill="currentColor"/>' },
+    storia: { n: "Storia", d: "Foto o video 9:16, sparisce dopo 24 ore", ic: '<circle cx="12" cy="12" r="9" opacity=".22" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="9" stroke-dasharray="4 2.2"/><rect x="9" y="7" width="6" height="10" rx="1.2"/>' }
+  };
+  const CANALI = ["Instagram", "Facebook", "TikTok"];
+  const GG = ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"], MESI = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"];
+  const isoD = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+  const daIso = (s) => { const [y, m, g] = s.split("-").map(Number); return new Date(y, m - 1, g); };
+  const lunedi = (d) => { const x = new Date(d.getFullYear(), d.getMonth(), d.getDate()); x.setDate(x.getDate() - ((x.getDay() + 6) % 7)); return x; };
+  const piu = (d, n) => { const x = new Date(d); x.setDate(x.getDate() + n); return x; };
+  const OGGI = isoD(new Date()), L0 = lunedi(new Date());
+  const dayLbl = (s) => { const d = daIso(s); return `${GG[d.getDay()]} ${d.getDate()}`; };
+  const dayLong = (s) => { const d = daIso(s); return `${["domenica", "lunedì", "martedì", "mercoledì", "giovedì", "venerdì", "sabato"][d.getDay()]} ${d.getDate()} ${MESI[d.getMonth()]}`; };
+  const W = (n) => isoD(piu(L0, n));
   const MK = { posts: [
-    { day: "Lun 16", d: 0, time: "18:00", type: "Reel", ch: "Instagram", title: "Il primo giro: Aperiblend in 15 secondi", st: "Pubblicato", link: "Aperiblend", cap: "Tutti i giorni dalle 18 alle 20. Il primo giro, prima che si riempia." },
-    { day: "Mar 17", d: 1, time: "12:30", type: "Post", ch: "Instagram", title: "Smokey Joe, il fascicolo n° 01", st: "Programmato", link: "Drink · Smokey Joe", cap: "Joe non parla molto. Rye whiskey, fumo e pessime decisioni prese con calma." },
-    { day: "Mar 17", d: 1, time: "19:00", type: "Storia", ch: "Instagram", title: "Sondaggio: pinsa o tagliere?", st: "Programmato", link: "Cucina", cap: "Stasera cosa dividiamo?" },
-    { day: "Mer 18", d: 2, time: "18:00", type: "Reel", ch: "Instagram", title: "Blend in Jazz: il backstage", st: "In lavorazione", link: "Serata · Blend in Jazz", cap: "Mercoledì il meglio del jazz romano, a due passi dal bancone. Primo set alle 20:30." },
-    { day: "Ven 20", d: 4, time: "17:30", type: "Post", ch: "Facebook", title: "Weekend: tavoli vicino ai musicisti", st: "Idea", link: "Prenotazioni", cap: "" },
-    { day: "Sab 21", d: 5, time: "21:00", type: "Storia", ch: "Instagram", title: "Diretta dal bancone", st: "Idea", link: "", cap: "" }
+    { id: 1, date: W(0), time: "18:00", type: "reel", ch: ["Instagram", "Facebook"], title: "Il primo giro: Aperiblend in 15 secondi", link: "Aperiblend", cap: "Tutti i giorni dalle 18 alle 20. Il primo giro, prima che si riempia.", media: [{ src: "video/pour.mp4", kind: "video" }], cover: "img/poster-sala.jpg", pub: true },
+    { id: 2, date: W(1), time: "12:30", type: "post", ch: ["Instagram"], title: "Smokey Joe, il fascicolo n° 01", link: "Drink · Smokey Joe", cap: "Joe non parla molto. Rye whiskey, fumo e pessime decisioni prese con calma.", media: [{ src: "img/blend-foodanddrink-AL85038.webp", kind: "img" }, { src: "img/blend-foodanddrink-AL85068.webp", kind: "img" }], prog: true },
+    { id: 3, date: W(1), time: "19:00", type: "storia", ch: ["Instagram"], title: "Sondaggio: pinsa o tagliere?", link: "Cucina", cap: "", media: [{ src: "img/blend-foodanddrink-DSC08308.webp", kind: "img" }], prog: true, lk: "menu" },
+    { id: 4, date: W(2), time: "18:00", type: "reel", ch: ["Instagram", "TikTok"], title: "Blend in Jazz: il backstage", link: "Serata · Blend in Jazz", cap: "Mercoledì il meglio del jazz romano, a due passi dal bancone. Primo set alle 20:30.", media: [], cover: "" },
+    { id: 5, date: W(4), time: "17:30", type: "post", ch: ["Facebook"], title: "Weekend: tavoli vicino ai musicisti", link: "Prenotazioni", cap: "", media: [{ src: "img/blend-foodanddrink-AL85227.webp", kind: "img" }] },
+    { id: 6, date: W(5), time: "21:00", type: "storia", ch: ["Instagram"], title: "Diretta dal bancone", link: "", cap: "", media: [] },
+    { id: 7, date: W(8), time: "18:30", type: "post", ch: ["Instagram", "Facebook"], title: "Taglieri della settimana", link: "Cucina", cap: "Salumi del Lazio, formaggi a latte crudo e il pane di Guttiau. Si divide, o almeno ci si prova.", media: [{ src: "img/blend-foodanddrink-AL85241.webp", kind: "img" }] }
   ] };
 
   /* ---------- limiti: misurati sui foglietti del sito, carta per carta ---------- */
@@ -1588,6 +2000,7 @@ window.MENU = {
     moon: '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>', user: '<circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7"/>', glass: '<path d="M5 4h14l-7 8zM12 12v8M8 20h8"/>', music: '<path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/>',
     ret: '<path d="M9 14l-5-5 5-5M4 9h10a6 6 0 0 1 0 12h-3"/>', ticket: '<path d="M3 9V6h18v3a3 3 0 0 0 0 6v3H3v-3a3 3 0 0 0 0-6zM14 6v12"/>', plus: '<path d="M12 5v14M5 12h14"/>', ext: '<path d="M14 5h5v5M19 5l-8 8M11 7H6v11h11v-5"/>', star: '<path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.8z"/>', help: '<path d="M9 9a3 3 0 1 1 4.4 2.6c-.9.5-1.4 1.1-1.4 2.2M12 17.5h.01"/>', eye: '<path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="2.8"/>', link: '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>', grip: '<path d="M9 6h.01M15 6h.01M9 12h.01M15 12h.01M9 18h.01M15 18h.01"/>',
     sparkle: '<path d="M11 3l1.9 5.1L18 10l-5.1 1.9L11 17l-1.9-5.1L4 10l5.1-1.9zM18.5 15l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/>',
+    cards: '<rect x="7" y="4" width="12" height="16" rx="2"/><path d="M4 7.5v10a2.5 2.5 0 0 0 2.5 2.5"/>',
     flash: '<path d="M13 3L5 14h6l-1 7 8-11h-6z"/>', more: '<circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/>'
   };
   const SECT = [
@@ -1609,14 +2022,14 @@ window.MENU = {
     if (s0 === "marketing") return "crescita";
     return null;
   }
-  const GROUPS = [[null, ["panoramica"]], ["Il sito", ["serate", "drink", "cucina", "recensioni"]], ["Il locale", ["magazzino"]], ["Persone", ["candidature"]], ["Crescita", ["marketing", "advertising"]], ["Account", ["impostazioni"]]];
-  const newApps = () => D.apps.filter((a) => a.status === "Nuova").length;
+  const GROUPS = [[null, ["panoramica"]], ["Crescita", ["marketing", "advertising"]], ["Il locale", ["magazzino"]], ["Persone", ["candidature"]], ["Il sito", ["serate", "drink", "cucina", "recensioni"]], [null, ["impostazioni"]]];
+  const newApps = () => D.apps.filter((a) => !a.voto).length;
   function drawNav() {
     const cur = route().s, bd = newApps(), S = (id) => SECT.find((x) => x[0] === id);
     const btn = (id) => { const [, t, ic] = S(id); return `<button type="button" data-go="${id}" ${cur === id ? 'aria-current="page"' : ""}><svg viewBox="0 0 24 24">${ic}</svg>${t}${id === "candidature" && bd ? `<span class="bd">${bd}</span>` : ""}</button>`; };
     $("#nav").innerHTML = GROUPS.map(([g, ids]) => `<div class="grp">${g ? `<p class="gl">${g}</p>` : ""}${ids.map(btn).join("")}</div>`).join("");
     /* telefono: cinque aree fisse, niente "Altro" */
-    const tabs = [["panoramica", "Home", I.home], ["sito", "Sito", I.sito], ["magazzino", "Magazzino", I.mag], ["candidature", "Persone", I.people], ["crescita", "Crescita", I.grow]];
+    const tabs = [["panoramica", "Home", I.home], ["crescita", "Crescita", I.grow], ["magazzino", "Magazzino", I.mag], ["candidature", "Persone", I.people], ["sito", "Sito", I.sito]];
     $("#tabs").innerHTML = tabs.map(([id, t, ic]) => `<button type="button" data-go="${id}" ${AREA[cur] === id ? 'aria-current="page"' : ""}><svg viewBox="0 0 24 24">${ic}</svg><span>${t}</span>${id === "candidature" && bd ? `<span class="bd">${bd}</span>` : ""}</button>`).join("");
   }
   document.addEventListener("click", (e) => { const b = e.target.closest("[data-go]"); if (b) { location.hash = b.dataset.go; } });
@@ -1627,16 +2040,19 @@ window.MENU = {
   function applica(x) { if (!x) return; Object.assign(D, clone(x.D || {})); if (x.MK) MK.posts = clone(x.MK); if (x.camps) ADS.camps = clone(x.camps); if (x.AD) Object.assign(AD, clone(x.AD)); if (x.MAG) Object.assign(MAG, clone(x.MAG)); }
   let saveT = 0;
   function salvaBozza() { clearTimeout(saveT); saveT = setTimeout(() => { if (!window.Bozza) return; const x = snap(); Bozza.ricorda(x); if (!Bozza.salva(x)) toast("La bozza è troppo pesante per questo dispositivo: pubblica per non perdere le foto."); $("#undo").disabled = !Bozza.puoAnnullare(); }, 400); }
+  let dirtySito = 0;
+  const inSito = () => AREA[route().s] === "sito";
   function setDirty(n = 1) {
-    dirty += n; const st = $("#state");
-    st.classList.toggle("dirty", dirty > 0); st.lastElementChild.textContent = dirty ? "Bozza da pubblicare" : "Tutto pubblicato";
+    dirty += n; if (n && inSito()) dirtySito += n;
+    const st = $("#state"); st.classList.toggle("dirty", dirtySito > 0); st.lastElementChild.textContent = dirtySito ? (dirtySito === 1 ? "1 modifica non ancora online" : `${dirtySito} modifiche non ancora online`) : "Sito aggiornato";
+    $("#pub").disabled = !dirtySito; $("#pubz").hidden = !inSito();
     if (n) salvaBozza();
   }
   function toast(t) { const el = $("#toast"); el.textContent = t; el.classList.add("on"); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove("on"), 2600); }
   const publish = () => {
     const bad = $$(".f.bad"); if (bad.length) { bad[0].scrollIntoView({ behavior: "smooth", block: "center" }); toast("Prima sistema i campi in rosso: non entrerebbero nel foglietto."); return; }
-    if (!dirty) { toast("Niente di nuovo da pubblicare."); return; }
-    dirty = 0; setDirty(0); if (window.Bozza) { Bozza.scarta(); Bozza.ricorda(snap()); } $("#undo").disabled = true; toast("Pubblicato. Il sito si aggiorna in un minuto (in questo prototipo per finta).");
+    if (!dirtySito) { toast("Il sito è già aggiornato."); return; }
+    dirty = 0; dirtySito = 0; setDirty(0); if (window.Bozza) { Bozza.scarta(); Bozza.ricorda(snap()); } $("#undo").disabled = true; toast("Pubblicato. Il sito si aggiorna in un minuto (in questo prototipo per finta)."); if (route().s === "panoramica") render();
   };
   $("#pub").addEventListener("click", publish);
 
@@ -1646,18 +2062,19 @@ window.MENU = {
   const aiBtn = (compito, label) => `<button class="aib" type="button" data-ai="${compito}">${sv(I.sparkle)}<span>${label}</span></button>`;
   let aiCtx = () => ({});
   function apriAI(btn, compito) {
-    const C = AI.COMPITI[compito], zona = btn.closest(".f, .compose"), inp = $("textarea, input[type=text]", zona), host = inp.closest(".f");
+    const C = AI.COMPITI[compito], zona = btn.closest(".f, .compose") || btn.closest(".card"), inp = $("textarea, input[type=text]", zona), host = inp.closest(".f");
     const gia = $(".aip", host); $$(".aip").forEach((x) => x.remove()); if (gia && gia.dataset.c === compito) return;
     if ((compito === "accorcia" || compito === "hashtag") && !inp.value.trim()) return toast("Prima scrivi la didascalia, o falla scrivere a Claude.");
-    const p = document.createElement("div"); p.className = "aip"; p.dataset.c = compito; let tono = C.toni ? C.toni[0] : "", curato = false, giro = 0, V = [];
+    const p = document.createElement("div"); p.className = "aip"; p.dataset.c = compito; let tono = C.toni ? C.toni[0] : "", curato = false, giro = 0, V = []; const opz = Object.fromEntries((C.opzioni || []).map(([k, , on]) => [k, on]));
     p.innerHTML = `<div class="aih"><b>${sv(I.sparkle)}${C.nome}</b><button class="x" type="button" data-aix aria-label="Chiudi">${sv(I.x)}</button></div>
       ${C.toni ? `<div class="chips ait">${C.toni.map((t, n) => `<button type="button" data-tono="${t}" aria-pressed="${!n}">${t}</button>`).join("")}</div>` : ""}
+      ${C.opzioni ? `<div class="aio">${C.opzioni.map(([k, t]) => `<button type="button" class="aiop" data-opz="${k}" aria-pressed="${opz[k]}">${sv(I.check)}${t}</button>`).join("")}</div>` : ""}
       <div class="aiout" aria-live="polite"></div>
       <div class="aif"><button class="mini" type="button" data-again>${sv(I.refresh)}Altre proposte</button>${C.sonnet ? `<label class="aisw"><input type="checkbox" data-cur><span>Più curato <small>Sonnet: più lento, costa di più</small></span></label>` : ""}</div>`;
     const run = async () => {
       $(".aiout", p).innerHTML = `<div class="ail"><i></i><i></i><i></i></div>`;
       try {
-        const r = await AI.chiedi(compito, { ...aiCtx(), testo: inp.value, tono, max: +host.dataset.max || undefined }, { curato, giro: giro++ });
+        const r = await AI.chiedi(compito, { stile: SET.stile, ...aiCtx(), testo: inp.value, tono, opzioni: opz, max: +host.dataset.max || undefined }, { curato, giro: giro++ });
         if (!p.isConnected) return; V = r.varianti;
         $(".aiout", p).innerHTML = V.map((v, n) => `<button type="button" class="aiv" data-use="${n}"><span>${esc(v)}</span><b>Usa</b></button>`).join("") + `<p class="ain">${r.prova ? "Testi di prova: quelli veri arrivano quando colleghiamo Claude." : `Scritto da Claude ${r.modello}. Rileggi sempre prima di pubblicare.`}</p>`;
       } catch (e) { if (p.isConnected) $(".aiout", p).innerHTML = `<p class="ain err">${esc(e.message)}</p>`; }
@@ -1665,6 +2082,7 @@ window.MENU = {
     p.addEventListener("click", (e) => {
       if (e.target.closest("[data-aix]")) return p.remove();
       const t = e.target.closest("[data-tono]"); if (t) { tono = t.dataset.tono; $$("[data-tono]", p).forEach((b) => b.setAttribute("aria-pressed", b === t)); giro = 0; return run(); }
+      const oz = e.target.closest("[data-opz]"); if (oz) { opz[oz.dataset.opz] = !opz[oz.dataset.opz]; oz.setAttribute("aria-pressed", opz[oz.dataset.opz]); giro = 0; return run(); }
       if (e.target.closest("[data-again]")) return run();
       const u = e.target.closest("[data-use]"); if (u) { inp.value = V[+u.dataset.use]; inp.dispatchEvent(new Event("input", { bubbles: true })); p.remove(); inp.focus(); toast("Inserito. Puoi ancora cambiarlo a mano."); }
     });
@@ -1744,8 +2162,9 @@ window.MENU = {
     for (const o of ord) { const r = o.righe.slice().sort((x, y) => x.giorni - y.giorni)[0]; out.push({ ic: I.mag, urg: o.urgente, t: `Ordina da ${o.fornitore.nome}`, s: `${o.righe.length} ${o.righe.length === 1 ? "articolo" : "articoli"} · ${r.articolo.nome.toLowerCase()} ${r.giorni < 1 ? "finisce oggi" : r.giorni < 2 ? "finisce domani" : "sta finendo"}`, b: "Ordina", go: "magazzino/oggi" }); }
     if (MAG.posta.length) out.push({ ic: I.mail, t: `${MAG.posta.length} ${MAG.posta.length === 1 ? "documento arrivato" : "documenti arrivati"} per email`, s: MAG.posta.map((m) => m.da).join(", "), b: "Controlla", go: "magazzino/arrivi" });
     for (const o of MAG.ordini) out.push({ ic: I.cam, t: `Arriva ${o.arriva}: ${o.fornitore}`, s: "Quando arriva, fotografa la bolla", b: "Arrivo merce", go: "magazzino/arrivi" });
-    const na = newApps(); if (na) out.push({ ic: I.user, t: `${na} ${na === 1 ? "candidatura nuova" : "candidature nuove"}`, s: "Da leggere e votare", b: "Apri", go: "candidature" });
-    const m = MK.posts.find((x) => x.st === "In lavorazione"); if (m) out.push({ ic: I.mkt, t: `Da finire: ${m.title}`, s: `${m.type} · esce ${m.day} alle ${m.time}`, b: "Finisci", go: "marketing/" + MK.posts.indexOf(m) });
+    const na = newApps(); if (na) out.push({ ic: I.user, t: `${na} ${na === 1 ? "candidatura da valutare" : "candidature da valutare"}`, s: "Si smistano in un minuto", b: "Apri", go: "candidature" });
+    const m = MK.posts.filter((x) => stato(x) === "Bozza" && x.date >= OGGI).sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time))[0]; if (m) out.push({ ic: I.mkt, t: `Da finire: ${m.title || FORM[m.type].n}`, s: `${FORM[m.type].n} · ${dayLbl(m.date)} alle ${m.time} · manca ${manca(m)[0]}`, b: "Finisci", go: "marketing/" + MK.posts.indexOf(m) });
+    if (dirtySito) out.unshift({ ic: I.sito, t: dirtySito === 1 ? "1 modifica al sito da pubblicare" : `${dirtySito} modifiche al sito da pubblicare`, s: "Finché non pubblichi, sul sito resta la versione di prima", b: "Pubblica", go: "sito" });
     return out.sort((a, b) => (b.urg ? 1 : 0) - (a.urg ? 1 : 0));
   }
   V.panoramica = () => {
@@ -1758,10 +2177,11 @@ window.MENU = {
       <section class="nums">
         <button type="button" class="num0" data-go="advertising"><span class="nv">${ADS.today.book}</span><span class="nl">tavoli dalla pubblicità stasera</span></button>
         <button type="button" class="num0" data-go="magazzino/oggi"><span class="nv ${ord ? "warn" : ""}">${ord}</span><span class="nl">${ord === 1 ? "fornitore" : "fornitori"} da chiamare</span></button>
-        <button type="button" class="num0" data-go="candidature"><span class="nv">${newApps()}</span><span class="nl">candidature nuove</span></button>
+        <button type="button" class="num0" data-go="candidature"><span class="nv">${newApps()}</span><span class="nl">candidature da valutare</span></button>
       </section>
       <section class="nexts"><div class="sh"><h2>Prossima serata</h2><button class="mini" type="button" data-go="serate/new">Aggiungi</button></div>
         <button type="button" class="nx0" data-go="serate/${D.shows.indexOf(n)}"><img src="${esc(n.img)}" alt=""><span><small>${esc(n.tag)}</small><b>${esc(n.title)}</b><small>${esc(n.lines[0])}</small></span>${sv(I.chev, "ch")}</button></section>
+      <section class="wk"><div class="sh"><h2>In uscita sui social</h2><button class="mini" type="button" data-go="marketing">Calendario</button></div>${MK.posts.filter((x) => !x.pub && x.date >= OGGI).sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time)).slice(0, 3).map((x) => `<button type="button" class="wki" data-go="marketing/${MK.posts.indexOf(x)}"><span class="wkt">${thumb(x) ? `<img src="${esc(thumb(x))}" alt="">` : sv(FORM[x.type].ic)}</span><span><b>${esc(x.title || FORM[x.type].n)}</b><small>${FORM[x.type].n} · ${dayLbl(x.date)} alle ${esc(x.time)} · ${stato(x)}</small></span>${sv(I.chev, "ch")}</button>`).join("") || '<p class="empty">Niente in programma.</p>'}</section>
       <details class="logd"><summary>Ultime modifiche</summary><div class="log">${D.log.map(([t, x]) => `<div><time>${t}</time><span>${esc(x)}</span></div>`).join("")}</div></details>
       <a class="sitel" href="index.html" target="_blank" rel="noopener">${sv(I.ext)}<span>Apri il sito</span><small>Online · ultima pubblicazione ieri alle 18:40</small></a>
     </div>`;
@@ -1771,7 +2191,7 @@ window.MENU = {
   V.sito = () => { head("sito", null); const on = D.shows.filter((x) => x.on).length;
     return hub([["serate", I.serate, "Serate", `${on} online · prossima: ${esc((D.shows.find((x) => x.hero) || D.shows[0]).title)}`], ["drink", I.drink, "Drink list", `${D.drinks.length} cocktail in carta`], ["cucina", I.cucina, "Cucina", `${D.kitchen.length} portate`], ["recensioni", I.rec, "Recensioni", `${esc(D.scores.trip)} Tripadvisor · ${esc(D.scores.google)} Google`]])
       + `<a class="sitel" href="index.html" target="_blank" rel="noopener">${sv(I.ext)}<span>Apri il sito</span><small>Online · ultima pubblicazione ieri alle 18:40</small></a>`; };
-  V.crescita = () => { head("crescita", null); const m = MK.posts.find((x) => x.st !== "Pubblicato");
+  V.crescita = () => { head("crescita", null); const m = MK.posts.filter((x) => !x.pub && x.date >= OGGI).sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time))[0];
     return hub([["marketing", I.mkt, "Marketing", m ? `Prossimo: ${esc(m.title)}` : "Niente in programma"], ["advertising", I.ads, "Advertising", `Stasera ${ADS.today.book} tavoli · €${ADS.today.cpb} l'uno`]]); };
 
   /* serate */
@@ -1795,7 +2215,7 @@ window.MENU = {
       <div class="card"><h2>Dove compare</h2><div style="display:grid;gap:.6rem">
         <label class="sw"><span><b>Online</b><small>Se spento resta in bozza e non si vede sul sito.</small></span><input type="checkbox" data-sw="on" ${x.on ? "checked" : ""}></label>
         <label class="sw"><span><b>Biglietto dell'apertura</b><small>Il biglietto «Prossima serata» nella prima schermata. Una serata sola alla volta.</small></span><input type="checkbox" data-sw="hero" ${x.hero ? "checked" : ""}></label></div></div>
-      <div class="foot"><button class="danger" type="button" data-del>Elimina la serata</button><span class="saved" aria-live="polite">Le modifiche restano in bozza finché non premi Pubblica</span></div>
+      <div class="foot"><button class="danger" type="button" data-del>Elimina la serata</button><span class="saved" aria-live="polite">Le modifiche vanno online quando premi «Pubblica sul sito»</span></div>
     </div>`;
     const prev = `<div class="prev"><div class="ph"><span>Anteprima</span><a href="index.html#serate" target="_blank" rel="noopener">Sul sito ↗</a></div><div class="stage" id="stage">${svPreview(x)}</div>${x.hero ? '<div class="ticket">${sv(I.ticket)} <span>Anche nel <b>biglietto dell\'apertura</b></span></div>' : ""}</div>`;
     return { html: `<div class="split ${i !== null ? "open" : ""}">${list}${form}${prev}</div>`, after: (root) => {
@@ -1805,7 +2225,7 @@ window.MENU = {
       wireDrop(root, (src) => { x.img = src; draw(); }, () => {});
       $$("[data-sw]", root).forEach((c) => c.addEventListener("change", () => { if (c.dataset.sw === "hero" && c.checked) D.shows.forEach((s) => (s.hero = false)); x[c.dataset.sw] = c.checked; setDirty(1); render(); }));
       $("[data-del]", root).addEventListener("click", () => { if (confirm("Eliminare questa serata?")) { D.shows.splice(sel, 1); setDirty(1); location.hash = "serate"; } });
-      $("[data-save]", root)?.addEventListener("click", () => toast("Salvato in bozza. Premi Pubblica per mandarlo online."));
+      $("[data-save]", root)?.addEventListener("click", () => toast("Salvato. Va online quando premi «Pubblica sul sito»."));
     } };
   };
 
@@ -1832,7 +2252,7 @@ window.MENU = {
       <div class="card"><h2>Foto del bicchiere <small>${d.foto ? "Foto sua" : "Per ora usa la foto del carattere «" + esc(d.c) + "»"}</small></h2>${drop(dfoto(d), d.fuoco, d.foto ? "Foto caricata" : "Carica la foto di questo drink", false, "drink")}</div>
       <div class="card"><h2>Profilo di gusto <small>Le X sul fascicolo</small></h2><div class="taste">${sl(0, "Dolce", "Amaro")}${sl(1, "Leggero", "Forte")}${sl(2, "Pulito", "Speziato")}</div></div>
       <div class="card"><h2>Ingredienti <small id="ingtot">Al massimo ${SLOT[sel % 4].ing} righe e ${SLOT[sel % 4].ingTot} caratteri in tutto su questa carta</small></h2>${lineList(d.ing, LIM.ing, SLOT[sel % 4].ing, "ing", "Uno per riga")}</div>
-      <div class="foot"><button class="danger" type="button" data-del>Togli dalla carta</button><span class="saved" aria-live="polite">Le modifiche restano in bozza finché non premi Pubblica</span></div>
+      <div class="foot"><button class="danger" type="button" data-del>Togli dalla carta</button><span class="saved" aria-live="polite">Le modifiche vanno online quando premi «Pubblica sul sito»</span></div>
     </div>`;
     const prev = `<div class="prev"><div class="ph"><span>Anteprima · fascicolo n° ${sel + 1}</span><a href="index.html#carta" target="_blank" rel="noopener">Sul sito ↗</a></div><div class="stage" id="stage">${dvPreview(d, sel)}</div></div>`;
     return { html: `<div class="split ${i !== null ? "open" : ""}">${list}${form}${prev}</div>`, after: (root) => { aiCtx = () => ({ nome: d.n, base: d.base, carattere: d.c });
@@ -1842,7 +2262,7 @@ window.MENU = {
       wireLines($("#form"), () => d.ing, (k, v) => { d.ing = v; draw(); const t = v.join(", ").length, mx = SLOT[sel % 4].ingTot, el = $("#ingtot"); if (el) { el.textContent = `${t} / ${mx} caratteri in tutto su questa carta`; el.style.color = t > mx ? "var(--red)" : ""; } }, LIM.ing);
       $("#chars").addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; d.c = b.textContent; $$("#chars button").forEach((x) => x.setAttribute("aria-pressed", x === b)); setDirty(1); draw(); });
       $("[data-del]", root).addEventListener("click", () => { if (confirm("Togliere questo drink dalla carta?")) { D.drinks.splice(sel, 1); setDirty(1); location.hash = "drink"; } });
-      $("[data-save]", root)?.addEventListener("click", () => toast("Salvato in bozza. Premi Pubblica per mandarlo online."));
+      $("[data-save]", root)?.addEventListener("click", () => toast("Salvato. Va online quando premi «Pubblica sul sito»."));
       /* riordino: trascina (desktop) */
       let from = null; const L = $("#dl");
       /* riordino col dito (o col mouse): si trascina la maniglia */
@@ -1874,7 +2294,7 @@ window.MENU = {
       <div class="card"><h2>Accanto alla foto</h2>${field("Frase", k.frase, LIM.frase, { k: "frase", area: true, rows: 2 })}<div class="row" style="margin-top:1.1rem">${field("Da provare", k.prova, LIM.prova, { k: "prova" })}${field("Scritta sul nastro", k.nastro, LIM.nastro, { k: "nastro" })}</div></div>
       <div class="card"><h2>L'appunto <small>Si apre toccando il nastro</small></h2>${field("Intestazione", k.appunto, LIM.ap, { k: "appunto" })}<div style="margin-top:1.1rem">${lineList(k.testo, LIM.para, 4, "testo", "Righe dell'appunto")}</div>
         <div class="row" style="margin-top:1.1rem">${field("Nota a penna", k.mano, LIM.mano, { k: "mano", ph: "facoltativa" })}${field("Parola cerchiata", k.parola, LIM.parola, { k: "parola", ph: "facoltativa" })}</div></div>
-      <div class="foot"><span></span><span class="saved" aria-live="polite">Le modifiche restano in bozza finché non premi Pubblica</span></div>
+      <div class="foot"><span></span><span class="saved" aria-live="polite">Le modifiche vanno online quando premi «Pubblica sul sito»</span></div>
     </div>`;
     const prev = `<div class="prev"><div class="ph"><span>Anteprima</span><a href="index.html#cucina" target="_blank" rel="noopener">Sul sito ↗</a></div><div class="stage" id="stage" style="padding:1.2rem">${kvPreview(k)}</div></div>`;
     return { html: `<div class="split ${i !== null ? "open" : ""}">${list}${form}${prev}</div>`, after: (root) => {
@@ -1882,7 +2302,7 @@ window.MENU = {
       wire($("#form"), (e) => { const f = e.target.dataset.k; if (f) k[f] = e.target.value; draw(); });
       wireLines($("#form"), () => k.testo, (n, v) => { k.testo = v; draw(); }, LIM.para);
       wireDrop(root, (src) => { k.foto = src; k.fuoco = "50% 50%"; draw(); }, (f) => { k.fuoco = f; draw(); });
-      $("[data-save]", root)?.addEventListener("click", () => toast("Salvato in bozza. Premi Pubblica per mandarlo online."));
+      $("[data-save]", root)?.addEventListener("click", () => toast("Salvato. Va online quando premi «Pubblica sul sito»."));
     } };
   };
 
@@ -1898,143 +2318,319 @@ window.MENU = {
         <div class="score"><div class="big">${esc(D.scores.google)}</div><div class="row" style="margin-top:.6rem"><div class="f"><label><span>Google</span></label><input type="text" value="${esc(D.scores.google)}" data-s="google"></div><div class="f"><label><span>Recensioni</span></label><input type="text" value="${esc(D.scores.googleN)}" data-s="googleN"></div></div></div></div></div>
       <div class="card"><h2>${RPROP[r.kind][0]} <small>Ogni prova ha il suo spazio: il ${RPROP[r.kind][0].toLowerCase()} regge al massimo ${LIM.rq[r.kind]} caratteri.</small></h2>${field("Frase della recensione", r.q, [8, LIM.rq[r.kind], "Copiala com'è, anche corta: corta si legge meglio."], { k: "q", area: true, rows: 2 })}
         <div class="row" style="margin-top:1.1rem">${field("Chi l'ha scritta", r.who, [2, 18, ""], { k: "who" })}${field("Dove", r.where, [2, 14, ""], { k: "where", ph: "Google" })}</div></div>
-      <div class="foot"><span></span><span class="saved" aria-live="polite">Le modifiche restano in bozza finché non premi Pubblica</span></div></div>`;
+      <div class="foot"><span></span><span class="saved" aria-live="polite">Le modifiche vanno online quando premi «Pubblica sul sito»</span></div></div>`;
     const prev = `<div class="prev"><div class="ph"><span>Anteprima</span><a href="index.html#resta" target="_blank" rel="noopener">Sul sito ↗</a></div><div class="stage" id="stage">${rvPreview(r)}</div></div>`;
     return { html: `<div class="split ${i !== null ? "open" : ""}">${list}${form}${prev}</div>`, after: (root) => {
       wire($("#form"), (e) => { const k = e.target.dataset.k; if (k) r[k] = e.target.value; const sk = e.target.dataset.s; if (sk) { D.scores[sk] = e.target.value; $$(".score .big", root)[sk.startsWith("trip") ? 0 : 1].textContent = sk.endsWith("N") ? $$(".score .big", root)[sk.startsWith("trip") ? 0 : 1].textContent : e.target.value; } $("#stage").innerHTML = rvPreview(r); });
-      $("[data-save]", root)?.addEventListener("click", () => toast("Salvato in bozza. Premi Pubblica per mandarlo online."));
+      $("[data-save]", root)?.addEventListener("click", () => toast("Salvato. Va online quando premi «Pubblica sul sito»."));
     } };
   };
 
   /* candidature: voto veloce (tasti 1-4), curriculum aperto accanto, smistamento a carte */
-  let filt = "Tutte", sortV = false;
+  /* ---------- candidature: archivio, mazzo da smistare, scheda del candidato ----------
+     Un voto per persona: Top (in alto), Buono (a destra), Forse (in basso, torna in fondo), No (a sinistra).
+     Lo stato non si sceglie a mano: "nuova" finché non la apri, "risposto" quando parte una risposta. */
+  let cTab = null, cRole = "", cQ = "";
   const VOTI = [null, { k: "no", t: "No", ic: sv(I.x) }, { k: "forse", t: "Forse", ic: sv(I.help) }, { k: "buono", t: "Buono", ic: sv(I.check) }, { k: "top", t: "Top", ic: sv(I.star) }];
-  const vb = (v) => v ? `<span class="vt ${VOTI[v].k}" title="${VOTI[v].t}">${VOTI[v].ic}</span>` : '<span class="vt none" title="Da votare">·</span>';
-  const TPL = [["Colloquio", "Ciao {nome}, grazie per averci scritto. Ti va di passare al locale per due chiacchiere? Dimmi tu quando sei libero questa settimana. Alberto"], ["Più avanti", "Ciao {nome}, grazie. Per ora siamo al completo, ma teniamo il tuo curriculum: se si libera un posto ti scriviamo noi. Alberto"], ["Grazie, no", "Ciao {nome}, grazie del tempo. Questa volta non siamo riusciti a trovare il posto giusto per te. In bocca al lupo. Alberto"]];
-  /* la pagina del curriculum: in produzione è il PDF vero, qui una pagina di prova */
-  const cvPage = (a) => `<div class="cvp"><div class="cvh"><b>${esc(a.name)}</b><span>${esc(a.email)}${a.tel ? " · " + esc(a.tel) : ""}</span></div><p class="cvr">${esc(a.role)} · Roma</p><h5>Esperienza</h5>${(a.exp || []).map(([y, t]) => `<div class="cve"><span>${esc(y)}</span><span>${esc(t)}</span></div>`).join("") || '<p class="cvx">Prima esperienza.</p>'}<h5>Su di me</h5><p>${esc(a.msg)}</p><h5>Disponibilità</h5><p>${esc(a.disp)}</p><div class="cvl"></div><div class="cvl s"></div><div class="cvl"></div></div>`;
-  function viewer(a) {
-    if (!a.cv) return `<div class="att"><span class="ic" style="background:var(--n3);color:var(--ash)">?</span><span><b>Nessun curriculum</b><small>Ha scritto solo il messaggio.</small></span></div>`;
-    return `<div class="pdf"><div class="pbar"><span class="ic">PDF</span><b>${esc(a.cv)}</b><small>${esc(a.size)} · pagina 1 di 1</small><span class="sp"></span><button class="x" type="button" data-zoom="-1" aria-label="Rimpicciolisci">−</button><button class="x" type="button" data-zoom="1" aria-label="Ingrandisci">+</button><button class="btn ghost sm cut" type="button" data-cv>Scarica</button></div><div class="pview" id="pview"><div class="ppage" style="--z:1">${cvPage(a)}</div></div></div>`;
-  }
-  const rateBar = (a) => `<div class="rate" id="rate" role="group" aria-label="Voto">${VOTI.slice(1).map((v, n) => `<button type="button" class="${v.k}" data-v="${n + 1}" aria-pressed="${a.voto === n + 1}"><i>${v.ic}</i>${v.t}<kbd>${n + 1}</kbd></button>`).join("")}</div>`;
-  V.candidature = (i) => {
-    head("candidature", i);
-    const FS = ["Tutte", "Nuova", "Colloquio", "Archiviata"];
-    let shown = D.apps.filter((a) => filt === "Tutte" || a.status === filt);
-    if (sortV) shown = shown.slice().sort((x, y) => (y.voto || 0) - (x.voto || 0));
-    const sel = i ?? (mob() ? null : (shown[0] ? D.apps.indexOf(shown[0]) : null)), a = sel !== null ? D.apps[sel] : null;
-    if (a && a.status === "Nuova" && i !== null) { a.status = "Letta"; drawNav(); }
-    const todo = D.apps.filter((x) => !x.voto && x.status !== "Archiviata").length;
-    const list = `<div class="clist"><button class="smista cut" type="button" id="smista" ${todo ? "" : "disabled"}><span><b>Smista le candidature</b><small>${todo ? `${todo} da votare, una alla volta` : "Tutte votate"}</small></span><span class="sarr">${sv(I.chev)}</span></button>
-      <div class="filters chips">${FS.map((f) => `<button type="button" data-f="${f}" aria-pressed="${f === filt}">${f === "Nuova" ? "Nuove" : f === "Archiviata" ? "Archiviate" : f}${f !== "Tutte" ? ` · ${D.apps.filter((x) => x.status === f).length}` : ""}</button>`).join("")}<button type="button" data-sortv aria-pressed="${sortV}">Per voto</button></div>
-      <div class="list" style="position:static;max-height:none">${shown.map((x) => { const k = D.apps.indexOf(x); return `<button class="item" type="button" data-go="candidature/${k}" ${k === sel ? 'aria-current="true"' : ""}>${vb(x.voto)}<span><b>${esc(x.name)}</b><small>${esc(x.role)} · ${esc(x.when)}${x.cv ? " · CV" : ""}</small></span><span class="st ${x.status === "Nuova" ? "new" : x.status === "Colloquio" ? "on" : ""}">${esc(x.status)}</span></button>`; }).join("") || '<p class="empty">Nessuna candidatura qui.</p>'}</div>
-      <p class="keys">Tasti: <kbd>1</kbd>–<kbd>4</kbd> voto · <kbd>J</kbd> <kbd>K</kbd> scorri</p></div>`;
-    const mail = a ? `<div class="mail" id="mail">
-      <div class="mhead"><div><h2>${esc(a.name)}</h2><div class="meta"><span>${esc(a.role)}</span><a href="mailto:${esc(a.email)}">${esc(a.email)}</a>${a.tel ? `<a href="tel:${esc(a.tel.replace(/\s/g, ""))}">${esc(a.tel)}</a>` : ""}<span>${esc(a.disp)}</span></div></div>
-        <div class="status" id="stat">${["Letta", "Colloquio", "Archiviata"].map((x) => `<button type="button" aria-pressed="${a.status === x}">${x}</button>`).join("")}</div></div>
-      ${rateBar(a)}
-      <div class="mgrid"><div class="mcol">
-        <div class="msg">${esc(a.msg)}</div>
-        <div class="card"><h2>Note interne <small>Le vedi solo tu</small></h2><div class="f"><textarea rows="2" data-note placeholder="Es. richiamare giovedì">${esc(a.notes)}</textarea></div></div>
-        ${a.replies.length ? `<div class="thread">${a.replies.map((r) => `<div class="bubble"><small>Tu, ${esc(r.when)}</small>${esc(r.text)}</div>`).join("")}</div>` : ""}
-        <div class="card"><h2>Rispondi <small>Parte da lavoro@blendfoodanddrink.it</small></h2><div class="compose"><div class="tpl chips">${TPL.map(([t], n) => `<button type="button" data-tpl="${n}">${t}</button>`).join("")}${aiBtn("candidato", "Bozza con Claude")}</div><div class="f"><textarea rows="5" id="reply" placeholder="Scrivi a ${esc(a.name.split(" ")[0])}…"></textarea></div><div class="foot"><span class="hint" style="font-size:.78rem;color:var(--dim)">La risposta arriva nella sua casella e torna qui.</span><button class="btn cut" type="button" data-send>Invia</button></div></div></div>
-      </div><div class="mcol">${viewer(a)}</div></div>
-    </div>` : `<div class="mail"><p class="empty">Scegli una candidatura a sinistra.</p></div>`;
-    return { html: `<div class="inbox ${i !== null ? "open" : ""}">${list}${mail}</div>`, after: (root) => {
-      $$("[data-f]", root).forEach((b) => b.addEventListener("click", () => { filt = b.dataset.f; render(); }));
-      $("[data-sortv]", root).addEventListener("click", () => { sortV = !sortV; render(); });
-      $("#smista", root).addEventListener("click", openSmista);
-      if (!a) return;
-      aiCtx = () => ({ nome: a.name.split(" ")[0], ruolo: a.role });
-      const setV = (v) => { a.voto = a.voto === v ? 0 : v; render(); toast(a.voto ? `Voto: ${VOTI[a.voto].t}` : "Voto tolto"); };
-      $("#rate").addEventListener("click", (e) => { const b = e.target.closest("[data-v]"); if (b) setV(+b.dataset.v); });
-      keyH = (e) => { if (e.target.closest("input, textarea")) return; if (/^[1-4]$/.test(e.key)) setV(+e.key); const k = shown.indexOf(a); if (e.key === "j" && shown[k + 1]) location.hash = "candidature/" + D.apps.indexOf(shown[k + 1]); if (e.key === "k" && shown[k - 1]) location.hash = "candidature/" + D.apps.indexOf(shown[k - 1]); };
-      $("#stat").addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; a.status = b.textContent; render(); toast(`Segnata come «${a.status}».`); });
-      $("[data-note]", root).addEventListener("input", (e) => { a.notes = e.target.value; });
-      $$("[data-tpl]", root).forEach((b) => b.addEventListener("click", () => { $("#reply").value = TPL[+b.dataset.tpl][1].replace("{nome}", a.name.split(" ")[0]); $("#reply").focus(); }));
-      $("[data-send]", root).addEventListener("click", () => { const t = $("#reply").value.trim(); if (!t) { toast("Scrivi qualcosa prima di inviare."); return; } a.replies.push({ when: "adesso", text: t }); if (a.status === "Letta" || a.status === "Nuova") a.status = "Colloquio"; render(); toast(`Risposta inviata a ${a.name.split(" ")[0]} (per finta).`); });
-      const cv = $("[data-cv]", root); if (cv) cv.addEventListener("click", () => toast("Qui si scarica il PDF del curriculum."));
-      $$("[data-zoom]", root).forEach((b) => b.addEventListener("click", () => { const pg = $(".ppage", root), z = Math.min(1.6, Math.max(.6, (+pg.style.getPropertyValue("--z") || 1) + b.dataset.zoom * .2)); pg.style.setProperty("--z", z.toFixed(1)); }));
-    } };
+  const ROLI = [["Bancone", "bar"], ["Sala", "sala"], ["Cucina", "cucina"], ["Altro", "altro"]];
+  /* disegni a due toni per i ruoli (Phosphor duotone, MIT) */
+  const RIC = {
+    bar: '<path d="M200,72l-72,72L56,72Z" opacity=".22"/><path d="M237.66,45.66A8,8,0,0,0,232,32H24a8,8,0,0,0-5.66,13.66L120,147.31V208H88a8,8,0,0,0,0,16h80a8,8,0,0,0,0-16H136V147.31ZM75.31,80H180.69L128,132.69ZM212.69,48l-16,16H59.31l-16-16Z"/>',
+    sala: '<path d="M216,152v24H40V152a88,88,0,0,1,176,0Z" opacity=".22"/><path d="M24,184H232a8,8,0,0,0,0-16h-8V152a96.12,96.12,0,0,0-88-95.66V40h16a8,8,0,0,0,0-16H104a8,8,0,0,0,0,16h16V56.34A96.12,96.12,0,0,0,32,152v16H24a8,8,0,0,0,0,16Zm24-32a80,80,0,0,1,160,0v16H48Zm192,56a8,8,0,0,1-8,8H24a8,8,0,0,1,0-16H232A8,8,0,0,1,240,208Z"/>',
+    cucina: '<path d="M216,80V184a24,24,0,0,1-24,24H64a24,24,0,0,1-24-24V80Z" opacity=".22"/><path d="M88,48V16a8,8,0,0,1,16,0V48a8,8,0,0,1-16,0Zm40,8a8,8,0,0,0,8-8V16a8,8,0,0,0-16,0V48A8,8,0,0,0,128,56Zm32,0a8,8,0,0,0,8-8V16a8,8,0,0,0-16,0V48A8,8,0,0,0,160,56Zm92.8,46.4L224,124v60a32,32,0,0,1-32,32H64a32,32,0,0,1-32-32V124L3.2,102.4a8,8,0,0,1,9.6-12.8L32,104V80a8,8,0,0,1,8-8H216a8,8,0,0,1,8,8v24l19.2-14.4a8,8,0,0,1,9.6,12.8ZM208,88H48v96a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16Z"/>',
+    altro: '<path d="M192,96a64,64,0,1,1-64-64A64,64,0,0,1,192,96Z" opacity=".22"/><path d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"/>'
   };
+  const roleK = (r) => (ROLI.find((x) => x[0] === r) || ROLI[3])[1];
+  const ava = (r, c = "") => `<span class="ava ava-${roleK(r)} ${c}"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">${RIC[roleK(r)]}</svg></span>`;
+  const vpill = (v) => v ? `<span class="vp ${VOTI[v].k}">${VOTI[v].ic}${VOTI[v].t}</span>` : "";
+  const TPL = [["Colloquio", "Ciao {nome}, grazie per averci scritto. Ti va di passare al locale per due chiacchiere? Dimmi tu quando sei libero questa settimana. Alberto"], ["Più avanti", "Ciao {nome}, grazie. Per ora siamo al completo, ma teniamo il tuo curriculum: se si libera un posto ti scriviamo noi. Alberto"], ["Grazie, no", "Ciao {nome}, grazie del tempo. Questa volta non siamo riusciti a trovare il posto giusto per te. In bocca al lupo. Alberto"]];
+  /* le pagine del curriculum: in produzione sono le pagine del PDF vero (pdf.js), qui pagine di prova */
+  const cvPages = (a) => a.cv ? (a.pag2 ? 2 : 1) : 0;
+  const cvPage = (a, n = 1) => n === 2 ? `<div class="cvp"><div class="cvh"><b>${esc(a.name)}</b><span>pagina 2</span></div><h5>Formazione</h5>${a.pag2.form.map(([y, t]) => `<div class="cve"><span>${esc(y)}</span><span>${esc(t)}</span></div>`).join("")}<h5>Lingue</h5><p>${esc(a.pag2.lingue)}</p><h5>Altro</h5><p>${esc(a.pag2.altro)}</p><div class="cvl"></div><div class="cvl s"></div><div class="cvl"></div><div class="cvl s"></div></div>`
+    : `<div class="cvp"><div class="cvh"><b>${esc(a.name)}</b><span>${esc(a.email)}${a.tel ? " · " + esc(a.tel) : ""}</span></div><p class="cvr">${esc(a.role)} · Roma</p><h5>Esperienza</h5>${(a.exp || []).map(([y, t]) => `<div class="cve"><span>${esc(y)}</span><span>${esc(t)}</span></div>`).join("") || '<p class="cvx">Prima esperienza.</p>'}<h5>Su di me</h5><p>${esc(a.msg)}</p><h5>Disponibilità</h5><p>${esc(a.disp)}</p><div class="cvl"></div><div class="cvl s"></div><div class="cvl"></div></div>`;
+  const paper = (a, n = 1) => a.cv ? `<div class="ppage">${cvPage(a, n)}</div>` : `<div class="nocv">${ava(a.role, "xl")}<b>Nessun curriculum</b><small>Ha scritto solo il messaggio</small><blockquote>${esc(a.msg)}</blockquote></div>`;
+  const espTxt = (a) => a.anni === undefined ? "" : a.anni ? `${a.anni} ${a.anni === 1 ? "anno" : "anni"} di esperienza` : "Prima esperienza";
+  const fattiDi = (a) => [espTxt(a), a.inglese && `Inglese ${a.inglese.toLowerCase()}`, a.disp, a.zona].filter(Boolean);
+  const daValutare = () => D.apps.filter((a) => !a.voto);
+  const inRole = (a) => !cRole || a.role === cRole;
+  const cConta = () => { const c = { todo: 0, 4: 0, 3: 0, 2: 0, 1: 0, all: 0 }; D.apps.filter(inRole).forEach((a) => { c.all++; c[a.voto || "todo"]++; }); return c; };
+  const CTABS = [["todo", "Da valutare"], ["4", "Top"], ["3", "Buono"], ["2", "Forse"], ["1", "No"], ["all", "Tutte"]];
+  const cLista = () => { const q = MZ.norm(cQ); return D.apps.filter((a) => inRole(a) && (cTab === "all" || (cTab === "todo" ? !a.voto : a.voto === +cTab)) && (!q || MZ.norm([a.name, a.role, a.msg, a.notes, a.email].join(" ")).includes(q)))
+    .sort((x, y) => (cTab === "all" ? (y.voto || 0) - (x.voto || 0) : 0) || (y.id - x.id)); };
+
+  V.candidature = (i) => {
+    if (i !== null && D.apps[i]) return profilo(D.apps[i]);
+    head("candidature", null);
+    const todo = daValutare().filter(inRole), c = cConta();
+    if (cTab === null || (cTab === "todo" && !todo.length)) cTab = todo.length ? "todo" : "all";
+    const L = cLista();
+    const hero = !D.apps.length ? `<div class="chero quiet"><span class="hi">${sv(I.people)}</span><span class="ht"><b>Ancora nessuna candidatura</b><small>Arrivano qui appena qualcuno si candida dal sito, curriculum compreso.</small></span></div>`
+      : todo.length ? `<button type="button" class="chero" id="smista"><span class="fan" aria-hidden="true">${todo.slice(0, 3).map((a, n) => `<span class="fmini m${n}">${a.cv ? `<span class="ppage">${cvPage(a)}</span>` : ava(a.role)}</span>`).reverse().join("")}</span><span class="ht"><b>${todo.length} da valutare${cRole ? ` · ${esc(cRole)}` : ""}</b><small>A destra Buono, a sinistra No, in alto Top.</small></span><span class="go btn">${sv(I.cards || I.people)}Inizia</span></button>`
+      : `<div class="chero quiet"><span class="hi ok">${sv(I.check)}</span><span class="ht"><b>Tutte valutate${cRole ? ` in ${esc(cRole)}` : ""}</b><small>${c[4] ? `<button class="mini" type="button" data-tab="4">${c[4]} ${c[4] === 1 ? "Top da chiamare" : "Top da chiamare"}</button>. ` : ""}Le nuove arrivano qui.</small></span></div>`;
+    const tabs = `<div class="ctabs" role="tablist">${CTABS.map(([k, t]) => `<button type="button" role="tab" data-tab="${k}" aria-selected="${cTab === k}" class="t-${k}">${k !== "todo" && k !== "all" ? VOTI[+k].ic : ""}<span>${t}</span><em>${c[k]}</em></button>`).join("")}</div>`;
+    const roles = `<div class="croles chips scroll"><button type="button" data-role="" aria-pressed="${!cRole}">Tutti i ruoli</button>${ROLI.map(([r]) => { const n = D.apps.filter((a) => a.role === r).length; return `<button type="button" data-role="${r}" aria-pressed="${cRole === r}" ${n ? "" : "disabled"}>${r}<em>${n}</em></button>`; }).join("")}</div>`;
+    const row = (a) => { const k = D.apps.indexOf(a), fl = [a.status === "Nuova" && '<span class="fl new">Nuova</span>', a.replies.length && '<span class="fl">Risposto</span>', a.notes && '<span class="fl">Nota</span>', !a.cv && '<span class="fl mute">Senza CV</span>'].filter(Boolean);
+      return `<button type="button" class="carow v${a.voto || 0}" data-go="candidature/${k}">${ava(a.role)}<span class="cwho"><b>${esc(a.name)}</b><small>${esc(a.role)} · ${esc(a.when)}</small><small class="cf">${esc([espTxt(a), a.inglese && "Inglese " + a.inglese.toLowerCase()].filter(Boolean).join(" · "))}</small>${fl.length ? `<span class="fls">${fl.join("")}</span>` : ""}</span><span class="dsp">${esc([espTxt(a), a.inglese && "Inglese " + a.inglese.toLowerCase()].filter(Boolean).join(" · "))}<small>${esc(a.disp)}</small></span><span class="end">${vpill(a.voto)}${sv(I.chev, "ch")}</span></button>`; };
+    const empty = cQ ? "Nessuno corrisponde alla ricerca." : cTab === "todo" ? "Niente da valutare qui." : "Ancora nessuno qui.";
+    return { html: `<div class="cand">${hero}<div class="cbar">${tabs}<div class="ctools"><label class="csearch">${sv('<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>')}<input type="search" id="cq" placeholder="Cerca per nome, ruolo, note" value="${esc(cQ)}" aria-label="Cerca"></label>${roles}</div></div>
+      <div class="clist2">${L.map(row).join("") || `<p class="empty">${empty}</p>`}</div></div>`,
+      after: (root) => {
+        $("#smista", root)?.addEventListener("click", openSmista);
+        root.addEventListener("click", (e) => { const t = e.target.closest("[data-tab]"); if (t) { cTab = t.dataset.tab; render(); } const r = e.target.closest("[data-role]"); if (r && !r.disabled) { cRole = r.dataset.role; render(); } });
+        const q = $("#cq", root); q.addEventListener("input", () => { cQ = q.value; clearTimeout(q._t); q._t = setTimeout(() => { render(); const n = $("#cq"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); }, 180); });
+      } };
+  };
+
+  /* ---------- la scheda: curriculum grande a sinistra, decisioni e risposta a destra ---------- */
+  function profilo(a) {
+    head("candidature", 1); if (mob()) $("#title").textContent = a.name;
+    if (a.status === "Nuova") { a.status = "Letta"; drawNav(); }
+    const ctx = cTab === null ? D.apps : cLista(), pos = ctx.indexOf(a), np = cvPages(a), wa = a.tel ? "https://wa.me/39" + a.tel.replace(/\D/g, "") : "";
+    const pages = a.cv ? Array.from({ length: np }, (_, n) => `<div class="ppage">${cvPage(a, n + 1)}</div>`).join("") : paper(a);
+    const nav = pos >= 0 && ctx.length > 1 ? `<div class="pnav"><button class="hbtn" type="button" data-pv="-1" ${pos ? "" : "disabled"} aria-label="Precedente">${sv(I.back)}</button><span>${pos + 1} di ${ctx.length}</span><button class="hbtn" type="button" data-pv="1" ${pos < ctx.length - 1 ? "" : "disabled"} aria-label="Successiva">${sv(I.chev)}</button></div>` : "";
+    return { html: `<div class="prof">
+      <div class="ptop"><button class="bk" type="button" data-go="candidature">${sv(I.back)}<span>Candidature</span></button>${nav}</div>
+      <section class="pcv"><div class="pcvbar">${a.cv ? `<span class="ic">PDF</span><b>${esc(a.cv)}</b><small>${np} ${np === 1 ? "pagina" : "pagine"} · ${esc(a.size)}</small>` : "<b>Nessun curriculum allegato</b>"}<span class="sp"></span>${a.cv ? `<button class="hbtn" type="button" data-zoom="-1" aria-label="Rimpicciolisci">${sv('<path d="M5 12h14"/>')}</button><button class="hbtn" type="button" data-zoom="1" aria-label="Ingrandisci">${sv(I.plus)}</button><button class="btn ghost sm" type="button" data-cv>Scarica</button>` : ""}</div><div class="pscroll" id="pscroll" title="Su telefono: due dita o doppio tocco per ingrandire"><div class="ppages" style="--z:1">${pages}</div></div></section>
+      <aside class="pside">
+        <div class="phero">${ava(a.role, "lg")}<div><h2>${esc(a.name)}</h2><p>${esc(a.role)} · ${esc(a.when)}</p>${a.replies.length ? '<span class="fl">Risposto</span>' : ""}</div></div>
+        <div class="pquick">${a.tel ? `<a class="pq" href="tel:${esc(a.tel.replace(/\s/g, ""))}">${sv('<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/>')}<span>Chiama</span></a><a class="pq" href="${wa}" target="_blank" rel="noopener">${sv('<path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 1a4 4 0 0 1-2-2l1-1-1-2z"/>')}<span>WhatsApp</span></a>` : ""}<a class="pq" href="mailto:${esc(a.email)}">${sv(I.mail)}<span>Email</span></a></div>
+        <div class="ptiles">${[["Esperienza", a.anni === undefined ? "Non detto" : a.anni ? `${a.anni} ${a.anni === 1 ? "anno" : "anni"}` : "Prima esperienza", a.anni >= 3 ? "g" : a.anni >= 1 ? "y" : ""], ["Inglese", a.inglese || "Non detto", /fluente|madre/i.test(a.inglese || "") ? "g" : /buono/i.test(a.inglese || "") ? "y" : ""], ["Disponibilità", a.disp, ""], ["Abita a", a.zona || "Non detto", /^\D*[1-5] km/.test(a.zona || "") ? "g" : ""]].map(([k, v, t]) => `<div class="pt ${t}"><small>${k}</small><b>${esc(v)}</b></div>`).join("")}</div>
+        <section class="psec"><h4>Il suo messaggio</h4><blockquote>${esc(a.msg)}</blockquote></section>
+        <section class="psec"><h4>Note interne <small>Le vedi solo tu</small><span class="saved0" id="nsv" hidden>Salvata</span></h4><textarea rows="3" id="pnote" placeholder="Es. richiamare giovedì, simpatico al telefono">${esc(a.notes)}</textarea></section>
+        <section class="psec"><h4>Rispondi <small>da lavoro@blendfoodanddrink.it</small></h4>
+          ${a.replies.length ? `<div class="thread">${a.replies.map((r) => `<div class="bubble"><small>Tu, ${esc(r.when)}</small>${esc(r.text)}</div>`).join("")}</div>` : ""}
+          <div class="compose"><div class="tpl chips">${TPL.map(([t], n) => `<button type="button" data-tpl="${n}">${t}</button>`).join("")}${aiBtn("candidato", "Bozza con Claude")}</div><div class="f"><textarea rows="4" id="reply" placeholder="Scrivi a ${esc(a.name.split(" ")[0])}…"></textarea></div><div class="foot"><span class="hint">La risposta arriva nella sua casella e torna qui.</span><button class="btn" type="button" data-send>Invia</button></div></div></section>
+        <details class="psec pdet"><summary>Dettagli</summary><dl><div><dt>Email</dt><dd>${esc(a.email)}</dd></div>${a.tel ? `<div><dt>Telefono</dt><dd>${esc(a.tel)}</dd></div>` : ""}<div><dt>Arrivata</dt><dd>${esc(a.when)}</dd></div><div><dt>Ruolo</dt><dd>${esc(a.role)}</dd></div></dl><button class="danger" type="button" data-del>Elimina la candidatura</button></details>
+      </aside>
+      <div class="pdecide" role="group" aria-label="Voto">${VOTI.slice(1).map((v, n) => `<button type="button" class="pd ${v.k}" data-v="${n + 1}" aria-pressed="${a.voto === n + 1}"><i>${v.ic}</i><span>${v.t}</span></button>`).reverse().join("")}</div>
+    </div>`, after: (root) => {
+      aiCtx = () => ({ nome: a.name.split(" ")[0], ruolo: a.role });
+      const vai = (d) => { const b = ctx[pos + d]; if (b) location.hash = "candidature/" + D.apps.indexOf(b); };
+      root.addEventListener("click", (e) => {
+        const v = e.target.closest("[data-v]"); if (v) { const nv = +v.dataset.v; a.voto = a.voto === nv ? 0 : nv; setDirty(1); toast(a.voto ? `${a.name.split(" ")[0]}: ${VOTI[a.voto].t}` : "Voto tolto"); if (a.voto && cTab === "todo" && ctx[pos + 1]) { setTimeout(() => vai(1), 260); } render(); return; }
+        const p = e.target.closest("[data-pv]"); if (p) vai(+p.dataset.pv);
+        const t = e.target.closest("[data-tpl]"); if (t) { $("#reply").value = TPL[+t.dataset.tpl][1].replace("{nome}", a.name.split(" ")[0]); $("#reply").focus(); }
+        if (e.target.closest("[data-send]")) { const tx = $("#reply").value.trim(); if (!tx) return toast("Scrivi qualcosa prima di inviare."); a.replies.push({ when: "adesso", text: tx }); a.status = "Risposto"; setDirty(1); render(); toast(`Risposta inviata a ${a.name.split(" ")[0]} (per finta).`); }
+        if (e.target.closest("[data-cv]")) toast("Qui si scarica il PDF del curriculum.");
+        const z = e.target.closest("[data-zoom]"); if (z) { const pg = $(".ppages", root), nz = Math.min(2, Math.max(.6, (+pg.style.getPropertyValue("--z") || 1) + z.dataset.zoom * .2)); pg.style.setProperty("--z", nz.toFixed(1)); }
+        if (e.target.closest("[data-del]") && confirm(`Eliminare la candidatura di ${a.name}?`)) { D.apps.splice(D.apps.indexOf(a), 1); setDirty(1); location.hash = "candidature"; }
+      });
+      const nt = $("#pnote", root); nt.addEventListener("input", () => { a.notes = nt.value; clearTimeout(nt._t); nt._t = setTimeout(() => { setDirty(1); const s = $("#nsv"); if (s) { s.hidden = false; setTimeout(() => (s.hidden = true), 1200); } }, 600); });
+      keyH = (e) => { if (e.target.closest("input, textarea")) return; if (e.key === "ArrowRight") vai(1); if (e.key === "ArrowLeft") vai(-1); };
+      zoomDita($("#pscroll", root));
+    } };
+  }
+  function zoomDita(sc) {
+    if (!sc) return; const pg = $(".ppages", sc); if (!pg) return; let d0 = 0, z0 = 1, cx = 0, cy = 0, tap = 0;
+    const zs = (z, x, y) => { const r = sc.getBoundingClientRect(), old = +pg.style.getPropertyValue("--z") || 1, nz = Math.min(3, Math.max(1, z)); const ax = sc.scrollLeft + x - r.left, ay = sc.scrollTop + y - r.top; pg.style.transition = "none"; pg.style.setProperty("--z", nz.toFixed(3)); sc.scrollLeft = ax * nz / old - (x - r.left); sc.scrollTop = ay * nz / old - (y - r.top); };
+    const dist = (t) => Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
+    sc.addEventListener("touchstart", (e) => { if (e.touches.length === 2) { d0 = dist(e.touches); z0 = +pg.style.getPropertyValue("--z") || 1; cx = (e.touches[0].clientX + e.touches[1].clientX) / 2; cy = (e.touches[0].clientY + e.touches[1].clientY) / 2; }
+      else if (e.touches.length === 1) { const now = Date.now(); if (now - tap < 300) { const z = +pg.style.getPropertyValue("--z") || 1; zs(z > 1.2 ? 1 : 2, e.touches[0].clientX, e.touches[0].clientY); tap = 0; } else tap = now; } }, { passive: true });
+    sc.addEventListener("touchmove", (e) => { if (e.touches.length !== 2 || !d0) return; e.preventDefault(); zs(z0 * dist(e.touches) / d0, cx, cy); }, { passive: false });
+    sc.addEventListener("touchend", (e) => { if (e.touches.length < 2) { d0 = 0; pg.style.transition = ""; } });
+  }
   let keyH = null;
   addEventListener("keydown", (e) => { if (route().s === "candidature" && keyH && !$("#smi.on")) keyH(e); });
-  /* smistamento: una carta alla volta, si scorre col dito o con i tasti */
+
+  /* ---------- smistamento: il curriculum intero come una carta, si sfoglia toccando i lati ---------- */
   function openSmista() {
-    const q = D.apps.filter((x) => !x.voto && x.status !== "Archiviata"); if (!q.length) return;
+    const q = D.apps.filter((x) => !x.voto && inRole(x)); if (!q.length) return;
     let n = 0, busy = false; const ov = $("#smi"), fatti = [];
     const conta = () => VOTI.slice(1).map((v, k) => [v, q.filter((a) => a.voto === k + 1).length]).reverse();
-    const card = () => { const a = q[n]; return a ? `<div class="scard" id="scard"><div class="sch"><span class="cnt">${n + 1} di ${q.length}</span><h3>${esc(a.name)}</h3><span class="s">${esc(a.role)} · ${esc(a.disp)}</span></div><div class="scv">${a.cv ? `<div class="ppage" style="--z:.78">${cvPage(a)}</div>` : `<p class="msg">${esc(a.msg)}</p>`}</div><i class="stamp2"></i></div>`
-      : `<div class="scard done"><span class="okc">${sv(I.check)}</span><h3>Fatto</h3><p>Hai votato ${q.length === 1 ? "la candidatura" : "tutte e " + q.length + " le candidature"}.</p><div class="sres">${conta().map(([v, c]) => `<span class="${v.k}"><b>${c}</b>${v.t}</span>`).join("")}</div><button class="btn" type="button" data-close>Torna all'elenco</button></div>`; };
-    const draw = () => { const a = q[n]; $(".sstage", ov).innerHTML = card(); $(".srate", ov).hidden = !a; $(".keys", ov).hidden = !a; $(".sprog i", ov).style.width = (n / q.length * 100) + "%";
-      $(".sinfo", ov).innerHTML = a && a.cv && a.msg ? `<p class="gl" style="padding:0">Il suo messaggio</p><p>${esc(a.msg)}</p>` : "";
+    const card = () => { const a = q[n]; if (!a) return `<div class="scard done"><span class="okc">${sv(I.check)}</span><h3>Fatto</h3><p>Hai valutato ${q.length === 1 ? "la candidatura" : "tutte e " + q.length + " le candidature"}.</p><div class="sres">${conta().map(([v, c]) => `<span class="${v.k}"><b>${c}</b>${v.t}</span>`).join("")}</div><button class="btn" type="button" data-close>Torna all'elenco</button></div>`;
+      const np = cvPages(a);
+      return `<div class="scard" id="scard" data-p="1" data-np="${np}"><div class="spaper">${paper(a)}${np > 1 ? `<div class="sbars">${Array.from({ length: np }, (_, k) => `<button type="button" class="${k ? "" : "on"}" data-pg="${k + 1}" aria-label="Pagina ${k + 1}"><i></i></button>`).join("")}</div>` : ""}</div>
+        <button type="button" class="sid" data-apri="${D.apps.indexOf(a)}">${ava(a.role)}<span><b>${esc(a.name)}</b><small>${esc(a.role)} · ${esc(a.when)}</small></span>${sv(I.chev, "ch")}<span class="sfacts">${fattiDi(a).map((f) => `<em>${esc(f)}</em>`).join("")}</span></button><i class="stamp2"></i></div>`; };
+    const draw = () => { const a = q[n]; $(".sstage", ov).innerHTML = card(); $(".srate", ov).hidden = !a; $(".sprog i", ov).style.width = (n / q.length * 100) + "%"; $(".scnt", ov).textContent = a ? `${n + 1} di ${q.length}` : "";
+      $(".sinfo", ov).innerHTML = a ? `<p class="gl" style="padding:0">Il suo messaggio</p><p>${esc(a.msg)}</p>${a.notes ? `<p class="gl" style="padding:0;margin-top:1rem">La tua nota</p><p>${esc(a.notes)}</p>` : ""}` : "";
       $$("[data-undo]", ov).forEach((b) => (b.disabled = !fatti.length)); };
-    const vote = (v) => { const a = q[n]; if (!a || busy) return; busy = true; a.voto = v; fatti.push(a); const c = $("#scard"); c.classList.add("out", VOTI[v].k); $(".stamp2", c).textContent = VOTI[v].t; setTimeout(() => { n++; busy = false; draw(); }, 380); };
+    const vote = (v) => { const a = q[n]; if (!a || busy) return; busy = true; a.voto = v; if (a.status === "Nuova") a.status = "Letta"; fatti.push(a); setDirty(1); try { navigator.vibrate && navigator.vibrate(12); } catch (e) {} const c = $("#scard"); c.classList.add("out", VOTI[v].k); $(".stamp2", c).textContent = VOTI[v].t; setTimeout(() => { n++; busy = false; draw(); }, 360); };
     const undo = () => { if (busy || !fatti.length) return; fatti.pop().voto = 0; n--; draw(); };
-    ov.innerHTML = `<div class="sbox"><div class="stop"><b>Smista le candidature</b><span class="sprog"><i></i></span><button class="hbtn" type="button" data-undo aria-label="Annulla l'ultima" title="Annulla l'ultima" disabled>${sv(I.undo)}</button><button class="hbtn" type="button" data-close aria-label="Chiudi">${sv(I.x)}</button></div>
+    const vaiPg = (c, p) => { c.dataset.p = p; $(".spaper .ppage", c).outerHTML = `<div class="ppage">${cvPage(q[n], p)}</div>`; $$(".sbars button", c).forEach((b, k) => b.classList.toggle("on", k + 1 === p)); };
+    const gira = (c, d) => { if (!d) return; const np = +c.dataset.np, p = +c.dataset.p + d; if (p < 1 || p > np) { c.classList.remove("bump"); void c.offsetWidth; c.classList.add("bump"); return; } vaiPg(c, p); };
+    ov.innerHTML = `<div class="sbox"><div class="stop"><button class="hbtn" type="button" data-close aria-label="Chiudi">${sv(I.x)}</button><div class="stt0"><b>Da valutare</b><span class="scnt"></span></div><button class="hbtn" type="button" data-undo aria-label="Annulla l'ultima" title="Annulla l'ultima" disabled>${sv(I.undo)}</button><span class="sprog"><i></i></span></div>
       <div class="sstage"></div>
-      <div class="sside"><div class="sinfo"></div><div class="srate">${VOTI.slice(1).map((v, k) => `<button type="button" class="${v.k}" data-v="${k + 1}"><i>${v.ic}</i><span>${v.t}</span><kbd>${k + 1}</kbd></button>`).join("")}</div>
-        <p class="keys"><span class="kt">Trascina: a sinistra No, a destra Buono, in alto Top</span><span class="kd">Frecce o tasti <kbd>1</kbd>-<kbd>4</kbd> per votare · <kbd>Z</kbd> annulla · <kbd>Esc</kbd> chiude</span></p></div></div>`;
+      <div class="sside"><div class="sinfo"></div><div class="srate">${VOTI.slice(1).map((v, k) => `<button type="button" class="${v.k}" data-v="${k + 1}" aria-label="${v.t}"><i>${v.ic}</i><span>${v.t}</span></button>`).join("")}</div></div></div>`;
     ov.classList.add("on"); draw();
     const close = () => { ov.classList.remove("on"); removeEventListener("keydown", kh); drawNav(); render(); };
-    const kh = (e) => { const k = { ArrowLeft: 1, ArrowDown: 2, ArrowRight: 3, ArrowUp: 4 }[e.key] || (/^[1-4]$/.test(e.key) ? +e.key : 0); if (k) { e.preventDefault(); vote(k); } if (e.key === "z" || e.key === "Z" || e.key === "Backspace") undo(); if (e.key === "Escape") close(); };
+    const kh = (e) => { const k = { ArrowLeft: 1, ArrowDown: 2, ArrowRight: 3, ArrowUp: 4 }[e.key]; if (k) { e.preventDefault(); vote(k); } if (e.key === "z" || e.key === "Z") undo(); if (e.key === "Escape") close(); };
     addEventListener("keydown", kh);
-    ov.onclick = (e) => { if (e.target === ov) return close(); const b = e.target.closest("[data-v]"); if (b) vote(+b.dataset.v); if (e.target.closest("[data-undo]")) undo(); if (e.target.closest("[data-close]")) close(); };
-    let sx = 0, sy = 0, dn = false;
-    ov.onpointerdown = (e) => { const c = e.target.closest("#scard"); if (!c || c.classList.contains("done") || busy || (e.pointerType === "mouse" && e.target.closest(".scv"))) return; dn = true; sx = e.clientX; sy = e.clientY; c.setPointerCapture(e.pointerId); c.style.transition = "none"; };
-    ov.onpointermove = (e) => { if (!dn) return; const c = $("#scard"), dx = e.clientX - sx, dy = e.clientY - sy; c.style.transform = `translate(${dx}px, ${Math.min(0, dy)}px) rotate(${dx / 18}deg)`; c.dataset.hint = dy < -90 ? "top" : dx > 80 ? "buono" : dx < -80 ? "no" : ""; };
-    ov.onpointerup = ov.onpointercancel = () => { if (!dn) return; dn = false; const c = $("#scard"), h = c.dataset.hint; c.style.transition = ""; c.style.transform = ""; c.dataset.hint = ""; if (h) vote(h === "top" ? 4 : h === "buono" ? 3 : 1); };
+    ov.onclick = (e) => {
+      if (e.target === ov) return close();
+      const b = e.target.closest("[data-v]"); if (b) return vote(+b.dataset.v);
+      if (e.target.closest("[data-undo]")) return undo();
+      if (e.target.closest("[data-close]")) return close();
+      const pg = e.target.closest("[data-pg]"); if (pg) return vaiPg($("#scard"), +pg.dataset.pg);
+      const ap = e.target.closest("[data-apri]"); if (ap) { close(); location.hash = "candidature/" + ap.dataset.apri; }
+    };
+    let sx = 0, sy = 0, dn = false, moved = false;
+    ov.onpointerdown = (e) => { const c = e.target.closest("#scard"); if (!c || busy || e.target.closest(".sid, .sbars")) return; dn = true; moved = false; sx = e.clientX; sy = e.clientY; c.setPointerCapture(e.pointerId); c.style.transition = "none"; };
+    ov.onpointermove = (e) => { if (!dn) return; const c = $("#scard"), dx = e.clientX - sx, dy = e.clientY - sy; if (Math.abs(dx) + Math.abs(dy) > 8) moved = true; if (!moved) return; c.style.transform = `translate(${dx}px, ${dy}px) rotate(${dx / 18}deg)`; c.dataset.hint = dy < -90 && Math.abs(dy) > Math.abs(dx) ? "top" : dy > 90 && Math.abs(dy) > Math.abs(dx) ? "forse" : dx > 80 ? "buono" : dx < -80 ? "no" : ""; };
+    ov.onpointerup = ov.onpointercancel = (e) => { if (!dn) return; dn = false; const c = $("#scard"), h = c.dataset.hint; c.style.transition = ""; c.style.transform = ""; c.dataset.hint = "";
+      if (h) return vote({ top: 4, buono: 3, forse: 2, no: 1 }[h]);
+      if (!moved && e.type === "pointerup") { const r = c.getBoundingClientRect(); if (e.clientY < $(".sid", c).getBoundingClientRect().top) gira(c, e.clientX < r.left + r.width * .35 ? -1 : e.clientX > r.right - r.width * .35 ? 1 : 0); } };
   }
-  /* ---------- marketing: piano dei contenuti ---------- */
-  const DAYS = ["Lun 16", "Mar 17", "Mer 18", "Gio 19", "Ven 20", "Sab 21", "Dom 22"];
-  const MST = ["Idea", "In lavorazione", "Programmato", "Pubblicato"];
-  const ideas = () => [
-    { type: "Reel", title: `Il giorno prima di «${D.shows[0].title}»`, link: "Serata · " + D.shows[0].title, d: 1, cap: `${D.shows[0].lines[0]}. ${D.shows[0].time}. I tavoli vicino ai musicisti finiscono presto.` },
-    { type: "Post", title: `Fascicolo di «${D.drinks[3].n}»`, link: "Drink · " + D.drinks[3].n, d: 3, cap: D.drinks[3].q },
-    { type: "Storia", title: "Aperiblend: il primo giro alle 18", link: "Aperiblend", d: 4, cap: "Dalle 18 alle 20, prima che si riempia." }
-  ];
+
+  const thumb = (m) => m.cover || (m.media.find((x) => x.kind === "img") || {}).src || "";
+  const manca = (m) => [!m.ch.length && "dove pubblicarlo", !m.media.length && (m.type === "reel" ? "il video" : m.type === "storia" ? "la foto o il video" : "la foto"), m.type === "reel" && m.media.length && !m.media.some((x) => x.kind === "video") && "un video (il reel è un video)", m.type !== "storia" && !(m.cap || "").trim() && "il testo"].filter(Boolean);
+  const stato = (m) => m.pub ? "Pubblicato" : m.prog ? "Programmato" : manca(m).length ? "Bozza" : "Pronto";
+  const SK = { Bozza: "b", Pronto: "r", Programmato: "p", Pubblicato: "u" };
+  let mkW = 0, mkVista = "settimana";
+  const ideas = () => { const sh = D.shows[0], dr = D.drinks[3], gEv = 2;
+    return [
+      { type: "reel", title: `Il giorno prima di «${sh.title}»`, link: "Serata · " + sh.title, date: W(gEv - 1), why: "Il giorno prima della serata: chi la vede ha ancora tempo per prenotare.", cap: `${sh.lines[0]}. ${sh.time}. I tavoli vicino ai musicisti finiscono presto.`, media: [], cover: sh.img },
+      { type: "post", title: `Fascicolo di «${dr.n}»`, link: "Drink · " + dr.n, date: W(3), why: "Il giovedì le persone scelgono dove andare nel weekend.", cap: dr.q, media: [{ src: dfoto(dr), kind: "img" }] },
+      { type: "storia", title: "Aperiblend: il primo giro alle 18", link: "Aperiblend", date: W(4), why: "Venerdì pomeriggio, quando si decide l'aperitivo.", cap: "", media: [{ src: "img/blend-foodanddrink-AL85139.webp", kind: "img" }], lk: "prenota" }
+    ].filter((x) => !MK.posts.some((p) => p.title === x.title)); };
+  const chIc = { Instagram: '<rect x="4" y="4" width="16" height="16" rx="4.5"/><circle cx="12" cy="12" r="3.6"/><circle cx="16.8" cy="7.2" r=".6" fill="currentColor"/>', Facebook: '<path d="M14 8.5h2V5h-2.5A3.5 3.5 0 0 0 10 8.5V11H8v3.5h2V21h3.5v-6.5H16l.5-3.5h-3V9a.5.5 0 0 1 .5-.5z"/>', TikTok: '<path d="M14 4v10.5a3.5 3.5 0 1 1-3.5-3.5M14 4c.5 2.5 2.2 4 5 4"/>' };
+  const chips = (m) => m.ch.map((c) => `<span class="chn" title="${c}">${sv(chIc[c])}</span>`).join("");
   function phone(m) {
-    const tall = m.type !== "Post";
-    return `<div class="phone"><div class="pht"><span class="pav">B</span><b>blendfoodanddrink</b><span class="dim">${esc(m.ch)}</span></div>
-      <div class="phm ${tall ? "tall" : ""}">${m.img ? `<img src="${esc(m.img)}" alt="">` : `<span class="empty">${tall ? "Video verticale 9:16" : "Foto 4:5"}</span>`}${m.type === "Reel" ? '<span class="play">▶</span>' : ""}</div>
-      ${m.type === "Storia" ? "" : `<p class="phc"><b>blendfoodanddrink</b> ${esc(m.cap.slice(0, 125))}${m.cap.length > 125 ? '<span class="dim">… altro</span>' : ""}</p>`}</div>`;
+    const t = thumb(m), v = m.media.find((x) => x.kind === "video"), tall = m.type !== "post";
+    const media = v ? `<video src="${esc(v.src)}" ${m.cover ? `poster="${esc(m.cover)}"` : ""} muted playsinline loop autoplay></video>` : t ? `<img src="${esc(t)}" alt="">` : `<span class="empty">${tall ? "Video o foto verticale 9:16" : "Foto 4:5"}</span>`;
+    if (m.type === "storia") return `<div class="phone story"><div class="phm tall">${media}<div class="stbar"><i></i></div><div class="sttop"><span class="pav">B</span><b>blendfoodanddrink</b><span class="dim">ora</span></div>${m.lk ? `<span class="stlink">${sv(I.ext)}${m.lk === "prenota" ? "Prenota un tavolo" : "Guarda il menu"}</span>` : ""}</div></div>`;
+    const cap = m.cap || "", n = m.media.filter((x) => x.kind === "img").length;
+    return `<div class="phone"><div class="pht"><span class="pav">B</span><b>blendfoodanddrink</b><span class="dim">${esc(m.ch[0] || "")}</span></div>
+      <div class="phm ${tall ? "tall" : ""}">${media}${m.type === "reel" ? '<span class="play">' + sv('<path d="M8 5v14l11-7z" fill="currentColor"/>') + "</span>" : ""}${m.type === "post" && n > 1 ? `<span class="car">1/${n}</span><span class="dots">${Array.from({ length: n }, (_, k) => `<i class="${k ? "" : "on"}"></i>`).join("")}</span>` : ""}</div>
+      <p class="phc"><b>blendfoodanddrink</b> ${esc(cap.slice(0, 125))}${cap.length > 125 ? '<span class="dim">… altro</span>' : ""}${!cap ? '<span class="dim">Il testo apparirà qui</span>' : ""}</p></div>`;
   }
+  const EMO = [["Preferite", () => [...(SET.stile.emoji || "")].filter((c) => c.trim())], ["Bar", () => "🍸🍹🍷🥂🍾🍺🍻🥃🍋🍊🧊🫒".match(/\p{Extended_Pictographic}/gu)], ["Cucina", () => "🍕🍔🍟🧀🥩🥓🥗🍤🍰🍫🍮🌶️".match(/\p{Extended_Pictographic}/gu)], ["Musica", () => "🎷🎺🎸🎹🎻🥁🎤🎶🎵💿🎧📻".match(/\p{Extended_Pictographic}/gu)], ["Serata", () => "🌙✨🔥🎉🕯️💛🖤⭐🌃🥳😎🍀".match(/\p{Extended_Pictographic}/gu)], ["Gesti", () => "👋👌🙌👏🤝❤️😍😋🤤😉🙏👀".match(/\p{Extended_Pictographic}/gu)], ["Info", () => "📍📅⏰👉➡️✅🎟️📞📩🔗🆕⬇️".match(/\p{Extended_Pictographic}/gu)]];
+  function inserisci(ta, t) { const a = ta.selectionStart ?? ta.value.length, b = ta.selectionEnd ?? a; ta.value = ta.value.slice(0, a) + t + ta.value.slice(b); ta.selectionStart = ta.selectionEnd = a + t.length; ta.dispatchEvent(new Event("input", { bubbles: true })); ta.focus(); }
+
   V.marketing = (i) => {
-    head("marketing", i);
-    const P = MK.posts, sel = i ?? (mob() ? null : 0), m = sel !== null ? P[sel] : null;
-    const cal = `<div class="cal">${DAYS.map((dl, d) => `<div class="cd"><p class="cdh">${dl}</p>${P.map((x, k) => x.d === d ? `<button type="button" class="pc ${k === sel ? "on" : ""}" data-go="marketing/${k}"><span class="ty ${x.type.toLowerCase()}">${x.type}</span><b>${esc(x.title)}</b><small>${x.time} · ${esc(x.ch)}</small><span class="ps s${MST.indexOf(x.st)}">${x.st}</span></button>` : "").join("")}<button class="pc add0" type="button" data-nuovo="${d}" aria-label="Nuovo contenuto ${dl}">+</button></div>`).join("")}</div>`;
-    const idea = `<div class="ideas"><p class="gl">Idee dal sito</p>${ideas().map((x, n) => `<div class="idea"><span class="ty ${x.type.toLowerCase()}">${x.type}</span><span><b>${esc(x.title)}</b><small>${DAYS[x.d]}</small></span><button class="btn ghost sm cut" type="button" data-idea="${n}">Crea bozza</button></div>`).join("")}</div>`;
-    const ed = m ? `<div class="form" id="form">
-      <div class="card"><h2>Contenuto</h2>
-        <div class="f"><div class="lb"><span>Tipo</span></div><div class="chips" data-chip="type">${["Post", "Reel", "Storia"].map((t) => `<button type="button" aria-pressed="${m.type === t}">${t}</button>`).join("")}</div></div>
-        <div class="f" style="margin-top:1rem"><div class="lb"><span>Dove</span></div><div class="chips" data-chip="ch">${["Instagram", "Facebook", "TikTok"].map((t) => `<button type="button" aria-pressed="${m.ch === t}">${t}</button>`).join("")}</div></div>
-        <div class="row three" style="margin-top:1rem"><div class="f"><label><span>Giorno</span></label><select data-k="d">${DAYS.map((dl, d) => `<option value="${d}" ${m.d === d ? "selected" : ""}>${dl}</option>`).join("")}</select></div><div class="f"><label><span>Ora</span></label><input type="text" value="${esc(m.time)}" data-k="time"></div><div class="f"><label><span>Collegato a</span></label><input type="text" value="${esc(m.link)}" data-k="link" placeholder="Serata, drink, cucina"></div></div>
-        <div style="margin-top:1rem">${field("Titolo interno", m.title, [3, 60, "Lo vedi solo tu nel calendario."], { k: "title" })}</div>
-        <div style="margin-top:1rem">${field("Didascalia", m.cap, [0, 2200, "Le prime 125 battute si leggono senza toccare «altro»: lì va la cosa importante."], { k: "cap", area: true, rows: 4, ai: [["didascalia", "Scrivi con Claude"], ["accorcia", "Accorcia"], ["hashtag", "Hashtag"]] })}</div></div>
-      <div class="card"><h2>Foto o video</h2>${drop(m.img, "50% 50%", m.type === "Post" ? "Foto 4:5" : "Video verticale 9:16", false, m.type === "Post" ? "post" : "storia")}</div>
-      <div class="card"><h2>Stato</h2><div class="chips" data-chip="st">${MST.map((t) => `<button type="button" aria-pressed="${m.st === t}">${t}</button>`).join("")}</div></div>
-      <div class="foot"><button class="danger" type="button" data-del>Elimina</button>${m.st === "Pubblicato" ? '<span class="saved">Pubblicato ✓</span>' : m.st === "Programmato" ? `<button class="btn cut" type="button" data-step="Pubblicato">Segna come pubblicato</button>` : `<button class="btn cut" type="button" data-step="Programmato">Programma per ${esc(m.day)} alle ${esc(m.time)}</button>`}</div></div>` : "";
-    const prev = m ? `<div class="prev"><div class="ph"><span>Anteprima</span></div><div class="stage" id="stage">${phone(m)}</div></div>` : "";
-    return { html: `<div class="mk ${i !== null ? "open" : ""}"><div class="mkl">${cal}${idea}</div>${m ? `<div class="split2">${ed}${prev}</div>` : ""}</div>`, after: (root) => {
-      $$("[data-nuovo]", root).forEach((b) => b.addEventListener("click", () => { const d = +b.dataset.nuovo; P.push({ day: DAYS[d], d, time: "18:00", type: "Post", ch: "Instagram", title: "Nuovo contenuto", st: "Idea", link: "", cap: "" }); setDirty(1); location.hash = "marketing/" + (P.length - 1); }));
-      $$("[data-idea]", root).forEach((b) => b.addEventListener("click", () => { const x = ideas()[+b.dataset.idea]; P.push({ ...x, day: DAYS[x.d], time: "18:00", ch: "Instagram", st: "Idea" }); setDirty(1); location.hash = "marketing/" + (P.length - 1); toast("Bozza creata con il testo preso dal sito."); }));
-      if (!m) return;
-      aiCtx = () => { const ln = (m.link || "").split(" · "), cosa = ln.length > 1 ? ln.slice(1).join(" · ") : m.title, gg = { Lun: "Lunedì", Mar: "Martedì", Mer: "Mercoledì", Gio: "Giovedì", Ven: "Venerdì", Sab: "Sabato", Dom: "Domenica" }[m.day.slice(0, 3)] || m.day, sh = D.shows.find((x) => x.title === cosa);
-        return { titolo: cosa, tipo: m.type, canale: m.ch, quando: ln[0] === "Serata" && sh ? (sh.lines[0] || "").split(" · ")[0] : `${gg} dalle 18`, dettaglio: sh ? sh.time || "" : "", appunti: m.title }; };
-      const draw = () => { $("#stage").innerHTML = phone(m); };
-      wire($("#form"), (e) => { const k = e.target.dataset.k; if (k === "d") { m.d = +e.target.value; m.day = DAYS[m.d]; render(); return; } if (k) m[k] = e.target.value; draw(); });
-      $("#form").addEventListener("change", (e) => { if (e.target.dataset.k === "d") { m.d = +e.target.value; m.day = DAYS[m.d]; setDirty(1); render(); } });
-      $$("[data-chip]", root).forEach((g) => g.addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; m[g.dataset.chip] = b.textContent; setDirty(1); render(); }));
-      wireDrop(root, (src) => { m.img = src; draw(); }, () => {});
-      const stp = $("[data-step]", root); if (stp) stp.addEventListener("click", () => {
-        const manca = [!m.img && "la foto o il video", !(m.cap || "").trim() && m.type !== "Storia" && "la didascalia"].filter(Boolean);
-        if (stp.dataset.step === "Programmato" && manca.length) { toast("Prima aggiungi " + manca.join(" e ") + "."); return; }
-        m.st = stp.dataset.step; setDirty(1); render(); toast(m.st === "Programmato" ? `Programmato: esce ${m.day} alle ${m.time} (quando colleghiamo Instagram).` : "Segnato come pubblicato.");
-      });
-      $("[data-del]", root).addEventListener("click", () => { if (confirm("Eliminare questo contenuto?")) { P.splice(sel, 1); setDirty(1); location.hash = "marketing"; } });
-    } };
+    const P = MK.posts;
+    if (i === "new") { const m = { id: Date.now(), date: OGGI, time: "18:00", type: "post", ch: ["Instagram"], title: "", link: "", cap: "", media: [] }; P.push(m); setDirty(1); location.replace("#marketing/" + (P.length - 1)); return ""; }
+    if (i !== null && P[i]) return editor(P[i], i);
+    head("marketing", null);
+    const L = piu(L0, mkW * 7), days = Array.from({ length: 7 }, (_, n) => isoD(piu(L, n))), fine = piu(L, 6);
+    const range = L.getMonth() === fine.getMonth() ? `${L.getDate()} – ${fine.getDate()} ${MESI[fine.getMonth()]}` : `${L.getDate()} ${MESI[L.getMonth()].slice(0, 3)} – ${fine.getDate()} ${MESI[fine.getMonth()].slice(0, 3)}`;
+    const card = (m) => { const k = P.indexOf(m), st = stato(m), t = thumb(m);
+      return `<button type="button" class="mkc s-${SK[st]}" data-k="${k}" data-go="marketing/${k}"><span class="mkt ${m.type}">${t ? `<img src="${esc(t)}" alt="" draggable="false">` : sv(FORM[m.type].ic)}<em>${FORM[m.type].n}</em></span><span class="mkb"><b>${esc(m.title || "Senza titolo")}</b><small>${esc(m.time)} ${chips(m)}</small><span class="mks">${st}</span></span></button>`; };
+    const week = `<div class="mkcal">${days.map((d) => { const its = P.filter((m) => m.date === d).sort((a, b) => a.time.localeCompare(b.time)); return `<div class="mkday ${d === OGGI ? "oggi" : ""} ${d < OGGI ? "passato" : ""}" data-day="${d}"><p class="mkdh"><span>${dayLbl(d)}</span>${d === OGGI ? "<em>oggi</em>" : ""}</p>${its.map(card).join("")}<button type="button" class="mkadd" data-nuovo="${d}" aria-label="Nuovo contenuto ${dayLong(d)}">${sv(I.plus)}<span>Aggiungi</span></button></div>`; }).join("")}</div>`;
+    const feed = P.filter((m) => m.type !== "storia").sort((a, b) => (b.date + b.time).localeCompare(a.date + a.time)), storie = P.filter((m) => m.type === "storia" && m.date >= OGGI).sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
+    const prof = `<div class="mkprof"><div class="mkph"><span class="pav big">B</span><div><b>blendfoodanddrink</b><small>Così apparirà il profilo, dal più recente</small></div></div>
+      ${storie.length ? `<div class="mkst">${storie.map((m) => `<button type="button" class="mksti" data-go="marketing/${P.indexOf(m)}"><span class="r ${m.prog ? "on" : ""}">${thumb(m) ? `<img src="${esc(thumb(m))}" alt="">` : ""}</span><small>${dayLbl(m.date)}</small></button>`).join("")}</div>` : ""}
+      <div class="mkgrid">${feed.map((m) => { const st = stato(m), t = thumb(m); return `<button type="button" class="mkg s-${SK[st]}" data-go="marketing/${P.indexOf(m)}">${t ? `<img src="${esc(t)}" alt="">` : `<span class="e">${sv(FORM[m.type].ic)}${esc(m.title || "")}</span>`}${m.type === "reel" ? `<span class="gt">${sv('<path d="M8 5v14l11-7z" fill="currentColor"/>')}</span>` : m.media.length > 1 ? `<span class="gt">${sv('<rect x="7" y="7" width="12" height="12" rx="2"/><path d="M5 15V6a1 1 0 0 1 1-1h9"/>')}</span>` : ""}${m.pub ? "" : `<span class="gd">${st === "Programmato" ? sv(I.check) : ""}${dayLbl(m.date)} · ${esc(m.time)}</span>`}</button>`; }).join("")}</div></div>`;
+    const I0 = ideas();
+    const idee = I0.length ? `<section class="mkideas"><div class="sh"><h2>Idee pronte dal sito</h2><small>Testo e foto presi da serate e drink: le aggiungi e le sistemi</small></div>${I0.map((x, n) => `<div class="mki"><span class="mkt ${x.type}">${x.cover || (x.media[0] || {}).src ? `<img src="${esc(x.cover || x.media[0].src)}" alt="">` : sv(FORM[x.type].ic)}<em>${FORM[x.type].n}</em></span><span class="mkib"><b>${esc(x.title)}</b><small>${sv('<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>')}${dayLong(x.date)}</small><small class="why">${esc(x.why)}</small></span><button class="btn ghost sm" type="button" data-idea="${n}">${sv(I.plus)}Aggiungi</button></div>`).join("")}</section>` : "";
+    return { html: `<div class="mkw">
+      <div class="mkbar"><div class="mknav"><button class="hbtn" type="button" data-w="-1" aria-label="Settimana prima">${sv(I.back)}</button><button class="btn ghost sm" type="button" data-w="0" ${mkW ? "" : "disabled"}>Oggi</button><button class="hbtn" type="button" data-w="1" aria-label="Settimana dopo">${sv(I.chev)}</button><b>${range}</b></div>
+        <div class="seg mkv" role="tablist">${[["settimana", "Settimana"], ["profilo", "Profilo"]].map(([k, t]) => `<button type="button" role="tab" data-vista="${k}" aria-selected="${mkVista === k}">${t}</button>`).join("")}</div>
+        <button class="btn" type="button" data-go="marketing/new">${sv(I.plus)}Nuovo contenuto</button></div>
+      ${mkVista === "settimana" ? week + `<p class="mkhint">${sv('<path d="M8 6h.01M8 12h.01M8 18h.01M16 6h.01M16 12h.01M16 18h.01"/>')}${matchMedia("(hover: none)").matches ? "Tieni premuto un contenuto e trascinalo su un altro giorno." : "Trascina un contenuto su un altro giorno per spostarlo."}</p>` : prof}
+      ${idee}</div>`,
+      after: (root) => {
+        root.addEventListener("click", (e) => {
+          const w = e.target.closest("[data-w]"); if (w) { mkW = +w.dataset.w ? mkW + +w.dataset.w : 0; render(); return; }
+          const v = e.target.closest("[data-vista]"); if (v) { mkVista = v.dataset.vista; render(); return; }
+          const nu = e.target.closest("[data-nuovo]"); if (nu) { P.push({ id: Date.now(), date: nu.dataset.nuovo, time: "18:00", type: "post", ch: ["Instagram"], title: "", link: "", cap: "", media: [] }); setDirty(1); location.hash = "marketing/" + (P.length - 1); return; }
+          const id = e.target.closest("[data-idea]"); if (id) { const x = I0[+id.dataset.idea]; P.push({ id: Date.now(), time: "18:00", ch: ["Instagram"], ...clone(x) }); delete P[P.length - 1].why; setDirty(1); location.hash = "marketing/" + (P.length - 1); toast(`Aggiunta ${dayLong(x.date)}. Controlla e programma.`); }
+        });
+        if (mkVista === "settimana") trascina(root);
+      } };
   };
+
+  /* trascinare i contenuti tra i giorni: col mouse subito, col dito dopo una pressione lunga */
+  const DR = { it: null, gh: null, sx: 0, sy: 0, on: false, over: null, tm: 0 };
+  function trascina(root) {
+    /* mouse: parte appena si muove; dito: dopo una pressione lunga, poi la pagina non scorre più finché non lasci */
+    root.addEventListener("pointerdown", (e) => { if (e.pointerType !== "mouse") return; const c = e.target.closest(".mkc"); if (!c || e.button > 0) return; Object.assign(DR, { it: c, sx: e.clientX, sy: e.clientY, on: false, over: null }); });
+    root.addEventListener("touchstart", (e) => { const c = e.target.closest(".mkc"); if (!c || e.touches.length > 1) return; const t = e.touches[0]; Object.assign(DR, { it: c, sx: t.clientX, sy: t.clientY, on: false, over: null, x: t.clientX, y: t.clientY });
+      clearTimeout(DR.tm); DR.tm = setTimeout(() => { if (DR.it && !DR.on) dragParti({ clientX: DR.x, clientY: DR.y }); }, 320); }, { passive: true });
+    root.addEventListener("click", (e) => { const c = e.target.closest(".mkc"); if (c && c._noclick) { e.preventDefault(); e.stopPropagation(); } }, true);
+    root.addEventListener("contextmenu", (e) => { if (e.target.closest(".mkc")) e.preventDefault(); });
+    if (trascina.ok) return; trascina.ok = true;
+    const muovi = (x, y) => { const gh = DR.gh; gh.style.left = x - gh._dx + "px"; gh.style.top = y - gh._dy + "px";
+      gh.style.display = "none"; const el = document.elementFromPoint(x, y); gh.style.display = ""; const dd = el && el.closest(".mkday");
+      if (dd !== DR.over) { if (DR.over) DR.over.classList.remove("over"); DR.over = dd; if (dd) dd.classList.add("over"); }
+      if (y > innerHeight - 80) scrollBy(0, 14); else if (y < 130) scrollBy(0, -14); };
+    addEventListener("pointermove", (e) => { if (e.pointerType !== "mouse" || !DR.it) return; if (!DR.on) { if (Math.abs(e.clientX - DR.sx) + Math.abs(e.clientY - DR.sy) > 6) dragParti(e); return; } e.preventDefault(); muovi(e.clientX, e.clientY); });
+    addEventListener("pointerup", (e) => { if (e.pointerType === "mouse" && DR.it) dragFine(true); });
+    addEventListener("touchmove", (e) => { if (!DR.it) return; const t = e.touches[0]; DR.x = t.clientX; DR.y = t.clientY;
+      if (!DR.on) { if (Math.abs(t.clientX - DR.sx) + Math.abs(t.clientY - DR.sy) > 10) { clearTimeout(DR.tm); DR.it = null; } return; }
+      e.preventDefault(); muovi(t.clientX, t.clientY); }, { passive: false });
+    addEventListener("touchend", () => { clearTimeout(DR.tm); if (DR.it) dragFine(true); });
+    addEventListener("touchcancel", () => { clearTimeout(DR.tm); if (DR.it) dragFine(false); });
+  }
+  function dragParti(e) { const it = DR.it; DR.on = true; it.classList.add("lift"); document.body.classList.add("dragging"); try { navigator.vibrate && navigator.vibrate(10); } catch (x) {} const r = it.getBoundingClientRect(), gh = it.cloneNode(true); gh.className += " ghost"; gh.style.width = r.width + "px"; gh.style.left = r.left + "px"; gh.style.top = r.top + "px"; gh._dx = e.clientX - r.left; gh._dy = e.clientY - r.top; document.body.appendChild(gh); DR.gh = gh; }
+  function dragFine(ok) {
+    clearTimeout(DR.tm); if (DR.gh) DR.gh.remove(); DR.gh = null; $$(".mkday.over").forEach((x) => x.classList.remove("over")); const it = DR.it; if (it) it.classList.remove("lift");
+    const moved = ok && DR.on && DR.over && it; DR.it = null; document.body.classList.remove("dragging");
+    if (DR.on && it) it._noclick = true;
+    if (moved) { const m = MK.posts[+it.dataset.k], to = DR.over.dataset.day; if (m.date !== to) { m.date = to; toast(`Spostato a ${dayLong(to)}${m.prog ? `, sempre alle ${m.time}` : ""}.`); setDirty(1); render(); } }
+    DR.on = false; DR.over = null;
+  }
+
+  /* ---------- un contenuto: formato, dove, foto e video, testo, quando ---------- */
+  function editor(m, k) {
+    head("marketing", 1); $("#title").textContent = mob() ? (m.title || "Nuovo contenuto") : "Contenuto";
+    const st = stato(m), mn = manca(m), isV = m.type === "reel", acc = m.type === "post" ? "image/*" : isV ? "video/*" : "image/*,video/*";
+    const tile = (x, n) => `<div class="mkm">${x.kind === "video" ? `<video src="${esc(x.src)}" muted playsinline ${m.cover ? `poster="${esc(m.cover)}"` : ""}></video><span class="vb">${sv('<path d="M8 5v14l11-7z" fill="currentColor"/>')}</span>` : `<img src="${esc(x.src)}" alt="">`}${m.type === "post" && m.media.length > 1 ? `<span class="nb0">${n + 1}</span>` : ""}<button class="x" type="button" data-rm="${n}" aria-label="Togli">${sv(I.x)}</button></div>`;
+    const maxM = m.type === "post" ? 10 : 1;
+    const azione = m.pub ? `<span class="mkdone">${sv(I.check)}Pubblicato ${dayLong(m.date)}</span>` : m.prog ? `<button class="btn ghost" type="button" data-unprog>Annulla la programmazione</button><span class="mkdone p">${sv(I.check)}Esce ${dayLong(m.date)} alle ${esc(m.time)}</span>` : `<button class="btn" type="button" data-prog ${mn.length ? "disabled" : ""}>Programma per ${dayLbl(m.date).toLowerCase()} alle ${esc(m.time)}</button>`;
+    const html = `<div class="mked">
+      <div class="ptop"><button class="bk" type="button" data-go="marketing">${sv(I.back)}<span>Calendario</span></button><span class="mkstate s-${SK[st]}">${st}</span></div>
+      <div class="form" id="form">
+        <section class="card"><h2>Cosa pubblichi</h2><div class="mkfmt">${Object.entries(FORM).map(([key, f]) => `<button type="button" class="mkf ${m.type === key ? "on" : ""}" data-fmt="${key}"><span class="fi">${sv(f.ic)}</span><b>${f.n}</b><small>${f.d}</small></button>`).join("")}</div>
+          <div class="f" style="margin-top:1rem"><label><span>Dove</span></label><div class="chips mkch">${CANALI.map((c) => { const no = c === "TikTok" && m.type !== "reel"; return `<button type="button" data-ch="${c}" aria-pressed="${m.ch.includes(c)}" ${no ? "disabled" : ""}>${sv(chIc[c])}${c}</button>`; }).join("")}</div><span class="hint">${m.type === "reel" ? "Lo stesso video può uscire anche su TikTok." : "Su TikTok vanno solo i video: scegli Reel."}</span></div>
+          <div style="margin-top:1rem">${field("Titolo per il calendario", m.title, [0, 60, "Lo vedi solo tu."], { k: "title", ph: "Es. Blend in Jazz, il backstage" })}</div></section>
+        <section class="card"><h2>${isV ? "Il video" : m.type === "storia" ? "Foto o video" : "Le foto"} <small>${m.type === "post" ? "Una o più foto (fino a 10, diventa un carosello). Verticali 4:5." : isV ? "Verticale 9:16, fino a 90 secondi. Poi scegli la copertina." : "Verticale 9:16. Se è un video, fino a 60 secondi."}</small></h2>
+          <div class="mkmedia">${m.media.map(tile).join("")}${m.media.length < maxM ? `<label class="mkadd2"><input type="file" accept="${acc}" ${m.type === "post" ? "multiple" : ""} data-up>${sv(I.plus)}<span>${m.media.length ? "Aggiungi" : isV ? "Carica il video" : "Carica"}</span></label><button type="button" class="mkadd2" data-lib>${sv('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/>')}<span>Dal sito</span></button>` : ""}</div>
+          ${isV ? `<div class="mkcov"><span class="mkm sm">${m.cover ? `<img src="${esc(m.cover)}" alt="">` : sv(FORM.post.ic)}</span><span><b>Copertina</b><small>È l'immagine che si vede nel profilo prima che parta il video.</small></span><label class="btn ghost sm"><input type="file" accept="image/*" data-cov hidden>${m.cover ? "Cambia" : "Scegli"}</label></div>` : ""}</section>
+        ${m.type === "storia" ? `<section class="card"><h2>Testo e link</h2><p class="hint" style="margin:0 0 .8rem">Le storie non hanno testo sotto: se serve, scrivilo dentro la foto o il video. Puoi aggiungere un tasto che porta al sito.</p><div class="chips" data-lk>${[["", "Nessun link"], ["prenota", "Prenota un tavolo"], ["menu", "Guarda il menu"]].map(([v, t]) => `<button type="button" data-lkv="${v}" aria-pressed="${(m.lk || "") === v}">${t}</button>`).join("")}</div></section>`
+          : `<section class="card"><h2>Il testo</h2>${field("Didascalia", m.cap, [0, 2200, "Le prime 125 battute si leggono senza toccare «altro»: lì va la cosa importante."], { k: "cap", area: true, rows: 5, ph: "Scrivi qui, oppure fallo scrivere a Claude" })}
+            <div class="mktools"><button class="aib" type="button" data-ai="didascalia">${sv(I.sparkle)}<span>Scrivi con Claude</span></button><button class="tb" type="button" data-emo aria-expanded="false">😊<span>Emoji</span></button><button class="tb" type="button" data-ins="hashtag">#<span>I nostri hashtag</span></button><button class="tb" type="button" data-ins="indirizzo">${sv('<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/>')}<span>Indirizzo</span></button><button class="mini" type="button" data-go="impostazioni/stile">Modifica</button></div></section>`}
+        <section class="card"><h2>Quando</h2><div class="row"><div class="f"><label><span>Giorno</span></label><input type="date" value="${m.date}" data-k="date"></div><div class="f"><label><span>Ora</span></label><input type="time" value="${esc(m.time)}" data-k="time" step="900"></div></div>
+          <p class="mkbest">${sv(I.bolt)}<span>Chi vi segue è più attivo tra le 18 e le 20.</span>${m.time !== "18:30" ? '<button class="mini" type="button" data-ora="18:30">Usa 18:30</button>' : ""}</p></section>
+        <div class="mkfoot">${mn.length && !m.prog && !m.pub ? `<p class="mkmiss">${sv(I.help)}Per programmarlo manca ${mn.join(", ")}.</p>` : ""}<div class="mkact"><button class="danger" type="button" data-del>Elimina</button>${azione}</div>
+          ${!m.pub ? `<p class="mknote">${m.ch.filter((c) => c !== "TikTok").length ? `Esce da solo su ${m.ch.filter((c) => c !== "TikTok").join(" e ")} quando colleghiamo Meta.` : ""}${m.ch.includes("TikTok") ? " Su TikTok arriva nelle bozze dell'app: lo pubblichi tu con un tocco." : ""}</p>` : ""}</div>
+      </div>
+      <div class="prev"><div class="ph"><span>Anteprima</span><span>${FORM[m.type].n} · ${esc(m.ch.join(", ") || "nessun canale")}</span></div><div class="stage" id="stage">${phone(m)}</div></div>
+    </div>`;
+    return { html, after: (root) => {
+      aiCtx = () => { const ln = (m.link || "").split(" · "), cosa = ln.length > 1 ? ln.slice(1).join(" · ") : (m.title || ""), sh = D.shows.find((x) => x.title === cosa);
+        return { titolo: cosa, tipo: FORM[m.type].n, canale: m.ch.join(", "), quando: ln[0] === "Serata" && sh ? (sh.lines[0] || "").split(" · ")[0] : dayLong(m.date), dettaglio: sh ? sh.time || "" : "", stile: SET.stile }; };
+      const draw = () => { $("#stage").innerHTML = phone(m); };
+      const cambia = (fn, full = true) => { fn(); setDirty(1); if (full) render(); else draw(); };
+      wire($("#form"), (e) => { const kk = e.target.dataset.k; if (kk === "cap" || kk === "title") { m[kk] = e.target.value; draw(); } });
+      $("#form").addEventListener("change", (e) => { const kk = e.target.dataset.k; if (kk === "date" || kk === "time") { if (e.target.value) cambia(() => (m[kk] = e.target.value)); } if (kk === "cap" || kk === "title") { setDirty(1); if (kk === "title" || !m.cap !== !e.target.value) render(); } });
+      root.addEventListener("click", (e) => {
+        const f = e.target.closest("[data-fmt]"); if (f && f.dataset.fmt !== m.type) return cambia(() => { m.type = f.dataset.fmt; if (m.type !== "reel") m.ch = m.ch.filter((c) => c !== "TikTok"); if (m.type === "reel") { const im = m.media.find((x) => x.kind === "img"); if (im && !m.cover) m.cover = im.src; m.media = m.media.filter((x) => x.kind === "video").slice(0, 1); } if (m.type === "post") { m.media = m.media.filter((x) => x.kind === "img"); if (!m.media.length && m.cover) m.media = [{ src: m.cover, kind: "img" }]; } if (m.type === "storia") m.media = m.media.slice(0, 1); if (!m.ch.length) m.ch = ["Instagram"]; });
+        const c = e.target.closest("[data-ch]"); if (c && !c.disabled) return cambia(() => { m.ch = m.ch.includes(c.dataset.ch) ? m.ch.filter((x) => x !== c.dataset.ch) : [...m.ch, c.dataset.ch]; });
+        const r = e.target.closest("[data-rm]"); if (r) return cambia(() => m.media.splice(+r.dataset.rm, 1));
+        const l = e.target.closest("[data-lkv]"); if (l) return cambia(() => (m.lk = l.dataset.lkv));
+        const o = e.target.closest("[data-ora]"); if (o) return cambia(() => (m.time = o.dataset.ora));
+        if (e.target.closest("[data-lib]")) return libreria(m, () => { setDirty(1); render(); });
+        const ins = e.target.closest("[data-ins]"); if (ins) { const ta = $("[data-k=cap]", root), t = (SET.stile[ins.dataset.ins] || "").trim(); if (!t) return toast("Impostalo prima in Impostazioni, Stile dei testi."); if (ta.value.includes(t)) return toast("È già nel testo."); inserisci(ta, (ta.value && !/\s$/.test(ta.value) ? "\n\n" : "") + t); return; }
+        const em = e.target.closest("[data-emo]"); if (em) return emojiPanel(em, $("[data-k=cap]", root));
+        if (e.target.closest("[data-prog]")) { m.prog = true; setDirty(1); render(); toast(`Programmato: esce ${dayLong(m.date)} alle ${m.time}.`); }
+        if (e.target.closest("[data-unprog]")) { m.prog = false; setDirty(1); render(); toast("Tolto dalla programmazione: resta nel calendario come bozza."); }
+        if (e.target.closest("[data-del]") && confirm("Eliminare questo contenuto?")) { MK.posts.splice(k, 1); setDirty(1); location.hash = "marketing"; }
+      });
+      root.addEventListener("change", (e) => {
+        if (e.target.matches("[data-up]")) { const fs = [...e.target.files].slice(0, maxM - m.media.length); cambia(() => fs.forEach((x) => m.media.push({ src: URL.createObjectURL(x), kind: /^video/.test(x.type) ? "video" : "img" }))); }
+        if (e.target.matches("[data-cov]") && e.target.files[0]) cambia(() => (m.cover = URL.createObjectURL(e.target.files[0])));
+      });
+    } };
+  }
+  /* foto e video già nel sito: si sceglie senza caricare niente */
+  function libreria(m, done) {
+    const imgs = [...new Set([...D.shows.map((x) => x.img), ...D.drinks.map(dfoto), ...D.kitchen.map((x) => x.img || x.foto).filter(Boolean), "img/blend-foodanddrink-AL85139.webp", "img/blend-foodanddrink-AL85227.webp", "img/blend-foodanddrink-DSC08308.webp", "img/blend-foodanddrink-AL85241.webp"])].filter(Boolean).map((src) => ({ src, kind: "img" }));
+    const vids = ["pour", "shake", "bar", "coupe", "food", "dj"].map((v) => ({ src: `video/${v}.mp4`, kind: "video" }));
+    const ok = m.type === "post" ? imgs : m.type === "reel" ? vids : [...vids, ...imgs];
+    const ov = document.createElement("div"); ov.className = "lib"; ov.innerHTML = `<div class="libp" role="dialog" aria-label="Foto e video del sito"><div class="nh"><b>Dal sito</b><button class="x" type="button" data-lx aria-label="Chiudi">${sv(I.x)}</button></div><div class="libg">${ok.map((x, n) => `<button type="button" data-li="${n}">${x.kind === "video" ? `<video src="${esc(x.src)}" muted playsinline preload="metadata"></video><span class="vb">${sv('<path d="M8 5v14l11-7z" fill="currentColor"/>')}</span>` : `<img src="${esc(x.src)}" alt="" loading="lazy">`}</button>`).join("")}</div></div>`;
+    const chiudi = () => { ov.remove(); removeEventListener("keydown", kh); }, kh = (e) => { if (e.key === "Escape") chiudi(); };
+    ov.addEventListener("click", (e) => { if (e.target === ov || e.target.closest("[data-lx]")) return chiudi(); const b = e.target.closest("[data-li]"); if (!b) return; const x = ok[+b.dataset.li]; if (m.type === "post") { if (m.media.length < 10) m.media.push(x); } else m.media = [x]; chiudi(); done(); });
+    addEventListener("keydown", kh); document.body.appendChild(ov);
+  }
+  function emojiPanel(btn, ta) {
+    const old = $(".emop"); if (old) { old.remove(); btn.setAttribute("aria-expanded", "false"); return; }
+    let tab = 0; const p = document.createElement("div"); p.className = "emop"; btn.setAttribute("aria-expanded", "true");
+    const draw = () => { const lst = EMO[tab][1]() || []; p.innerHTML = `<div class="emot">${EMO.map(([t], n) => `<button type="button" data-et="${n}" aria-pressed="${n === tab}">${t}</button>`).join("")}</div><div class="emog">${lst.map((c) => `<button type="button" data-e="${c}">${c}</button>`).join("") || '<p class="hint">Scegli le tue preferite in Impostazioni, Stile dei testi.</p>'}</div>`; };
+    p.addEventListener("click", (e) => { e.stopPropagation(); const t = e.target.closest("[data-et]"); if (t) { tab = +t.dataset.et; draw(); return; } const c = e.target.closest("[data-e]"); if (c) inserisci(ta, c.dataset.e); });
+    draw(); btn.closest(".mktools").after(p);
+    const fuori = (e) => { if (!p.isConnected) return removeEventListener("click", fuori); if (!p.contains(e.target) && !btn.contains(e.target)) { p.remove(); btn.setAttribute("aria-expanded", "false"); removeEventListener("click", fuori); } };
+    setTimeout(() => addEventListener("click", fuori));
+  }
 
   const spark = (a) => { const mx = Math.max(...a, 1); return `<svg class="spk" viewBox="0 0 70 22" preserveAspectRatio="none"><polyline points="${a.map((v, k) => `${(k / (a.length - 1) * 70).toFixed(1)},${(20 - v / mx * 18).toFixed(1)}`).join(" ")}"/></svg>`; };
   /* ---------- advertising: il motore. Alberto sceglie cosa e quanto, il motore fa il resto su Meta e spiega perché ---------- */
@@ -2071,29 +2667,29 @@ window.MENU = {
     const pv = M.previsione(AD.mese), az = M.pilota(statoPilota()), mxS = Math.max(...ADS.days.map((d) => d[1]));
     const bars = ADS.days.map(([b, sp], k) => `<div class="bc"><span class="bb" style="height:${(sp / mxS * 100).toFixed(0)}%"><i style="height:${Math.min(100, b / sp * 240).toFixed(0)}%"></i></span><small>${["L", "M", "M", "G", "V", "S", "D"][k]}</small></div>`).join("");
     return { html: `
-      <div class="sim card"><div class="simh"><div><p class="gl" style="padding:0">Quanto vuoi spendere al mese</p><div class="simv"><span id="mese">${euro(AD.mese, 0)}</span><small>${euro(AD.mese / 30, 0)} al giorno</small></div></div><span class="live"><i></i>Pilota ${AD.pilota ? "acceso" : "spento"}</span></div>
-        <input type="range" min="150" max="3000" step="50" value="${AD.mese}" id="mese-r" aria-label="Budget al mese">
-        <div class="simk" id="simk"></div>
-        <p class="gl" style="padding:0;margin-top:1.2rem">Dove vanno i soldi oggi</p><div id="simd">${distrib(pv.righe)}</div></div>
       <div class="adtop"><div class="chips">${["Stasera", "7 giorni", "30 giorni"].map((x) => `<button type="button" data-per="${x}" aria-pressed="${per === x}">${x}</button>`).join("")}</div><span class="live"><i></i>In diretta</span></div>
       <div class="kpis">
         <div class="kpi"><span class="k">Tavoli dalla pubblicità</span><span class="v y" id="kbook">${f(T.book)}</span><span class="s">su ${f(61)} prenotazioni</span></div>
         <div class="kpi"><span class="k">Spesa</span><span class="v">${euro(f(41), 0)}</span><span class="s">Meta</span></div>
         <div class="kpi"><span class="k">Costo a tavolo</span><span class="v">€${T.cpb}</span><span class="s"><b class="up">−63%</b> da quando c'è il motore</span></div>
-        <div class="kpi"><span class="k">Ritorno per euro</span><span class="v">${T.roas}×</span><span class="s">valore dei tavoli diviso la spesa</span></div>
       </div>
       <div class="adgrid">
-        <div class="card"><h2>Il pilota <small>Cosa ha fatto e cosa ti chiede</small></h2><div class="acts">${az.map((a, n) => `<div class="pa ${a.auto ? "auto" : "ask"}" data-a="${n}"><span class="ai">${sv({ pausa: I.pause, aumenta: I.up, riduci: I.down, creativita: I.refresh, spinta: I.bolt }[a.tipo])}</span><div><b>${a.auto ? "Fatto" : "Ti chiede"} · ${esc(a.su)}</b><p>${esc(a.perche)}</p></div>${a.auto ? '<button class="mini" type="button" data-undo>Annulla</button>' : '<span class="ab"><button class="btn sm cut" type="button" data-ok>Sì</button><button class="btn ghost sm cut" type="button" data-no>No</button></span>'}</div>`).join("")}</div></div>
-        <div class="card"><h2>Stasera, in diretta <small>Ogni tavolo con la sua provenienza</small></h2><div class="feed" id="feed">${ADS.feed.map(([t, w, src, c]) => `<div class="fr"><time>${t}</time><b>${esc(w)}</b><span class="src ${c}">${esc(src)}</span></div>`).join("")}</div>
-          <h2 style="margin-top:1.4rem">Ultimi sette giorni <small><i class="lg sp"></i> spesa · <i class="lg bk"></i> tavoli</small></h2><div class="bars">${bars}</div></div>
+        <div class="card"><h2>Il pilota <small>${az.filter((a) => !a.auto).length ? "Ti chiede una conferma" : "Tutto sotto controllo"}</small></h2><div class="acts">${az.map((a, n) => a.auto ? "" : `<div class="pa ask" data-a="${n}"><span class="ai">${sv({ pausa: I.pause, aumenta: I.up, riduci: I.down, creativita: I.refresh, spinta: I.bolt }[a.tipo])}</span><div><b>${esc(a.su)}</b><p>${esc(a.perche)}</p></div><span class="ab"><button class="btn sm" type="button" data-ok>Sì</button><button class="btn ghost sm" type="button" data-no>No</button></span></div>`).join("") || '<p class="hint" style="margin:0">Niente da decidere. Se serve, ti scrive una notifica.</p>'}</div>
+          ${az.some((a) => a.auto) ? `<details class="fold done0"><summary><span>Fatto da solo oggi · ${az.filter((a) => a.auto).length}</span></summary><div class="acts">${az.map((a, n) => !a.auto ? "" : `<div class="pa auto" data-a="${n}"><span class="ai">${sv({ pausa: I.pause, aumenta: I.up, riduci: I.down, creativita: I.refresh, spinta: I.bolt }[a.tipo])}</span><div><b>${esc(a.su)}</b><p>${esc(a.perche)}</p></div><button class="mini" type="button" data-undo>Annulla</button></div>`).join("")}</div></details>` : ""}</div>
+        <div class="card"><h2>Stasera, in diretta <small>Ogni tavolo con la sua provenienza</small></h2><div class="feed" id="feed">${ADS.feed.slice(0, 4).map(([t, w, src, c]) => `<div class="fr"><time>${t}</time><b>${esc(w)}</b><span class="src ${c}">${esc(src)}</span></div>`).join("")}</div>
+          <h2 style="margin-top:1.4rem">Ultimi sette giorni <small><i class="lg sp"></i> spesa · <i class="lg lgb"></i> tavoli</small></h2><div class="bars">${bars}</div></div>
       </div>
+      <div class="sim card"><div class="simh"><div><p class="gl" style="padding:0">Quanto vuoi spendere al mese</p><div class="simv"><span id="mese">${euro(AD.mese, 0)}</span><small>${euro(AD.mese / 30, 0)} al giorno</small></div></div><span class="live"><i></i>Pilota ${AD.pilota ? "acceso" : "spento"}</span></div>
+        <input type="range" min="150" max="3000" step="50" value="${AD.mese}" id="mese-r" aria-label="Budget al mese">
+        <div class="simk" id="simk"></div>
+        <p class="gl" style="padding:0;margin-top:1.2rem">Dove vanno i soldi oggi</p><div id="simd">${distrib(pv.righe)}</div></div>
       <div class="card"><h2>Campagne <small>Accendi, spegni, cambia il budget</small></h2><div class="camps">
         <div class="cr chd"><span>Campagna</span><span>Budget/giorno</span><span>Spesa</span><span>Tavoli</span><span>€ a tavolo</span><span>Andamento</span></div>
         ${ADS.camps.map((c, k) => `<div class="cr ${c.on ? "" : "off"}"><span class="cn"><label class="sw0"><input type="checkbox" data-on="${k}" ${c.on ? "checked" : ""} aria-label="Attiva"></label><span><b>${esc(c.n)}</b><small class="src ${c.ch === "Meta" ? "m" : "g"}">${c.ch}</small></span></span><span class="cb">€ <input type="number" min="0" value="${c.bud}" data-bud="${k}" aria-label="Budget al giorno"></span><span data-l="Spesa">${euro(f(c.spend), 0)}</span><span data-l="Tavoli">${f(c.book)}</span><span data-l="€ a tavolo">${c.book ? euro(c.spend / c.book) : "-"}</span><span>${spark(c.trend)}</span></div>`).join("")}
       </div><button class="add" type="button" data-go="advertising/nuova" style="margin-top:1rem">+ Nuova campagna</button></div>`,
       after: (root) => {
         const sim = () => { const p = M.previsione(AD.mese); $("#mese").textContent = euro(AD.mese, 0); $("#mese").nextElementSibling.textContent = euro(AD.mese / 30, 0) + " al giorno";
-          $("#simk").innerHTML = `<div><span class="v y">${p.prenMese}</span><small>tavoli previsti al mese</small></div><div><span class="v">${euro(p.cpb)}</span><small>a tavolo</small></div><div><span class="v up">−${Math.round(p.risparmio * 100)}%</span><small>rispetto a un «boost» senza motore (${euro(p.senza.cpb)} a tavolo, ${p.senza.prenMese} tavoli)</small></div>`;
+          $("#simk").innerHTML = `<div><span class="v y">${p.prenMese}</span><small>tavoli previsti al mese</small></div><div><span class="v">${euro(p.cpb)}</span><small>a tavolo</small></div><div><span class="v up">−${Math.round(p.risparmio * 100)}%</span><small>rispetto a una sponsorizzata normale</small></div>`;
           $("#simd").innerHTML = distrib(p.righe); };
         sim(); $("#mese-r").addEventListener("input", (e) => { AD.mese = +e.target.value; sim(); });
         $("#mese-r").addEventListener("change", () => setDirty(1));
@@ -2116,14 +2712,15 @@ window.MENU = {
     const base = { tavoli: [`${t}. Tavoli dalle 18, prenoti in un minuto.`, `Stasera da Blend: ${t.toLowerCase()}. Il primo giro è il più bello.`, `Mezzocammino, 18-2. ${t}, un tavolo per voi.`], serata: [`${t}: musica dal vivo a due passi dal bancone.`, `Mercoledì c'è ${t}. I tavoli vicino ai musicisti finiscono presto.`, `${t}. Jazz, cocktail e niente fretta.`], tornare: ["È un po' che non passi. Il bancone ti aspetta.", "Carta nuova, stessa luce bassa. Torna a trovarci.", "Ti teniamo il tavolo di sempre?"] };
     return (base[w.obiettivo] || base.tavoli).map((s) => ({ testo: s.slice(0, 125), ok: true }));
   }
+  const GOALIC = {"tavoli": "<circle cx=\"128\" cy=\"136\" r=\"46\" opacity=\".22\"/><path fill-rule=\"evenodd\" d=\"M128 76a60 60 0 1 0 0 120a60 60 0 1 0 0-120Zm0 14a46 46 0 1 1 0 92a46 46 0 1 1 0-92Z\"/><path d=\"M28 48a8 8 0 0 0-8 8v40a18 18 0 0 0 12 17v95a8 8 0 0 0 16 0v-95a18 18 0 0 0 12-17V56a8 8 0 0 0-16 0v36h-4V56a8 8 0 0 0-8-8Z\"/><path d=\"M228 48c-16 6-24 30-24 68h12v92a8 8 0 0 0 16 0V56a8 8 0 0 0-4-8Z\"/>", "serata": "<path d=\"M88 200a24 24 0 1 1-24-24 24 24 0 0 1 24 24Zm104-40a24 24 0 1 0 24 24 24 24 0 0 0-24-24Z\" opacity=\".22\"/><path d=\"M212.92 25.69a8 8 0 0 0-6.86-1.45l-128 32A8 8 0 0 0 72 64v110.08A32 32 0 1 0 88 200V102.25l112-28v70.83A32 32 0 1 0 216 172V32a8 8 0 0 0-3.08-6.31ZM56 216a16 16 0 1 1 16-16 16 16 0 0 1-16 16Zm32-130.25V70.25l112-28v15.5ZM184 192a16 16 0 1 1 16-16 16 16 0 0 1-16 16Z\"/>", "tornare": "<path d=\"M168,144a40,40,0,1,1-40-40A40,40,0,0,1,168,144ZM64,56A32,32,0,1,0,96,88,32,32,0,0,0,64,56Zm128,0a32,32,0,1,0,32,32A32,32,0,0,0,192,56Z\" opacity=\".22\"/><path d=\"M244.8,150.4a8,8,0,0,1-11.2-1.6A51.6,51.6,0,0,0,192,128a8,8,0,0,1,0-16,24,24,0,1,0-23.24-30,8,8,0,1,1-15.5-4A40,40,0,1,1,219,117.51a67.94,67.94,0,0,1,27.43,21.68A8,8,0,0,1,244.8,150.4ZM190.92,212a8,8,0,1,1-13.85,8,57,57,0,0,0-98.15,0,8,8,0,1,1-13.84-8,72.06,72.06,0,0,1,33.74-29.92,48,48,0,1,1,58.36,0A72.06,72.06,0,0,1,190.92,212ZM128,176a32,32,0,1,0-32-32A32,32,0,0,0,128,176ZM72,120a8,8,0,0,0-8-8A24,24,0,1,1,87.24,82a8,8,0,1,0,15.5-4A40,40,0,1,0,37,117.51,67.94,67.94,0,0,0,9.6,139.19a8,8,0,1,0,12.8,9.61A51.6,51.6,0,0,1,64,128,8,8,0,0,0,72,120Z\"/>"};
   function adNuova() {
     const w = AD.wiz, P = ["Cosa vuoi", "Cosa mostriamo", "Quando e quanto", "Riepilogo"];
     const step = `<ol class="steps">${P.map((t, n) => `<li class="${n === w.passo ? "on" : n < w.passo ? "ok" : ""}"><span>${n + 1}</span>${t}</li>`).join("")}</ol>`;
     const giorni = Math.max(1, Math.round((new Date(w.al) - new Date(w.dal)) / 864e5) + 1);
     let corpo = "";
-    if (w.passo === 0) corpo = `<div class="goals">${Object.entries(M.OBIETTIVI).map(([k, o]) => `<button type="button" class="goal ${w.obiettivo === k ? "on" : ""}" data-goal="${k}"><span class="gi">${sv({ tavoli: I.glass, serata: I.music, tornare: I.ret }[k])}</span><b>${o.nome}</b><small>${{ tavoli: "Più prenotazioni nelle sere che scegli. Il motore ottimizza su chi prenota davvero.", serata: "Fai sapere a chi abita vicino che c'è una serata. Poi riproponiamo la serata a chi ha guardato.", tornare: "Ricorda a chi è già venuto che il Blend c'è ancora. Costa pochissimo." }[k]}</small></button>`).join("")}</div>`;
+    if (w.passo === 0) corpo = `<div class="goals">${Object.entries(M.OBIETTIVI).map(([k, o]) => `<button type="button" class="goal ${w.obiettivo === k ? "on" : ""}" data-goal="${k}"><span class="gi"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">${GOALIC[k]}</svg></span><b>${o.nome}</b><small>${{ tavoli: "Più prenotazioni nelle sere che scegli. Il motore ottimizza su chi prenota davvero.", serata: "Fai sapere a chi abita vicino che c'è una serata. Poi riproponiamo la serata a chi ha guardato.", tornare: "Ricorda a chi è già venuto che il Blend c'è ancora. Costa pochissimo." }[k]}</small></button>`).join("")}</div>`;
     if (w.passo === 1) {
-      const opts = [...D.shows.slice(0, 4).map((s) => ({ tipo: "Serata", titolo: s.title, img: s.img })), ...D.drinks.slice(0, 4).map((d) => ({ tipo: "Drink", titolo: d.n, img: dfoto(d) })), ...MK.posts.filter((p) => p.type === "Reel").map((p) => ({ tipo: "Reel", titolo: p.title, img: p.img || "" }))];
+      const opts = [...D.shows.slice(0, 4).map((s) => ({ tipo: "Serata", titolo: s.title, img: s.img })), ...D.drinks.slice(0, 4).map((d) => ({ tipo: "Drink", titolo: d.n, img: dfoto(d) })), ...MK.posts.filter((p) => p.type === "reel").map((p) => ({ tipo: "Reel", titolo: p.title, img: thumb(p) }))];
       if (!w.testi) w.testi = testiProposti(w);
       corpo = `<p class="lead2">Scegli fino a tre cose dal back office. Il motore le mette in prova e tiene quella che porta più tavoli.</p><div class="pick">${opts.map((o, n) => { const on = w.cosa.some((c) => c.titolo === o.titolo); return `<button type="button" class="pk ${on ? "on" : ""}" data-pk="${n}">${o.img ? `<img src="${esc(o.img)}" alt="">` : '<span class="ph0">Reel</span>'}<span class="pt"><small>${o.tipo}</small>${esc(o.titolo)}</span><i>✓</i></button>`; }).join("")}</div>
         <div class="card" style="margin-top:1.2rem"><h2>Testi proposti <small>Scritti dal motore, li puoi cambiare. Meta mostra le prime 125 battute.</small></h2><div class="txs">${w.testi.map((t, n) => `<div class="f" data-min="10" data-max="125"><label><span>Variante ${"ABC"[n]}</span><span class="cnt"></span></label><textarea rows="2" data-tx="${n}">${esc(t.testo)}</textarea><span class="hint"></span></div>`).join("")}</div><button class="aib" type="button" data-rigen>${sv(I.sparkle)}<span>Altri testi con Claude</span></button></div>`;
@@ -2464,7 +3061,7 @@ window.MENU = {
       ${c.manca ? `<p class="hint" style="color:var(--warn);margin-top:.6rem">${c.manca} ingredienti senza articolo o senza costo: il calcolo è incompleto.</p>` : ""}</div>
       <div class="card"><h2>Ricetta <small>Per una porzione. Il magazzino aggiunge il ${Math.round(MAG.margine * 100)}% per gli sprechi</small></h2><div class="rec">${p.ricetta.map((r, n) => { const a = MAG.A.find((x) => x.id === r.articolo); return `<div class="rc0 ${a ? "" : "miss"}"><select data-ra="${n}" aria-label="Ingrediente"><option value="">${r.nome ? "Da collegare: " + esc(r.nome) : "Scegli l'ingrediente"}</option>${MAG.A.map((x) => `<option value="${x.id}" ${x.id === r.articolo ? "selected" : ""}>${esc(x.nome)}</option>`).join("")}</select><input type="number" step="any" min="0" value="${r.qta}" data-rq="${n}" aria-label="Quantità"><span class="u">${unitLbl(a)}</span><button class="x" type="button" data-rx="${n}" aria-label="Togli">${sv(I.x)}</button></div>`; }).join("")}</div><button class="mini" type="button" id="add-i">+ aggiungi un ingrediente</button></div>
       <div class="card"><h2>Cassa</h2><div class="row"><div class="f"><label><span>Codice su iPratico</span></label><input type="text" value="${esc(p.ipratico)}" data-k="ipratico" placeholder="es. PLU 112"><span class="hint">Serve per riconoscere la vendita. Lo prendiamo in automatico quando colleghiamo iPratico.</span></div><div class="f"><label><span>Stato</span></label><div class="chips" id="stato">${["stimata", "confermata"].map((s) => `<button type="button" aria-pressed="${p.stato === s}">${s}</button>`).join("")}</div><span class="hint">«Confermata» quando la cucina o il bancone l'hanno controllata.</span></div></div></div>
-      <div class="foot"><button class="btn ghost cut" type="button" id="prova">Prova: vendine uno</button><span class="saved">Le modifiche restano in bozza finché non premi Pubblica</span></div><div id="esito"></div></div>`;
+      <div class="foot"><button class="btn ghost cut" type="button" id="prova">Prova: vendine uno</button><span class="saved">Le modifiche si salvano da sole</span></div><div id="esito"></div></div>`;
     return { html: `<div class="split mz open">${lista}${form}</div>`, after: (root) => {
       $$("[data-ra]", root).forEach((s) => s.addEventListener("change", () => { p.ricetta[+s.dataset.ra].articolo = s.value; setDirty(1); render(); }));
       $$("[data-rq]", root).forEach((i) => i.addEventListener("change", () => { p.ricetta[+i.dataset.rq].qta = +i.value; setDirty(1); render(); }));
@@ -2557,16 +3154,21 @@ window.MENU = {
       persone: [["cand", "Nuova candidatura", "«Giulia Ferri si candida per il bancone.»", true]],
       crescita: [["pilota", "Il pilota chiede conferma", "«Alzo di €15 la spinta su Blend in Jazz?»", true], ["post", "C'è un post da pubblicare oggi", "«Alle 18: reel di Blend in Jazz, è pronto.»", true], ["camp", "Una campagna finisce o va male", "«La ricerca su Google costa troppo: l'ho messa in pausa.»", false]]
     },
+    stile: { hashtag: "#blendfoodanddrink #mezzocammino #romasud #cocktailbar", indirizzo: "📍 Via di Mezzocammino 141, Roma · tutti i giorni dalle 18 alle 2", emoji: "🍸✨🎷🌙🍕", note: "Frasi brevi, tono diretto e caldo. Niente punti esclamativi a raffica." },
     persone: [{ n: "Alberto", r: "Titolare · tutto", tel: "questo telefono" }, { n: "Cucina", r: "Solo magazzino cucina", tel: "da invitare" }, { n: "Bancone", r: "Solo magazzino bar", tel: "da invitare" }]
   };
-  const SGRP = [["aspetto", "Aspetto", I.moon], ["notifiche", "Notifiche", I.bell], ["persone", "Persone e accessi", I.people], ["collegamenti", "Collegamenti", I.link], ["magazzino", "Regole del magazzino", I.mag]];
+  const SGRP = [["aspetto", "Aspetto", I.moon], ["notifiche", "Notifiche", I.bell], ["stile", "Stile dei testi", I.sparkle], ["persone", "Persone e accessi", I.people], ["collegamenti", "Collegamenti", I.link], ["magazzino", "Regole del magazzino", I.mag]];
   V.impostazioni = () => {
     head("impostazioni", null);
     const raw = location.hash.slice(1).split("/")[1] || "", sub = SGRP.some((x) => x[0] === raw && raw !== "magazzino") ? raw : "";
     const t = temaScelto(), grp = (k, titolo) => `<div class="ngrp"><p class="gl">${titolo}</p>${SET.notif[k].map(([id, tt, ex, on], n) => `<label class="sw"><span><b>${tt}</b><small>${ex}</small></span><input type="checkbox" data-n="${k}.${n}" ${on ? "checked" : ""}></label>`).join("")}</div>`;
     const ore = (v) => Array.from({ length: 24 }, (_, h) => `<option value="${h}" ${h === v ? "selected" : ""}>${String(h).padStart(2, "0")}:00</option>`).join("");
     const pushOn = SET.push === "granted";
-    const C = { aspetto: `<div class="card"><h2>Aspetto <small>Al sole meglio il chiaro, la sera lo scuro</small></h2><div class="segt" id="tema">${[["dark", "Scuro", '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>'], ["light", "Chiaro", '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>'], ["auto", "Come il telefono", '<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/>']].map(([k, l, ic]) => `<button type="button" data-t="${k}" aria-pressed="${t === k}"><svg viewBox="0 0 24 24">${ic}</svg>${l}</button>`).join("")}</div></div>`,
+    const C = { stile: `<div class="card"><h2>Stile dei testi <small>Claude li usa ogni volta che scrive, e li inserisci con un tocco</small></h2>
+        <div class="f"><label><span>I nostri hashtag</span></label><textarea rows="2" data-st="hashtag">${esc(SET.stile.hashtag)}</textarea><span class="hint">Separali con uno spazio. Si aggiungono in fondo al testo.</span></div>
+        <div class="f" style="margin-top:1rem"><label><span>Indirizzo e orari</span></label><input type="text" data-st="indirizzo" value="${esc(SET.stile.indirizzo)}"><span class="hint">La riga che metti spesso in fondo ai post.</span></div>
+        <div class="f" style="margin-top:1rem"><label><span>Emoji che usate di più</span></label><input type="text" data-st="emoji" value="${esc(SET.stile.emoji)}"><span class="hint">Compaiono per prime nel pannello delle emoji e Claude sceglie tra queste.</span></div>
+        <div class="f" style="margin-top:1rem"><label><span>Come scrivete</span></label><textarea rows="3" data-st="note">${esc(SET.stile.note)}</textarea><span class="hint">Due righe sul tono. Claude le legge prima di scrivere.</span></div></div>`, aspetto: `<div class="card"><h2>Aspetto <small>Al sole meglio il chiaro, la sera lo scuro</small></h2><div class="segt" id="tema">${[["dark", "Scuro", '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>'], ["light", "Chiaro", '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>'], ["auto", "Come il telefono", '<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/>']].map(([k, l, ic]) => `<button type="button" data-t="${k}" aria-pressed="${t === k}"><svg viewBox="0 0 24 24">${ic}</svg>${l}</button>`).join("")}</div></div>`,
       notifiche: `<div class="card"><h2>Notifiche sul telefono</h2>
         <div class="perm ${pushOn ? "on" : ""}"><span class="pi2">${pushOn ? sv(I.check) : sv(I.bell)}</span><div><b>${pushOn ? "Notifiche attive su questo telefono" : "Attiva le notifiche su questo telefono"}</b><small>${pushOn ? "Arrivano anche a back office chiuso. Puoi spegnerle dalle impostazioni del telefono." : "Su iPhone prima aggiungi il back office alla schermata Home (Condividi → Aggiungi alla schermata Home), poi tocca qui."}</small></div>${pushOn ? '<button class="btn ghost sm cut" type="button" id="prova-n">Mandami una prova</button>' : '<button class="btn sm cut" type="button" id="attiva">Attiva</button>'}</div>
         <div class="push" style="margin-top:1rem"><span class="pi">B</span><div><b>Blend · Magazzino</b><p>Ordina dalla Macelleria: gli hamburger finiscono domani. Tocca per mandare l'ordine.</p></div><small>ora</small></div>
@@ -2574,7 +3176,7 @@ window.MENU = {
         <div class="ngrp"><p class="gl">Silenzio</p><div class="quiet"><span>Niente notifiche dalle</span><select id="q0" aria-label="Dalle">${ore(SET.quiet[0])}</select><span>alle</span><select id="q1" aria-label="Alle">${ore(SET.quiet[1])}</select></div><span class="hint" style="color:var(--dim);font-size:.8rem">Il riepilogo di fine serata arriva comunque, appena finisce il silenzio.</span></div></div>`,
       persone: `<div class="card"><h2>Chi riceve cosa <small>Ognuno vede solo la sua parte</small></h2><div class="ppl">${SET.persone.map((x) => `<div class="pp"><span class="av">${esc(x.n[0])}</span><span><b>${esc(x.n)}</b><small>${esc(x.r)} · ${esc(x.tel)}</small></span>${x.tel === "da invitare" ? '<button class="btn ghost sm cut" type="button" data-inv>Invita</button>' : '<span class="stt">Tu</span>'}</div>`).join("")}</div><button class="mini" type="button" id="add-p" style="margin-top:.7rem">+ aggiungi una persona</button></div>`,
       collegamenti: `<div class="card"><h2>Collegamenti <small>Cosa parla con il back office</small></h2><div class="links">${[["iP", "iPratico", "Vendite per il magazzino: stampante virtuale o report notturno automatico", "da collegare"], ["@", "Email arrivi", "arrivi@blendfoodanddrink.it: bolle e fatture entrano da sole", "da attivare"], ["M", "Meta (Instagram e Facebook)", "Post, pubblicità, pixel e Conversions API", "da collegare"], ["G", "Google", "Recensioni e, se serve, Google Ads", "da collegare"], ["R", "Resend", "Risposte ai candidati da lavoro@blendfoodanddrink.it", "da collegare"], ["C", "Claude", "Testi per social e annunci, lettura di bolle e fatture. Haiku di base, Sonnet solo dove serve", "da collegare"]].map(([l, n, d, st]) => `<div class="lk"><span class="lg2">${l}</span><span><b>${n}</b><small>${d}</small></span><span class="stt">${st}</span></div>`).join("")}</div></div>` };
-    const stato = { aspetto: { dark: "Scuro", light: "Chiaro", auto: "Come il telefono" }[t], notifiche: pushOn ? "Attive su questo telefono" : "Da attivare su questo telefono", persone: `${SET.persone.length} persone · ${SET.persone.filter((x) => x.tel === "da invitare").length} da invitare`, collegamenti: "iPratico, Meta, Google, email", magazzino: "iPratico, riordino, lettura delle bolle" };
+    const stato = { stile: "Hashtag, indirizzo, emoji, tono", aspetto: { dark: "Scuro", light: "Chiaro", auto: "Come il telefono" }[t], notifiche: pushOn ? "Attive su questo telefono" : "Da attivare su questo telefono", persone: `${SET.persone.length} persone · ${SET.persone.filter((x) => x.tel === "da invitare").length} da invitare`, collegamenti: "iPratico, Meta, Google, email", magazzino: "iPratico, riordino, lettura delle bolle" };
     const go = (id) => id === "magazzino" ? "magazzino/impostazioni" : "impostazioni/" + id;
     let html;
     if (mob() && !sub) html = hub(SGRP.map(([id, tt, ic]) => [go(id), ic, tt, stato[id]]));
@@ -2582,6 +3184,7 @@ window.MENU = {
       html = `<div class="set2"><nav class="snav">${SGRP.map(([id, tt, ic]) => `<button type="button" data-go="${go(id)}" ${id === cur ? 'aria-current="true"' : ""}>${sv(ic)}<span><b>${tt}</b><small>${stato[id]}</small></span></button>`).join("")}</nav><div class="set">${C[cur]}</div></div>`; }
     return { html, after: (root) => {
       $$("[data-t]", root).forEach((b) => b.addEventListener("click", () => setTema(b.dataset.t)));
+      $$("[data-st]", root).forEach((x) => x.addEventListener("input", () => { SET.stile[x.dataset.st] = x.value; setDirty(1); }));
       $$("[data-n]", root).forEach((c) => c.addEventListener("change", () => { const [k, n] = c.dataset.n.split("."); SET.notif[k][+n][3] = c.checked; }));
       $("#q0", root)?.addEventListener("change", (e) => (SET.quiet[0] = +e.target.value)); $("#q1", root)?.addEventListener("change", (e) => (SET.quiet[1] = +e.target.value));
       $("#attiva", root)?.addEventListener("click", async () => {
@@ -2640,15 +3243,17 @@ window.MENU = {
     const i = raw === "new" ? "new" : r.i;
     drawNav();
     const out = V[r.s](i);
-    const v = $("#view");
+    /* contenitore nuovo a ogni disegno: i gestori di eventi della pagina prima non si accumulano */
+    const v0 = $("#view"), v = v0.cloneNode(false); v0.replaceWith(v);
     if (typeof out === "string") v.innerHTML = out; else { v.innerHTML = out.html; out.after(v); }
     if (location.hash !== lastHash) { v.classList.remove("enter"); void v.offsetWidth; if (mob()) v.classList.add("enter"); lastHash = location.hash; }
-    $("#back").hidden = !(mob() && parentOf()); $(".gearb").hidden = !$("#back").hidden || r.s === "impostazioni";
+    $("#back").hidden = !(mob() && parentOf()); $("#pubz").hidden = !inSito(); $("#pub").disabled = !dirtySito; $(".gearb").hidden = !$("#back").hidden || r.s === "impostazioni";
     { const pw = mob() && [...v.querySelectorAll(".prev")].find((x) => x.offsetParent); if (pv0) { pv0.disconnect(); pv0 = null; }
       if (pw) { const b = document.createElement("button"); b.type = "button"; b.className = "fab pvj"; b.innerHTML = sv(I.eye) + "<span>Anteprima</span>"; b.onclick = () => pw.scrollIntoView({ behavior: "smooth", block: "start" }); v.appendChild(b); pv0 = new IntersectionObserver(([en]) => b.classList.toggle("off", en.isIntersecting)); pv0.observe(pw); } }
     const ti = $("#title"); if (r.s !== "panoramica" && mob() && i !== null) { const it = $(".item[aria-current=true] b, .item2.on b", v); if (it) ti.textContent = it.textContent; }
   }
-  $("#undo").addEventListener("click", () => { const x = window.Bozza && Bozza.annulla(); if (!x) return; applica(x); Bozza.salva(x); $("#undo").disabled = !Bozza.puoAnnullare(); render(); toast("Annullato."); });
+  addEventListener("keydown", (e) => { if ((e.ctrlKey || e.metaKey) && !e.shiftKey && e.key.toLowerCase() === "z" && !e.target.closest("input, textarea, [contenteditable]")) { e.preventDefault(); $("#undo").click(); } });
+  $("#undo").addEventListener("click", () => { const x = window.Bozza && Bozza.annulla(); if (!x) return; applica(x); Bozza.salva(x); render(); toast("Annullata l'ultima modifica."); });
   { const b = window.Bozza && Bozza.leggi(); if (b && b.dati) { applica(b.dati); dirty = b.dati.dirty || 1; setDirty(0); const t = new Date(b.quando); setTimeout(() => toast(`Ho ripreso la tua bozza di ${t.toLocaleDateString("it-IT", { weekday: "long" })} alle ${t.toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit" })}.`), 600); } if (window.Bozza) Bozza.ricorda(snap()); }
   document.addEventListener("click", (e) => { if (e.target.closest("[data-theme-toggle]")) setTema(document.documentElement.dataset.theme === "light" ? "dark" : "light"); });
   let lastW = innerWidth, lastHash = "", pv0 = null;
