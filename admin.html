@@ -1171,6 +1171,55 @@ details.fold > summary .live { font-size: .78rem; font-weight: 600; }
   .status button { min-height: 40px; padding: 0 .9rem; display: inline-flex; align-items: center; box-sizing: border-box; }
   .pbar { gap: .3rem; padding: .4rem .5rem; } .pbar small { display: none; } .pbar b { flex: 1 1 0; } .pbar .sp { display: none; }
 }
+
+/* ---------- v2, parte 5: assistente Claude, strada di lettura dei documenti, riquadro della fotocamera ---------- */
+.aibar { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .6rem; }
+.aib { all: unset; box-sizing: border-box; display: inline-flex; align-items: center; gap: .4rem; min-height: 36px; padding: 0 .8rem 0 .65rem; border-radius: 18px; border: 1px solid color-mix(in srgb, var(--sign-t) 45%, transparent); color: var(--sign-t); font: 600 .84rem/1 var(--f-ui); cursor: pointer; white-space: nowrap; transition: background .15s, transform .1s; }
+.aib .i { width: 17px; height: 17px; } .aib:hover { background: color-mix(in srgb, var(--sign-t) 12%, transparent); } .aib:active { transform: scale(.97); }
+.aib:focus-visible { outline: 2px solid var(--sign); outline-offset: 2px; } .aib[disabled], .aib.busy { opacity: .55; cursor: progress; }
+.chips .aib { margin-left: auto; }
+.aip { display: grid; gap: .7rem; margin-top: .7rem; padding: .9rem; border-radius: var(--r2); background: var(--n2); border: 1px solid var(--line2); animation: aiin .22s ease-out both; }
+@keyframes aiin { from { opacity: 0; transform: translateY(-4px); } }
+.aih { display: flex; align-items: center; justify-content: space-between; gap: .6rem; } .aih b { display: inline-flex; align-items: center; gap: .45rem; font: 650 .92rem/1.2 var(--f-ui); } .aih b .i { width: 18px; height: 18px; color: var(--sign-t); }
+.aih .x { width: 32px; height: 32px; margin: -.3rem -.3rem -.3rem 0; }
+.aiout { display: grid; gap: .45rem; }
+.aiv { all: unset; box-sizing: border-box; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .8rem; align-items: center; padding: .7rem .8rem; border-radius: 12px; background: var(--n1); border: 1px solid var(--line); cursor: pointer; transition: border-color .15s; }
+.aiv:hover, .aiv:focus-visible { border-color: var(--sign); } .aiv span { font-size: .92rem; line-height: 1.45; white-space: pre-line; overflow-wrap: anywhere; }
+.aiv b { padding: .45rem .7rem; border-radius: 8px; background: var(--sign); color: var(--on-sign); font: 650 .8rem/1 var(--f-ui); }
+.ain { margin: .1rem 0 0; font-size: .78rem; color: var(--ash); } .ain.err { color: var(--red-t); }
+.ail { display: grid; gap: .45rem; } .ail i { display: block; height: 46px; border-radius: 12px; background: linear-gradient(90deg, var(--n1) 25%, var(--n3) 50%, var(--n1) 75%); background-size: 200% 100%; animation: aish 1.1s linear infinite; } .ail i:nth-child(2) { animation-delay: .12s; } .ail i:nth-child(3) { animation-delay: .24s; }
+@keyframes aish { to { background-position: -200% 0; } }
+.aif { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .4rem 1rem; } .aif .mini { display: inline-flex; align-items: center; gap: .35rem; } .aif .mini .i { width: 16px; height: 16px; }
+.aisw { display: inline-flex; align-items: center; gap: .55rem; font-size: .84rem; font-weight: 600; cursor: pointer; } .aisw small { font-weight: 400; color: var(--ash); margin-left: .25rem; }
+.aisw input { appearance: none; width: 36px; height: 20px; border-radius: 10px; background: var(--n3); position: relative; margin: 0; cursor: pointer; flex: none; transition: background .2s; }
+.aisw input::after { content: ""; position: absolute; left: 3px; top: 3px; width: 14px; height: 14px; border-radius: 50%; background: var(--ash); transition: transform .2s, background .2s; }
+.aisw input:checked { background: var(--sign); } .aisw input:checked::after { transform: translateX(16px); background: var(--night); }
+@media (prefers-reduced-motion: reduce) { .ail i, .aip { animation: none; } }
+/* documenti */
+.via { display: flex; align-items: center; gap: .45rem; margin: -.3rem 0 .9rem; font-size: .84rem; color: var(--ash); } .via .i { width: 17px; height: 17px; color: var(--sign-t); flex: none; }
+.via2 { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .7rem 1rem; margin-bottom: 1rem; padding: .8rem .9rem; border-radius: var(--r2); background: var(--n1); border: 1px solid color-mix(in srgb, var(--warn) 45%, transparent); }
+.via2 b { display: block; font-weight: 650; font-size: .92rem; } .via2 small { display: block; color: var(--ash); font-size: .82rem; line-height: 1.4; } .via2 > span { flex: 1 1 220px; min-width: 0; }
+.vie { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; counter-reset: v; }
+.vie li { counter-increment: v; display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; gap: .1rem .8rem; align-items: start; padding: .8rem .9rem; border-radius: 12px; background: var(--n2); }
+.vie li::before { content: counter(v); grid-row: span 2; width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; background: var(--n3); font: 700 .8rem/1 var(--f-ui); color: var(--bone); margin-top: .1rem; }
+.vie b { font-weight: 650; } .vie small { grid-column: 2; color: var(--ash); font-size: .84rem; line-height: 1.45; }
+.vie .stt { grid-column: 3; grid-row: 1; font-size: .7rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; padding: .3rem .5rem; border-radius: 6px; background: var(--n3); color: var(--sign-t); white-space: nowrap; } .vie .stt.ok { color: var(--ok); }
+/* fotocamera: foglio a spigoli vivi, con qualche riga finta per far capire che si inquadra un documento */
+.cframe { border-radius: 0; box-shadow: 0 0 0 200vmax rgba(0, 0, 0, .4); outline: 1px solid rgba(255, 255, 255, .32); outline-offset: -1px; }
+.cframe i { width: 26px; height: 26px; border-radius: 0 !important; }
+.cframe .still { border-radius: 0; }
+.cdoc { position: absolute; inset: 8% 9% 9%; display: flex; flex-direction: column; gap: 2.2%; opacity: .2; pointer-events: none; transition: opacity .2s; }
+.cdoc u, .cdoc s, .cdoc b { display: block; background: #fff; border-radius: 1px; flex: none; }
+.cdoc u { height: 3px; } .cdoc u:nth-child(1) { width: 34%; height: 8px; margin-bottom: 1.5%; } .cdoc u:nth-child(2) { width: 58%; } .cdoc u:nth-child(3) { width: 46%; }
+.cdoc s { height: 2px; width: 100%; } .cdoc s:nth-of-type(1) { margin-top: 16%; } .cdoc s:nth-of-type(2), .cdoc s:nth-of-type(3) { margin-top: 5%; }
+.cdoc b { width: 26%; height: 7px; align-self: flex-end; margin-top: auto; }
+.camv.rev0 .cdoc { opacity: 0; }
+@media (max-width: 860px) {
+  .aib { min-height: 42px; } .aiv { padding: .8rem; } .aiv b { padding: .6rem .8rem; }
+  .chips .aib { margin-left: 0; }
+  .vie li { grid-template-columns: 30px minmax(0, 1fr); } .vie .stt { grid-column: 2; grid-row: auto; justify-self: start; margin-top: .3rem; }
+  .via2 .btn { width: 100%; box-sizing: border-box; }
+}
 </style>
 </head>
 <body>
@@ -1199,6 +1248,7 @@ details.fold > summary .live { font-size: .78rem; font-weight: 600; }
 <script src="admin-media.js"></script>
 <script src="admin-store.js"></script>
 <script src="admin-magazzino.js"></script>
+<script src="admin-ai.js"></script>
 <script>
 const CMS = {
   characters: {
@@ -1537,6 +1587,7 @@ window.MENU = {
     pause: '<path d="M9 5v14M15 5v14"/>', up: '<path d="M12 19V5M6 11l6-6 6 6"/>', down: '<path d="M12 5v14M6 13l6 6 6-6"/>', refresh: '<path d="M20 11a8 8 0 0 0-14.5-4M4 4v4h4M4 13a8 8 0 0 0 14.5 4M20 20v-4h-4"/>', bolt: '<path d="M13 3L5 14h6l-1 7 8-11h-6z"/>',
     moon: '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>', user: '<circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7"/>', glass: '<path d="M5 4h14l-7 8zM12 12v8M8 20h8"/>', music: '<path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/>',
     ret: '<path d="M9 14l-5-5 5-5M4 9h10a6 6 0 0 1 0 12h-3"/>', ticket: '<path d="M3 9V6h18v3a3 3 0 0 0 0 6v3H3v-3a3 3 0 0 0 0-6zM14 6v12"/>', plus: '<path d="M12 5v14M5 12h14"/>', ext: '<path d="M14 5h5v5M19 5l-8 8M11 7H6v11h11v-5"/>', star: '<path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.8z"/>', help: '<path d="M9 9a3 3 0 1 1 4.4 2.6c-.9.5-1.4 1.1-1.4 2.2M12 17.5h.01"/>', eye: '<path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="2.8"/>', link: '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>', grip: '<path d="M9 6h.01M15 6h.01M9 12h.01M15 12h.01M9 18h.01M15 18h.01"/>',
+    sparkle: '<path d="M11 3l1.9 5.1L18 10l-5.1 1.9L11 17l-1.9-5.1L4 10l5.1-1.9zM18.5 15l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/>',
     flash: '<path d="M13 3L5 14h6l-1 7 8-11h-6z"/>', more: '<circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/>'
   };
   const SECT = [
@@ -1591,9 +1642,40 @@ window.MENU = {
 
   /* ---------- campi con contatore e limite ---------- */
   const uid = (() => { let n = 0; return () => "f" + (++n); })();
+  /* ---------- assistente (Claude): un tasto accanto al campo, le proposte si aprono sotto ---------- */
+  const aiBtn = (compito, label) => `<button class="aib" type="button" data-ai="${compito}">${sv(I.sparkle)}<span>${label}</span></button>`;
+  let aiCtx = () => ({});
+  function apriAI(btn, compito) {
+    const C = AI.COMPITI[compito], zona = btn.closest(".f, .compose"), inp = $("textarea, input[type=text]", zona), host = inp.closest(".f");
+    const gia = $(".aip", host); $$(".aip").forEach((x) => x.remove()); if (gia && gia.dataset.c === compito) return;
+    if ((compito === "accorcia" || compito === "hashtag") && !inp.value.trim()) return toast("Prima scrivi la didascalia, o falla scrivere a Claude.");
+    const p = document.createElement("div"); p.className = "aip"; p.dataset.c = compito; let tono = C.toni ? C.toni[0] : "", curato = false, giro = 0, V = [];
+    p.innerHTML = `<div class="aih"><b>${sv(I.sparkle)}${C.nome}</b><button class="x" type="button" data-aix aria-label="Chiudi">${sv(I.x)}</button></div>
+      ${C.toni ? `<div class="chips ait">${C.toni.map((t, n) => `<button type="button" data-tono="${t}" aria-pressed="${!n}">${t}</button>`).join("")}</div>` : ""}
+      <div class="aiout" aria-live="polite"></div>
+      <div class="aif"><button class="mini" type="button" data-again>${sv(I.refresh)}Altre proposte</button>${C.sonnet ? `<label class="aisw"><input type="checkbox" data-cur><span>Più curato <small>Sonnet: più lento, costa di più</small></span></label>` : ""}</div>`;
+    const run = async () => {
+      $(".aiout", p).innerHTML = `<div class="ail"><i></i><i></i><i></i></div>`;
+      try {
+        const r = await AI.chiedi(compito, { ...aiCtx(), testo: inp.value, tono, max: +host.dataset.max || undefined }, { curato, giro: giro++ });
+        if (!p.isConnected) return; V = r.varianti;
+        $(".aiout", p).innerHTML = V.map((v, n) => `<button type="button" class="aiv" data-use="${n}"><span>${esc(v)}</span><b>Usa</b></button>`).join("") + `<p class="ain">${r.prova ? "Testi di prova: quelli veri arrivano quando colleghiamo Claude." : `Scritto da Claude ${r.modello}. Rileggi sempre prima di pubblicare.`}</p>`;
+      } catch (e) { if (p.isConnected) $(".aiout", p).innerHTML = `<p class="ain err">${esc(e.message)}</p>`; }
+    };
+    p.addEventListener("click", (e) => {
+      if (e.target.closest("[data-aix]")) return p.remove();
+      const t = e.target.closest("[data-tono]"); if (t) { tono = t.dataset.tono; $$("[data-tono]", p).forEach((b) => b.setAttribute("aria-pressed", b === t)); giro = 0; return run(); }
+      if (e.target.closest("[data-again]")) return run();
+      const u = e.target.closest("[data-use]"); if (u) { inp.value = V[+u.dataset.use]; inp.dispatchEvent(new Event("input", { bubbles: true })); p.remove(); inp.focus(); toast("Inserito. Puoi ancora cambiarlo a mano."); }
+    });
+    p.addEventListener("change", (e) => { if (e.target.matches("[data-cur]")) { curato = e.target.checked; run(); } });
+    host.appendChild(p); run();
+  }
+  document.addEventListener("click", (e) => { const b = e.target.closest("[data-ai]"); if (b) apriAI(b, b.dataset.ai); });
+
   function field(label, val, lim, opt = {}) {
     const [mn, mx, hint] = lim, id = uid(), tag = opt.area ? "textarea" : "input";
-    return `<div class="f" data-min="${mn}" data-max="${mx}"><label for="${id}"><span>${label}</span><span class="cnt"></span></label><${tag} id="${id}" ${opt.area ? `rows="${opt.rows || 3}"` : 'type="text"'} data-k="${opt.k || ""}" placeholder="${esc(opt.ph || "")}">${opt.area ? esc(val) : ""}</${tag}>${hint ? `<span class="hint" data-h="${esc(hint)}">${esc(hint)}</span>` : '<span class="hint"></span>'}</div>`.replace(`data-k="${opt.k || ""}"`, `data-k="${opt.k || ""}" ${opt.area ? "" : `value="${esc(val)}"`}`);
+    return `<div class="f" data-min="${mn}" data-max="${mx}"><label for="${id}"><span>${label}</span><span class="cnt"></span></label><${tag} id="${id}" ${opt.area ? `rows="${opt.rows || 3}"` : 'type="text"'} data-k="${opt.k || ""}" placeholder="${esc(opt.ph || "")}">${opt.area ? esc(val) : ""}</${tag}>${hint ? `<span class="hint" data-h="${esc(hint)}">${esc(hint)}</span>` : '<span class="hint"></span>'}${opt.ai ? `<div class="aibar">${opt.ai.map(([c, l]) => aiBtn(c, l)).join("")}</div>` : ""}</div>`.replace(`data-k="${opt.k || ""}"`, `data-k="${opt.k || ""}" ${opt.area ? "" : `value="${esc(val)}"`}`);
   }
   function check(f) {
     const inp = $("input, textarea", f), n = inp.value.trim().length, mn = +f.dataset.min, mx = +f.dataset.max, c = $(".cnt", f), h = $(".hint", f);
@@ -1746,14 +1828,14 @@ window.MENU = {
       <div class="note"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg><span>Le carte restano al loro posto: il drink n° ${sel + 1} usa sempre la carta <b>${SLOT[sel % 4].n.toLowerCase()}</b>. Se sposti un drink prende la carta della nuova posizione, così due carte uguali non sono mai vicine.</span></div>
       <div class="card"><h2>Il drink</h2><div class="row">${field("Nome", d.n, LIM.dn, { k: "n" })}${field("Base", d.base, LIM.base, { k: "base", ph: "Gin, Rum, Senza alcol" })}</div>
         <div class="f" style="margin-top:1.1rem"><div class="lb"><span>Carattere</span></div><div class="chips" id="chars">${CH.map((c) => `<button type="button" aria-pressed="${c === d.c}">${esc(c)}</button>`).join("")}</div><span class="hint">Decide il timbro sul fascicolo e la foto del bicchiere.</span></div>
-        <div style="margin-top:1.1rem">${field("Descrizione", d.q, [LIM.q[0], SLOT[sel % 4].q, `Sulla carta ${SLOT[sel % 4].n.toLowerCase()} entrano ${SLOT[sel % 4].q} caratteri: i bordi e i fogli sotto non sono scrivibili.`], { k: "q", area: true, rows: 3 })}</div></div>
+        <div style="margin-top:1.1rem">${field("Descrizione", d.q, [LIM.q[0], SLOT[sel % 4].q, `Sulla carta ${SLOT[sel % 4].n.toLowerCase()} entrano ${SLOT[sel % 4].q} caratteri: i bordi e i fogli sotto non sono scrivibili.`], { k: "q", area: true, rows: 3, ai: [["drink", "Proponi con Claude"]] })}</div></div>
       <div class="card"><h2>Foto del bicchiere <small>${d.foto ? "Foto sua" : "Per ora usa la foto del carattere «" + esc(d.c) + "»"}</small></h2>${drop(dfoto(d), d.fuoco, d.foto ? "Foto caricata" : "Carica la foto di questo drink", false, "drink")}</div>
       <div class="card"><h2>Profilo di gusto <small>Le X sul fascicolo</small></h2><div class="taste">${sl(0, "Dolce", "Amaro")}${sl(1, "Leggero", "Forte")}${sl(2, "Pulito", "Speziato")}</div></div>
       <div class="card"><h2>Ingredienti <small id="ingtot">Al massimo ${SLOT[sel % 4].ing} righe e ${SLOT[sel % 4].ingTot} caratteri in tutto su questa carta</small></h2>${lineList(d.ing, LIM.ing, SLOT[sel % 4].ing, "ing", "Uno per riga")}</div>
       <div class="foot"><button class="danger" type="button" data-del>Togli dalla carta</button><span class="saved" aria-live="polite">Le modifiche restano in bozza finché non premi Pubblica</span></div>
     </div>`;
     const prev = `<div class="prev"><div class="ph"><span>Anteprima · fascicolo n° ${sel + 1}</span><a href="index.html#carta" target="_blank" rel="noopener">Sul sito ↗</a></div><div class="stage" id="stage">${dvPreview(d, sel)}</div></div>`;
-    return { html: `<div class="split ${i !== null ? "open" : ""}">${list}${form}${prev}</div>`, after: (root) => {
+    return { html: `<div class="split ${i !== null ? "open" : ""}">${list}${form}${prev}</div>`, after: (root) => { aiCtx = () => ({ nome: d.n, base: d.base, carattere: d.c });
       const draw = () => { $("#stage").innerHTML = dvPreview(d, sel); };
       wireDrop(root, (src) => { d.foto = src; d.fuoco = "50% 50%"; draw(); }, (f) => { d.fuoco = f; draw(); });
       wire($("#form"), (e) => { const k = e.target.dataset.k; if (k) d[k] = e.target.value; const t = e.target.dataset.t; if (t !== undefined) { const v = +e.target.value; if (t === "0") { d.p[0] = Math.max(0, -v); d.p[2] = Math.max(0, v); } else d.p[+t + 2] = v; } draw(); });
@@ -1856,7 +1938,7 @@ window.MENU = {
         <div class="msg">${esc(a.msg)}</div>
         <div class="card"><h2>Note interne <small>Le vedi solo tu</small></h2><div class="f"><textarea rows="2" data-note placeholder="Es. richiamare giovedì">${esc(a.notes)}</textarea></div></div>
         ${a.replies.length ? `<div class="thread">${a.replies.map((r) => `<div class="bubble"><small>Tu, ${esc(r.when)}</small>${esc(r.text)}</div>`).join("")}</div>` : ""}
-        <div class="card"><h2>Rispondi <small>Parte da lavoro@blendfoodanddrink.it</small></h2><div class="compose"><div class="tpl chips">${TPL.map(([t], n) => `<button type="button" data-tpl="${n}">${t}</button>`).join("")}</div><div class="f"><textarea rows="5" id="reply" placeholder="Scrivi a ${esc(a.name.split(" ")[0])}…"></textarea></div><div class="foot"><span class="hint" style="font-size:.78rem;color:var(--dim)">La risposta arriva nella sua casella e torna qui.</span><button class="btn cut" type="button" data-send>Invia</button></div></div></div>
+        <div class="card"><h2>Rispondi <small>Parte da lavoro@blendfoodanddrink.it</small></h2><div class="compose"><div class="tpl chips">${TPL.map(([t], n) => `<button type="button" data-tpl="${n}">${t}</button>`).join("")}${aiBtn("candidato", "Bozza con Claude")}</div><div class="f"><textarea rows="5" id="reply" placeholder="Scrivi a ${esc(a.name.split(" ")[0])}…"></textarea></div><div class="foot"><span class="hint" style="font-size:.78rem;color:var(--dim)">La risposta arriva nella sua casella e torna qui.</span><button class="btn cut" type="button" data-send>Invia</button></div></div></div>
       </div><div class="mcol">${viewer(a)}</div></div>
     </div>` : `<div class="mail"><p class="empty">Scegli una candidatura a sinistra.</p></div>`;
     return { html: `<div class="inbox ${i !== null ? "open" : ""}">${list}${mail}</div>`, after: (root) => {
@@ -1864,6 +1946,7 @@ window.MENU = {
       $("[data-sortv]", root).addEventListener("click", () => { sortV = !sortV; render(); });
       $("#smista", root).addEventListener("click", openSmista);
       if (!a) return;
+      aiCtx = () => ({ nome: a.name.split(" ")[0], ruolo: a.role });
       const setV = (v) => { a.voto = a.voto === v ? 0 : v; render(); toast(a.voto ? `Voto: ${VOTI[a.voto].t}` : "Voto tolto"); };
       $("#rate").addEventListener("click", (e) => { const b = e.target.closest("[data-v]"); if (b) setV(+b.dataset.v); });
       keyH = (e) => { if (e.target.closest("input, textarea")) return; if (/^[1-4]$/.test(e.key)) setV(+e.key); const k = shown.indexOf(a); if (e.key === "j" && shown[k + 1]) location.hash = "candidature/" + D.apps.indexOf(shown[k + 1]); if (e.key === "k" && shown[k - 1]) location.hash = "candidature/" + D.apps.indexOf(shown[k - 1]); };
@@ -1928,7 +2011,7 @@ window.MENU = {
         <div class="f" style="margin-top:1rem"><div class="lb"><span>Dove</span></div><div class="chips" data-chip="ch">${["Instagram", "Facebook", "TikTok"].map((t) => `<button type="button" aria-pressed="${m.ch === t}">${t}</button>`).join("")}</div></div>
         <div class="row three" style="margin-top:1rem"><div class="f"><label><span>Giorno</span></label><select data-k="d">${DAYS.map((dl, d) => `<option value="${d}" ${m.d === d ? "selected" : ""}>${dl}</option>`).join("")}</select></div><div class="f"><label><span>Ora</span></label><input type="text" value="${esc(m.time)}" data-k="time"></div><div class="f"><label><span>Collegato a</span></label><input type="text" value="${esc(m.link)}" data-k="link" placeholder="Serata, drink, cucina"></div></div>
         <div style="margin-top:1rem">${field("Titolo interno", m.title, [3, 60, "Lo vedi solo tu nel calendario."], { k: "title" })}</div>
-        <div style="margin-top:1rem">${field("Didascalia", m.cap, [0, 2200, "Le prime 125 battute si leggono senza toccare «altro»: lì va la cosa importante."], { k: "cap", area: true, rows: 4 })}</div></div>
+        <div style="margin-top:1rem">${field("Didascalia", m.cap, [0, 2200, "Le prime 125 battute si leggono senza toccare «altro»: lì va la cosa importante."], { k: "cap", area: true, rows: 4, ai: [["didascalia", "Scrivi con Claude"], ["accorcia", "Accorcia"], ["hashtag", "Hashtag"]] })}</div></div>
       <div class="card"><h2>Foto o video</h2>${drop(m.img, "50% 50%", m.type === "Post" ? "Foto 4:5" : "Video verticale 9:16", false, m.type === "Post" ? "post" : "storia")}</div>
       <div class="card"><h2>Stato</h2><div class="chips" data-chip="st">${MST.map((t) => `<button type="button" aria-pressed="${m.st === t}">${t}</button>`).join("")}</div></div>
       <div class="foot"><button class="danger" type="button" data-del>Elimina</button>${m.st === "Pubblicato" ? '<span class="saved">Pubblicato ✓</span>' : m.st === "Programmato" ? `<button class="btn cut" type="button" data-step="Pubblicato">Segna come pubblicato</button>` : `<button class="btn cut" type="button" data-step="Programmato">Programma per ${esc(m.day)} alle ${esc(m.time)}</button>`}</div></div>` : "";
@@ -1937,6 +2020,8 @@ window.MENU = {
       $$("[data-nuovo]", root).forEach((b) => b.addEventListener("click", () => { const d = +b.dataset.nuovo; P.push({ day: DAYS[d], d, time: "18:00", type: "Post", ch: "Instagram", title: "Nuovo contenuto", st: "Idea", link: "", cap: "" }); setDirty(1); location.hash = "marketing/" + (P.length - 1); }));
       $$("[data-idea]", root).forEach((b) => b.addEventListener("click", () => { const x = ideas()[+b.dataset.idea]; P.push({ ...x, day: DAYS[x.d], time: "18:00", ch: "Instagram", st: "Idea" }); setDirty(1); location.hash = "marketing/" + (P.length - 1); toast("Bozza creata con il testo preso dal sito."); }));
       if (!m) return;
+      aiCtx = () => { const ln = (m.link || "").split(" · "), cosa = ln.length > 1 ? ln.slice(1).join(" · ") : m.title, gg = { Lun: "Lunedì", Mar: "Martedì", Mer: "Mercoledì", Gio: "Giovedì", Ven: "Venerdì", Sab: "Sabato", Dom: "Domenica" }[m.day.slice(0, 3)] || m.day, sh = D.shows.find((x) => x.title === cosa);
+        return { titolo: cosa, tipo: m.type, canale: m.ch, quando: ln[0] === "Serata" && sh ? (sh.lines[0] || "").split(" · ")[0] : `${gg} dalle 18`, dettaglio: sh ? sh.time || "" : "", appunti: m.title }; };
       const draw = () => { $("#stage").innerHTML = phone(m); };
       wire($("#form"), (e) => { const k = e.target.dataset.k; if (k === "d") { m.d = +e.target.value; m.day = DAYS[m.d]; render(); return; } if (k) m[k] = e.target.value; draw(); });
       $("#form").addEventListener("change", (e) => { if (e.target.dataset.k === "d") { m.d = +e.target.value; m.day = DAYS[m.d]; setDirty(1); render(); } });
@@ -2041,7 +2126,7 @@ window.MENU = {
       const opts = [...D.shows.slice(0, 4).map((s) => ({ tipo: "Serata", titolo: s.title, img: s.img })), ...D.drinks.slice(0, 4).map((d) => ({ tipo: "Drink", titolo: d.n, img: dfoto(d) })), ...MK.posts.filter((p) => p.type === "Reel").map((p) => ({ tipo: "Reel", titolo: p.title, img: p.img || "" }))];
       if (!w.testi) w.testi = testiProposti(w);
       corpo = `<p class="lead2">Scegli fino a tre cose dal back office. Il motore le mette in prova e tiene quella che porta più tavoli.</p><div class="pick">${opts.map((o, n) => { const on = w.cosa.some((c) => c.titolo === o.titolo); return `<button type="button" class="pk ${on ? "on" : ""}" data-pk="${n}">${o.img ? `<img src="${esc(o.img)}" alt="">` : '<span class="ph0">Reel</span>'}<span class="pt"><small>${o.tipo}</small>${esc(o.titolo)}</span><i>✓</i></button>`; }).join("")}</div>
-        <div class="card" style="margin-top:1.2rem"><h2>Testi proposti <small>Scritti dal motore, li puoi cambiare. Meta mostra le prime 125 battute.</small></h2><div class="txs">${w.testi.map((t, n) => `<div class="f" data-min="10" data-max="125"><label><span>Variante ${"ABC"[n]}</span><span class="cnt"></span></label><textarea rows="2" data-tx="${n}">${esc(t.testo)}</textarea><span class="hint"></span></div>`).join("")}</div><button class="mini" type="button" data-rigen>↻ Proponi altri testi</button></div>`;
+        <div class="card" style="margin-top:1.2rem"><h2>Testi proposti <small>Scritti dal motore, li puoi cambiare. Meta mostra le prime 125 battute.</small></h2><div class="txs">${w.testi.map((t, n) => `<div class="f" data-min="10" data-max="125"><label><span>Variante ${"ABC"[n]}</span><span class="cnt"></span></label><textarea rows="2" data-tx="${n}">${esc(t.testo)}</textarea><span class="hint"></span></div>`).join("")}</div><button class="aib" type="button" data-rigen>${sv(I.sparkle)}<span>Altri testi con Claude</span></button></div>`;
       w._opts = opts;
     }
     if (w.passo === 2) {
@@ -2069,7 +2154,7 @@ window.MENU = {
         $$("[data-goal]", root).forEach((b) => b.addEventListener("click", () => { w.obiettivo = b.dataset.goal; w.testi = null; render(); }));
         $$("[data-pk]", root).forEach((b) => b.addEventListener("click", () => { const o = w._opts[+b.dataset.pk], i = w.cosa.findIndex((c) => c.titolo === o.titolo); if (i >= 0) w.cosa.splice(i, 1); else if (w.cosa.length < 3) w.cosa.push(o); else return toast("Al massimo tre: toglierne una prima."); w.testi = testiProposti(w); render(); }));
         const tx = $(".txs", root); if (tx) { wire(tx, (e) => { const n = e.target.dataset.tx; if (n !== undefined) w.testi[+n].testo = e.target.value; }); }
-        const rg = $("[data-rigen]", root); if (rg) rg.addEventListener("click", () => { w.testi = testiProposti(w).reverse(); render(); toast("Nuove proposte (in produzione le scrive Claude)."); });
+        const rg = $("[data-rigen]", root); if (rg) rg.addEventListener("click", async () => { rg.disabled = true; rg.classList.add("busy"); try { const r = await AI.chiedi("annuncio", { titolo: w.cosa[0] ? w.cosa[0].titolo : "" }, { giro: (w._giro = (w._giro || 0) + 1) % 2 }); w.testi.forEach((t, n) => { if (r.varianti[n]) t.testo = r.varianti[n]; }); render(); toast(r.prova ? "Proposte di prova: quelle vere arrivano quando colleghiamo Claude." : "Nuove proposte."); } catch (e) { rg.disabled = false; rg.classList.remove("busy"); toast(e.message); } });
         $$("[data-w]", root).forEach((el) => el.addEventListener(el.type === "range" ? "input" : "change", () => { w[el.dataset.w] = el.type === "range" ? +el.value : el.value; if (el.type === "range") { clearTimeout(adNuova.t); adNuova.t = setTimeout(render, 60); } else render(); }));
         const nx = $("[data-next]", root); if (nx) nx.addEventListener("click", () => { w.passo++; render(); });
         const pv = $("[data-prev]", root); if (pv) pv.addEventListener("click", () => { w.passo--; render(); });
@@ -2236,9 +2321,9 @@ window.MENU = {
   /* ---------- fotocamera interna: riquadro A4, più pagine, torcia se c'è ---------- */
   function apriCamera(onDone) {
     let ov = $("#camv"); if (!ov) { ov = document.createElement("div"); ov.id = "camv"; ov.className = "camv"; ov.setAttribute("role", "dialog"); ov.setAttribute("aria-label", "Fotocamera"); document.body.appendChild(ov); }
-    let stream = null, track = null, torch = false, shot = null; const pages = [];
+    let stream = null, track = null, torch = false, shot = null, qual = null; const pages = [];
     ov.innerHTML = `<video playsinline muted autoplay></video>
-      <div class="czone"><div class="cframe"><img class="still" alt="" hidden><i></i><i></i><i></i><i></i></div></div>
+      <div class="czone"><div class="cframe"><div class="cdoc" aria-hidden="true"><u></u><u></u><u></u><s></s><s></s><s></s><b></b></div><img class="still" alt="" hidden><i></i><i></i><i></i><i></i></div></div>
       <div class="ctop"><button class="cbtn" type="button" data-cx aria-label="Chiudi la fotocamera">${sv(I.x)}</button><span class="cpg">Pagina 1</span><button class="cbtn" type="button" data-torch aria-label="Torcia" aria-pressed="false" hidden>${sv(I.bolt)}</button></div>
       <div class="cbot">
         <p class="chint">Tieni tutto il foglio dentro il riquadro</p>
@@ -2250,9 +2335,9 @@ window.MENU = {
     const close = () => { stop(); ov.classList.remove("on"); ov.innerHTML = ""; removeEventListener("keydown", kh, true); removeEventListener("hashchange", close); };
     const err = () => { stop(); $(".cerr", ov).hidden = false; ov.classList.add("ko"); };
     const stato = () => {
-      const rev = !!shot; $(".live", ov).hidden = rev; $(".rev", ov).hidden = !rev; const st = $(".still", ov); st.hidden = !rev; if (rev) st.src = shot;
+      const rev = !!shot; ov.classList.toggle("rev0", rev); $(".live", ov).hidden = rev; $(".rev", ov).hidden = !rev; const st = $(".still", ov); st.hidden = !rev; if (rev) st.src = shot;
       $(".cpg", ov).textContent = "Pagina " + (pages.length + 1);
-      $(".chint", ov).textContent = rev ? "Si legge bene? Se è mossa o tagliata, rifalla." : pages.length ? "Un'altra pagina? Scatta ancora, oppure tocca Fine." : "Tieni tutto il foglio dentro il riquadro";
+      $(".chint", ov).textContent = rev ? (qual && qual.buia ? "Sembra buia: accendi la torcia o avvicinati a una luce, poi rifalla." : qual && qual.mossa ? "Sembra mossa o sfocata: meglio rifarla." : "Si legge bene? Se è mossa o tagliata, rifalla.") : pages.length ? "Un'altra pagina? Scatta ancora, oppure tocca Fine." : "Tieni tutto il foglio dentro il riquadro";
       $(".cth", ov).innerHTML = pages.length ? `<img src="${pages[pages.length - 1]}" alt=""><b>${pages.length}</b>` : "";
       const f = $("[data-fine]", ov); f.hidden = !pages.length; f.textContent = pages.length > 1 ? `Fine · ${pages.length} pagine` : "Fine";
     };
@@ -2262,7 +2347,7 @@ window.MENU = {
       const fr = $(".cframe", ov).getBoundingClientRect(), vr = v.getBoundingClientRect(), sc = Math.max(vr.width / vw, vr.height / vh), ox = (vr.width - vw * sc) / 2, oy = (vr.height - vh * sc) / 2;
       const sw = fr.width / sc, sh = fr.height / sc, k = Math.min(1, 2200 / sh), c = document.createElement("canvas"); c.width = Math.round(sw * k); c.height = Math.round(sh * k);
       c.getContext("2d").drawImage(v, (fr.left - vr.left - ox) / sc, (fr.top - vr.top - oy) / sc, sw, sh, 0, 0, c.width, c.height);
-      shot = c.toDataURL("image/jpeg", .88); ov.classList.remove("flash"); void ov.offsetWidth; ov.classList.add("flash"); try { navigator.vibrate && navigator.vibrate(15); } catch (e) {}
+      qual = window.AI ? AI.qualitaFoto(c) : null; shot = c.toDataURL("image/jpeg", .88); ov.classList.remove("flash"); void ov.offsetWidth; ov.classList.add("flash"); try { navigator.vibrate && navigator.vibrate(15); } catch (e) {}
       stato();
     };
     const kh = (e) => { if (e.key === "Escape") { e.stopPropagation(); close(); } else if ((e.key === " " || e.key === "Enter") && !e.target.closest("button, label")) { e.preventDefault(); shot ? ($("[data-usa]", ov).click()) : scatta(); } };
@@ -2286,6 +2371,12 @@ window.MENU = {
   /* ---------- arrivo merce: foto della bolla, fattura elettronica, o a mano ---------- */
   const XML_PROVA = `<?xml version="1.0"?><p:FatturaElettronica xmlns:p="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/fatture/v1.2"><FatturaElettronicaHeader><CedentePrestatore><DatiAnagrafici><IdFiscaleIVA><IdCodice>01234567890</IdCodice></IdFiscaleIVA><Anagrafica><Denominazione>Macelleria (esempio)</Denominazione></Anagrafica></DatiAnagrafici></CedentePrestatore></FatturaElettronicaHeader><FatturaElettronicaBody><DatiGenerali><DatiGeneraliDocumento><Data>2026-11-16</Data><Numero>482/A</Numero><ImportoTotaleDocumento>238.40</ImportoTotaleDocumento></DatiGeneraliDocumento></DatiGenerali><DatiBeniServizi><DettaglioLinee><Descrizione>HAMBURGER IRISH ANGUS 200G CONF.10</Descrizione><Quantita>4.00</Quantita><UnitaMisura>CF</UnitaMisura><PrezzoUnitario>35.50</PrezzoUnitario></DettaglioLinee><DettaglioLinee><Descrizione>GUANCIALE SARDO SU SIRBONI</Descrizione><Quantita>2.10</Quantita><UnitaMisura>KG</UnitaMisura><PrezzoUnitario>24.00</PrezzoUnitario></DettaglioLinee><DettaglioLinee><Descrizione>SALSICCIA SUINO NERO</Descrizione><Quantita>3.00</Quantita><UnitaMisura>KG</UnitaMisura><PrezzoUnitario>18.60</PrezzoUnitario></DettaglioLinee><DettaglioLinee><Descrizione>COSTINE DI MAIALE</Descrizione><Quantita>2.00</Quantita><UnitaMisura>KG</UnitaMisura><PrezzoUnitario>11.00</PrezzoUnitario></DettaglioLinee></DatiBeniServizi></FatturaElettronicaBody></p:FatturaElettronica>`;
   const BOLLA_PROVA = { fornitore: "Macelleria (esempio)", numero: "DDT 1187", data: "16/11/2026", righe: [{ descrizione: "Hamburger Irish Angus 200g conf.10", quantita: 4, unita: "CF", prezzo: 35.5 }, { descrizione: "Guanciale Su Sirboni", quantita: 2.1, unita: "KG", prezzo: 24 }, { descrizione: "Contro filetto fassona", quantita: 1.8, unita: "KG", prezzo: 38 }, { descrizione: "Polpo verace", quantita: 2, unita: "KG", prezzo: 23.9 }] };
+  function viaLettura(st, R) {
+    if (st.fonte === "mano") return "";
+    const senza = { xml: "Letta senza AI: la fattura elettronica è già un file di dati.", pdf: "Letta dal testo del PDF, senza AI.", email: "Letta dal testo dell'allegato, senza AI." }[st.fonte];
+    const n = st.pagine || 1, due = !st.curato && st.fonte === "foto" && window.AI ? AI.serveSecondoPasso(R, st.doc) : { serve: false };
+    return `<p class="via">${sv(senza ? I.check : I.sparkle)}<span>${senza || `Letta da Claude ${st.curato ? "Sonnet · " + n + " " + (n === 1 ? "pagina" : "pagine") + " · qualche centesimo" : "Haiku · " + n + " " + (n === 1 ? "pagina" : "pagine") + " · meno di un centesimo"}`}</span></p>${due.serve ? `<div class="via2"><span><b>${due.motivo}</b><small>Sonnet legge meglio bolle storte o scritte a mano. Costa qualche centesimo.</small></span><button class="btn ghost sm" type="button" id="rileggi">${sv(I.sparkle)}Rileggi con Sonnet</button></div>` : ""}`;
+  }
   function mArrivi() {
     const st = MAG.arrivo;
     if (st.fase === "scegli") return { html: `<div class="arrh">
@@ -2304,10 +2395,10 @@ window.MENU = {
         $$("[data-mail]").forEach((b) => b.addEventListener("click", () => { const m = MAG.posta.splice(+b.dataset.mail, 1)[0]; const art = MAG.A.filter((x) => fornitoreDi(x.fornitore).nome === m.da).slice(0, 5); const doc = { fornitore: m.da, numero: m.oggetto, data: "", righe: art.length ? art.map((x) => ({ descrizione: x.nome.toUpperCase() + " " + x.formato, quantita: 2, unita: "CF", prezzo: x.costoLotto })) : BOLLA_PROVA.righe }; MAG.arrivo = { ...st, fase: "lettura", img: "" }; render(); setTimeout(() => { if (MAG.arrivo.fase !== "lettura") return; MAG.arrivo = { fase: "revisione", doc, fonte: "email", righe: MZ.prepareCarico(doc, MAG.A) }; render(); }, 1400); }));
         $("#mano").addEventListener("click", () => { MAG.arrivo = { ...st, fase: "revisione", doc: { fornitore: "", numero: "", data: "", righe: [] }, fonte: "mano", righe: [{ riga: { descrizione: "", quantita: 1 }, articolo: null, qta: 0, stato: "nuovo", fiducia: 0, varPrezzo: 0 }] }; render(); });
       } };
-    if (st.fase === "lettura") return { html: `<div class="scan"><div class="sc0">${st.img ? `<img src="${st.img}" alt="">` : ""}<i class="beam"></i></div><b>Leggo ${st.pagine > 1 ? "le " + st.pagine + " pagine" : "il documento"}…</b><small>Riconosco righe, quantità e prezzi. In produzione ci pensa un modello leggero (pochi decimi di centesimo a pagina).</small><button class="btn ghost sm" type="button" id="stop-l">Annulla</button></div>`, after: () => $("#stop-l").addEventListener("click", () => { MAG.arrivo = { fase: "scegli" }; render(); }) };
+    if (st.fase === "lettura") return { html: `<div class="scan"><div class="sc0">${st.img ? `<img src="${st.img}" alt="">` : ""}<i class="beam"></i></div><b>${st.curato ? "Rileggo con più attenzione…" : `Leggo ${st.pagine > 1 ? "le " + st.pagine + " pagine" : "il documento"}…`}</b><small>${st.curato ? "Claude Sonnet ricontrolla le righe incerte." : "Riconosco righe, quantità e prezzi, poi li abbino ai tuoi articoli."}</small><button class="btn ghost sm" type="button" id="stop-l">Annulla</button></div>`, after: () => $("#stop-l").addEventListener("click", () => { MAG.arrivo = { fase: "scegli" }; render(); }) };
     if (st.fase === "revisione") {
       const R = st.righe, ok = R.filter((r) => r.stato === "ok").length;
-      return { html: `<div class="rev"><div class="revh"><div><h2 class="h2">${esc(st.doc.fornitore || "Nuovo arrivo")} <small>${st.doc.numero ? esc(st.doc.numero) + " · " : ""}${esc(st.doc.data || "")} · letta da ${({ xml: "fattura elettronica", foto: "foto", email: "email", pdf: "PDF", mano: "inserimento a mano" })[st.fonte] || st.fonte}</small></h2><p class="lead2">${ok} righe riconosciute, ${R.length - ok} da controllare. Tocca una riga per cambiare articolo o quantità.</p></div></div>
+      return { html: `<div class="rev"><div class="revh"><div><h2 class="h2">${esc(st.doc.fornitore || "Nuovo arrivo")} <small>${st.doc.numero ? esc(st.doc.numero) + " · " : ""}${esc(st.doc.data || "")} · letta da ${({ xml: "fattura elettronica", foto: "foto", email: "email", pdf: "PDF", mano: "inserimento a mano" })[st.fonte] || st.fonte}</small></h2><p class="lead2">${ok} righe riconosciute, ${R.length - ok} da controllare. Tocca una riga per cambiare articolo o quantità.</p>${viaLettura(st, R)}</div></div>
         <div class="rrows">${R.map((r, n) => `<div class="rr ${r.stato}"><span class="ri">${r.stato === "ok" ? "✓" : r.stato === "controlla" ? "?" : "+"}</span><div class="rd"><small>${st.fonte === "mano" ? "" : "Sulla bolla: " + esc(r.riga.descrizione)} ${r.riga.quantita && st.fonte !== "mano" ? "· " + r.riga.quantita + " " + esc(r.riga.unita || "") : ""}</small>
           <select data-ra="${n}" aria-label="Articolo"><option value="">${r.stato === "nuovo" && st.fonte !== "mano" ? "Articolo nuovo: crealo o scegli" : "Scegli l'articolo"}</option>${MAG.A.map((a) => `<option value="${a.id}" ${r.articolo && r.articolo.id === a.id ? "selected" : ""}>${esc(a.nome)}</option>`).join("")}</select>
           ${r.varPrezzo && Math.abs(r.varPrezzo) > 0.03 ? `<span class="pc ${r.varPrezzo > 0 ? "up" : "dn"}">${r.varPrezzo > 0 ? "▲" : "▼"} costa il ${Math.abs(Math.round(r.varPrezzo * 100))}% ${r.varPrezzo > 0 ? "in più" : "in meno"} dell'ultima volta</span>` : ""}</div>
@@ -2320,6 +2411,7 @@ window.MENU = {
           $$("[data-rx]", root).forEach((b) => b.addEventListener("click", () => { R.splice(+b.dataset.rx, 1); render(); }));
           $("#add-r").addEventListener("click", () => { R.push({ riga: { descrizione: "", quantita: 1 }, articolo: null, qta: 0, stato: "nuovo", fiducia: 0, varPrezzo: 0 }); render(); });
           $("#annulla-a").addEventListener("click", () => { MAG.arrivo = { fase: "scegli" }; render(); });
+          $("#rileggi", root)?.addEventListener("click", () => { const prima = MAG.arrivo; MAG.arrivo = { ...prima, fase: "lettura", curato: true }; render(); setTimeout(() => { if (MAG.arrivo.fase !== "lettura") return; prima.righe.forEach((r) => { if (r.articolo && r.stato === "controlla") r.stato = "ok"; }); MAG.arrivo = { ...prima, curato: true }; render(); }, 2400); });
           $("#carica").addEventListener("click", () => {
             const valide = R.filter((r) => r.articolo && r.qta > 0); if (!valide.length) return toast("Nessuna riga da caricare: scegli almeno un articolo.");
             MAG.mov.unshift(...MZ.caricaMerce(MAG.A, valide));
@@ -2428,10 +2520,15 @@ window.MENU = {
       <div class="card"><h2>Regole di riordino <small>Quanti giorni deve coprire ogni ordine, dopo la consegna</small></h2><div class="covs">${cats.map((c) => `<div class="f"><label><span>${c}</span><span class="cnt">${MAG.coperture[c]} giorni</span></label><input type="range" min="1" max="30" value="${MAG.coperture[c]}" data-cov="${c}"></div>`).join("")}</div><p class="hint" style="color:var(--dim);margin-top:.6rem">La birra si ordina a fusti e la carne fresca va consumata presto: per questo coprono periodi diversi. Le quantità si arrotondano sempre alla confezione del fornitore.</p></div>
       <div class="card"><h2>Notifiche sul telefono <small><button class="mini" type="button" data-go="impostazioni/notifiche">Scegli quali ricevere</button></small></h2><div class="rules" hidden>${[["ordini", "Quando qualcosa è da ordinare", "«Ordina dalla Macelleria: gli hamburger finiscono domani.»"], ["arrivi", "Quando arriva una consegna", "«Oggi arriva l'Ortofrutta: fotografa la bolla.»"], ["sera", "Riepilogo a fine serata", "«Stasera 142 prodotti, food cost 27%, 3 articoli da ordinare.»"], ["prezzi", "Quando un fornitore alza i prezzi", "«Il guanciale costa l'8% in più dell'ultima volta.»"]].map(([k, t, ex]) => `<label class="sw"><span><b>${t}</b><small>${ex}</small></span><input type="checkbox" data-nt="${k}" ${MAG.notif[k] ? "checked" : ""}></label>`).join("")}</div>
         <div class="push"><span class="pi">B</span><div><b>Blend · Magazzino</b><p>Ordina dalla Macelleria: gli hamburger finiscono domani. Tocca per mandare l'ordine.</p></div><small>ora</small></div></div>
-      <div class="card"><h2>Lettura di bolle e fatture</h2><div class="opts">${[["foto", "Foto e PDF con un modello leggero", "La strada di tutti i giorni: foto della bolla all'arrivo, PDF dalle email. Legge anche bolle storte o scritte a mano. Meno di un decimo di centesimo a pagina."], ["xml", "Anche la fattura elettronica, se c'è", "Quando arriva il file XML (dal fornitore o dal commercialista) lo leggiamo gratis e controlliamo che torni con la bolla già caricata."], ["telefono", "Lettura sul telefono", "Gratis e senza internet, ma sbaglia con tabelle, timbri e foto storte."]].map(([k, t, d]) => `<label class="opt ${MAG.lettura === k ? "on" : ""}"><input type="radio" name="lt" value="${k}" ${MAG.lettura === k ? "checked" : ""}><b>${t}</b><small>${d}</small></label>`).join("")}</div></div>`,
+      <div class="card"><h2>Lettura di bolle e fatture <small>Prima le strade gratis, Claude solo quando serve</small></h2><ol class="vie">
+        <li><b>Fattura elettronica (XML)</b><small>È già un file di dati: si legge con le regole. Nessun costo, nessun errore di lettura.</small><span class="stt ok">senza AI</span></li>
+        <li><b>PDF con il testo dentro</b><small>Si estrae il testo e si riconoscono le righe con le regole e con quello che il sistema ricorda di ogni fornitore. Claude entra solo se restano righe incerte.</small><span class="stt ok">senza AI</span></li>
+        <li><b>Foto della bolla, scansioni</b><small>Qui serve leggere davvero: lo fa Claude Haiku e restituisce righe, quantità e prezzi già in tabella. Meno di un centesimo a documento. Prima di spedirla, il telefono controlla che la foto non sia mossa o buia.</small><span class="stt">Haiku</span></li>
+        <li><b>Bolle storte, scritte a mano, righe che non tornano</b><small>Secondo passaggio con Claude Sonnet, più attento e più caro (qualche centesimo).</small><span class="stt">Sonnet</span></li></ol>
+        <label class="sw" style="margin-top:.8rem"><span><b>Passa a Sonnet da solo</b><small>Quando metà delle righe è incerta o la somma non torna. Spento: te lo propone e decidi tu.</small></span><input type="checkbox" data-sa ${MAG.sonnetAuto ? "checked" : ""}></label></div>`,
       after: (root) => {
         $$("input[name=ip]", root).forEach((r) => r.addEventListener("change", () => { MAG.ipratico.modo = r.value; setDirty(1); render(); }));
-        $$("input[name=lt]", root).forEach((r) => r.addEventListener("change", () => { MAG.lettura = r.value; setDirty(1); render(); }));
+        $("[data-sa]", root)?.addEventListener("change", (e) => { MAG.sonnetAuto = e.target.checked; setDirty(1); });
         $("#marg").addEventListener("input", (e) => { MAG.margine = +e.target.value / 100; $("#mv").textContent = e.target.value + "%"; setDirty(1); });
         $$("[data-cov]", root).forEach((r) => r.addEventListener("input", () => { MAG.coperture[r.dataset.cov] = +r.value; r.previousElementSibling.lastElementChild.textContent = r.value + " giorni"; setDirty(1); }));
         $$("[data-nt]", root).forEach((c) => c.addEventListener("change", () => { MAG.notif[c.dataset.nt] = c.checked; setDirty(1); }));
@@ -2476,7 +2573,7 @@ window.MENU = {
         ${grp("magazzino", "Magazzino")}${grp("serata", "La serata")}${grp("persone", "Persone")}${grp("crescita", "Marketing e advertising")}
         <div class="ngrp"><p class="gl">Silenzio</p><div class="quiet"><span>Niente notifiche dalle</span><select id="q0" aria-label="Dalle">${ore(SET.quiet[0])}</select><span>alle</span><select id="q1" aria-label="Alle">${ore(SET.quiet[1])}</select></div><span class="hint" style="color:var(--dim);font-size:.8rem">Il riepilogo di fine serata arriva comunque, appena finisce il silenzio.</span></div></div>`,
       persone: `<div class="card"><h2>Chi riceve cosa <small>Ognuno vede solo la sua parte</small></h2><div class="ppl">${SET.persone.map((x) => `<div class="pp"><span class="av">${esc(x.n[0])}</span><span><b>${esc(x.n)}</b><small>${esc(x.r)} · ${esc(x.tel)}</small></span>${x.tel === "da invitare" ? '<button class="btn ghost sm cut" type="button" data-inv>Invita</button>' : '<span class="stt">Tu</span>'}</div>`).join("")}</div><button class="mini" type="button" id="add-p" style="margin-top:.7rem">+ aggiungi una persona</button></div>`,
-      collegamenti: `<div class="card"><h2>Collegamenti <small>Cosa parla con il back office</small></h2><div class="links">${[["iP", "iPratico", "Vendite per il magazzino: stampante virtuale o report notturno automatico", "da collegare"], ["@", "Email arrivi", "arrivi@blendfoodanddrink.it: bolle e fatture entrano da sole", "da attivare"], ["M", "Meta (Instagram e Facebook)", "Post, pubblicità, pixel e Conversions API", "da collegare"], ["G", "Google", "Recensioni e, se serve, Google Ads", "da collegare"], ["R", "Resend", "Risposte ai candidati da lavoro@blendfoodanddrink.it", "da collegare"]].map(([l, n, d, st]) => `<div class="lk"><span class="lg2">${l}</span><span><b>${n}</b><small>${d}</small></span><span class="stt">${st}</span></div>`).join("")}</div></div>` };
+      collegamenti: `<div class="card"><h2>Collegamenti <small>Cosa parla con il back office</small></h2><div class="links">${[["iP", "iPratico", "Vendite per il magazzino: stampante virtuale o report notturno automatico", "da collegare"], ["@", "Email arrivi", "arrivi@blendfoodanddrink.it: bolle e fatture entrano da sole", "da attivare"], ["M", "Meta (Instagram e Facebook)", "Post, pubblicità, pixel e Conversions API", "da collegare"], ["G", "Google", "Recensioni e, se serve, Google Ads", "da collegare"], ["R", "Resend", "Risposte ai candidati da lavoro@blendfoodanddrink.it", "da collegare"], ["C", "Claude", "Testi per social e annunci, lettura di bolle e fatture. Haiku di base, Sonnet solo dove serve", "da collegare"]].map(([l, n, d, st]) => `<div class="lk"><span class="lg2">${l}</span><span><b>${n}</b><small>${d}</small></span><span class="stt">${st}</span></div>`).join("")}</div></div>` };
     const stato = { aspetto: { dark: "Scuro", light: "Chiaro", auto: "Come il telefono" }[t], notifiche: pushOn ? "Attive su questo telefono" : "Da attivare su questo telefono", persone: `${SET.persone.length} persone · ${SET.persone.filter((x) => x.tel === "da invitare").length} da invitare`, collegamenti: "iPratico, Meta, Google, email", magazzino: "iPratico, riordino, lettura delle bolle" };
     const go = (id) => id === "magazzino" ? "magazzino/impostazioni" : "impostazioni/" + id;
     let html;

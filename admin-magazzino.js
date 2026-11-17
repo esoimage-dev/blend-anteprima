@@ -94,13 +94,16 @@
     if (a.unita === "g") { if (/\bkg\b/.test(norm(riga.unita))) return q * 1000; if (kg) return q * toG(n(kg[1]), kg[2]); return q * (a.lotto || 1000); }
     return q;
   }
+  const GENERICHE = new Set("maiale suino suina manzo bovino vitello pollo agnello fresco fresca freschi fresche nero nera bianco bianca rosso rossa conf confezione pezzi cartone cassetta busta vaschetta sacco kg100 grammi litri bottiglia bott latta extra qualita italia italiano italiana per con senza".split(" "));
   function abbina(riga, articoli) {
     const s = norm(riga.descrizione); let best = null, bs = 0;
     for (const a of articoli) {
       if (a.alias && a.alias.some((x) => norm(x) === s)) return { articolo: a, fiducia: 1 };
       const tok = new Set(norm(a.nome + " " + (a.formato || "") + " " + (a.alias || []).join(" ")).split(" ").filter((w) => w.length > 2));
       const w = s.split(" ").filter((x) => x.length > 2), hit = w.filter((x) => tok.has(x)).length;
-      const sc = w.length ? hit / Math.max(2, Math.min(w.length, tok.size)) : 0;
+      /* parole generiche (maiale, fresco, conf...) da sole non bastano: serve almeno una parola che distingue il prodotto */
+      const forte = w.filter((x) => tok.has(x) && !GENERICHE.has(x)).length;
+      const sc = !forte ? 0 : w.length ? hit / Math.max(2, Math.min(w.length, tok.size)) : 0;
       if (sc > bs) { bs = sc; best = a; }
     }
     return { articolo: bs >= 0.34 ? best : null, fiducia: Math.min(1, bs) };
