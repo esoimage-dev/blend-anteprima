@@ -2045,6 +2045,25 @@ details.tech > summary { cursor: pointer; font-weight: 650; min-height: 44px; di
   .view { padding-left: 1.5rem; padding-right: 1.5rem; }
 }
 @media (min-width: 861px) and (max-width: 1100px) and (pointer: coarse) { .pdecide .pd { flex-direction: column; gap: .2rem; padding: 0 .2rem; min-width: 0; font-size: .82rem; } }
+
+/* ---------- v8: candidature, i dati del modulo (esperienza, lingue, disponibilità, zona) ---------- */
+.dkf { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: .35rem .5rem; margin-top: .15rem; }
+.dkx { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: .5rem; align-items: start; padding: .5rem .6rem; border-radius: 10px; background: #f3eee5; color: #2b241b; text-align: left; }
+.dkx i { width: 26px; height: 26px; display: grid; place-items: center; border-radius: 8px; background: #fff; color: #6b6255; flex: none; } .dkx i .i { width: 15px; height: 15px; }
+.dkx small { display: block; font: 600 .64rem/1.1 var(--f-ui); letter-spacing: .08em; text-transform: uppercase; color: #8a8074; }
+.dkx b { display: block; margin-top: .15rem; font: 650 .84rem/1.25 var(--f-ui); color: #2b241b; }
+.dkx em { display: block; margin-top: .1rem; font: 500 .74rem/1.25 var(--f-ui); font-style: normal; color: #6b6255; }
+.dkx.g b { color: #2e7d32; } .dkx.g i { color: #2e7d32; background: #e3f1e3; }
+.dkx.y b { color: #8d6200; } .dkx.y i { color: #8d6200; background: #fbefd2; }
+.dkx.nd b { color: #a39b90; font-weight: 500; font-style: italic; }
+@media (max-width: 420px) { .dkx { padding: .45rem .5rem; gap: .4rem; } .dkx i { width: 22px; height: 22px; } .dkx b { font-size: .78rem; } }
+.ptiles .pt { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: .65rem; align-items: start; }
+.pt i { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 10px; background: var(--n2); color: var(--ash); } .pt i .i { width: 17px; height: 17px; }
+.pt small { font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; }
+.pt em { display: block; margin-top: .15rem; font-style: normal; font-size: .82rem; color: var(--ash); }
+.pt.g i { color: var(--ok); background: color-mix(in srgb, var(--ok) 14%, var(--n1)); } .pt.y i { color: var(--sign-t); background: color-mix(in srgb, var(--sign) 16%, var(--n1)); }
+.pt.nd b { color: var(--dim, var(--ash)); font-weight: 500; font-style: italic; }
+.wki b { white-space: normal; overflow: visible; text-overflow: clip; }
 </style>
 </head>
 <body>
@@ -2789,7 +2808,19 @@ window.MENU = {
   const anniN = (a) => typeof a.anni === "number" ? a.anni : /nessuna/i.test(a.anni || "") ? 0 : /più di 5/i.test(a.anni || "") ? 6 : /3-5/.test(a.anni || "") ? 4 : /1-2/.test(a.anni || "") ? 1.5 : /meno/i.test(a.anni || "") ? .5 : undefined;
   const anniT = (a) => typeof a.anni === "string" ? (/nessuna/i.test(a.anni) ? "Prima esperienza" : a.anni) : a.anni ? `${a.anni} ${a.anni === 1 ? "anno" : "anni"}` : "Prima esperienza";
   const espTxt = (a) => a.anni === undefined || a.anni === "" ? "" : anniN(a) === 0 ? "Prima esperienza" : `${anniT(a)} di esperienza`;
-  const fattiDi = (a) => [espTxt(a), a.inglese && `Inglese ${a.inglese.toLowerCase()}`, a.disp, a.zona].filter(Boolean);
+  const fattiDi = (a) => [espTxt(a), a.inglese && `Inglese ${a.inglese.toLowerCase()}`, a.lingue && `anche ${a.lingue.toLowerCase()}`, a.disp, a.zona].filter(Boolean);
+  /* i quattro dati che arrivano dal modulo del sito, sempre nello stesso ordine e con la stessa etichetta */
+  const FIC = { esp: '<rect x="3.5" y="7.5" width="17" height="12" rx="2"/><path d="M9 7.5v-2A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5v2M3.5 12.5h17"/>', lin: '<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.4 3.4 5.4 3.4 8.5s-1 6.1-3.4 8.5c-2.4-2.4-3.4-5.4-3.4-8.5s1-6.1 3.4-8.5z"/>', disp: '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>', zona: '<path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/>' };
+  const schedaDi = (a) => {
+    const n = anniN(a), ing = a.inglese || "";
+    return [
+      { id: "esp", k: "Esperienza", v: a.anni === undefined || a.anni === "" ? "" : anniT(a), t: n >= 3 ? "g" : n >= 1 ? "y" : "" },
+      { id: "lin", k: "Lingue", v: ing ? `Inglese ${ing.toLowerCase()}` : "", x: a.lingue ? `anche ${a.lingue.toLowerCase()}` : "", t: /fluente|madre/i.test(ing) ? "g" : /buono/i.test(ing) ? "y" : "" },
+      { id: "disp", k: "Disponibilità", v: a.disp || "", t: "" },
+      { id: "zona", k: "Abita a", v: a.zona || "", t: /^\D*[1-5] km/.test(a.zona || "") ? "g" : "" }
+    ];
+  };
+  const factHtml = (a, cls) => schedaDi(a).map((f) => `<span class="${cls} ${f.t} ${f.v ? "" : "nd"}"><i>${sv(FIC[f.id])}</i><span><small>${f.k}</small><b>${f.v ? esc(f.v) : "Non detto"}</b>${f.x ? `<em>${esc(f.x)}</em>` : ""}</span></span>`).join("");
   const daValutare = () => D.apps.filter(daVal);
   const inRole = (a) => !cRole || a.role === cRole;
   const cConta = () => { const c = { todo: 0, 4: 0, 3: 0, 2: 0, 1: 0, all: 0 }; D.apps.filter(inRole).forEach((a) => { c.all++; if (a.voto) c[a.voto]++; if (daVal(a)) c.todo++; }); return c; };
@@ -2834,7 +2865,7 @@ window.MENU = {
       <aside class="pside">
         <div class="phero">${ava(a.role, "lg")}<div><h2>${esc(a.name)}</h2><p>${esc(a.role)} · ${esc(a.when)}</p>${a.replies.length ? '<span class="fl">Risposto</span>' : ""}</div></div>
         <div class="pquick">${a.tel ? `<a class="pq" href="tel:${esc(a.tel.replace(/\s/g, ""))}">${sv('<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/>')}<span>Chiama</span></a><a class="pq" href="${wa}" target="_blank" rel="noopener">${sv('<path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 1a4 4 0 0 1-2-2l1-1-1-2z"/>')}<span>WhatsApp</span></a>` : ""}<a class="pq" href="mailto:${esc(a.email)}">${sv(I.mail)}<span>Email</span></a></div>
-        <div class="ptiles">${[["Esperienza", a.anni === undefined || a.anni === "" ? "Non detto" : anniT(a), anniN(a) >= 3 ? "g" : anniN(a) >= 1 ? "y" : ""], ["Inglese", (a.inglese || "Non detto") + (a.lingue ? " · " + a.lingue : ""), /fluente|madre/i.test(a.inglese || "") ? "g" : /buono/i.test(a.inglese || "") ? "y" : ""], ["Disponibilità", a.disp, ""], ["Abita a", a.zona || "Non detto", /^\D*[1-5] km/.test(a.zona || "") ? "g" : ""]].map(([k, v, t]) => `<div class="pt ${t}"><small>${k}</small><b>${esc(v)}</b></div>`).join("")}</div>
+        <div class="ptiles">${factHtml(a, "pt")}</div>
         <section class="psec"><h4>Il suo messaggio</h4><blockquote>${esc(a.msg)}</blockquote></section>
         <section class="psec"><h4>Note interne <small>Le vedi solo tu</small><span class="saved0" id="nsv" hidden>Salvata</span></h4><textarea rows="3" id="pnote" placeholder="Es. richiamare giovedì, simpatico al telefono">${esc(a.notes)}</textarea></section>
         <section class="psec"><h4>Rispondi <small>da lavoro@blendfoodanddrink.it</small></h4>
@@ -2880,7 +2911,7 @@ window.MENU = {
     const card = () => { const a = q[n]; if (!a) return `<div class="dkc done"><span class="okc">${sv(I.check)}</span><h3>Fatto</h3><p>Hai valutato ${q.length === 1 ? "la candidatura" : "tutte e " + q.length + " le candidature"}.</p><div class="sres">${conta().map(([v, c]) => `<span class="${v.k}"><b>${c}</b>${v.t}</span>`).join("")}</div><button class="btn" type="button" data-close>Torna all'elenco</button></div>`;
       const np = cvPages(a);
       return `<div class="dkc" id="scard" data-p="1" data-np="${np}"><div class="dkp">${paper(a)}${np > 1 ? `<div class="dkbars">${Array.from({ length: np }, (_, k) => `<button type="button" class="${k ? "" : "on"}" data-pg="${k + 1}" aria-label="Pagina ${k + 1}"><i></i></button>`).join("")}</div>` : ""}</div>
-        <button type="button" class="dkid" data-apri="${D.apps.indexOf(a)}">${ava(a.role)}<span><b>${esc(a.name)}</b><small>${esc(a.role)} · ${esc(a.when)}</small></span>${sv(I.chev, "ch")}<span class="dkf">${fattiDi(a).map((f) => `<em>${esc(f)}</em>`).join("")}</span></button>
+        <button type="button" class="dkid" data-apri="${D.apps.indexOf(a)}">${ava(a.role)}<span><b>${esc(a.name)}</b><small>${esc(a.role)} · ${esc(a.when)}</small></span>${sv(I.chev, "ch")}<span class="dkf">${factHtml(a, "dkx")}</span></button>
         <i class="dkst"></i></div>`; };
     const draw = () => { const a = q[n]; $(".dks", ov).innerHTML = card(); ov.classList.toggle("fine", !a); $(".dkcnt", ov).textContent = a ? `${n + 1} di ${q.length}` : `${q.length} di ${q.length}`; $(".dkprog i", ov).style.width = (n / q.length * 100) + "%"; $$("[data-undo]", ov).forEach((b) => (b.disabled = !fatti.length)); };
     const vote = (v) => { const a = q[n]; if (!a || busy) return; busy = true; a.prima = a.voto; a.voto = v; if (a.status === "Nuova") a.status = "Letta"; fatti.push(a); setDirty(1); try { navigator.vibrate && navigator.vibrate(12); } catch (e) {} const c = $("#scard"); c.classList.add("out", VOTI[v].k); $(".dkst", c).textContent = VOTI[v].t; const b = $(`.dka.${VOTI[v].k}`, ov); if (b) { b.classList.remove("pop"); void b.offsetWidth; b.classList.add("pop"); } setTimeout(() => { n++; busy = false; ov.dataset.lean = ""; draw(); }, 360); };
