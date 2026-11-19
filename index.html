@@ -2117,6 +2117,42 @@ body.past .deck.swap-in .tt .disc, .deck.swap-in .disc { translate: 0 0; opacity
 .job .jx:hover, .job .jx:focus-visible { background: #e0321f; color: #fff; }
 /* footer: "Candidati" rosso come la sua freccia */
 .facts button.go.cand { color: #d6362b; } .facts button.go.cand:hover { color: #ef4a35; }
+
+/* ---------- v55: fogliettino sempre leggibile, video con dissolvenza, mosaico ordinato, candidature ---------- */
+/* il testo del fogliettino a volte non veniva ridisegnato (ombra sul blocco ruotato): l'ombra va sulla carta, il testo su un suo livello */
+#locale .scrap { filter: none !important; }
+#locale .scrap > .bg.burnt { filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .5)) drop-shadow(0 18px 24px rgba(0, 0, 0, .5)) !important; }
+#locale .scrap p { position: relative; z-index: 1; transform: translateZ(0); backface-visibility: hidden; }
+/* i video finiscono con una dissolvenza lenta al nero e ripartono */
+#locale .media { background: #050403; }
+#locale .media video { transition: opacity .8s ease; }
+#locale .media video.fo { opacity: 0; }
+/* mosaico: sfalsato ma ordinato, meno alto */
+@media (min-width: 901px) {
+  .mosaic .m1 { grid-column: 1 / span 8; }
+  .mosaic .m2 { grid-column: 9 / span 4; margin-top: 10%; }
+  .mosaic .m4 { grid-column: 5 / span 4; margin-top: -10%; }
+  .mosaic .m5 { grid-column: 9 / span 3; margin-top: 6%; }
+  .mosaic .txt { align-self: center; }
+}
+/* candidature */
+.jpaper select { width: 100%; padding: .35rem 1.4rem .4rem 0; border: 0; border-bottom: 1.5px solid rgba(36, 26, 16, .45); border-radius: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%236a5236' stroke-width='1.6'/%3E%3C/svg%3E") right .2rem center / 11px no-repeat; font: 400 1rem/1.4 var(--f-type); color: #1d150d; outline: none; appearance: none; -webkit-appearance: none; cursor: pointer; }
+.jpaper select:focus { border-bottom-color: #1f3a74; } .jpaper select:invalid, .jpaper select option[value=""] { color: rgba(36, 26, 16, .45); }
+.jpaper .jgrid { row-gap: 1.05rem; }
+.jpaper .jsend { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .4rem 1rem; margin-top: 1.1rem; }
+.jpaper .jsend .jerr { margin: 0; min-height: 0; flex: 1 1 12rem; }
+.jgo { margin-left: auto; gap: .45rem; font-size: 1.65rem; color: #b0261a; padding: .2rem 0 .35rem; position: relative; }
+.jgo span { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1.5px no-repeat; transition: background-size .25s ease; padding-bottom: .1rem; }
+.jgo:hover span, .jgo:focus-visible span { background-size: 100% 1.5px; }
+.jgo svg { width: 28px; height: 17px; }
+.jgo:hover svg { translate: 4px 0; }
+@media (min-width: 861px) { .jpaper { margin-top: 62px; padding-top: clamp(2.8rem, 4.4vw, 3.4rem); padding-bottom: clamp(2.6rem, 4vw, 3.2rem); } .jpaper .fld.wide { margin-top: 1.3rem; } .jpaper .cv { margin-top: 1.4rem; } }
+/* chiudi: solo la scritta rossa con la X, niente riquadro */
+.job .jx { background: none !important; box-shadow: none !important; padding: .4rem .2rem; color: #c0281c; transition: color .15s; text-shadow: 0 1px 6px rgba(0, 0, 0, .5); }
+.job .jx:hover, .job .jx:focus-visible { background: none !important; color: #ff3b26; }
+.job .jx { font-size: 1.5rem; }
+@media (min-width: 861px) { .jpaper { padding-bottom: clamp(3.8rem, 5vw, 4.6rem); } }
+.jpaper select.vuoto { color: rgba(36, 26, 16, .45); }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -2240,11 +2276,11 @@ body.past .deck.swap-in .tt .disc, .deck.swap-in .disc { translate: 0 0; opacity
         <p>Via di Mezzocammino 141, a due passi dalla Colombo. Luce bassa, jazz in sala, un bancone aperto fino alle 2.</p>
       </div>
       <div class="mosaic">
-        <div class="media cut m1" data-speed="-4"><video muted loop playsinline preload="none" data-src="video/bar.mp4" poster="img/poster/bar.jpg" aria-label="La sala e il bancone illuminato"></video></div>
-        <div class="media cut m2" data-speed="6"><video muted loop playsinline preload="none" data-src="video/plants.mp4" poster="img/poster/plants.jpg" aria-label="Piante rampicanti e lampadine dal soffitto"></video></div>
+        <div class="media cut m1" data-speed="-4"><video muted playsinline preload="none" data-src="video/bar.mp4" poster="img/poster/bar.jpg" aria-label="La sala e il bancone illuminato"></video></div>
+        <div class="media cut m2" data-speed="6"><video muted playsinline preload="none" data-src="video/plants.mp4" poster="img/poster/plants.jpg" aria-label="Piante rampicanti e lampadine dal soffitto"></video></div>
         <div class="txt"><div class="scrap"><span class="bg burnt" aria-hidden="true"></span><span class="strip" aria-hidden="true"></span><p>Luce bassa. Un vinile sul piatto. Un bancone che prende i cocktail molto sul serio, e una cucina che non fa da contorno.</p><span class="hand">il mercoledì si suona dal vivo<svg class="arr" viewBox="0 0 60 30" aria-hidden="true"><path d="M3 18 C16 9 32 9 50 15"/><path d="M41 7 C45 10 49 13 52 15 C47 17 43 20 40 25"/></svg></span></div></div>
-        <div class="media cut m4" data-speed="-6"><video muted loop playsinline preload="none" data-src="video/shake.mp4" poster="img/poster/shake.jpg" aria-label="Il barman shakera un cocktail"></video></div>
-        <div class="media cut m5" data-speed="8"><video muted loop playsinline preload="none" data-src="video/stir.mp4" poster="img/poster/stir.jpg" aria-label="Il barman mescola un cocktail"></video></div>
+        <div class="media cut m4" data-speed="-6"><video muted playsinline preload="none" data-src="video/shake.mp4" poster="img/poster/shake.jpg" aria-label="Il barman shakera un cocktail"></video></div>
+        <div class="media cut m5" data-speed="8"><video muted playsinline preload="none" data-src="video/stir.mp4" poster="img/poster/stir.jpg" aria-label="Il barman mescola un cocktail"></video></div>
       </div>
     </div>
   </section>
@@ -2520,13 +2556,16 @@ body.past .deck.swap-in .tt .disc, .deck.swap-in .disc { translate: 0 0; opacity
           <label class="fld"><span>Nome e cognome <b class="req" aria-hidden="true">*</b></span><input name="nome" autocomplete="name" required></label>
           <label class="fld"><span>Email <b class="req" aria-hidden="true">*</b></span><input name="email" type="email" autocomplete="email" required></label>
           <label class="fld"><span>Telefono</span><input name="tel" type="tel" autocomplete="tel"></label>
+          <label class="fld"><span>Dove abiti</span><input name="zona" placeholder="quartiere o paese"></label>
+          <label class="fld"><span>Esperienza</span><select name="anni"><option value="">scegli</option><option>Nessuna, voglio imparare</option><option>Meno di un anno</option><option>1-2 anni</option><option>3-5 anni</option><option>Più di 5 anni</option></select></label>
+          <label class="fld"><span>Inglese</span><select name="inglese"><option value="">scegli</option><option>Base</option><option>Buono</option><option>Fluente</option><option>Madrelingua</option></select></label>
           <label class="fld"><span>Quando ci sei</span><input name="disp" placeholder="weekend, sere, da subito"></label>
+          <label class="fld"><span>Altre lingue</span><input name="lingue" placeholder="spagnolo, francese…"></label>
         </div>
         <label class="fld wide"><span>Raccontaci in due righe</span><textarea name="msg" rows="3" placeholder="Dove hai lavorato, cosa ti piace fare."></textarea></label>
         <label class="cv" id="cv"><input type="file" name="cv" accept=".pdf,.doc,.docx,.odt" id="cv-in"><img class="clipcv" src="img/carta/graffetta.webp" alt="" aria-hidden="true"><span class="cvbox"><b id="cv-n">Attacca il curriculum</b><small>PDF o Word, fino a 5 MB.</small></span></label>
         <label class="ok"><input type="checkbox" name="privacy" required><i></i><span>Ho letto l'<a href="https://blendfoodanddrink.it/privacy-policy/" target="_blank" rel="noopener">informativa privacy</a> e acconsento al trattamento dei dati per questa candidatura.</span></label>
-        <p class="jerr" id="job-err" role="alert"></p>
-        <div class="jsend"><button class="jgo" type="submit">Manda la candidatura <svg viewBox="0 0 40 16" aria-hidden="true"><path d="M2 8 C12 6 24 9 37 8 M29 2 C32 5 35 7 38 8 C35 10 32 12 30 14"/></svg></button></div>
+        <div class="jsend"><p class="jerr" id="job-err" role="alert"></p><button class="jgo" type="submit"><span>Manda la candidatura</span><svg viewBox="0 0 26 16" aria-hidden="true"><path d="M2 8.5 C9 7.5 15 8.5 23 8 M17 3 C19.5 5 21.5 6.8 24 8 C21.5 9.4 19.5 11.2 17.5 13.5"/></svg></button></div>
       </div>
     </form>
     <div class="jdone" id="job-done" hidden><p class="jno">Lavora con noi</p><h2 id="job-thx">Grazie.</h2><p class="jhand">La leggiamo con calma.<br>Se fa per noi, ti chiamiamo.</p><p class="proto">Prototipo: in questa anteprima non è stato inviato nulla.</p></div>
@@ -2821,7 +2860,7 @@ const CMS = {
       "Lo trovi": "You'll find it", "se sai dove cercarlo.": "if you know where to look.", "Pochi piatti.": "A few dishes.", "Fatti sul serio.": "Done properly.",
       "Jazz,": "Jazz,", "vinili": "vinyl", "e altre buone scuse": "and other good excuses", "per fare tardi.": "to stay out late.",
       "Cambia ogni stagione.": "It changes every season.", "Il carattere resta.": "The character stays.", "Il giorno dopo,": "The day after,", "ne parlano così.": "this is what they say.",
-      "Note legali e crediti": "Legal notes and credits", "la prossima": "next", "Cercasi gente di notte.": "Night people wanted.", "Manda la candidatura": "Send your application",
+      "Note legali e crediti": "Legal notes and credits", "la prossima": "next", "Cercasi gente di notte.": "Night people wanted.", "Manda la candidatura": "Send your application", "Dove abiti": "Where you live", "Esperienza": "Experience", "Inglese": "English", "Altre lingue": "Other languages", "scegli": "choose", "Nessuna, voglio imparare": "None, I want to learn", "Meno di un anno": "Less than a year", "1-2 anni": "1-2 years", "3-5 anni": "3-5 years", "Più di 5 anni": "More than 5 years", "Base": "Basic", "Buono": "Good", "Fluente": "Fluent", "Madrelingua": "Native",
       "Antipasti": "Starters", "Pinsa": "Pinsa", "Taglieri": "Boards", "Dolci": "Desserts"
     };
     const orig = new WeakMap(), skip = /^(SCRIPT|STYLE|TEXTAREA|INPUT|SVG|PATH)$/;
@@ -3205,7 +3244,14 @@ const CMS = {
     }), { rootMargin: "120px 0px" });
     vids.forEach((v) => vio.observe(v));
     /* Il locale: i quattro video partono tutti insieme, dall'inizio, appena sono pronti tutti */
-    const locGo = () => { loc.forEach((v) => { want.add(v); try { v.currentTime = 0; } catch (e) {} tryPlay(v); }); };
+    const locGo = () => { loc.forEach((v) => { want.add(v); try { v.currentTime = 0; } catch (e) {} v.classList.remove("fo"); tryPlay(v); }); };
+    loc.forEach((v) => {
+      v.loop = false; v.removeAttribute("loop");
+      if (/shake/.test(v.dataset.src)) { v.defaultPlaybackRate = .8; v.playbackRate = .8; }
+      v.addEventListener("play", () => { if (/shake/.test(v.dataset.src)) v.playbackRate = .8; });
+      v.addEventListener("timeupdate", () => { if (v.duration && (v.duration - v.currentTime) / (v.playbackRate || 1) < .95) v.classList.add("fo"); });
+      v.addEventListener("ended", () => { if (!want.has(v)) return; setTimeout(() => { try { v.currentTime = 0; } catch (e) {} tryPlay(v); requestAnimationFrame(() => v.classList.remove("fo")); }, 450); });
+    });
     let locIn = false;
     if (loc.length) {
       /* si caricano un po' prima che la sezione arrivi, così quando ci sei sono già pronti */
@@ -3277,6 +3323,7 @@ const CMS = {
   ["dragenter", "dragover"].forEach((t) => cvL.addEventListener(t, (e) => { e.preventDefault(); cvL.classList.add("over"); }));
   ["dragleave", "drop"].forEach((t) => cvL.addEventListener(t, () => cvL.classList.remove("over")));
   cvL.addEventListener("drop", (e) => { e.preventDefault(); const f = e.dataTransfer.files[0]; if (f) { try { const dt = new DataTransfer(); dt.items.add(f); cvIn.files = dt.files; } catch (x) {} setCv(f); } });
+  $$("#job-f select").forEach((sl) => { const f = () => sl.classList.toggle("vuoto", !sl.value); f(); sl.addEventListener("change", f); });
   jf.addEventListener("submit", (e) => {
     e.preventDefault();
     const fd = new FormData(jf);
