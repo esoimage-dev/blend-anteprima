@@ -2158,6 +2158,30 @@ body.past .deck.swap-in .tt .disc, .deck.swap-in .disc { translate: 0 0; opacity
 .legal .mmby { white-space: nowrap; }
 .legal .mmby a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(255,255,255,.35); }
 .legal .mmby a:hover { text-decoration-color: currentColor; }
+
+/* ---------- v56: testo dei fogli sempre visibile, invio candidatura, credito ---------- */
+/* l'ombra sta sulla carta, non sul blocco che contiene il testo (Chrome a volte non ridisegnava il testo) */
+.ticket, .scrap, .file, .page, .page-wrap.open .page, .pz, .pz:hover, .slip { filter: none !important; }
+.ticket > .bg, .scrap > .bg { filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .5)) drop-shadow(0 18px 24px rgba(0, 0, 0, .5)) !important; }
+.file > .bg { filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .5)) drop-shadow(0 22px 28px rgba(0, 0, 0, .55)) !important; }
+.page > .bg { filter: drop-shadow(0 4px 6px rgba(0, 0, 0, .3)); }
+.page-wrap.open .page > .bg { filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .45)) drop-shadow(0 24px 32px rgba(0, 0, 0, .55)); }
+/* nastri della cucina: l'ombra la fa una copia del nastro sotto la scritta */
+.tape { position: relative; isolation: isolate; filter: none !important; }
+.tape::before { content: ""; position: absolute; inset: 0; z-index: -1; background: inherit; filter: drop-shadow(0 3px 4px rgba(0, 0, 0, .45)); pointer-events: none; }
+/* ridisegno forzato (un fotogramma, invisibile) */
+.rp { outline: .5px solid transparent !important; }
+/* candidatura: niente sottolineatura, solo freccia e colore; un po' più in alto */
+.jgo span { background: none !important; padding-bottom: 0; }
+.jpaper .jsend { margin-top: .5rem; }
+@media (min-width: 861px) { .jpaper { padding-bottom: clamp(4.6rem, 6vw, 5.4rem); } }
+@media (max-width: 860px) { .jpaper { padding-bottom: 4rem; } }
+/* credito */
+.legal .mmar { display: inline-block; margin-left: .1rem; font-size: .9em; transition: translate .2s; }
+.legal .mmby a:hover + .mmar { translate: 2px -2px; }
+@media (min-width: 861px) { .jpaper { padding-bottom: 6.6rem; } }
+@media (max-width: 860px) { .jpaper { padding-bottom: 5rem; } }
+@media (max-width: 860px) { .job .jpaper { padding-bottom: 5.2rem !important; } }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -2532,7 +2556,7 @@ body.past .deck.swap-in .tt .disc, .deck.swap-in .disc { translate: 0 0; opacity
       <a class="btn cut" href="https://blendfoodanddrink.plateform.app/reserve" target="_blank" rel="noopener"><span class="r">Prenota un tavolo</span></a>
     </div>
     <div class="legal">
-      <span>© 2026 Blend Food &amp; Drink · P.IVA 13731661008 <span class="mmby">· Website realizzato da <a href="https://mothermachine.studio" target="_blank" rel="noopener">Mother Machine</a></span></span>
+      <span>© 2026 Blend Food &amp; Drink · P.IVA 13731661008 <span class="mmby">· Website realizzato da <a href="https://mothermachine.studio" target="_blank" rel="noopener">Mother Machine Studio</a> <span class="mmar" aria-hidden="true">↗</span></span></span>
       <nav aria-label="Social e note legali">
         <a href="https://www.instagram.com/blendfoodanddrink/" target="_blank" rel="noopener">Instagram</a>
         <a href="https://www.facebook.com/BlendFoodAndDrink/" target="_blank" rel="noopener">Facebook</a>
@@ -3338,6 +3362,17 @@ const CMS = {
     $("#job-thx").textContent = `Grazie, ${String(fd.get("nome")).split(" ")[0]}.`;
     jf.hidden = true; $("#job-done").hidden = false;
   });
+
+  /* ---------- fogli di carta: Chrome a volte non ridisegna il testo dentro un blocco con ombra (filtro).
+     Quando un foglio entra in vista, e quando i caratteri scritti a mano finiscono di caricare, lo si fa ridisegnare */
+  (function ridisegna() {
+    const SEL = ".ticket, .scrap, .tape, .file, .page, .pz, .slip, .next, .deck .dl, .secret, .jpaper";
+    const nudge = (el) => { el.classList.add("rp"); requestAnimationFrame(() => requestAnimationFrame(() => el.classList.remove("rp"))); };
+    const tutti = () => $$(SEL).forEach(nudge);
+    if ("IntersectionObserver" in window) { const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) nudge(e.target); }), { rootMargin: "60px 0px" }); $$(SEL).forEach((el) => io.observe(el)); }
+    if (document.fonts) { document.fonts.ready.then(tutti); document.fonts.addEventListener && document.fonts.addEventListener("loadingdone", tutti); }
+    addEventListener("load", () => setTimeout(tutti, 300));
+  })();
 
   /* ---------- dove siamo: mappa disegnata dalle strade vere (OpenStreetMap) e una torcia ---------- */
   const map = $("#map"), mapS = $(".sheet", map), torch = document.createElement("i");
