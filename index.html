@@ -2182,6 +2182,9 @@ body.past .deck.swap-in .tt .disc, .deck.swap-in .disc { translate: 0 0; opacity
 @media (min-width: 861px) { .jpaper { padding-bottom: 6.6rem; } }
 @media (max-width: 860px) { .jpaper { padding-bottom: 5rem; } }
 @media (max-width: 860px) { .job .jpaper { padding-bottom: 5.2rem !important; } }
+
+/* ---------- v57: fascicoli, i margini li calcola lo script sull'area del foglio davanti; il nastro non copre la prima riga ---------- */
+@media (max-width: 900px) { .file[data-v="0"] .clip, .file:not([data-v]) .clip { top: -20px; left: -40px; transform: scale(.72) rotate(-40deg); } }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -2889,7 +2892,7 @@ const CMS = {
       "Lo trovi": "You'll find it", "se sai dove cercarlo.": "if you know where to look.", "Pochi piatti.": "A few dishes.", "Fatti sul serio.": "Done properly.",
       "Jazz,": "Jazz,", "vinili": "vinyl", "e altre buone scuse": "and other good excuses", "per fare tardi.": "to stay out late.",
       "Cambia ogni stagione.": "It changes every season.", "Il carattere resta.": "The character stays.", "Il giorno dopo,": "The day after,", "ne parlano così.": "this is what they say.",
-      "Note legali e crediti": "Legal notes and credits", "la prossima": "next", "Cercasi gente di notte.": "Night people wanted.", "Manda la candidatura": "Send your application", "Dove abiti": "Where you live", "Esperienza": "Experience", "Inglese": "English", "Altre lingue": "Other languages", "scegli": "choose", "Nessuna, voglio imparare": "None, I want to learn", "Meno di un anno": "Less than a year", "1-2 anni": "1-2 years", "3-5 anni": "3-5 years", "Più di 5 anni": "More than 5 years", "Base": "Basic", "Buono": "Good", "Fluente": "Fluent", "Madrelingua": "Native",
+      "Note legali e crediti": "Legal notes and credits", "la prossima": "next", "Cercasi gente di notte.": "Night people wanted.", "Manda la candidatura": "Send your application", "· Website realizzato da": "· Website by", "Dove abiti": "Where you live", "Esperienza": "Experience", "Inglese": "English", "Altre lingue": "Other languages", "scegli": "choose", "Nessuna, voglio imparare": "None, I want to learn", "Meno di un anno": "Less than a year", "1-2 anni": "1-2 years", "3-5 anni": "3-5 years", "Più di 5 anni": "More than 5 years", "Base": "Basic", "Buono": "Good", "Fluente": "Fluent", "Madrelingua": "Native",
       "Antipasti": "Starters", "Pinsa": "Pinsa", "Taglieri": "Boards", "Dolci": "Desserts"
     };
     const orig = new WeakMap(), skip = /^(SCRIPT|STYLE|TEXTAREA|INPUT|SVG|PATH)$/;
@@ -2987,7 +2990,7 @@ const CMS = {
   });
   function pick(name, scroll) {
     sel = name; const d = CMS.drinks.find((x) => x.n === name); show(d);
-    if (window.__fitGlass) requestAnimationFrame(window.__fitGlass);
+    window.__fitFile(); if (window.__fitGlass) requestAnimationFrame(window.__fitGlass);
     $$("button", list).forEach((x) => x.setAttribute("aria-current", x.dataset.n === name));
     const items = CMS.drinks.filter((x) => cur === "Tutti" || x.c === cur), k = items.findIndex((x) => x.n === name);
     $("#g-cnt").textContent = `${String(k + 1).padStart(2, "0")} / ${String(items.length).padStart(2, "0")}`;
@@ -3005,11 +3008,23 @@ const CMS = {
     pick(sel, false);
     if (ST) ST.refresh();
   }
+  /* fascicoli: la carta si allarga a tutto il riquadro, quindi i margini si calcolano sulla misura vera del riquadro.
+     Valori = parte della carta da lasciare libera (sinistra, destra, sopra, sotto): bordi rovinati e fogli di sotto restano vuoti */
+  const SAFE = [[.085, .065, .085, .145], [.065, .085, .155, .165], [.14, .055, .11, .225], [.09, .085, .125, .105]];
+  window.__fitFile = () => {
+    const f = $(".file"); if (!f) return;
+    const [l, r, t, b] = SAFE[+f.dataset.v || 0], W = f.offsetWidth;
+    f.style.setProperty("padding-left", Math.round(l * W) + "px", "important"); f.style.setProperty("padding-right", Math.round(r * W) + "px", "important");
+    f.style.setProperty("padding-top", "0px", "important"); f.style.setProperty("padding-bottom", "0px", "important");
+    const hc = f.offsetHeight, H = hc / (1 - t - b);
+    f.style.setProperty("padding-top", Math.round(t * H) + "px", "important"); f.style.setProperty("padding-bottom", Math.round(b * H) + "px", "important");
+  };
+  if (document.fonts) document.fonts.ready.then(() => { window.__fitFile(); window.__fitGlass && window.__fitGlass(); });
   /* il blocco foto + fascicolo si riduce quanto serve per stare tutto nello schermo */
   const glassEl = $("#glass");
   window.__fitGlass = () => {
-    if (innerWidth <= 900) { glassEl.style.zoom = ""; return; }
-    glassEl.style.zoom = ""; const h = glassEl.offsetHeight, k = Math.min(1, (innerHeight - 110) / h);
+    if (innerWidth <= 900) { glassEl.style.zoom = ""; window.__fitFile(); return; }
+    glassEl.style.zoom = ""; window.__fitFile(); const h = glassEl.offsetHeight, k = Math.min(1, (innerHeight - 110) / h);
     glassEl.style.zoom = k < 1 ? k.toFixed(3) : "";
   };
   addEventListener("resize", () => window.__fitGlass());
@@ -3358,9 +3373,16 @@ const CMS = {
     const fd = new FormData(jf);
     const miss = !fd.get("nome") ? "Manca il nome." : !/^\S+@\S+\.\S+$/.test(fd.get("email") || "") ? "Controlla l'email." : !fd.get("ruolo") ? "Scegli per quale posto ti candidi." : !fd.get("privacy") ? "Serve il consenso privacy per leggere la candidatura." : "";
     if (miss) { jerr.textContent = miss; if (!fd.get("ruolo")) { $("#job .roles").scrollIntoView({ behavior: "smooth", block: "center" }); setTimeout(hintRoles, 400); } return; }
-    /* in produzione: POST a una Worker Cloudflare che invia con Resend e salva nel back office */
-    $("#job-thx").textContent = `Grazie, ${String(fd.get("nome")).split(" ")[0]}.`;
-    jf.hidden = true; $("#job-done").hidden = false;
+    const fatto = () => { $("#job-thx").textContent = `Grazie, ${String(fd.get("nome")).split(" ")[0]}.`; jf.hidden = true; $("#job-done").hidden = false; };
+    /* Aggancio pronto: quando c'è la Worker Cloudflare basta mettere il suo indirizzo in window.BLEND_API (es. "https://api.blendfoodanddrink.it").
+       Riceve multipart/form-data con: ruolo, nome, email, tel, zona, anni, inglese, lingue, disp, msg, cv (file), privacy.
+       Gli stessi nomi li legge il back office (scheda candidatura). Senza indirizzo resta il prototipo: nessun dato esce dalla pagina. */
+    const API = window.BLEND_API;
+    if (!API) return fatto();
+    const go = $(".jgo"); go.disabled = true; jerr.textContent = "";
+    fetch(API.replace(/\/$/, "") + "/api/candidature", { method: "POST", body: fd }).then((r) => { if (!r.ok) throw new Error(r.status); fatto(); })
+      .catch(() => { jerr.textContent = "Non è partita: riprova tra poco, o scrivici a info@blendfoodanddrink.it."; })
+      .finally(() => { go.disabled = false; });
   });
 
   /* ---------- fogli di carta: Chrome a volte non ridisegna il testo dentro un blocco con ombra (filtro).

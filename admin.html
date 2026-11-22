@@ -2064,6 +2064,23 @@ details.tech > summary { cursor: pointer; font-weight: 650; min-height: 44px; di
 .pt.g i { color: var(--ok); background: color-mix(in srgb, var(--ok) 14%, var(--n1)); } .pt.y i { color: var(--sign-t); background: color-mix(in srgb, var(--sign) 16%, var(--n1)); }
 .pt.nd b { color: var(--dim, var(--ash)); font-weight: 500; font-style: italic; }
 .wki b { white-space: normal; overflow: visible; text-overflow: clip; }
+
+/* ---------- v9: mazzo, la carta si colora insieme al timbro ---------- */
+.dkc::after { content: ""; position: absolute; inset: 0; z-index: 6; border-radius: inherit; pointer-events: none; background: transparent; box-shadow: inset 0 0 0 0 transparent; transition: background .18s ease, box-shadow .18s ease; }
+.dkc[data-hint="buono"]::after, .dkc.out.buono::after { background: rgba(46, 139, 60, .16); box-shadow: inset 0 0 0 3px rgba(46, 139, 60, .55); }
+.dkc[data-hint="no"]::after, .dkc.out.no::after { background: rgba(217, 72, 59, .15); box-shadow: inset 0 0 0 3px rgba(217, 72, 59, .55); }
+.dkc[data-hint="top"]::after, .dkc.out.top::after { background: rgba(252, 198, 80, .26); box-shadow: inset 0 0 0 3px rgba(214, 160, 30, .65); }
+.dkc[data-hint="forse"]::after, .dkc.out.forse::after { background: rgba(98, 71, 196, .12); box-shadow: inset 0 0 0 3px rgba(98, 71, 196, .45); }
+.dkc .dkst { z-index: 7; }
+
+/* ---------- v9: anteprime di carta, il testo non sparisce più. L'ombra sta sulla carta (::before), non sul blocco col testo ---------- */
+.slip, .fv, .kv .pg, .rv { filter: none !important; }
+.slip::before { filter: drop-shadow(0 10px 14px rgba(0, 0, 0, .45)); }
+.fv::before { filter: drop-shadow(0 16px 20px rgba(0, 0, 0, .5)); }
+.kv .pg::before { filter: drop-shadow(0 14px 18px rgba(0, 0, 0, .45)); }
+.rv::before { filter: drop-shadow(0 14px 18px rgba(0, 0, 0, .5)); }
+.slip .go { gap: .6rem; } .slip .go > * { white-space: nowrap; flex: none; }
+.slip { padding-bottom: 1.5rem; }
 </style>
 </head>
 <body>
@@ -2680,7 +2697,7 @@ window.MENU = {
       wireLines($("#form"), () => x.lines, (k, v) => { x.lines = v; draw(); }, LIM.line);
       wireDrop(root, (src) => { x.img = src; draw(); }, () => {});
       $$("[data-sw]", root).forEach((c) => c.addEventListener("change", () => { if (c.dataset.sw === "hero" && c.checked) D.shows.forEach((s) => (s.hero = false)); x[c.dataset.sw] = c.checked; setDirty(1); render(); }));
-      $("[data-del]", root).addEventListener("click", () => { if (confirm("Eliminare questa serata?")) { D.shows.splice(sel, 1); setDirty(1); location.hash = "serate"; } });
+      $("[data-del]", root).addEventListener("click", () => conferma("Eliminare questa serata?", "Sparisce dalla pila delle locandine sul sito.", "Elimina", () => { const k = sel, x = D.shows.splice(k, 1)[0]; setDirty(1); location.hash = "serate"; toastA(`${x.title}: eliminata.`, "Annulla", () => { D.shows.splice(k, 0, x); setDirty(1); location.hash = "serate/" + k; }); }));
       $("[data-save]", root)?.addEventListener("click", () => toast("Salvato. Va online quando premi «Pubblica sul sito»."));
     } };
   };
@@ -2691,7 +2708,7 @@ window.MENU = {
   function fvPreview(d, pos) {
     const sl = SLOT[pos % 4], p = d.p || [2, 2, 2, 2, 2], v = [(p[2] - p[0] + 5) / 10, p[3] / 5, p[4] / 5].map((x) => Math.round(6 + x * 88));
     const rows = [["dolce", "amaro"], ["leggero", "forte"], ["pulito", "speziato"]];
-    return `<div class="fv" style="--paper:url('${sl.paper}');--tape:url('${sl.tape}')"><span class="clip"></span><span class="stamp">${esc(d.c)}</span><span class="no">Fascicolo n° ${String(pos + 1).padStart(2, "0")}, base ${esc((d.base || "").toLowerCase())}</span><h3>${esc(d.n)}</h3><p class="q">${esc(d.q)}</p>
+    return `<div class="fv" data-v="${pos % 4}" style="--paper:url('${sl.paper}');--tape:url('${sl.tape}')"><span class="clip"></span><span class="stamp">${esc(d.c)}</span><span class="no">Fascicolo n° ${String(pos + 1).padStart(2, "0")}, base ${esc((d.base || "").toLowerCase())}</span><h3>${esc(d.n)}</h3><p class="q">${esc(d.q)}</p>
       <div class="pf">${rows.map((r, k) => `<div class="pr"><span>${r[0]}</span><span class="dots"><i style="left:${v[k]}%"></i></span><span>${r[1]}</span></div>`).join("")}</div><p class="ing"><b>Ingredienti</b>${d.ing.filter(Boolean).map(esc).join(", ")}</p></div>`;
   }
   V.drink = (i) => {
@@ -2717,7 +2734,7 @@ window.MENU = {
       wire($("#form"), (e) => { const k = e.target.dataset.k; if (k) d[k] = e.target.value; const t = e.target.dataset.t; if (t !== undefined) { const v = +e.target.value; if (t === "0") { d.p[0] = Math.max(0, -v); d.p[2] = Math.max(0, v); } else d.p[+t + 2] = v; } draw(); });
       wireLines($("#form"), () => d.ing, (k, v) => { d.ing = v; draw(); const t = v.join(", ").length, mx = SLOT[sel % 4].ingTot, el = $("#ingtot"); if (el) { el.textContent = `${t} / ${mx} caratteri in tutto su questa carta`; el.style.color = t > mx ? "var(--red)" : ""; } }, LIM.ing);
       $("#chars").addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; d.c = b.textContent; $$("#chars button").forEach((x) => x.setAttribute("aria-pressed", x === b)); setDirty(1); draw(); });
-      $("[data-del]", root).addEventListener("click", () => { if (confirm("Togliere questo drink dalla carta?")) { D.drinks.splice(sel, 1); setDirty(1); location.hash = "drink"; } });
+      $("[data-del]", root).addEventListener("click", () => conferma("Togliere questo drink dalla carta?", "Il fascicolo sparisce dal sito. Gli altri scalano di un numero.", "Togli", () => { const k = sel, x = D.drinks.splice(k, 1)[0]; setDirty(1); location.hash = "drink"; toastA(`${x.n}: tolto dalla carta.`, "Annulla", () => { D.drinks.splice(k, 0, x); setDirty(1); location.hash = "drink/" + k; }); }));
       $("[data-save]", root)?.addEventListener("click", () => toast("Salvato. Va online quando premi «Pubblica sul sito»."));
       /* riordino: trascina (desktop) */
       let from = null; const L = $("#dl");
@@ -2884,7 +2901,7 @@ window.MENU = {
         if (e.target.closest("[data-send]")) { const tx = $("#reply").value.trim(); if (!tx) return toast("Scrivi qualcosa prima di inviare."); a.replies.push({ when: "adesso", text: tx }); a.status = "Risposto"; setDirty(1); render(); toast(`Risposta inviata a ${a.name.split(" ")[0]} (per finta).`); }
         if (e.target.closest("[data-cv]")) toast("Qui si scarica il PDF del curriculum.");
         const z = e.target.closest("[data-zoom]"); if (z) { const pg = $(".ppages", root), nz = Math.min(2, Math.max(.6, (+pg.style.getPropertyValue("--z") || 1) + z.dataset.zoom * .2)); pg.style.setProperty("--z", nz.toFixed(1)); }
-        if (e.target.closest("[data-del]") && confirm(`Eliminare la candidatura di ${a.name}?`)) { D.apps.splice(D.apps.indexOf(a), 1); setDirty(1); location.hash = "candidature"; }
+        if (e.target.closest("[data-del]")) conferma(`Eliminare la candidatura di ${a.name}?`, "Spariscono anche curriculum, note e risposte.", "Elimina", () => { const k = D.apps.indexOf(a); D.apps.splice(k, 1); setDirty(1); location.hash = "candidature"; toastA(`${a.name}: candidatura eliminata.`, "Annulla", () => { D.apps.splice(k, 0, a); setDirty(1); render(); }); });
       });
       const nt = $("#pnote", root); nt.addEventListener("input", () => { a.notes = nt.value; clearTimeout(nt._t); nt._t = setTimeout(() => { setDirty(1); const s = $("#nsv"); if (s) { s.hidden = false; setTimeout(() => (s.hidden = true), 1200); } }, 600); });
       keyH = (e) => { if (e.target.closest("input, textarea")) return; if (e.key === "ArrowRight") vai(1); if (e.key === "ArrowLeft") vai(-1); };
@@ -3905,6 +3922,14 @@ window.MENU = {
   addEventListener("keydown", (e) => { if (e.key === "Escape" && ntf.classList.contains("on")) apriNtf(false); });
 
   /* ---------- disegno ---------- */
+  /* fascicoli in anteprima: margini sull'area del foglio davanti (stessi valori del sito) */
+  const SAFEF = [[.085, .065, .085, .145], [.065, .085, .155, .165], [.14, .055, .11, .225], [.09, .085, .125, .105]];
+  function fitFv() { document.querySelectorAll(".fv[data-v]").forEach((f) => { if (!f.offsetWidth) return; const [l, r, t, b] = SAFEF[+f.dataset.v || 0], W = f.offsetWidth;
+    f.style.setProperty("padding-left", Math.round(l * W) + "px", "important"); f.style.setProperty("padding-right", Math.round(r * W) + "px", "important");
+    f.style.setProperty("padding-top", "0px", "important"); f.style.setProperty("padding-bottom", "0px", "important");
+    const H = f.offsetHeight / (1 - t - b); f.style.setProperty("padding-top", Math.round(t * H) + "px", "important"); f.style.setProperty("padding-bottom", Math.round(b * H) + "px", "important"); }); }
+  document.addEventListener("input", () => requestAnimationFrame(fitFv)); addEventListener("resize", () => requestAnimationFrame(fitFv));
+  if (document.fonts) document.fonts.ready.then(() => fitFv());
   function render() {
     if (typeof chiudiPop === "function") chiudiPop();
     clearInterval(feedT); keyH = null; if (window.drawBadge) drawBadge();
@@ -3915,6 +3940,7 @@ window.MENU = {
     /* contenitore nuovo a ogni disegno: i gestori di eventi della pagina prima non si accumulano */
     const v0 = $("#view"), v = v0.cloneNode(false); v0.replaceWith(v);
     if (typeof out === "string") v.innerHTML = out; else { v.innerHTML = out.html; out.after(v); }
+    requestAnimationFrame(fitFv);
     if (location.hash !== lastHash) { v.classList.remove("enter"); void v.offsetWidth; if (mob()) v.classList.add("enter"); lastHash = location.hash; }
     $("#back").hidden = !(mob() && parentOf()); $("#pubz").hidden = !inSito(); $("#pub").disabled = !dirtySito; $(".gearb").hidden = !$("#back").hidden || r.s === "impostazioni";
     { const pw = mob() && [...v.querySelectorAll(".prev")].find((x) => x.offsetParent); if (pv0) { pv0.disconnect(); pv0 = null; }
